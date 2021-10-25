@@ -2,7 +2,7 @@
 
 @mixin media-position ($screenWidth, $side: right, $value) {
     @media screen and (max-width: $screenWidth) {
-        @if($side == right){ right: $value; }
+        @if($side == right){ right: $value;}
         @if($side == left){ left: $value; }
         @if($side == bottom){ bottom: $value; }
         @if($side == top){ top: $value; }
