@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@import './assets/styles/fonts.scss';
+@import './assets/styles/images.scss';
+@import './assets/styles/colors.scss';
+body {
+    background-color: $dark_grey;
+    background-image: $img-background;
+    font-family: Roboto-Medium;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

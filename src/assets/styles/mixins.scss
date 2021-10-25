@@ -1,0 +1,57 @@
+@import 'variables.scss';
+
+@mixin media-position ($screenWidth, $side: right, $value) {
+    @media screen and (max-width: $screenWidth) {
+        @if($side == right){ right: $value; }
+        @if($side == left){ left: $value; }
+        @if($side == bottom){ bottom: $value; }
+        @if($side == top){ top: $value; }
+    }
+}
+
+@mixin media-visible ($screenWidth, $display){
+    @media screen and (max-width: $screenWidth) {
+        display: $display;
+    }
+}
+@mixin media-unvisible ($screenWidth){
+    @media screen and (max-width: $screenWidth) {
+        display: none;
+    }
+}
+
+@mixin media-margin ($margin-xs, $margin-sm: 100%, $margin-md: 100%, $margin-lg: 100%){
+    @if($margin-sm == 100%){
+        @media screen and (min-width: $xs) {  margin: $margin-xs; }
+    }@else if($margin-md == 100%){
+        @media screen and (min-width: $xs) {  margin: $margin-xs; }
+        @media screen and (min-width: $sm) {  margin: $margin-sm; }
+    }@else if($margin-lg == 100%){
+        @media screen and (min-width: $xs) {  margin: $margin-xs; }
+        @media screen and (min-width: $sm) {  margin: $margin-sm; }
+        @media screen and (min-width: $md) {  margin: $margin-md; }
+    }@else {
+        @media screen and (min-width: $xs) {  margin: $margin-xs; }
+        @media screen and (min-width: $sm) {  margin: $margin-sm; }
+        @media screen and (min-width: $md) {  margin: $margin-md; }
+        @media screen and (min-width: $lg) {  margin: $margin-lg; }
+    }
+}
+
+@mixin media-font-size ($font-size-xs, $font-size-sm: 100%, $font-size-md: 100%, $font-size-lg: 100%){
+    @if($font-size-sm == 100%){
+        @media screen and (min-width: $xs) {  font-size: $font-size-xs; }
+    }@else if($font-size-md == 100%){
+        @media screen and (min-width: $xs) {  font-size: $font-size-xs; }
+        @media screen and (min-width: $sm) {  font-size: $font-size-sm; }
+    }@else if($font-size-lg == 100%){
+        @media screen and (min-width: $xs) {  font-size: $font-size-xs; }
+        @media screen and (min-width: $sm) {  font-size: $font-size-sm; }
+        @media screen and (min-width: $md) {  font-size: $font-size-md; }
+    }@else {
+        @media screen and (min-width: $xs) {  font-size: $font-size-xs; }
+        @media screen and (min-width: $sm) {  font-size: $font-size-sm; }
+        @media screen and (min-width: $md) {  font-size: $font-size-md; }
+        @media screen and (min-width: $lg) {  font-size: $font-size-lg; }
+    }
+}
