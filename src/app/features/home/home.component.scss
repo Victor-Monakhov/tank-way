@@ -1,9 +1,92 @@
 @import 'mixins.scss';
+@import 'variables.scss';
+@import 'colors.scss';
+@import 'animations.scss';
+@import 'images.scss';
 
 .wrapper {
     display: flex;
+    flex-wrap: wrap;
     @include media-margin(0 0 50px, 0 20px 50px, 0 50px 50px);
     app-navbar{
         width: 100%;
+    }
+    .row{
+        display: flex;
+        width: 100%;
+        margin: 50px 0 0 0;
+        justify-content: center;
+        @media screen and (max-width: $sm) {
+            flex-wrap: wrap;
+        }
+        #right{
+            @media screen and (min-width: $sm) {
+                margin-left: 25px;
+            }
+        }
+        .panel{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            @media screen and (max-width: $sm) {
+                width: 100%;
+            }
+            width: 50%;
+            background-color: $dark-grey06;
+            box-shadow: $panel-shadow;
+            border-radius: 10px;
+            font-family: Roboto-Medium;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 50px;
+            .smile{
+                background-image: $img-smile;
+                width: $img-smile-width;
+                height: $img-smile-height;
+            }
+            p{
+                text-align: justify;
+                @include media-font-size(1rem, 1.1rem, 1.2rem, 1.3rem);
+                transition: 1s;
+            }
+            h1{
+                @include media-margin(10px 5px, 15px 5px, 20px 5px);
+                @include media-font-size(1.3rem, 1.4rem, 1.5rem, 1.6rem);
+                color: #28a5c4;
+                text-shadow: $text-shadow;
+                font-weight: bold;
+                text-align: center;
+                transition: 1s;
+            }
+            hr{
+                border: 2px solid transparent;
+                border-image: $border-img-grad-brown-blue;
+                width: 100%;
+            }
+            .testGame-btn {
+                display: inline-flex;
+                margin: 50px 0;
+                @include media-font-size(1.3rem, 1.4rem, 1.5rem, 1.6rem);
+                width: 60%;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.7);
+                font-size: 1.7rem;
+                height: 50px;
+                border-radius: 5px;
+                background-image: linear-gradient(to bottom, #28a5c4, #ffffff, #8b4513);
+                box-shadow: $panel-shadow;
+            }
+            .testGame-btn:hover {
+                border: 3px solid saddlebrown;
+                animation: border3px-anim 1500ms linear 0s infinite normal both;
+            }
+            .testGame-btn:active {
+                box-shadow: $click-shadow;
+            }
+        }
     }
 }

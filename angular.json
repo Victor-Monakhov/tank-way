@@ -28,7 +28,17 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { 
+                "glob": "**/*", 
+                "input": "./node_modules/@victor_monakhov/tanks/images/testGame", 
+                "output": "images/testGame" 
+              },
+              { 
+                "glob": "**/*", 
+                "input": "./node_modules/@victor_monakhov/tanks/sounds", 
+                "output": "sounds" 
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
@@ -44,13 +54,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "1mb",
                   "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "150kb",
+                  "maximumError": "150kb"
                 }
               ],
               "fileReplacements": [
@@ -100,7 +110,17 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { 
+                "glob": "**/*", 
+                "input": "./node_modules/@victor_monakhov/tanks/images/testGame", 
+                "output": "images/testGame" 
+              },
+              { 
+                "glob": "**/*", 
+                "input": "./node_modules/@victor_monakhov/tanks/sounds", 
+                "output": "sounds" 
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
