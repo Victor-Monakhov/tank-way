@@ -1,13 +1,13 @@
 
 <div class = "wrapper">
     <app-navbar></app-navbar>
-    <div class = "row">
-      <div class = "panel">
+    <div class = "row mt-50">
+      <div class = "panel mb-50" id="left_panel">
         <span class = "smile"></span>
           <h1 class="col-7">
               WELCOME!
           </h1>
-        <span class = "smile" id="left"></span>
+        <span class = "smile"></span>
         <p>
           Hello! This is the tanks page!
           If you are new and have not yet tasted victory on a real battlefield -
@@ -16,11 +16,12 @@
           We hope you enjoy it and you stay with us!
         </p>
         <hr>
-        <button type="button" class="testGame-btn" id="run_testGame" (click) = "onClick()">TEST GAME</button>
+        <button type="button" class="btn testGame" id="run_testGame" (click) = "onClick()">TEST GAME</button>
       </div>
-      <div class = "panel" id="right">
+      <div class = "panel mb-50" id="right_panel">
         <h1>GALLERY</h1>
         <hr>
+        <app-slider style="width: 100%; flex-wrap: wrap;"></app-slider>
       </div>
     </div>
 </div>

@@ -1,10 +1,53 @@
-@import './assets/styles/fonts.scss';
-@import './assets/styles/images.scss';
-@import './assets/styles/colors.scss';
+@import 'fonts.scss';
+@import 'images.scss';
+@import 'colors.scss';
+@import 'mixins.scss';
+@import 'buttons.scss';
+@import 'animations.scss';
+@import 'variables.scss';
 body {
+    margin: 0;
     background-color: $dark_grey;
     background-image: $img-background;
     font-family: Roboto-Medium;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.row{
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+hr{
+    border: 2px solid transparent;
+    border-image: $border-img-grad-brown-blue;
+    width: 100%;
+}
+p{
+    text-align: justify;
+    @include media-font-size(1rem, 1.1rem, 1.2rem, 1.3rem);
+    transition: 1s;
+}
+h1{
+    @include media-margin(10px 5px, 15px 5px, 20px 5px);
+    @include media-font-size(1.3rem, 1.4rem, 1.5rem, 1.6rem);
+    color: #28a5c4;
+    text-shadow: $text-shadow;
+    font-weight: bold;
+    text-align: center;
+    transition: 1s;
+}
+.panel{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: $dark-grey06;
+    box-shadow: $panel-shadow;
+    border-radius: 10px;
+    font-family: Roboto-Medium;
+    color: #fff;
+    padding: 10px;
+}
+
+

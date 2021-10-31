@@ -11,10 +11,10 @@ export class TestGameDirective implements AfterViewInit{
   constructor(private rd: Renderer2, private el:ElementRef) {
   }
   ngAfterViewInit(){
-    this.createElement();
+    this.startGame();
   }
 
-  private createElement(){
+  private startGame(){
     this.el.nativeElement.width = window.innerWidth;
     this.el.nativeElement.height = window.innerHeight;
     if(!this.startFlag){

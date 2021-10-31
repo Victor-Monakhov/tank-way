@@ -1,0 +1,11 @@
+<div class = "row">
+    <button type="button" class = "btn move-slide" (click) = "clickLeft()">
+      <div class = "arrow-left"></div>
+    </button>
+    <button type="button" class = "btn move-slide" (click) = "clickRight()">
+      <div class = "arrow-right"></div>
+    </button>
+  </div>
+  <div app-slider class="panel gallery" id="gallery_panel">
+    <img  [src]="imagePath" alt="image" [width] = "galleryWidth" [height] = "galleryHeight">
+  </div>
