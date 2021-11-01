@@ -4,7 +4,6 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './components/home.component';
 import { NavbarComponent } from 'src/app/shared/header/navbar/navbar.component';
 import { SliderComponent } from 'src/app/shared/slider/slider.component';
-import { SliderDirective } from 'src/app/shared/slider/slider.directive';
 
 
 
@@ -12,8 +11,7 @@ import { SliderDirective } from 'src/app/shared/slider/slider.directive';
   declarations: [
     HomeComponent,
     NavbarComponent,
-    SliderComponent,
-    SliderDirective],
+    SliderComponent],
   imports: [
     CommonModule,
     HomeRoutingModule 

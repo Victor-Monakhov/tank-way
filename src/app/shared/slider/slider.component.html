@@ -1,11 +1,14 @@
-<div class = "row">
+<div class="wrapper" [style.background-color] = "fullScreenFlag ? 'rgba(60, 50, 50, 0.7)' : 'transparent'">
+  <div class = "row buttons-menu">
     <button type="button" class = "btn move-slide" (click) = "clickLeft()">
       <div class = "arrow-left"></div>
     </button>
     <button type="button" class = "btn move-slide" (click) = "clickRight()">
       <div class = "arrow-right"></div>
     </button>
+    <button type="button" class = "btn move-slide" (click) = "clickFullScreen()">
+      <div class = "full-screen"></div>
+    </button>
   </div>
-  <div app-slider class="panel gallery" id="gallery_panel">
-    <img  [src]="imagePath" alt="image" [width] = "galleryWidth" [height] = "galleryHeight">
-  </div>
+  <img class="panel gallery"  [src]="imagePath" alt="image" [width] = "galleryWidth" [height] = "galleryHeight">
+</div>
