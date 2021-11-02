@@ -15,15 +15,17 @@ export class SliderComponent implements OnInit, AfterContentChecked{
   ];
   index:number = 0;
   winSizeListener: any = window.addEventListener('resize', resize => this.win_resizeHandler());
-  galleryWidth: number = 0;
-  galleryHeight: number = 0;
+  imageWidth: number = 0;
+  imageHeight: number = 0;
   currentImage = new Image();
+  galleryHeight: number = 0;
   fullScreenFlag: boolean = false;
 
   constructor(private rd: Renderer2, private el:ElementRef) {
   }
 
   ngOnInit(): void {
+    this.galleryHeight = this.el.nativeElement.style.height;
     this.galleryBalancer(0);
   }
 
@@ -35,29 +37,32 @@ export class SliderComponent implements OnInit, AfterContentChecked{
     this.updateGallery();
     this.galleryBalancer(20);
   }
+
   resizeImage(padding: number, image: HTMLImageElement, element: any, fullScreen: boolean){
     let size = {
       width: 0,
       height: 0
     }
-    if(!fullScreen){
-      size.width = element.clientWidth - padding;
-      let coefficient:number = (element.clientWidth - padding) / image.width; 
-      size.height = Math.round(coefficient * image.height);
+    console.log(element.clientWidth);
+    
+      let screen = (fullScreen) ?
+                   window.innerHeight - element.firstChild.clientHeight * 2 :
+                   element.clientHeight - element.firstChild.clientHeight * 2;
+      let coefficientV:number = screen / image.height;
+      if(image.height > screen){
+        size.width = Math.round(image.width * coefficientV);
+        size.height = screen;
+      }
+      else{
+        size.width = image.width;
+        size.height = image.height;
+      }
+      if(size.width > element.clientWidth - padding){
+        let coefficientH = (element.clientWidth - padding)/size.width;
+        size.width = element.clientWidth - padding;
+        size.height = Math.round(coefficientH * size.height);
+      }
       return size;
-    }
-    else{
-      let coefficientV:number = (window.innerHeight - element.firstChild.clientHeight * 2) / image.height;
-      size.width = (image.height > window.innerHeight - element.firstChild.clientHeight * 2) ?
-                    Math.round(image.width * coefficientV) :
-                    image.width;
-      size.width = (size.width > element.clientWidth - padding) ?
-                    element.clientWidth - padding :
-                    size.width;
-      let coefficientH:number = (size.width) / image.width;
-      size.height = Math.round(coefficientH * image.height);
-      return size;
-    }
   }
 
   clickLeft(): void{
@@ -83,7 +88,9 @@ export class SliderComponent implements OnInit, AfterContentChecked{
   }
   updateGallery(): void{
     if(this.fullScreenFlag){
+      window.scrollTo(0, 0);
       document.body.style.overflow = 'hidden';
+      this.el.nativeElement.lastChild.style.height = '100%';
       this.el.nativeElement.lastChild.style.position = 'absolute';
       this.el.nativeElement.lastChild.style.top = 0;
       this.el.nativeElement.lastChild.style.left = 0;
@@ -92,6 +99,7 @@ export class SliderComponent implements OnInit, AfterContentChecked{
     }
     else{
       document.body.style.overflow = 'visible';
+      this.el.nativeElement.lastChild.style.height = this.galleryHeight;
       this.el.nativeElement.lastChild.style.position = 'static';
     }
   }
@@ -99,8 +107,8 @@ export class SliderComponent implements OnInit, AfterContentChecked{
     this.currentImage.src = this.images[this.index];
     this.currentImage.onload = ()=>{
       let size = this.resizeImage(padding, this.currentImage, this.el.nativeElement.lastChild, this.fullScreenFlag);
-      this.galleryWidth = size.width;
-      this.galleryHeight = size.height;
+      this.imageWidth = size.width;
+      this.imageHeight = size.height;
     }
   }
 }
