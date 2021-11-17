@@ -5,3 +5,7 @@
     99% { border-bottom: 3px solid #6495ed;}
     100% { border-right: 3px solid #6495ed;}
 }
+
+@keyframes border-bottom-anim {
+    50% {border-bottom: 3px solid #6495ed;}
+}

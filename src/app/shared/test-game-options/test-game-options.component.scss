@@ -1,0 +1,34 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+@import 'colors.scss';
+@import 'animations.scss';
+@import 'images.scss';
+
+.settings{
+    display: flex;
+    width: 100%;
+    .settings-menu{
+        display: flex;
+        padding: 0;
+        width: 100%;
+        justify-content: space-around;
+        .settings-item{
+            //@media screen and (min-width: $md) { height: 50px};
+            color: #fff;
+            background-color: transparent;
+            @include media-font-size(1.2rem, 1.3rem, 1.4rem, 1.5rem);
+            border: 3px solid transparent;
+        }
+        .settings-item:hover{
+            color: #fff;
+            cursor: pointer;
+            border-bottom: 3px solid #8b4513;
+            animation: border-bottom-anim 1500ms linear 0s infinite normal both;
+        }
+        .settings-item:focus{
+            color: #6495ed;
+            border-bottom: 3px solid #8b4513;
+            animation: border-bottom-anim 1500ms linear 0s infinite normal both;
+        }
+    }
+}

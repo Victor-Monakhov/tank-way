@@ -8,37 +8,37 @@
     display: flex;
     flex-wrap: wrap;
     @include media-margin(0 0 50px, 0 20px 50px, 0 50px 50px);
-    app-navbar{
-        width: 100%;
-    }
-    .mt-50{
-        margin: 50px 0 0 0;
+    .home-panel{
+        margin-bottom: 50px;
         justify-content: center;
-        @media screen and (max-width: $sm) {
-            flex-wrap: wrap;
+        @media screen and (max-width: $md) {
+            width: 100%;
+        }
+        .smile{
+            background-image: $img-smile;
+            width: $img-smile-width;
+            height: $img-smile-height;
+        }
+        .testGame {
+            margin: 20px 0;
+            @include media-font-size(1.3rem, 1.4rem, 1.5rem, 1.6rem);
+            width: 300px;
+            height: 50px;
+        }
+        #left_panel{
+            width: 100%;
+            @media screen and (min-width: $md) {
+                width: 50%;
+            }
+            @media screen and (max-width: $md) {
+                margin-bottom: 50px;
+            }
         }
         #right_panel{
-            @media screen and (min-width: $sm) {
+            width: 100%;
+            @media screen and (min-width: $md) {
+                width: 50%;
                 margin-left: 25px;
-            }
-        }
-        .mb-50{
-            width: 50%;
-            margin-bottom: 50px;
-            @media screen and (max-width: $sm) {
-                width: 100%;
-            }
-            .smile{
-                background-image: $img-smile;
-                width: $img-smile-width;
-                height: $img-smile-height;
-            }
-            .testGame {
-                margin: 50px 0;
-                @include media-font-size(1.3rem, 1.4rem, 1.5rem, 1.6rem);
-                width: 60%;
-                font-size: 1.7rem;
-                height: 50px;
             }
         }
     }
