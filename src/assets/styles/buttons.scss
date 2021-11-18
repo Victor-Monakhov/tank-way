@@ -1,3 +1,4 @@
+//simple button
 .btn {
     display: flex;
     justify-content: center;
@@ -18,3 +19,40 @@
 .btn:active {
     box-shadow: $click-shadow;
 }
+
+//radio button tank
+.tank-radio{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.tank-radio+label{
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+.tank-radio+label::after{
+    content:'';
+    display: inline-block;
+    width: 20px;
+    height: 18px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 5px;
+    background-image: $img-radio-tank;
+    transform: rotateZ(180deg);
+    cursor: pointer;
+}
+.radio-red:not(:disabled):not(:checked)+label:hover::after{
+    background-image: $img-radio-tank-red;
+}
+.radio-blue:not(:disabled):not(:checked)+label:hover::after{
+    background-image: $img-radio-tank-blue;
+}
+.radio-red:checked+label:after{
+    background-image: $img-radio-tank-red;
+}
+.radio-blue:checked+label:after{
+    background-image: $img-radio-tank-blue;
+}
+

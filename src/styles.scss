@@ -23,7 +23,7 @@ p{
     transition: 1s;
 }
 h1{
-    @include media-margin(10px 5px, 15px 5px, 20px 5px);
+    margin: 10px 5px;
     @include media-font-size(1.3rem, 1.4rem, 1.5rem, 1.6rem);
     color: #28a5c4;
     text-shadow: $text-shadow;

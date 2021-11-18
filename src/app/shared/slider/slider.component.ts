@@ -26,14 +26,15 @@ export class SliderComponent implements OnInit, AfterContentChecked{
 
   ngOnInit(): void {
     this.galleryHeight = this.el.nativeElement.style.height;
-    this.galleryBalancer(0);
   }
 
   ngAfterContentChecked():void{
     this.imagePath = this.images[this.index];
+    this.galleryBalancer(0);
   }
 
   win_resizeHandler(): void {
+    this.galleryHeight = this.el.nativeElement.style.height;
     this.updateGallery();
     this.galleryBalancer(20);
   }
@@ -43,26 +44,24 @@ export class SliderComponent implements OnInit, AfterContentChecked{
       width: 0,
       height: 0
     }
-    console.log(element.clientWidth);
-    
-      let screen = (fullScreen) ?
-                   window.innerHeight - element.firstChild.clientHeight * 2 :
-                   element.clientHeight - element.firstChild.clientHeight * 2;
-      let coefficientV:number = screen / image.height;
-      if(image.height > screen){
-        size.width = Math.round(image.width * coefficientV);
-        size.height = screen;
-      }
-      else{
-        size.width = image.width;
-        size.height = image.height;
-      }
-      if(size.width > element.clientWidth - padding){
-        let coefficientH = (element.clientWidth - padding)/size.width;
-        size.width = element.clientWidth - padding;
-        size.height = Math.round(coefficientH * size.height);
-      }
-      return size;
+    let screen = (fullScreen) ?
+                  window.innerHeight - element.firstChild.clientHeight * 2 :
+                  element.clientHeight - element.firstChild.clientHeight * 2;
+    let coefficientV:number = screen / image.height;
+    if(image.height > screen){
+      size.width = Math.round(image.width * coefficientV);
+      size.height = screen;
+    }
+    else{
+      size.width = image.width;
+      size.height = image.height;
+    }
+    if(size.width > element.clientWidth - padding){
+      let coefficientH = (element.clientWidth - padding)/size.width;
+      size.width = element.clientWidth - padding;
+      size.height = Math.round(coefficientH * size.height);
+    }
+    return size; 
   }
 
   clickLeft(): void{
