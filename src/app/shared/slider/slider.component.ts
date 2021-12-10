@@ -20,6 +20,7 @@ export class SliderComponent implements OnInit, AfterContentChecked{
   currentImage = new Image();
   galleryHeight: number = 0;
   fullScreenFlag: boolean = false;
+  readonly galleryPadding:number = 20;
 
   constructor(private rd: Renderer2, private el:ElementRef) {
   }
@@ -30,13 +31,13 @@ export class SliderComponent implements OnInit, AfterContentChecked{
 
   ngAfterContentChecked():void{
     this.imagePath = this.images[this.index];
-    this.galleryBalancer(0);
+    this.galleryBalancer(this.galleryPadding);
   }
 
   win_resizeHandler(): void {
     this.galleryHeight = this.el.nativeElement.style.height;
     this.updateGallery();
-    this.galleryBalancer(20);
+    this.galleryBalancer(this.galleryPadding);
   }
 
   resizeImage(padding: number, image: HTMLImageElement, element: any, fullScreen: boolean){
@@ -44,20 +45,20 @@ export class SliderComponent implements OnInit, AfterContentChecked{
       width: 0,
       height: 0
     }
-    let screen = (fullScreen) ?
+    let screenHeight:number = (fullScreen) ?
                   window.innerHeight - element.firstChild.clientHeight * 2 :
                   element.clientHeight - element.firstChild.clientHeight * 2;
-    let coefficientV:number = screen / image.height;
-    if(image.height > screen){
-      size.width = Math.round(image.width * coefficientV);
-      size.height = screen;
+    let coefficientV:number = screenHeight / image.height;
+    if(image.height > screenHeight){
+      size.width = Math.round(image.width * coefficientV) - padding;
+      size.height = screenHeight;
     }
     else{
       size.width = image.width;
       size.height = image.height;
     }
-    if(size.width > element.clientWidth - padding){
-      let coefficientH = (element.clientWidth - padding)/size.width;
+    if(size.width > element.clientWidth){
+      let coefficientH:number = (element.clientWidth - padding)/size.width;
       size.width = element.clientWidth - padding;
       size.height = Math.round(coefficientH * size.height);
     }
@@ -69,7 +70,7 @@ export class SliderComponent implements OnInit, AfterContentChecked{
       this.index = this.images.length - 1;
     else
       --this.index;
-    this.galleryBalancer(20);
+    this.galleryBalancer(this.galleryPadding);
   }
 
   clickRight(): void{
@@ -77,13 +78,13 @@ export class SliderComponent implements OnInit, AfterContentChecked{
       this.index = 0;
     else
       ++this.index;
-    this.galleryBalancer(20);
+    this.galleryBalancer(this.galleryPadding);
   }
 
   clickFullScreen(): void{
     this.fullScreenFlag = !this.fullScreenFlag;
     this.updateGallery();
-    this.galleryBalancer(20);
+    this.galleryBalancer(this.galleryPadding);
   }
   updateGallery(): void{
     if(this.fullScreenFlag){
