@@ -1,4 +1,5 @@
 $roboto: '../fonts/roboto';
+$vollkorn: '../fonts/vollkorn';
 @font-face{
     font-family: Roboto-Black;
     src: url($roboto + '/Roboto-Black.ttf');
@@ -47,3 +48,84 @@ $roboto: '../fonts/roboto';
     font-family: Roboto-ThinItalic;
     src: url($roboto + '/Roboto-ThinItalic.ttf');
 }
+@font-face{
+  font-family: RobotoCondensed-Bold;
+  src: url($roboto + '/RobotoCondensed-Bold.ttf');
+}
+@font-face{
+  font-family: RobotoCondensed-BoldItalic;
+  src: url($roboto + '/RobotoCondensed-BoldItalic.ttf');
+}
+@font-face{
+  font-family: RobotoCondensed-Italic;
+  src: url($roboto + '/RobotoCondensed-Italic.ttf');
+}
+@font-face{
+  font-family: RobotoCondensed-Light;
+  src: url($roboto + '/RobotoCondensed-Light.ttf');
+}
+@font-face{
+  font-family: RobotoCondensed-LightItalic;
+  src: url($roboto + '/RobotoCondensed-LightItalic.ttf');
+}
+@font-face{
+  font-family: RobotoCondensed-Regular;
+  src: url($roboto + '/RobotoCondensed-Regular.ttf');
+}
+@font-face{
+  font-family: WaitingfortheSunrise-Regular;
+  src: url('../fonts/w_f_sunrise/WaitingfortheSunrise-Regular.ttf');
+}
+@font-face{
+  font-family: Vollkorn-Black;
+  src: url($vollkorn + '/Vollkorn-Black.ttf');
+}
+@font-face{
+  font-family: Vollkorn-BlackItalic;
+  src: url($vollkorn + '/Vollkorn-BlackItalic.ttf');
+}
+@font-face{
+  font-family: Vollkorn-Bold;
+  src: url($vollkorn + '/Vollkorn-Bold.ttf');
+}
+@font-face{
+  font-family: Vollkorn-BoldItalic;
+  src: url($vollkorn + '/Vollkorn-BoldItalic.ttf');
+}
+@font-face{
+  font-family: Vollkorn-ExtraBold;
+  src: url($vollkorn + '/Vollkorn-ExtraBold.ttf');
+}
+@font-face{
+  font-family: Vollkorn-ExtraBoldItalic;
+  src: url($vollkorn + '/Vollkorn-ExtraBoldItalic.ttf');
+}
+@font-face{
+  font-family: Volkorn-Italic;
+  src: url($vollkorn + '/Vollkorn-Italic.ttf');
+}
+@font-face{
+  font-family: Volkorn-Medium;
+  src: url($vollkorn + '/Vollkorn-Medium.ttf');
+}
+@font-face{
+  font-family: Volkorn-MediumItalic;
+  src: url($vollkorn + '/Vollkorn-MediumItalic.ttf');
+}
+@font-face{
+  font-family: Volkorn-Regular;
+  src: url($vollkorn + '/Vollkorn-Regular.ttf');
+}
+@font-face{
+  font-family: Volkorn-SemiBold;
+  src: url($vollkorn + '/Vollkorn-SemiBold.ttf');
+}
+@font-face{
+  font-family: Volkorn-SemiBoldItalic;
+  src: url($vollkorn + '/Vollkorn-SemiBoldItalic.ttf');
+}
+@font-face{
+  font-family: Risque;
+  src: url('../fonts/risque/Risque-Regular.ttf');
+}
+

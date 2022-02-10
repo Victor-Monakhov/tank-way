@@ -1,58 +1,69 @@
-//simple button
+@import "variables.scss";
+@import "colors.scss";
+//simple btn
 .btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    font-weight: bold;
-    color: $dark_grey07;
-    border-radius: 5px;
-    background-image: linear-gradient(to bottom, #28a5c4, #ffffff, #8b4513);
-    box-shadow: $panel-shadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  color: $dark_grey07;
+  border-radius: 5px;
+  background-image: linear-gradient(to bottom, #28a5c4, #ffffff, #8b4513);
+  box-shadow: $panel-shadow;
 }
+
 .btn:hover {
-    color: #000;
-    border: 3px solid saddlebrown;
-    animation: border3px-anim 1500ms linear 0s infinite normal both;
-    transition: 2s;
+  color: #000;
+  border: 3px solid saddlebrown;
+  animation: border3px-anim 1500ms linear 0s infinite normal both;
+  transition: 2s;
 }
+
 .btn:active {
-    box-shadow: $click-shadow;
+  box-shadow: $click-shadow;
 }
 
 //radio button tank
-.tank-radio{
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
+.tank-radio {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
 }
-.tank-radio+label{
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
+
+.tank-radio + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
 }
-.tank-radio+label::after{
-    content:'';
-    display: inline-block;
-    width: 20px;
-    height: 18px;
-    flex-shrink: 0;
-    flex-grow: 0;
-    margin: 5px;
-    background-image: $img-radio-tank;
-    transform: rotateZ(180deg);
-    cursor: pointer;
+
+.tank-radio + label::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 18px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin: 5px;
+  background-image: $img-radio-tank;
+  transform: rotateZ(180deg);
+  cursor: pointer;
 }
-.radio-red:not(:disabled):not(:checked)+label:hover::after{
-    background-image: $img-radio-tank-red;
+
+.radio-red:not(:disabled):not(:checked) + label:hover::after {
+  background-image: $img-radio-tank-red;
 }
-.radio-blue:not(:disabled):not(:checked)+label:hover::after{
-    background-image: $img-radio-tank-blue;
+
+.radio-blue:not(:disabled):not(:checked) + label:hover::after {
+  background-image: $img-radio-tank-blue;
 }
-.radio-red:checked+label:after{
-    background-image: $img-radio-tank-red;
+
+.radio-red:checked + label:after {
+  background-image: $img-radio-tank-red;
 }
-.radio-blue:checked+label:after{
-    background-image: $img-radio-tank-blue;
+
+.radio-blue:checked + label:after {
+  background-image: $img-radio-tank-blue;
 }
 

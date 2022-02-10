@@ -1,11 +1,16 @@
-<div class = "navbar">
-    <button type = "button" class = "btn-menu" (click) = "onClick()"></button>
-    <ul [style.flex-direction] = "isVisible_navMenu ? 'column' : 'row'"
-        [style.width] = "isVisible_navMenu ? '100%' : 'auto'"
-        [style.display] = "isWindowBig ? 'flex' : isVisible_navMenu ? 'flex' : 'none'">
-      <li><a href="#">Sign up</a><hr></li>
-      <li><a href="#">Sign in</a><hr></li>
-      <li><a href="#">About game</a><hr></li>
-    </ul>
-    <div class = "gameLogo"></div>
+<div class="navbar panel">
+  <div class="wrapper">
+    <button type="button" class="btn-menu" (click)="onClick()" [appDropMenu] = menu></button>
+    <div class="gameLogo"></div>
+    <app-drop-menu class="nav-menu"></app-drop-menu>
+<!--    <ng-container *ngTemplateOutlet="menu"></ng-container>-->
+  </div>
+<!--  <ng-container *ngIf="isVisibleMenu">-->
+    <app-drop-menu #menu class="nav-menu"></app-drop-menu>
+<!--    <ng-container *ngTemplateOutlet="menu"></ng-container>-->
+<!--  </ng-container>-->
 </div>
+
+<!--<ng-template #menu>-->
+
+<!--</ng-template>-->

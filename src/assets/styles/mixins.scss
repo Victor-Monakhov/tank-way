@@ -20,6 +20,24 @@
     }
 }
 
+@mixin media-property($property, $value-xs, $value-sm: 0%, $value-md: 0%, $value-lg: 0%){
+  @if($value-sm == 0%){
+    @media screen and (min-width: $xs + 1px) {  #{$property}: $value-xs; }
+  }@else if($value-md == 0%){
+    @media screen and (min-width: $xs + 1px) {  #{$property}: $value-xs; }
+    @media screen and (min-width: $sm + 1px) {  #{$property}: $value-sm; }
+  }@else if($value-lg == 0%){
+    @media screen and (min-width: $xs + 1px) {  #{$property}: $value-xs; }
+    @media screen and (min-width: $sm + 1px) {  #{$property}: $value-sm; }
+    @media screen and (min-width: $md + 1px) {  #{$property}: $value-md; }
+  }@else {
+    @media screen and (min-width: $xs + 1px) {  #{$property}: $value-xs; }
+    @media screen and (min-width: $sm + 1px) {  #{$property}: $value-sm; }
+    @media screen and (min-width: $md + 1px) {  #{$property}: $value-md; }
+    @media screen and (min-width: $lg + 1px) {  #{$property}: $value-lg; }
+  }
+}
+
 @mixin media-margin ($margin-xs, $margin-sm: 100%, $margin-md: 100%, $margin-lg: 100%){
     @if($margin-sm == 100%){
         @media screen and (min-width: $xs) {  margin: $margin-xs; }
