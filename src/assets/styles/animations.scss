@@ -1,3 +1,8 @@
+@keyframes menu_go_right{
+  0% { left: -100%; top: -100%}
+  100% { left: 0; top: 0;}
+}
+
 @keyframes border3px-anim{
     0% { border-right: 3px solid #6495ed;}
     33% { border-top: 3px solid #6495ed;}

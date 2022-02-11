@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { WIN_SIZES } from 'src/app/app.config';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,15 +7,18 @@ import { WIN_SIZES } from 'src/app/app.config';
 })
 export class NavbarComponent implements OnInit {
 
-  isVisibleMenu: boolean = false;
+  public theme: string = 'blue';
+  @Output() public themeEvent: EventEmitter<string> = new EventEmitter<string>();
+
+  public menuContent: string[] = ['Sign up', 'Sign in', 'About game'];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onClick(): void{
-    this.isVisibleMenu = !this.isVisibleMenu;
+  public onTheme(theme: string){
+    this.theme = theme;
+    this.themeEvent.emit(theme);
   }
-
 }

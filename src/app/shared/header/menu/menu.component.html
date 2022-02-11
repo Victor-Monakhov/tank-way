@@ -1,0 +1,8 @@
+<div *ngIf="visible" class="nav-menu" [class]="mode">
+  <div *ngFor="let item of menuContent">
+    <p (click)="closed.emit()">{{item}}</p>
+    <hr>
+  </div>
+</div>
+
+

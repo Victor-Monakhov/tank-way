@@ -29,19 +29,21 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { 
-                "glob": "**/*", 
-                "input": "./node_modules/@victor_monakhov/tanks/images/testGame", 
-                "output": "images/testGame" 
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@victor_monakhov/tanks/images/testGame",
+                "output": "images/testGame"
               },
-              { 
-                "glob": "**/*", 
-                "input": "./node_modules/@victor_monakhov/tanks/sounds", 
-                "output": "sounds" 
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@victor_monakhov/tanks/sounds",
+                "output": "sounds"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/@angular/cdk/overlay-prebuilt.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["./src/assets/styles"]
@@ -110,15 +112,15 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { 
-                "glob": "**/*", 
-                "input": "./node_modules/@victor_monakhov/tanks/images/testGame", 
-                "output": "images/testGame" 
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@victor_monakhov/tanks/images/testGame",
+                "output": "images/testGame"
               },
-              { 
-                "glob": "**/*", 
-                "input": "./node_modules/@victor_monakhov/tanks/sounds", 
-                "output": "sounds" 
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@victor_monakhov/tanks/sounds",
+                "output": "sounds"
               }
             ],
             "styles": [

@@ -8,17 +8,6 @@
 .navbar {
   display: block;
 
-  hr {
-    @include media-property(display, block, block, none, none);
-  }
-
-  .nav-menu {
-    @include media-property(display, block, block, none, none);
-    @include media-property(margin, 10px 10px 0 0, 10px 20px 0 0, 0 20px, 0 30px);
-
-
-  }
-
   .wrapper {
     @include media-property(justify-content, space-between, space-between, start, start);
     display: flex;
@@ -50,15 +39,42 @@
 
     .gameLogo {
       @include media-property(margin, 0 10px, 0 20px, 0 20px, 0 30px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background-color: $dark_grey;
       background-image: $img-gameLogo;
       width: $img-gameLogo-width;
       height: $img-gameLogo-height;
       border-radius: 5px;
       box-shadow: $panel-shadow;
+      .theme{
+        height: $img-gameLogo-height;
+        width: $img-gameLogo-height;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 3px solid transparent;
+        flex-shrink: 0;
+      }
+      .red-theme-btn{
+        border-color: #922222;
+        border-right: transparent;
+        :host-context(.red-theme) & {
+          width: 100%;
+          flex-shrink: 1;
+        }
+      }
+      .blue-theme-btn{
+        border-color: #6495ed;
+        border-left: transparent;
+        :host-context(.blue-theme) & {
+          width: 100%;
+          flex-shrink: 1;
+        }
+      }
     }
 
-    .nav-menu {
+    app-menu {
       @include media-property(display, none, none, block, block);
     }
   }

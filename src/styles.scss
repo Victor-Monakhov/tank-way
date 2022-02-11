@@ -8,6 +8,7 @@
 
 body {
   margin: 0;
+  padding: 0;
   background-color: $dark_grey;
   background-image: $img-background;
   font-family: Roboto-Medium, sans-serif;
@@ -19,7 +20,6 @@ html, body {
 hr {
   border: 2px solid transparent;
   border-image: $border-img-grad-brown-blue;
-  width: 100%;
 }
 
 p {

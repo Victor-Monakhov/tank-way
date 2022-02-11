@@ -6,8 +6,8 @@ import { NavbarComponent } from 'src/app/shared/header/navbar/navbar.component';
 import { SliderComponent } from 'src/app/shared/slider/slider.component';
 import { TestGameOptionsComponent } from 'src/app/shared/test-game-options/test-game-options.component';
 import {AppModule} from "../../app.module";
-import {DropMenuDirective} from "../../shared/header/navbar/drop-menu.directive";
-import {DropMenuComponent} from "../../shared/header/drop-menu/drop-menu.component";
+import {MenuDirective} from "../../shared/header/navbar/menu.directive";
+import {MenuComponent} from "../../shared/header/menu/menu.component";
 
 
 
@@ -17,12 +17,16 @@ import {DropMenuComponent} from "../../shared/header/drop-menu/drop-menu.compone
     NavbarComponent,
     SliderComponent,
     TestGameOptionsComponent,
-    DropMenuDirective,
-    DropMenuComponent,
+    MenuDirective,
+    MenuComponent,
   ],
     imports: [
         CommonModule,
         HomeRoutingModule,
-    ]
+    ],
+  exports: [
+    MenuDirective,
+    MenuComponent
+  ]
 })
 export class HomeModule { }
