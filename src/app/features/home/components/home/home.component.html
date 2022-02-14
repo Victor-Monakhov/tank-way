@@ -1,0 +1,22 @@
+<app-navbar (themeEvent)="setTheme($event)"></app-navbar>
+<div class="wrapper">
+  <img src="../../assets/images/{{theme}}-background.png" alt="#">
+  <div class="panel">
+    <h1>WELCOME!</h1>
+    <p>
+      Hello! This is the tanks page!
+      If you are new and have not yet tasted victory on a real battlefield -
+      try the mini version of the game by clicking on the button below. Or register immediately and
+      get access to the full version of the game and the opportunity to play with friends.
+      We hope you enjoy it and you stay with us!
+    </p>
+    <div class="hr-wrapper">
+      <hr>
+    </div>
+    <button type="button" class="btn testGame-btn" (click)="onClick()">TEST GAME</button>
+  </div>
+  <div class="row home-panel">
+    <app-test-game-options class="panel" id="left_panel"></app-test-game-options>
+    <app-slider class="panel" id="right_panel"></app-slider>
+  </div>
+</div>

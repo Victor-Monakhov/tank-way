@@ -1,0 +1,96 @@
+@import 'src/assets/styles/colors';
+@import 'src/assets/styles/mixins';
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/images';
+@import 'src/assets/styles/fonts';
+@import 'src/assets/styles/animations';
+@import 'themes.scss';
+
+.navbar {
+  @include media-property(margin, 0, 0, 0 20px, 0 50px);
+  background-image: $grad-darkgrey-blue;
+  box-shadow: $panel-shadow;
+  display: block;
+  margin: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+
+  .wrapper {
+    @include media-property(justify-content, space-between, space-between, start, start);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: $header-height;
+
+    .btn-menu {
+      @include media-property(margin, 0 10px, 0 20px, 0 20px, 0 30px);
+      @include media-property(display, flex, flex, none, none);
+      width: $img-logo-width;
+      height: $img-logo-height;
+      border-radius: 5px;
+      box-shadow: $panel-shadow;
+      background-image: $img-logo;
+      transition: 1s;
+      border: solid transparent 0;
+      cursor: pointer;
+    }
+
+    .btn-menu:hover {
+      transform: rotateZ(90deg);
+    }
+
+    .btn-menu:active {
+      transition: 0s;
+      box-shadow: $click-shadow;
+    }
+
+    .gameLogo {
+      @include media-property(margin, 0 10px, 0 20px, 0 20px, 0 30px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $dark_grey;
+      background-image: $img-gameLogo;
+      width: $img-gameLogo-width;
+      height: $img-gameLogo-height;
+      border-radius: 5px;
+      box-shadow: $panel-shadow;
+
+      .theme {
+        height: $img-gameLogo-height;
+        width: $img-gameLogo-height;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 3px solid transparent;
+        flex-shrink: 0;
+      }
+
+      .red-theme-btn {
+        border-color: #922222;
+        border-right: transparent;
+
+        :host-context(.red-theme) & {
+          width: 100%;
+          flex-shrink: 1;
+        }
+      }
+
+      .blue-theme-btn {
+        border-color: #6495ed;
+        border-left: transparent;
+
+        :host-context(.blue-theme) & {
+          width: 100%;
+          flex-shrink: 1;
+        }
+      }
+    }
+
+    app-menu {
+      @include media-property(display, none, none, block, block);
+    }
+  }
+}

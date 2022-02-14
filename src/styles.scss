@@ -6,19 +6,15 @@
 @import 'animations.scss';
 @import 'variables.scss';
 
+
 body {
+  @include media-property(padding, 0 0 50px, 0 0 50px, 0 20px 50px, 0 50px 50px);
   margin: 0;
-  padding: 0;
   background-color: $dark_grey;
-  background-image: $img-background;
   font-family: Roboto-Medium, sans-serif;
 }
 
-html, body {
-}
-
 hr {
-  border: 2px solid transparent;
   border-image: $border-img-grad-brown-blue;
 }
 
@@ -40,7 +36,6 @@ h1 {
 .row {
   @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
   display: flex;
-  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -48,14 +43,16 @@ h1 {
 .panel {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: $dark-grey06;
-  box-shadow: $panel-shadow;
+  background-color: $dark-grey09;
+  box-shadow: $panel-shadow-blue;
   border-radius: 10px;
   font-family: Roboto-Medium, sans-serif;
   color: #fff;
   padding: 10px;
+  margin-top: 50px;
 }
 
 

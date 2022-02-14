@@ -1,14 +1,28 @@
+@import "mixins.scss";
+
 @keyframes menu_go_right{
-  0% { left: -100%; top: -100%}
-  100% { left: 0; top: 0;}
+  0% { left: -100%;}
+  100% {left: 0;}
+}
+@keyframes menu_go_left{
+  0% { left: 0;}
+  100% {left: -100%;}
 }
 
-@keyframes border3px-anim{
+@keyframes border3px-anim-blue{
     0% { border-right: 3px solid #6495ed;}
     33% { border-top: 3px solid #6495ed;}
     66% { border-left: 3px solid #6495ed;}
     99% { border-bottom: 3px solid #6495ed;}
     100% { border-right: 3px solid #6495ed;}
+}
+
+@keyframes border3px-anim-red{
+  0% { border-right: 3px solid #922222;}
+  33% { border-top: 3px solid #922222;}
+  66% { border-left: 3px solid #922222;}
+  99% { border-bottom: 3px solid #922222;}
+  100% { border-right: 3px solid #922222;}
 }
 
 @keyframes border-bottom-anim {

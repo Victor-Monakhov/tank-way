@@ -1,0 +1,71 @@
+@import 'src/assets/styles/mixins';
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/colors';
+@import 'src/assets/styles/animations';
+@import 'src/assets/styles/images';
+@import "themes.scss";
+
+.settings{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+    .settings-menu{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        height: 50px;
+        .settings-item{
+            color: #fff;
+            background-color: transparent;
+            @include media-font-size(1.2rem, 1.3rem, 1.4rem, 1.5rem);
+            border: 3px solid transparent;
+        }
+        .settings-item:hover{
+            color: #fff;
+            cursor: pointer;
+            border-bottom: 3px solid #8b4513;
+            animation: border-bottom-anim 1500ms linear 0s infinite normal both;
+        }
+        .settings-item:focus{
+            color: #6495ed;
+            border-bottom: 3px solid #8b4513;
+            animation: border-bottom-anim 1500ms linear 0s infinite normal both;
+        }
+    }
+    $game-settings-panel-height: 250px;
+    $game-settings-img-panel: 100px;
+    .game-settings{
+        border: 3px solid transparent;
+        border-image: $border-img-grad-brown-blue;
+        width: 90%;
+        height: $game-settings-panel-height;
+        .position-panel{
+            width: 100%;
+            height: 100%;
+            background-color: $dark_grey;
+            .base-img{
+                justify-content: space-around;
+                flex-wrap: nowrap;
+                padding: 10px 0;
+                height: $game-settings-img-panel;
+            }
+            .start-position{
+                justify-content: space-around;
+                align-items: start;
+                height: $game-settings-panel-height - $game-settings-img-panel - 20;
+                .red-side{
+                    color: brown;
+
+
+                }
+                .blue-side{
+                    color:#6495ed;
+                }
+            }
+        }
+    }
+
+}

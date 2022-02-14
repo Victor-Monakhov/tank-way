@@ -1,6 +1,7 @@
 @import "variables.scss";
 @import "colors.scss";
 @import "images.scss";
+@import "themes.scss";
 //simple btn
 .btn {
   display: flex;
@@ -11,14 +12,14 @@
   font-weight: bold;
   color: $dark_grey07;
   border-radius: 5px;
-  background-image: linear-gradient(to bottom, #28a5c4, #ffffff, #8b4513);
+  background-image: $btn-grad-blue;
   box-shadow: $panel-shadow;
 }
 
 .btn:hover {
   color: #000;
-  border: 3px solid saddlebrown;
-  animation: border3px-anim 1500ms linear 0s infinite normal both;
+  border: 3px solid $brown;
+  animation: border3px-anim-blue 1500ms linear 0s infinite normal both;
   transition: 2s;
 }
 

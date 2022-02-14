@@ -1,0 +1,59 @@
+@import "variables.scss";
+@import 'colors.scss';
+@import 'animations.scss';
+.panel{
+  :host-context(.red-theme) &{
+    box-shadow: $panel-shadow-red;
+  }
+  :host-context(.blue-theme) &{
+    box-shadow: $panel-shadow-blue;
+  }
+}
+h1{
+  :host-context(.red-theme) &{
+    color: $red;
+  }
+  :host-context(.blue-theme) &{
+    color: $blue;
+  }
+}
+
+hr{
+  :host-context(.red-theme) &{
+    border-image: $border-img-grad-brown-red;
+  }
+  :host-context(.blue-theme) &{
+    border-image: $border-img-grad-brown-blue;
+  }
+}
+
+.navbar{
+  :host-context(.red-theme) &{
+    box-shadow: $panel-shadow;
+    background-image: $grad-darkgrey-red;
+  }
+  :host-context(.blue-theme) &{
+    box-shadow: $panel-shadow;
+    background-image: $grad-darkgrey-blue;
+  }
+}
+
+.btn{
+  :host-context(.red-theme) &{
+    background-image: $btn-grad-red;
+  }
+  :host-context(.blue-theme) &{
+    background-image: $btn-grad-blue;
+  }
+}
+
+.btn:hover{
+  :host-context(.red-theme) &{
+    border: 3px solid $green;
+    animation: border3px-anim-red 1500ms linear 0s infinite normal both;
+  }
+  :host-context(.blue-theme) &{
+    border: 3px solid $brown;
+    animation: border3px-anim-blue 1500ms linear 0s infinite normal both;
+  }
+}

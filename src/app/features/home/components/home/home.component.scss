@@ -1,0 +1,52 @@
+@import 'src/assets/styles/mixins';
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/colors';
+@import 'src/assets/styles/animations';
+@import 'src/assets/styles/images';
+@import 'src/assets/styles/variables';
+@import '../../../../../assets/styles/themes';
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    position: relative;
+    margin-top: $header-height + 20px;
+    img{
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      z-index: -1;
+      left: 0;
+      filter: blur(8px) brightness(0.5);
+      object-fit: cover;
+    }
+    .panel{
+      .hr-wrapper{
+        width: 100%;
+      }
+        .testGame-btn {
+          @include media-property(font-size, 1.3rem, 1.4rem, 1.5rem, 1.6rem);
+            margin: 20px 0;
+            width: 300px;
+            height: 50px;
+        }
+        #left_panel{
+            width: 100%;
+            @media screen and (min-width: $md) {
+                width: 50%;
+            }
+            @media screen and (max-width: $md) {
+                margin-bottom: 50px;
+            }
+        }
+        #right_panel{
+            width: 100%;
+            @media screen and (min-width: $md) {
+                width: 50%;
+                margin-left: 25px;
+            }
+        }
+    }
+}
