@@ -8,6 +8,10 @@
   0% { left: 0;}
   100% {left: -100%;}
 }
+@keyframes row_go_down {
+  0% { margin-top: -100%;}
+  100% {margin-top: 0;}
+}
 
 @keyframes border3px-anim-blue{
     0% { border-right: 3px solid #6495ed;}

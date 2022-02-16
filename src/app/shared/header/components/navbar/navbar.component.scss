@@ -7,24 +7,21 @@
 @import 'themes.scss';
 
 .navbar {
-  @include media-property(margin, 0, 0, 0 20px, 0 50px);
-  background-image: $grad-darkgrey-blue;
-  box-shadow: $panel-shadow;
-  display: block;
+  @include media-property(justify-content, space-between, space-between, start, start);
+  display: flex;
+  align-items: center;
+  height: $header-height;
+ //padding: 10px 100px;
+  background-color: $black;
+  @include media-property(padding, 10px, 10px, 10px 50px, 10px 50px);
+  //background-image: $grad-darkgrey-blue;
+  //box-shadow: $panel-shadow;
   margin: 0;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   z-index: 10;
-
-  .wrapper {
-    @include media-property(justify-content, space-between, space-between, start, start);
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    height: $header-height;
-
     .btn-menu {
       @include media-property(margin, 0 10px, 0 20px, 0 20px, 0 30px);
       @include media-property(display, flex, flex, none, none);
@@ -92,5 +89,4 @@
     app-menu {
       @include media-property(display, none, none, block, block);
     }
-  }
 }

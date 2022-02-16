@@ -1,0 +1,75 @@
+@import 'src/assets/styles/mixins';
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/colors';
+@import 'src/assets/styles/animations';
+@import 'src/assets/styles/images';
+@import 'src/assets/styles/themes';
+
+
+.wrapper{
+  position: fixed;
+  bottom: 20px;
+  flex-direction: column;
+  width: 100%;
+
+  .slider{
+    display: grid;
+    grid-template-rows: repeat(1, 150px);
+    grid-column-gap: 15px;
+    width: 100%;
+    .btn-menu {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      bottom: 50%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+
+      h1{
+        margin: 0 50px;
+      }
+
+      .move-slide {
+        padding: 0;
+        margin: 5px;
+        width: 30px;
+        height: 30px;
+
+        .arrow {
+          width: 0;
+          height: 0;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+        }
+
+        .arrow-left {
+          border-right: 20px solid $dark-grey06;
+        }
+
+        .arrow-left:hover {
+          border-right: 20px solid #000;
+          transition: 2s;
+        }
+
+        .arrow-right {
+          border-left: 20px solid $dark-grey06;
+        }
+
+        .arrow-right:hover {
+          border-left: 20px solid #000;
+          transition: 2s;
+        }
+      }
+    }
+    img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+}
+
+
+

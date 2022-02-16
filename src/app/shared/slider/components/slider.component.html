@@ -1,0 +1,9 @@
+<div class="row wrapper">
+  <div class="slider" *ngIf="images$.value.length"
+       [style]="{'grid-template-columns' : 'repeat(' + images$.value.length + ', 1fr)'}">
+    <img *ngFor="let image of images$.value"
+         alt="image"
+         [src]="image.src.medium">
+  </div>
+</div>
+

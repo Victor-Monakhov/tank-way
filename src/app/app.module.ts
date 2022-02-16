@@ -6,6 +6,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MenuDirective} from './shared/header/directives/menu.directive';
 import {MenuComponent} from './shared/header/components/menu/menu.component';
 import {Overlay, OverlayModule} from "@angular/cdk/overlay";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {GalleryInterceptor} from "./shared/slider/interceptors/gallery.interceptor";
 
 @NgModule({
   declarations: [
@@ -15,9 +17,16 @@ import {Overlay, OverlayModule} from "@angular/cdk/overlay";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    OverlayModule
+    OverlayModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: GalleryInterceptor,
+    },
+  ],
   exports: [],
   bootstrap: [AppComponent]
 })

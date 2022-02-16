@@ -5,13 +5,12 @@
 @import 'buttons.scss';
 @import 'animations.scss';
 @import 'variables.scss';
+@import "themes.scss";
 
 
 body {
-  @include media-property(padding, 0 0 50px, 0 0 50px, 0 20px 50px, 0 50px 50px);
   margin: 0;
-  background-color: $dark_grey;
-  font-family: Roboto-Medium, sans-serif;
+  font-family: Raleway-Thin, sans-serif;
 }
 
 hr {
@@ -21,9 +20,19 @@ hr {
 p {
   @include media-property(font-size, 1.2rem, 1.3rem, 1.4rem, 1.5rem);
   text-align: justify;
+  margin: 10px 0;
+  color: #ffffff;
 }
 
-h1 {
+h1{
+  @include media-property(font-size, 5rem, 5.2rem, 5.4rem, 5.6rem);
+  text-shadow: $text-shadow;
+  font-family: Raleway-Thin, sans-serif;
+  text-align: center;
+  margin: 0;
+}
+
+h2 {
   @include media-property(font-size, 2rem, 2.1rem, 2.2rem, 2.3rem);
   margin: 10px 5px;
   color: #28a5c4;
@@ -36,7 +45,6 @@ h1 {
 .row {
   @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
   display: flex;
-  margin: 0;
   padding: 0;
 }
 
@@ -53,6 +61,8 @@ h1 {
   color: #fff;
   padding: 10px;
   margin-top: 50px;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 

@@ -1,6 +1,17 @@
 @import "variables.scss";
 @import 'colors.scss';
 @import 'animations.scss';
+
+.page-wrapper{
+  :host-context(.red-theme) &{
+    background-color: #1A1A1D;
+  }
+  :host-context(.blue-theme) &{
+    //background-color: #F4E4C1;
+    //background-image: linear-gradient(to right bottom,$brown, #15DB95);
+  }
+}
+
 .panel{
   :host-context(.red-theme) &{
     box-shadow: $panel-shadow-red;
@@ -10,12 +21,12 @@
   }
 }
 h1{
-  :host-context(.red-theme) &{
-    color: $red;
-  }
-  :host-context(.blue-theme) &{
-    color: $blue;
-  }
+  //:host-context(.red-theme) &{
+  //  color: $red;
+  //}
+  //:host-context(.blue-theme) &{
+  //  color: $blue;
+  //}
 }
 
 hr{
@@ -29,12 +40,12 @@ hr{
 
 .navbar{
   :host-context(.red-theme) &{
-    box-shadow: $panel-shadow;
-    background-image: $grad-darkgrey-red;
+    //box-shadow: $panel-shadow;
+    //background-image: $grad-darkgrey-red;
   }
   :host-context(.blue-theme) &{
-    box-shadow: $panel-shadow;
-    background-image: $grad-darkgrey-blue;
+    //box-shadow: $panel-shadow;
+    //background-image: $grad-darkgrey-blue;
   }
 }
 
