@@ -1,6 +1,11 @@
-import { AfterContentChecked, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {GalleryService, Image} from "../services/gallery.service";
-import {BehaviorSubject, Observable} from "rxjs";
 import {SubSink} from "subsink";
 
 @Component({
@@ -8,20 +13,52 @@ import {SubSink} from "subsink";
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent implements OnInit{
+export class SliderComponent implements OnInit, OnDestroy {
+
+  @ViewChild('slider') public slider: ElementRef;
 
   private subs: SubSink = new SubSink();
-  public images$: BehaviorSubject<Image[]> = new BehaviorSubject<Image[]>([]);
+  public images: Image[] = [];
+  public scrollY: number = 0;
+  public sliderWidth: number = 0;
+  public columnGap: number = 15;
+  public imgWidth: number = 200;
+  public imgBorderWidth: number = 1;
 
   constructor(private galleryService: GalleryService) {
   }
 
-  ngOnInit(): void {
-    this.subs.add(this.galleryService.getImages().subscribe(images => this.images$.next(images)));
+  ngOnInit() {
+    this.subs.add(
+      this.galleryService.getImages().subscribe(images => {
+        this.images = images;
+        this.setSliderWidth();
+      }));
   }
 
-  public onMoveLeft(scroll: Event){
-    console.log(scroll);
+  private setSliderWidth() {
+    const gapsSum = (this.images.length - 1) * (this.columnGap - this.imgBorderWidth * 2);
+    const imagesSum = this.images.length * this.imgWidth;
+    const borderSum = this.images.length * this.imgBorderWidth * 2;
+    this.sliderWidth = gapsSum + imagesSum + borderSum;
+  }
+
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
+  public onMoveLeft(scroll: WheelEvent) {
+    const contentWidth = this.slider.nativeElement.clientWidth;
+    const scrollDistance: number = this.sliderWidth - contentWidth;
+    const blockLeft: boolean = this.scrollY === 0 && scroll.deltaY > 0;
+    const blockRight: boolean = this.scrollY <= -scrollDistance && scroll.deltaY < 0;
+    if (this.scrollY <= 0 && !blockRight && !blockLeft) {
+      const futureScrollY = this.scrollY + scroll.deltaY;
+      const dScrollRight = (futureScrollY < -scrollDistance) ? futureScrollY + scrollDistance : 0;
+      const dScrollLeft = (futureScrollY > 0) ? futureScrollY : 0
+      this.scrollY += scroll.deltaY - dScrollRight - dScrollLeft;
+    }
   }
 
   // ngAfterContentChecked():void{
@@ -60,27 +97,30 @@ export class SliderComponent implements OnInit{
   //   return size;
   // }
   //
-  clickLeft(): void{
-  //   if(this.index === 0)
-  //     this.index = this.images.length - 1;
-  //   else
-  //     --this.index;
-  //   this.galleryBalancer(this.galleryPadding);
+  clickLeft(): void {
+    //   if(this.index === 0)
+    //     this.index = this.images.length - 1;
+    //   else
+    //     --this.index;
+    //   this.galleryBalancer(this.galleryPadding);
   }
+
   //
-  clickRight(): void{
-  //   if(this.index === this.images.length - 1)
-  //     this.index = 0;
-  //   else
-  //     ++this.index;
-  //   this.galleryBalancer(this.galleryPadding);
+  clickRight(): void {
+    //   if(this.index === this.images.length - 1)
+    //     this.index = 0;
+    //   else
+    //     ++this.index;
+    //   this.galleryBalancer(this.galleryPadding);
   }
+
   //
-  clickFullScreen(): void{
-  //   this.fullScreenFlag = !this.fullScreenFlag;
-  //   this.updateGallery();
-  //   this.galleryBalancer(this.galleryPadding);
+  clickFullScreen(): void {
+    //   this.fullScreenFlag = !this.fullScreenFlag;
+    //   this.updateGallery();
+    //   this.galleryBalancer(this.galleryPadding);
   }
+
   // updateGallery(): void{
   //   if(this.fullScreenFlag){
   //     window.scrollTo(0, 0);

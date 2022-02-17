@@ -25,7 +25,7 @@ p {
 }
 
 h1{
-  @include media-property(font-size, 5rem, 5.2rem, 5.4rem, 5.6rem);
+  @include media-property(font-size, 3.3rem, 4.2rem, 5.4rem, 5.6rem);
   text-shadow: $text-shadow;
   font-family: Raleway-Thin, sans-serif;
   text-align: center;
@@ -43,7 +43,7 @@ h2 {
 }
 
 .row {
-  @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
+  @include media-property(padding, 0 20px, 0 30px, 0 40px, 0 50px);
   display: flex;
   padding: 0;
 }

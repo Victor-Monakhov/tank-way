@@ -1,9 +1,18 @@
-<div class="row wrapper">
-  <div class="slider" *ngIf="images$.value.length"
-       [style]="{'grid-template-columns' : 'repeat(' + images$.value.length + ', 1fr)'}">
-    <img *ngFor="let image of images$.value"
-         alt="image"
-         [src]="image.src.medium">
+<div class="wrapper" >
+  <div #slider class="slider"
+       (wheel)="onMoveLeft($event)">
+    <div *ngIf="images.length"
+         class="slider-content"
+         [style]="{'grid-template-columns' : 'repeat(' + images.length + ', ' + imgWidth + 'px)',
+       'grid-column-gap' : columnGap + 'px'}"
+         [style.left]="scrollY + 'px'">
+      <img *ngFor="let image of images"
+           alt="image"
+           [src]="image.src.medium"
+           [width]="imgWidth"
+           [style.border-width]="imgBorderWidth + 'px'">
+    </div>
   </div>
 </div>
+
 
