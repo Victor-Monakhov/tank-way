@@ -6,30 +6,102 @@
 @import 'src/assets/styles/themes';
 
 
-.wrapper{
-  position: fixed;
-  bottom: 0;
-  flex-direction: column;
-  width: 100%;
-  padding: 10px 0;
+.wrapper {
+  transition: 1s;
   background-color: $black;
-  .slider{
-    @include  media-property(margin, 0 20px, 0 30px, 0 40px, 0 50px) ;
-    overflow-x: hidden;
-    .slider-content{
-      position: relative;
-      display: grid;
-      grid-template-rows: repeat(1, 150px);
-      img {
-        height: 148px;
-        object-fit: cover;
-        border: solid $red;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+  @include media-property(padding, 10px 10px, 10px 20px, 10px 30px, 10px 40px);
+
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $red;
+
+    h2 {
+      margin: 0 10px 0 0;
+      cursor: pointer;
+    }
+
+    i {
+      font-size: 2rem;
+      color: #ffffff;
+      cursor: pointer;
+    }
+  }
+
+  .slider-content {
+    @include media-property(grid-template-rows, repeat(4, 150px), repeat(3, 150px), repeat(2, 150px), repeat(2, 150px));
+    //grid-template-columns: repeat(6, 200px);
+   // grid-template-rows: repeat(4, 150px);
+    //@include media-property(grid-template-columns, repeat(, 1fr), repeat(20, 1fr), repeat(20, 1fr), repeat(20, 1fr));
+    @include media-property(grid-row-gap, 10px, 10px, 15px, 20px);
+    @include media-property(grid-column-gap, 10px, 10px, 15px, 20px);
+    transition: 1s;
+    height: 0;
+    display: grid;
+
+
+    overflow-y: hidden;
+    img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border: 1px solid $red;
+      border-radius: 5px;
+      cursor: pointer;
     }
   }
 }
+
+
+//--------------------------first version
+//.show {
+//  bottom: 0 !important;
+//}
+//
+//.wrapper{
+//  transition: .5s;
+//  position: fixed;
+//  bottom: -160px;
+//  flex-direction: column;
+//  width: 100%;
+//  padding: 10px 0;
+//  background-color: $black;
+//
+//  .title{
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    color: $red;
+//    margin: 0 0 10px 0;
+//    h2{
+//        margin: 0 10px 0 0;
+//        cursor: pointer;
+//    }
+//    i{
+//      font-size: 2rem;
+//      color: #ffffff;
+//      cursor: pointer;
+//    }
+//  }
+//  .slider{
+//    @include  media-property(margin, 0 20px, 0 30px, 0 40px, 0 50px) ;
+//    overflow-x: hidden;
+//    animation: slider_go_up 1s ease 1 both;
+//    .slider-content{
+//      position: relative;
+//      display: grid;
+//      grid-template-rows: repeat(1, 150px);
+//      img {
+//        height: 148px;
+//        object-fit: cover;
+//        border: solid $red;
+//        border-radius: 5px;
+//        cursor: pointer;
+//      }
+//    }
+//  }
+//}
 
 
 

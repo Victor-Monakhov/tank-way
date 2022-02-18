@@ -1,19 +1,25 @@
 import {
+  AfterViewChecked,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ElementRef,
+  HostListener,
   OnDestroy,
   OnInit,
   ViewChild
 } from '@angular/core';
 import {GalleryService, Image} from "../services/gallery.service";
 import {SubSink} from "subsink";
+import {WIN_SIZES} from "../../../app.config";
+import {from} from "rxjs";
 
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  styleUrls: ['./slider.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SliderComponent implements OnInit, OnDestroy {
+export class SliderComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   @ViewChild('slider') public slider: ElementRef;
 
@@ -24,8 +30,11 @@ export class SliderComponent implements OnInit, OnDestroy {
   public columnGap: number = 15;
   public imgWidth: number = 200;
   public imgBorderWidth: number = 1;
+  public visible: boolean = false;
+  public columns: number = 0;
 
-  constructor(private galleryService: GalleryService) {
+
+  constructor(private galleryService: GalleryService, private dChanges: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -34,6 +43,24 @@ export class SliderComponent implements OnInit, OnDestroy {
         this.images = images;
         this.setSliderWidth();
       }));
+    //this.onResize();
+  }
+
+  ngAfterViewChecked() {
+      // if(WIN_SIZES.LG < window.innerWidth){
+      //   this.columns = Math.ceil(this.images.length / 2);
+      // } else if(WIN_SIZES.MD < window.innerWidth) {
+      //   this.columns = Math.ceil(this.images.length / 2);
+      // } else if(WIN_SIZES.SM < window.innerWidth) {
+      //   this.columns = Math.ceil(this.images.length / 3);
+      // } else if(WIN_SIZES.XS < window.innerWidth) {
+      //   this.columns = Math.ceil(this.images.length / 4);
+      // }
+      // if(this.slider) {
+      //   this.dChanges.detectChanges();
+      //   //this.slider = new ElementRef<HTMLDivElement>(this.slider.nativeElement);
+      //   this.setSliderHeight();
+      // }
   }
 
   private setSliderWidth() {
@@ -42,7 +69,6 @@ export class SliderComponent implements OnInit, OnDestroy {
     const borderSum = this.images.length * this.imgBorderWidth * 2;
     this.sliderWidth = gapsSum + imagesSum + borderSum;
   }
-
 
   ngOnDestroy() {
     this.subs.unsubscribe();
@@ -61,89 +87,36 @@ export class SliderComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ngAfterContentChecked():void{
-  //   this.imagePath = this.images[this.index];
-  //   this.galleryBalancer(this.galleryPadding);
-  // }
-  //
-  // win_resizeHandler(): void {
-  //   this.galleryHeight = this.el.nativeElement.style.height;
-  //   this.updateGallery();
-  //   this.galleryBalancer(this.galleryPadding);
-  // }
-  //
-  // resizeImage(padding: number, image: HTMLImageElement, element: any, fullScreen: boolean){
-  //   let size = {
-  //     width: 0,
-  //     height: 0
-  //   }
-  //   let screenHeight:number = (fullScreen) ?
-  //                 window.innerHeight - element.firstChild.clientHeight * 2 :
-  //                 element.clientHeight - element.firstChild.clientHeight * 2;
-  //   let coefficientV:number = screenHeight / image.height;
-  //   if(image.height > screenHeight){
-  //     size.width = Math.round(image.width * coefficientV) - padding;
-  //     size.height = screenHeight;
-  //   }
-  //   else{
-  //     size.width = image.width;
-  //     size.height = image.height;
-  //   }
-  //   if(size.width > element.clientWidth){
-  //     let coefficientH:number = (element.clientWidth - padding)/size.width;
-  //     size.width = element.clientWidth - padding;
-  //     size.height = Math.round(coefficientH * size.height);
-  //   }
-  //   return size;
-  // }
-  //
-  clickLeft(): void {
-    //   if(this.index === 0)
-    //     this.index = this.images.length - 1;
-    //   else
-    //     --this.index;
-    //   this.galleryBalancer(this.galleryPadding);
+  public onVisible(){
+    this.visible = !this.visible;
+    this.dChanges.detectChanges();
+    //this.setSliderHeight();
+    this.onResize()
   }
 
-  //
-  clickRight(): void {
-    //   if(this.index === this.images.length - 1)
-    //     this.index = 0;
-    //   else
-    //     ++this.index;
-    //   this.galleryBalancer(this.galleryPadding);
+  @HostListener('window:resize', ['$event'])
+  private onResize() {
+    if(WIN_SIZES.LG < window.innerWidth){
+      this.columns = Math.ceil(this.images.length / 2);
+    } else if(WIN_SIZES.MD < window.innerWidth) {
+      this.columns = Math.ceil(this.images.length / 2);
+    } else if(WIN_SIZES.SM < window.innerWidth) {
+      this.columns = Math.ceil(this.images.length / 3);
+    } else if(WIN_SIZES.XS < window.innerWidth) {
+      this.columns = Math.ceil(this.images.length / 4);
+    }
+    if(this.slider) {
+      this.setSliderHeight();
+    }
   }
 
-  //
-  clickFullScreen(): void {
-    //   this.fullScreenFlag = !this.fullScreenFlag;
-    //   this.updateGallery();
-    //   this.galleryBalancer(this.galleryPadding);
+  private setSliderHeight(){
+    if(this.visible){
+        this.slider.nativeElement.style.height = this.slider.nativeElement.scrollHeight + 'px';
+        this.slider.nativeElement.style.paddingTop = '10px';
+    } else {
+      this.slider.nativeElement.style.height = 0;
+      this.slider.nativeElement.style.paddingTop = 0;
+    }
   }
-
-  // updateGallery(): void{
-  //   if(this.fullScreenFlag){
-  //     window.scrollTo(0, 0);
-  //     document.body.style.overflow = 'hidden';
-  //     this.el.nativeElement.lastChild.style.height = '100%';
-  //     this.el.nativeElement.lastChild.style.position = 'absolute';
-  //     this.el.nativeElement.lastChild.style.top = 0;
-  //     this.el.nativeElement.lastChild.style.left = 0;
-  //     this.el.nativeElement.lastChild.style.bottom = 0;
-  //     this.el.nativeElement.lastChild.style.right = 0;
-  //   }
-  //   else{
-  //     document.body.style.overflow = 'visible';
-  //     this.el.nativeElement.lastChild.style.height = this.galleryHeight;
-  //     this.el.nativeElement.lastChild.style.position = 'static';
-  //   }
-  // }
-  // galleryBalancer(padding: number){
-  //   this.currentImage.src = this.images[this.index];
-  //   this.currentImage.onload = ()=>{
-  //     let size = this.resizeImage(padding, this.currentImage, this.el.nativeElement.lastChild, this.fullScreenFlag);
-  //     this.imageWidth = size.width;
-  //     this.imageHeight = size.height;
-  //   }
-  // }
 }

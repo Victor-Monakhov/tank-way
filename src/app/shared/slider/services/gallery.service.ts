@@ -47,9 +47,12 @@ export class GalleryService {
   }
 
   public getImages(): Observable<Image[]>{
-    return this.http.get<ImagesPage>("https://api.pexels.com/v1/curated?per_page=20").pipe(
+    return this.http.get<ImagesPage>("https://api.pexels.com/v1/curated?per_page=100", {
+      headers: {
+        Authorization: '563492ad6f917000010000018550af4ae3b941f1b5605270941a403b'
+      }
+    }).pipe(
       map(page => {
-        console.log(page.photos);
         return page.photos
       })
     );

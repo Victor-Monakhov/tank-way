@@ -35,9 +35,8 @@ h1{
 h2 {
   @include media-property(font-size, 2rem, 2.1rem, 2.2rem, 2.3rem);
   margin: 10px 5px;
-  color: #28a5c4;
   text-shadow: $text-shadow;
-  font-family: Risque, sans-serif;
+  font-family: Raleway-Thin, sans-serif;
   font-weight: bold;
   text-align: center;
 }
