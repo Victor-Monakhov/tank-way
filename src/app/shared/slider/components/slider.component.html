@@ -7,35 +7,17 @@
   </div>
   <div #slider *ngIf="images.length"
        class="slider-content"
-        [ngStyle]="{'grid-template-columns' : 'repeat(' + columns + ' ,' + imgWidth + 'px)'}">
-    <img *ngFor="let image of images"
+       (wheel)="onMoveLeft($event)">
+    <img #image *ngFor="let image of images"
          alt="image"
-         [src]="image.src.medium">
+         [src]="image.src.medium"
+          (click)="onImage(image.id)">
   </div>
 </div>
 
-<!--first version-->
-<!--<div class="wrapper" [ngStyle]="visible ? {'background' : '#1A1A1D'} : {'background' : 'transparent'}"-->
-<!--     [ngClass]="{'show': visible}">-->
-<!--  <div class="title" [ngClass]="{'title-hidden' : !visible}">-->
-<!--    <h2 (click)="onVisible()">GALLERY</h2>-->
-<!--    <i *ngIf="visible" (click)="onVisible()" class="fa-solid fa-angles-down"></i>-->
-<!--    <i *ngIf="!visible" (click)="onVisible()" class="fa-solid fa-angles-up"></i>-->
-<!--  </div>-->
-<!--  <div #slider class="slider"-->
-<!--       (wheel)="onMoveLeft($event)">-->
-<!--    <div *ngIf="images.length"-->
-<!--         class="slider-content"-->
-<!--         [style]="{'grid-template-columns' : 'repeat(' + images.length + ', ' + imgWidth + 'px)',-->
-<!--       'grid-column-gap' : columnGap + 'px'}"-->
-<!--         [style.left]="scrollY + 'px'">-->
-<!--      <img *ngFor="let image of images"-->
-<!--           alt="image"-->
-<!--           [src]="image.src.medium"-->
-<!--           [width]="imgWidth"-->
-<!--           [style.border-width]="imgBorderWidth + 'px'">-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<ng-template #fullScreen>
+
+</ng-template>
+
 
 

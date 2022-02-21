@@ -1,0 +1,8 @@
+<div *ngIf="image$ | async as img" class="full-screen-wrapper">
+  <i class="fa-solid fa-xmark" (click)="onExit()"></i>
+  <div class="image-wrapper">
+    <i class="fa-solid fa-chevron-left"></i>
+    <img [src]="img.src.large2x" alt="image">
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+</div>

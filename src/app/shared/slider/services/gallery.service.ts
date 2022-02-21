@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {from, Observable} from "rxjs";
+import {BehaviorSubject, from, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {createClient} from "pexels";
 
@@ -41,7 +41,7 @@ export interface ImagesPage{
 })
 export class GalleryService {
 
-  private client;
+  public images$: BehaviorSubject<Image[]> = new BehaviorSubject<Image[]>([]);
 
   constructor(public http: HttpClient) {
   }
@@ -56,5 +56,13 @@ export class GalleryService {
         return page.photos
       })
     );
+  }
+
+  public getImage(id: number = 0): Observable<Image>{
+    return this.http.get<Image>(`https://api.pexels.com/v1/photos/${id}`, {
+      headers: {
+        Authorization: '563492ad6f917000010000018550af4ae3b941f1b5605270941a403b'
+      }
+    });
   }
 }

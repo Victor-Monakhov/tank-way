@@ -10,6 +10,7 @@ import {MenuDirective} from "../../shared/header/directives/menu.directive";
 import {MenuComponent} from "../../shared/header/components/menu/menu.component";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {GalleryInterceptor} from "../../shared/slider/interceptors/gallery.interceptor";
+import { FullScreenGalleryComponent } from './components/full-screen-gallery/full-screen-gallery.component';
 
 
 
@@ -21,6 +22,7 @@ import {GalleryInterceptor} from "../../shared/slider/interceptors/gallery.inter
     TestGameOptionsComponent,
     MenuDirective,
     MenuComponent,
+    FullScreenGalleryComponent,
   ],
     imports: [
         CommonModule,

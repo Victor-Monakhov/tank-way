@@ -1,5 +1,4 @@
 import {
-  AfterViewChecked,
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ElementRef,
@@ -11,7 +10,8 @@ import {
 import {GalleryService, Image} from "../services/gallery.service";
 import {SubSink} from "subsink";
 import {WIN_SIZES} from "../../../app.config";
-import {from} from "rxjs";
+import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-slider',
@@ -19,64 +19,55 @@ import {from} from "rxjs";
   styleUrls: ['./slider.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SliderComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class SliderComponent implements OnInit, OnDestroy {
 
   @ViewChild('slider') public slider: ElementRef;
+  @ViewChild('image') public image: ElementRef;
 
   private subs: SubSink = new SubSink();
+  private screenSize: number = 0;
   public images: Image[] = [];
   public scrollY: number = 0;
-  public sliderWidth: number = 0;
-  public columnGap: number = 15;
-  public imgWidth: number = 200;
-  public imgBorderWidth: number = 1;
   public visible: boolean = false;
-  public columns: number = 0;
+  public sliderStyles: CSSStyleDeclaration;
+  public image$?: Observable<Image>;
 
-
-  constructor(private galleryService: GalleryService, private dChanges: ChangeDetectorRef) {
+  constructor(private galleryService: GalleryService, private dChanges: ChangeDetectorRef, private router: Router) {
   }
 
   ngOnInit() {
     this.subs.add(
       this.galleryService.getImages().subscribe(images => {
-        this.images = images;
-        this.setSliderWidth();
+        this.galleryService.images$.next(images);
+        this.images = this.galleryService.images$.value;
       }));
-    //this.onResize();
   }
 
-  ngAfterViewChecked() {
-      // if(WIN_SIZES.LG < window.innerWidth){
-      //   this.columns = Math.ceil(this.images.length / 2);
-      // } else if(WIN_SIZES.MD < window.innerWidth) {
-      //   this.columns = Math.ceil(this.images.length / 2);
-      // } else if(WIN_SIZES.SM < window.innerWidth) {
-      //   this.columns = Math.ceil(this.images.length / 3);
-      // } else if(WIN_SIZES.XS < window.innerWidth) {
-      //   this.columns = Math.ceil(this.images.length / 4);
-      // }
-      // if(this.slider) {
-      //   this.dChanges.detectChanges();
-      //   //this.slider = new ElementRef<HTMLDivElement>(this.slider.nativeElement);
-      //   this.setSliderHeight();
-      // }
+  private setSliderWidth(): number {
+    const columns = this.sliderStyles.getPropertyValue('grid-template-columns').split(' ').length;
+    const gap: number = Number.parseInt(this.sliderStyles.getPropertyValue('grid-column-gap'), 10);
+    const gapsSum = (columns - 1) * gap;
+    const imagesSum = this.image.nativeElement.offsetWidth * columns;
+    return gapsSum + imagesSum;
   }
 
-  private setSliderWidth() {
-    const gapsSum = (this.images.length - 1) * (this.columnGap - this.imgBorderWidth * 2);
-    const imagesSum = this.images.length * this.imgWidth;
-    const borderSum = this.images.length * this.imgBorderWidth * 2;
-    this.sliderWidth = gapsSum + imagesSum + borderSum;
+  private getSliderHeight(): number {
+    const rows: number = this.sliderStyles.getPropertyValue('grid-template-rows').split(' ').length;
+    const gap: number = Number.parseInt(this.sliderStyles.getPropertyValue('grid-column-gap'), 10);
+    const gapsSum = (rows - 1) * gap;
+    const imagesSum = this.image.nativeElement.offsetHeight * rows;
+    return gapsSum + imagesSum;
   }
+
 
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
 
-  public onMoveLeft(scroll: WheelEvent) {
+  public onMoveLeft(scroll: WheelEvent): void {
+    this.dChanges.detectChanges();
     const contentWidth = this.slider.nativeElement.clientWidth;
-    const scrollDistance: number = this.sliderWidth - contentWidth;
+    const scrollDistance: number = this.setSliderWidth() - contentWidth;
     const blockLeft: boolean = this.scrollY === 0 && scroll.deltaY > 0;
     const blockRight: boolean = this.scrollY <= -scrollDistance && scroll.deltaY < 0;
     if (this.scrollY <= 0 && !blockRight && !blockLeft) {
@@ -84,37 +75,43 @@ export class SliderComponent implements OnInit, OnDestroy, AfterViewChecked {
       const dScrollRight = (futureScrollY < -scrollDistance) ? futureScrollY + scrollDistance : 0;
       const dScrollLeft = (futureScrollY > 0) ? futureScrollY : 0
       this.scrollY += scroll.deltaY - dScrollRight - dScrollLeft;
+      this.slider.nativeElement.scroll({left: -this.scrollY,});
     }
   }
 
-  public onVisible(){
+  public onVisible(): void {
     this.visible = !this.visible;
     this.dChanges.detectChanges();
-    //this.setSliderHeight();
-    this.onResize()
+    this.onResize(true);
   }
 
+  public onImage(id: number){
+      this.router.navigate(['/full-screen', id]);
+  }
+
+
   @HostListener('window:resize', ['$event'])
-  private onResize() {
-    if(WIN_SIZES.LG < window.innerWidth){
-      this.columns = Math.ceil(this.images.length / 2);
-    } else if(WIN_SIZES.MD < window.innerWidth) {
-      this.columns = Math.ceil(this.images.length / 2);
-    } else if(WIN_SIZES.SM < window.innerWidth) {
-      this.columns = Math.ceil(this.images.length / 3);
-    } else if(WIN_SIZES.XS < window.innerWidth) {
-      this.columns = Math.ceil(this.images.length / 4);
+  private onResize(flag: boolean = false): void {
+    let screenSize: number;
+    if (WIN_SIZES.MD < window.innerWidth) {
+      screenSize = WIN_SIZES.MD;
+    } else if (WIN_SIZES.SM < window.innerWidth) {
+      screenSize = WIN_SIZES.SM;
+    } else if (WIN_SIZES.XS < window.innerWidth) {
+      screenSize = WIN_SIZES.XS;
     }
-    if(this.slider) {
+    if (this.slider && (screenSize !== this.screenSize || flag)) {
+      this.screenSize = screenSize;
+      this.sliderStyles = getComputedStyle(this.slider.nativeElement);
       this.setSliderHeight();
     }
   }
 
-  private setSliderHeight(){
-    if(this.visible){
-        this.slider.nativeElement.style.height = this.slider.nativeElement.scrollHeight + 'px';
-        this.slider.nativeElement.style.paddingTop = '10px';
-    } else {
+  private setSliderHeight(): void {
+    if (this.visible && this.slider) {
+      this.slider.nativeElement.style.height = this.getSliderHeight() + 'px';
+      this.slider.nativeElement.style.paddingTop = '10px';
+    } else if (this.slider) {
       this.slider.nativeElement.style.height = 0;
       this.slider.nativeElement.style.paddingTop = 0;
     }

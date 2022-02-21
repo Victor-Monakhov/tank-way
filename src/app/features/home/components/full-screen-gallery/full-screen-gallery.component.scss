@@ -1,0 +1,48 @@
+@import 'src/assets/styles/mixins';
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/colors';
+@import 'src/assets/styles/animations';
+@import 'src/assets/styles/images';
+@import 'src/assets/styles/themes';
+
+.full-screen-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 6000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $black;
+  overflow: hidden;
+
+  i {
+    @include media-property(font-size, 1.5rem, 1.5rem, 2rem, 2rem);
+    @include media-property(top, 15px, 15px, 20px, 20px);
+    @include media-property(right, 20px, 20px, 30px, 30px);
+    position: absolute;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+    i {
+      @include media-property(font-size, 1.5rem, 1.5rem, 2rem, 2rem);
+      @include media-property(margin, 0 20px, 0 20px, 0 30px, 0 30px);
+      position: static;
+    }
+
+    img {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
