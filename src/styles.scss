@@ -5,16 +5,19 @@
 @import 'buttons.scss';
 @import 'animations.scss';
 @import 'variables.scss';
-@import "themes.scss";
 
 
 body {
   margin: 0;
+  min-width: 300px;
   font-family: Raleway-Thin, sans-serif;
 }
 
 hr {
-  border-image: $border-img-grad-brown-blue;
+  border: unset;
+  height: 1px;
+  background-color: $red;
+  opacity: 0.5;
 }
 
 p {
@@ -24,44 +27,59 @@ p {
   color: #ffffff;
 }
 
-h1{
-  @include media-property(font-size, 3.3rem, 4.2rem, 5.4rem, 5.6rem);
-  text-shadow: $text-shadow;
+strong{
+  @include media-property(font-size, 1.7rem, 1.8rem, 1.9rem, 2rem);
+  font-weight: unset;
+  color: #ffffff;
+}
+
+h1, h2, h3, p, strong{
   font-family: Raleway-Thin, sans-serif;
   text-align: center;
   margin: 0;
 }
-
-h2 {
-  @include media-property(font-size, 2rem, 2.1rem, 2.2rem, 2.3rem);
-  margin: 10px 5px;
+h1, h2, h3{
   text-shadow: $text-shadow;
-  font-family: Raleway-Thin, sans-serif;
-  font-weight: bold;
-  text-align: center;
+}
+
+h1{
+  @include media-property(font-size, 3.3rem, 4.2rem, 5.4rem, 5.6rem);
+}
+
+h2{
+  @include media-property(font-size, 2.7rem, 2.8rem, 2.9rem, 3rem);
+}
+
+h3 {
+  @include media-property(font-size, 2rem, 2.1rem, 2.2rem, 2.3rem);
 }
 
 .row {
-  @include media-property(padding, 0 20px, 0 30px, 0 40px, 0 50px);
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: $black03;
   padding: 0;
 }
 
 .panel {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: $dark-grey09;
-  box-shadow: $panel-shadow-blue;
-  border-radius: 10px;
-  font-family: Roboto-Medium, sans-serif;
-  color: #fff;
-  padding: 10px;
-  margin-top: 50px;
-  width: 100%;
-  overflow-x: hidden;
+
+  //display: flex;
+  //flex-wrap: wrap;
+  //flex-direction: column;
+  //align-items: center;
+  //justify-content: center;
+  //background-color: $dark-grey09;
+  //box-shadow: $panel-shadow-blue;
+  //border-radius: 10px;
+  //font-family: Roboto-Medium, sans-serif;
+  //color: #fff;
+  //padding: 10px;
+  //margin-top: 50px;
+  //width: 100%;
+  //overflow-x: hidden;
 }
 
 

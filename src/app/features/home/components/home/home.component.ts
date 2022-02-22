@@ -5,10 +5,6 @@ import {Router} from '@angular/router';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  host: {
-    "[class.blue-theme]": "(theme === 'blue')",
-    "[class.red-theme]": "(theme === 'red')"
-  },
 })
 export class HomeComponent implements OnInit {
 
@@ -18,10 +14,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  setTheme(theme: string){
-    this.theme = theme;
   }
 
   onClick() {

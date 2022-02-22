@@ -7,9 +7,9 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {GalleryService, Image} from "../services/gallery.service";
+import {GalleryService, Image} from "../../services/gallery.service";
 import {SubSink} from "subsink";
-import {WIN_SIZES} from "../../../app.config";
+import {WIN_SIZES} from "../../../../app.config";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 
@@ -30,6 +30,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   public scrollY: number = 0;
   public visible: boolean = false;
   public sliderStyles: CSSStyleDeclaration;
+  public sliderWidth: number;
   public image$?: Observable<Image>;
 
   constructor(private galleryService: GalleryService, private dChanges: ChangeDetectorRef, private router: Router) {
@@ -65,9 +66,9 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   public onMoveLeft(scroll: WheelEvent): void {
-    this.dChanges.detectChanges();
+    scroll.preventDefault();
     const contentWidth = this.slider.nativeElement.clientWidth;
-    const scrollDistance: number = this.setSliderWidth() - contentWidth;
+    const scrollDistance: number = this.sliderWidth - contentWidth;
     const blockLeft: boolean = this.scrollY === 0 && scroll.deltaY > 0;
     const blockRight: boolean = this.scrollY <= -scrollDistance && scroll.deltaY < 0;
     if (this.scrollY <= 0 && !blockRight && !blockLeft) {
@@ -103,6 +104,7 @@ export class SliderComponent implements OnInit, OnDestroy {
     if (this.slider && (screenSize !== this.screenSize || flag)) {
       this.screenSize = screenSize;
       this.sliderStyles = getComputedStyle(this.slider.nativeElement);
+      this.sliderWidth = this.setSliderWidth();
       this.setSliderHeight();
     }
   }

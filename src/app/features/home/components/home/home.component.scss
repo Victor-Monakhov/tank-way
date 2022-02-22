@@ -4,7 +4,6 @@
 @import 'src/assets/styles/animations';
 @import 'src/assets/styles/images';
 @import 'src/assets/styles/variables';
-@import '../../../../../assets/styles/themes';
 
     img{
       position: fixed;
@@ -17,49 +16,79 @@
       object-fit: cover;
     }
     .title{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       @include media-property(padding, 20px, 30px, 0 20%, 0 20%);
-      justify-content: center;
-      flex-wrap: wrap;
       animation: row_go_down 1s ease 1 both;
-      background-color: $black03;
       h1{
         color: $red;
         margin: 50px 0 20px 0;
       }
 
       p{
-        font-family: Raleway-Thin, sans-serif;
-        text-align: center;
         margin-bottom: 50px;
       }
     }
-    .panel{
-      .hr-wrapper{
+    .settings-title{
+      @include media-property(padding, 10px, 20px, 30px, 40px);
+      @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
+      @include media-property(flex-direction, column, column, row, row);
+      justify-content: start;
+      h2{
+        @include media-property(margin, 40px 10px 40px 0, 40px 20px 40px 0, 40px 30px 40px 0, 40px 40px 40px 0);
+        color: $red;
+        margin: 40px 0 40px 0;
+        flex-shrink: 0;
+      }
+      .p-wrapper{
+        display: flex;
+        justify-content: center;
         width: 100%;
       }
-        .testGame-btn {
-          @include media-property(font-size, 1.3rem, 1.4rem, 1.5rem, 1.6rem);
-            margin: 20px 0;
-            width: 300px;
-            height: 50px;
-        }
-        #left_panel{
-            width: 100%;
-            @media screen and (min-width: $md) {
-                width: 50%;
-            }
-            @media screen and (max-width: $md) {
-                margin-bottom: 50px;
-            }
-        }
-        #right_panel{
-            width: 100%;
-            @media screen and (min-width: $md) {
-                width: 50%;
-                margin-left: 25px;
-            }
-        }
     }
+    .pos-selection-wrapper{
+      @include media-property(flex-direction, column, column, row, row);
+      @include media-property(justify-content, center, center, start, start);
+      @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
+      .pos-selection-title{
+        @include media-property(padding, 10px, 20px, 30px, 40px);
+        @include media-property(width, auto,auto, 25%, 25%);
+        flex-shrink: 0;
+        strong{
+          font-weight: bold;
+        }
+      }
+      .pos-selection{
+        display: flex;
+        background-color: $black;
+        height: 400px;
+        width: 100%;
+      }
+    }
+
+
+    //.panel{
+    //  .hr-wrapper{
+    //    width: 100%;
+    //  }
+    //    .testGame-btn {
+    //      @include media-property(font-size, 1.3rem, 1.4rem, 1.5rem, 1.6rem);
+    //        margin: 20px 0;
+    //        width: 300px;
+    //        height: 50px;
+    //    }
+    //    #left_panel{
+    //        width: 100%;
+    //        @media screen and (min-width: $md) {
+    //            width: 50%;
+    //        }
+    //        @media screen and (max-width: $md) {
+    //            margin-bottom: 50px;
+    //        }
+    //    }
+    //    #right_panel{
+    //        width: 100%;
+    //        @media screen and (min-width: $md) {
+    //            width: 50%;
+    //            margin-left: 25px;
+    //        }
+    //    }
+    //}

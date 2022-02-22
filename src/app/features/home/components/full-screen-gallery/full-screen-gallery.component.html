@@ -1,8 +1,12 @@
 <div *ngIf="image$ | async as img" class="full-screen-wrapper">
   <i class="fa-solid fa-xmark" (click)="onExit()"></i>
   <div class="image-wrapper">
-    <i class="fa-solid fa-chevron-left"></i>
+    <div class="icon-wrapper">
+      <i class="fa-solid fa-chevron-left" (click)="onNext(false, img.id)"></i>
+    </div>
     <img [src]="img.src.large2x" alt="image">
-    <i class="fa-solid fa-chevron-right"></i>
+    <div class="icon-wrapper">
+      <i class="fa-solid fa-chevron-right" (click)="onNext(true, img.id)"></i>
+    </div>
   </div>
 </div>

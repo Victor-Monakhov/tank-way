@@ -1,0 +1,6 @@
+<div class="navbar">
+    <button type="button" class="btn-menu"  [appDropMenu] = menu></button>
+    <div class="gameLogo"></div>
+    <app-menu [menuContent]="menuContent" [visible]="true"></app-menu>
+</div>
+<app-menu #menu [menuContent]="menuContent" [mode]="'drop'"></app-menu>

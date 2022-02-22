@@ -1,13 +1,13 @@
 @import "src/assets/styles/mixins";
 @import "src/assets/styles/variables";
 @import "src/assets/styles/animations";
-@import "themes.scss";
 @import "colors.scss";
 
-.static{
+.static {
   @include media-property(display, none, none, flex, flex);
 }
-.drop{
+
+.drop {
   @include media-property(display, block, block, none, none);
   z-index: 5000;
   width: 40%;
@@ -15,14 +15,20 @@
   position: fixed;
   margin: 0;
 }
-.menu-go-right{
+
+.menu-go-right {
   animation: menu_go_right 0.5s ease-out 1 both;
 }
-.menu-go-left{
+
+.menu-go-left {
   animation: menu_go_left 0.5s ease-out 1 both;
 }
 
 .nav-menu {
+  @include media-property(padding, 10px, 10px, 0, 0);
+  background-color: $black;
+  border-radius: 5px;
+
   hr {
     @include media-property(display, block, block, none, none);
   }
@@ -30,30 +36,16 @@
   p {
     @include media-property(margin, 0 10px 0 0, 0 20px 0 0, 0 20px 0 0, 0 30px 0 0);
     display: inline;
-    font-family: WaitingfortheSunrise-Regular, sans-serif;
-    font-weight: bold;
+    font-family: Raleway-Thin, sans-serif;
     text-align: start;
-    border: 3px solid transparent;
-    border-radius: 10px;
+    border: 1px solid transparent;
     cursor: pointer;
+    padding: 5px;
+    white-space: nowrap;
   }
 
   p:hover {
-    @include media-property(border-color, transparent, transparent, $brown, $brown);
-    $animation: border3px-anim-blue 1500ms linear 0s infinite normal both;
-    @include media-property(color, $blue, $blue, #fff, #fff);
-    :host-context(.blue-theme) &{
-      @include media-property(border-color, transparent, transparent, $brown, $brown);
-      @include media-property(color, $blue, $blue, #fff, #fff);
-      $animation: border3px-anim-blue 1500ms linear 0s infinite normal both;
-      @include media-property(animation, none, none, $animation, $animation);
-    }
-    :host-context(.red-theme) &{
-      @include media-property(border-color, transparent, transparent, $green, $green);
-      @include media-property(color, $red, $red, #fff, #fff);
-      $animation: border3px-anim-red 1500ms linear 0s infinite normal both;
-      @include media-property(animation, none, none, $animation, $animation);
-    }
-    text-shadow: $text-shadow;
+    @include media-property(border-bottom-color, transparent, transparent, $red, $red);
+    @include media-property(color, $red, $red, #fff, #fff);
   }
 }

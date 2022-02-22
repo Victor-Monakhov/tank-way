@@ -2,8 +2,8 @@ import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@ang
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  templateUrl: 'menu.component.html',
+  styleUrls: ['menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
 
@@ -16,5 +16,10 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onMenuItem(item: string){
+    console.log(item);
+    this.closed.emit();
   }
 }

@@ -1,9 +1,8 @@
-@import 'src/assets/styles/mixins';
-@import 'src/assets/styles/variables';
-@import 'src/assets/styles/colors';
-@import 'src/assets/styles/animations';
-@import 'src/assets/styles/images';
-@import "themes.scss";
+@import '../../../../../../../assets/styles/mixins';
+@import '../../../../../../../assets/styles/variables';
+@import '../../../../../../../assets/styles/colors';
+@import '../../../../../../../assets/styles/animations';
+@import '../../../../../../../assets/styles/images';
 
 .settings{
     display: flex;

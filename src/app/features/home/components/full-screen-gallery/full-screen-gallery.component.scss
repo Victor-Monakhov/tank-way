@@ -3,13 +3,11 @@
 @import 'src/assets/styles/colors';
 @import 'src/assets/styles/animations';
 @import 'src/assets/styles/images';
-@import 'src/assets/styles/themes';
 
 .full-screen-wrapper {
   display: flex;
   flex-direction: column;
   position: fixed;
-  z-index: 6000;
   top: 0;
   right: 0;
   bottom: 0;
@@ -27,16 +25,19 @@
   }
 
   .image-wrapper {
-    display: flex;
+    @include media-property(grid-template-columns, 30px 1fr 30px, 40px 1fr 40px, 50px 1fr 50px, 50px 1fr 50px);
+    @include media-property(grid-column-gap, 10px, 10px, 20px, 20px);
+    display: grid;
+    grid-template-rows: 100vh;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-
-    i {
-      @include media-property(font-size, 1.5rem, 1.5rem, 2rem, 2rem);
-      @include media-property(margin, 0 20px, 0 20px, 0 30px, 0 30px);
-      position: static;
+    div{
+      display: flex;
+      justify-content: center;
+      i {
+        @include media-property(font-size, 1.5rem, 1.5rem, 2rem, 2rem);
+        position: static;
+        flex-shrink: 0;
+      }
     }
 
     img {

@@ -19,7 +19,10 @@ export class FullScreenGalleryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initImages();
-    this.image$ = this.galleryService.getImage(this.aRoute.snapshot.params['id']);
+    this.subs.add(this.aRoute.params.subscribe(params => {
+      this.image$ = this.galleryService.getImage(params['id']);
+    }))
+
   }
 
   ngOnDestroy() {
@@ -35,8 +38,27 @@ export class FullScreenGalleryComponent implements OnInit, OnDestroy {
     }
   }
 
+  public onNext(direction: boolean, id: number){
+    let index: number = this.galleryService.images$.value.findIndex(image => image.id === id);
+    if(index < 0){
+      return;
+    }
+    if(direction){
+      index++;
+      if(index >= this.galleryService.images$.value.length){
+        index = 0;
+      }
+    } else {
+      index--;
+      if(index < 0){
+        index = this.galleryService.images$.value.length - 1;
+      }
+    }
+    const nextId: number = this.galleryService.images$.value[index].id;
+    this.router.navigate(['/full-screen', nextId]);
+  }
+
   public onExit(){
     this.router.navigate(['/']);
   }
-
 }

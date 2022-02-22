@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-test-game-options',
-  templateUrl: './test-game-options.component.html',
-  styleUrls: ['./test-game-options.component.scss']
+  selector: 'app-settings',
+  templateUrl: './position-selection.component.html',
+  styleUrls: ['./position-selection.component.scss']
 })
-export class TestGameOptionsComponent implements OnInit {
+export class PositionSelectionComponent implements OnInit {
 
   posRadios: any[] = [];
 

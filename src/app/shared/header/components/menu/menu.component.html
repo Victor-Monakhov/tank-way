@@ -3,7 +3,7 @@
      [class]="mode"
      [ngClass]="anim ? 'menu-go-right' : 'menu-go-left'">
   <div *ngFor="let item of menuContent">
-    <p (click)="closed.emit()">{{item}}</p>
+    <p (click)="onMenuItem(item)">{{item}}</p>
     <hr>
   </div>
 </div>

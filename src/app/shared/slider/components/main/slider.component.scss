@@ -1,22 +1,32 @@
-@import 'src/assets/styles/mixins';
-@import 'src/assets/styles/variables';
-@import 'src/assets/styles/colors';
-@import 'src/assets/styles/animations';
-@import 'src/assets/styles/images';
-@import 'src/assets/styles/themes';
+@import '../../../../../assets/styles/mixins';
+@import '../../../../../assets/styles/variables';
+@import '../../../../../assets/styles/colors';
+@import '../../../../../assets/styles/animations';
+@import '../../../../../assets/styles/images';
 
+//#slider:active{
+//  //height: $header-height + 20px;
+//  //content: '';
+//  margin-top: -$header-height - 20px;
+//  padding-top: $header-height + 20px;
+//}
 
 .wrapper {
   background-color: $black;
   @include media-property(padding, 10px 10px, 10px 20px, 10px 30px, 10px 40px);
 
+  a{
+    text-decoration: none;
+    display: flex;
+    color: $red;
+  }
   .title {
     display: flex;
     justify-content: center;
     align-items: center;
     color: $red;
 
-    h2 {
+    h3 {
       margin: 0 10px 0 0;
       cursor: pointer;
     }
