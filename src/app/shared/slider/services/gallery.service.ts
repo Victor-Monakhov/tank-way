@@ -42,6 +42,7 @@ export interface ImagesPage{
 export class GalleryService {
 
   public images$: BehaviorSubject<Image[]> = new BehaviorSubject<Image[]>([]);
+  public image$: BehaviorSubject<Image> = new BehaviorSubject<Image>({} as Image);
 
   constructor(public http: HttpClient) {
   }

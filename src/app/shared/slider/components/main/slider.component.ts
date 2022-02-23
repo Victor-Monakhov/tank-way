@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
-  ElementRef,
+  ElementRef, EventEmitter,
   HostListener,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   ViewChild
 } from '@angular/core';
 import {GalleryService, Image} from "../../services/gallery.service";
@@ -23,6 +23,7 @@ export class SliderComponent implements OnInit, OnDestroy {
 
   @ViewChild('slider') public slider: ElementRef;
   @ViewChild('image') public image: ElementRef;
+  @Output() public eventFullScreen: EventEmitter<string> = new EventEmitter<string>();
 
   private subs: SubSink = new SubSink();
   private screenSize: number = 0;
@@ -31,7 +32,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   public visible: boolean = false;
   public sliderStyles: CSSStyleDeclaration;
   public sliderWidth: number;
-  public image$?: Observable<Image>;
+  public fullScreenMode: boolean = false;
 
   constructor(private galleryService: GalleryService, private dChanges: ChangeDetectorRef, private router: Router) {
   }
@@ -86,8 +87,9 @@ export class SliderComponent implements OnInit, OnDestroy {
     this.onResize(true);
   }
 
-  public onImage(id: number){
-      this.router.navigate(['/full-screen', id]);
+  public onImage(id: number) {
+    //this.subs.add(this.galleryService.getImage().subscribe(image => this.galleryService.image$.next(image)));
+    this.eventFullScreen.emit(id.toString());
   }
 
 

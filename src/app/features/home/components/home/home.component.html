@@ -1,5 +1,5 @@
-<app-navbar></app-navbar>
-<!--<div class="page-wrapper">-->
+<div *ngIf="!galleryMode; else galleryFullScreen" class="home-wrapper">
+  <app-navbar></app-navbar>
   <img src="../../assets/images/bg-tanks.png" alt="#">
   <div class="row title">
     <h1>WELCOME!</h1>
@@ -11,7 +11,7 @@
       We hope you enjoy it and you stay with us!
     </p>
   </div>
-  <app-slider></app-slider>
+  <app-slider (eventFullScreen) = "galleryMode = $event"></app-slider>
   <div class="row settings-title">
     <h2>SETTINGS:</h2>
     <div class="p-wrapper">
@@ -26,6 +26,15 @@
 
     </div>
   </div>
+</div>
+
+<ng-template #galleryFullScreen>
+  <app-full-screen-gallery
+    (eventFullScreen) = "galleryMode = $event"
+    [initialId]="galleryMode">
+
+  </app-full-screen-gallery>
+</ng-template>
 <!--  -->
 <!--  <div class="panel">-->
 

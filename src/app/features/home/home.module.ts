@@ -10,20 +10,20 @@ import {MenuDirective} from "../../shared/header/directives/menu.directive";
 import {MenuComponent} from "../../shared/header/components/menu/menu.component";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {GalleryInterceptor} from "../../shared/slider/interceptors/gallery.interceptor";
-import { FullScreenGalleryComponent } from './components/full-screen-gallery/full-screen-gallery.component';
+import {FullScreenComponent} from "../../shared/slider/components/full-screen/full-screen.component";
 
 
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    NavbarComponent,
-    SliderComponent,
-    PositionSelectionComponent,
-    MenuDirective,
-    MenuComponent,
-    FullScreenGalleryComponent,
-  ],
+    declarations: [
+        HomeComponent,
+        NavbarComponent,
+        SliderComponent,
+        PositionSelectionComponent,
+        MenuDirective,
+        MenuComponent,
+        FullScreenComponent,
+    ],
     imports: [
         CommonModule,
         HomeRoutingModule,
