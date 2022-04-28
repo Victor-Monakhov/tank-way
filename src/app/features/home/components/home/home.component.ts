@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClick() {
-    this.router.navigate(['testGame']);
+  onDemo() {
+    this.router.navigate(['demo']);
   }
 }

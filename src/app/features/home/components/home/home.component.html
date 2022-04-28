@@ -12,6 +12,9 @@
     </p>
   </div>
   <app-slider (eventFullScreen) = "galleryMode = $event"></app-slider>
+  <div class="row">
+    <button class="btn play" (click)="onDemo()">PLAY DEMO</button>
+  </div>
   <div class="row settings-title">
     <h2>SETTINGS:</h2>
     <div class="p-wrapper">
@@ -23,7 +26,7 @@
       <strong>Select your position</strong>
     </div>
     <div class="pos-selection">
-
+      <app-settings></app-settings>
     </div>
   </div>
 </div>
@@ -35,15 +38,3 @@
 
   </app-full-screen-gallery>
 </ng-template>
-<!--  -->
-<!--  <div class="panel">-->
-
-<!--    <div class="hr-wrapper">-->
-<!--      <hr>-->
-<!--    </div>-->
-<!--    <button type="button" class="btn testGame-btn" (click)="onClick()">TEST GAME</button>-->
-<!--  </div>-->
-<!--  <div class="row home-panel">-->
-<!--    <app-settings class="panel" id="left_panel"></app-settings>-->
-<!--  </div>-->
-<!--</div>-->

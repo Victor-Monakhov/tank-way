@@ -8,17 +8,17 @@
   align-items: center;
   cursor: pointer;
   text-decoration: none;
-  font-weight: bold;
-  color: $dark_grey07;
-  border-radius: 5px;
-  background-image: $btn-grad-blue;
-  box-shadow: $panel-shadow;
+  font-family: Raleway-Bold, sans-serif;
+  //font-weight: unset;
+  color: $red;
+  border-radius: 50px;
+  border: 2px solid $black;
+  background-color: transparent;
 }
 
 .btn:hover {
-  color: #000;
-  border: 3px solid $brown;
-  animation: border3px-anim-blue 1500ms linear 0s infinite normal both;
+  color: $black;
+  border: 2px solid $red;
   transition: 2s;
 }
 

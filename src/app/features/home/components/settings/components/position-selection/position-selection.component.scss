@@ -3,68 +3,29 @@
 @import '../../../../../../../assets/styles/colors';
 @import '../../../../../../../assets/styles/animations';
 @import '../../../../../../../assets/styles/images';
+@import 'fonts.scss';
 
-.settings{
+.positions{
+    @include media-property(justify-content, center, center, center, space-around);
+    margin: 10px;
     display: flex;
+    gap: 10px;
     flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    height: 300px;
-    .settings-menu{
+    label{
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+    img{
+        padding: 10px;
+    }
+    .red-side-positions, .blue-side-positions{
         display: flex;
-        width: 100%;
-        justify-content: space-around;
-        align-items: center;
-        height: 50px;
-        .settings-item{
-            color: #fff;
-            background-color: transparent;
-            @include media-font-size(1.2rem, 1.3rem, 1.4rem, 1.5rem);
-            border: 3px solid transparent;
-        }
-        .settings-item:hover{
-            color: #fff;
-            cursor: pointer;
-            border-bottom: 3px solid #8b4513;
-            animation: border-bottom-anim 1500ms linear 0s infinite normal both;
-        }
-        .settings-item:focus{
-            color: #6495ed;
-            border-bottom: 3px solid #8b4513;
-            animation: border-bottom-anim 1500ms linear 0s infinite normal both;
+        justify-content: space-between;
+        .red-side-menu, .blue-side-menu{
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
     }
-    $game-settings-panel-height: 250px;
-    $game-settings-img-panel: 100px;
-    .game-settings{
-        border: 3px solid transparent;
-        border-image: $border-img-grad-brown-blue;
-        width: 90%;
-        height: $game-settings-panel-height;
-        .position-panel{
-            width: 100%;
-            height: 100%;
-            background-color: $dark_grey;
-            .base-img{
-                justify-content: space-around;
-                flex-wrap: nowrap;
-                padding: 10px 0;
-                height: $game-settings-img-panel;
-            }
-            .start-position{
-                justify-content: space-around;
-                align-items: start;
-                height: $game-settings-panel-height - $game-settings-img-panel - 20;
-                .red-side{
-                    color: brown;
-
-
-                }
-                .blue-side{
-                    color:#6495ed;
-                }
-            }
-        }
-    }
-
 }

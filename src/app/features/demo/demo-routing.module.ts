@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeModule } from '../home/home.module';
-import { TestGameComponent } from './components/test-game.component';
+import { DemoComponent } from './components/demo.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TestGameComponent,
+    component: DemoComponent,
   }
 ];
 
@@ -21,4 +21,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class TestGameRoutingModule { }
+export class DemoRoutingModule { }

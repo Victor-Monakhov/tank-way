@@ -9,8 +9,8 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'testGame',
-    loadChildren: () => import('../test-game/test-game.module').then(m => m.TestGameModule),
+    path: 'demo',
+    loadChildren: () => import('../demo/demo.module').then(m => m.DemoModule),
   },
 ];
 

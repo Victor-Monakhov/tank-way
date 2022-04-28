@@ -44,6 +44,11 @@
         width: 100%;
       }
     }
+    .play{
+      @include media-property(font-size, 3rem, 4rem, 5rem, 5.3rem);
+      margin-top: 70px;
+      padding: 10px;
+    }
     .pos-selection-wrapper{
       @include media-property(flex-direction, column, column, row, row);
       @include media-property(justify-content, center, center, start, start);
@@ -57,38 +62,10 @@
         }
       }
       .pos-selection{
+        //@include media-property(padding, 10px, 20px, 30px, 40px);
         display: flex;
         background-color: $black;
-        height: 400px;
         width: 100%;
+        flex-direction: column;
       }
     }
-
-
-    //.panel{
-    //  .hr-wrapper{
-    //    width: 100%;
-    //  }
-    //    .testGame-btn {
-    //      @include media-property(font-size, 1.3rem, 1.4rem, 1.5rem, 1.6rem);
-    //        margin: 20px 0;
-    //        width: 300px;
-    //        height: 50px;
-    //    }
-    //    #left_panel{
-    //        width: 100%;
-    //        @media screen and (min-width: $md) {
-    //            width: 50%;
-    //        }
-    //        @media screen and (max-width: $md) {
-    //            margin-bottom: 50px;
-    //        }
-    //    }
-    //    #right_panel{
-    //        width: 100%;
-    //        @media screen and (min-width: $md) {
-    //            width: 50%;
-    //            margin-left: 25px;
-    //        }
-    //    }
-    //}
