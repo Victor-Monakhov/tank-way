@@ -6,20 +6,18 @@ import { Game } from '@victor_monakhov/tanks';
   selector: 'app-demo',
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.scss'],
-  providers: [DemoService]
+  //providers: [DemoService]
 })
 export class DemoComponent implements OnInit, AfterViewInit{
 
-  private readonly 
   @ViewChild('demoPanel') public demoPanelRef: ElementRef;
   @ViewChild('canvas') public canvasRef: ElementRef;
 
 
-  constructor(public el: ElementRef, public tgService: DemoService) {
+  constructor(private demoService: DemoService) {
   }
 
   ngOnInit(): void { 
-    
   }
 
   ngAfterViewInit(){
@@ -33,19 +31,13 @@ export class DemoComponent implements OnInit, AfterViewInit{
       canvas.width = demoPanel.clientWidth - 160;
       canvas.height = demoPanel.clientHeight - 10;
     }
-     
-     
-
-
     this.startGame(canvas);
   }
 
   private startGame(canvas: HTMLElement){
-    const game = new Game(canvas);
-    game.run();
-  }
-
-  onClick(){
+    //console.log(this.demoService.position);
     
+    const game = new Game(canvas, this.demoService.form.controls['position'].value);
+    game.run();
   }
 }

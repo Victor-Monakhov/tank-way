@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DemoService } from 'src/app/features/demo/services/demo.service';
 
 @Component({
   selector: 'app-settings',
@@ -8,34 +9,20 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class PositionSelectionComponent implements OnInit {
 
-  posRadios: any[] = [];
-  public form: FormGroup = this.fb.group({
+  public form = this.demoService.form = this.fb.group({
     position: 0,
-  })
+  });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private demoService: DemoService) {
   }
   ngOnInit(): void {
-    // this.posRadios.push(
-    //   document.getElementById('red_1'),
-    //   document.getElementById('red_2'),
-    //   document.getElementById('red_3'),
-    //   document.getElementById('red_4'),
-    //   document.getElementById('blue_1'),
-    //   document.getElementById('blue_2'),
-    //   document.getElementById('blue_3'),
-    //   document.getElementById('blue_4'));
-    // this.posRadios[0].checked = true;
-    // this.posRadios.forEach((element)=>{
-    //   element.onclick = () =>{
-    //     this.posRadios.forEach((item)=>{
-    //       if(item.checked && item !== element) {
-    //         item.checked = false;
-    //       }
-    //     });
-    //     element.checked = true;
-    //   }
-    // });
+  }
+
+  public onSetPosition(){
+    // this.demoService.position = this.form.controls['position'].value;
+    // console.log(this.form.controls['position'].value);
+    
+    // console.log(this.demoService.position);
   }
 
 }

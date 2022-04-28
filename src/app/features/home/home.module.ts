@@ -12,6 +12,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {GalleryInterceptor} from "../../shared/slider/interceptors/gallery.interceptor";
 import {FullScreenComponent} from "../../shared/slider/components/full-screen/full-screen.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DemoComponent } from '../demo/components/demo.component';
 
 
 
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MenuDirective,
         MenuComponent,
         FullScreenComponent,
+        DemoComponent
     ],
     imports: [
         CommonModule,
