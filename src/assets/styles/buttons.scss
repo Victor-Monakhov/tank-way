@@ -9,16 +9,16 @@
   cursor: pointer;
   text-decoration: none;
   font-family: Raleway-Bold, sans-serif;
-  //font-weight: unset;
   color: $red;
   border-radius: 50px;
-  border: 2px solid $black;
+  border: none;
+  //border: 2px solid $black;
   background-color: transparent;
 }
 
 .btn:hover {
   color: $black;
-  border: 2px solid $red;
+  //border: 2px solid $red;
   transition: 2s;
 }
 
@@ -27,19 +27,19 @@
 }
 
 //radio button tank
-.tank-radio {
+.tank-radio-lbl, .lbl-tank-radio {
   position: absolute;
   z-index: -1;
   opacity: 0;
 }
 
-.tank-radio + label {
+.tank-radio-lbl + label, .lbl-tank-radio + label{
   display: inline-flex;
   align-items: center;
   user-select: none;
 }
 
-.tank-radio + label::after {
+.tank-radio-lbl + label::before, .lbl-tank-radio + label::after {
   content: '';
   display: inline-block;
   width: 20px;
@@ -48,11 +48,11 @@
   flex-grow: 0;
   margin: 5px;
   background-image: $img-radio-tank;
-  transform: rotateZ(180deg);
+  transform: rotateZ(270deg);
   cursor: pointer;
 }
 
-.radio-red:not(:disabled):not(:checked) + label:hover::after {
+.radio-red:not(:disabled):not(:checked) + label:hover::before {
   background-image: $img-radio-tank-red;
 }
 
@@ -60,7 +60,7 @@
   background-image: $img-radio-tank-blue;
 }
 
-.radio-red:checked + label:after {
+.radio-red:checked + label:before {
   background-image: $img-radio-tank-red;
 }
 

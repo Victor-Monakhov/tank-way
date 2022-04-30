@@ -6,7 +6,6 @@ import { Game } from '@victor_monakhov/tanks';
   selector: 'app-demo',
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.scss'],
-  //providers: [DemoService]
 })
 export class DemoComponent implements OnInit, AfterViewInit{
 
@@ -35,9 +34,8 @@ export class DemoComponent implements OnInit, AfterViewInit{
   }
 
   private startGame(canvas: HTMLElement){
-    //console.log(this.demoService.position);
-    
-    const game = new Game(canvas, this.demoService.form.controls['position'].value);
+    const pos = this.demoService.form.controls['position'].value;
+    const game = new Game(canvas, pos);
     game.run();
   }
 }

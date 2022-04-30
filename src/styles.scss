@@ -34,6 +34,13 @@ strong{
   color: #ffffff;
 }
 
+small{
+  @include media-property(font-size, 1rem, 1.1rem, 1.2rem, 1.3rem);
+  text-align: justify;
+  color: #ffffff;
+  margin: 0;
+}
+
 h1, h2, h3, p, strong{
   font-family: Raleway-Thin, sans-serif;
   text-align: center;

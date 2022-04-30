@@ -5,8 +5,20 @@
 @import '../../../../../../../assets/styles/images';
 @import 'fonts.scss';
 
+
+.pos-selection-title{
+    @include media-property(display, flex, flex, flex, none);
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    strong{
+      display: flex;
+      font-weight: bold;
+      justify-content: center;
+    }
+  }
 .positions{
-    @include media-property(justify-content, center, center, center, space-around);
+    @include media-property(justify-content, center, center, space-around, space-around);
     margin: 10px;
     display: flex;
     gap: 10px;
@@ -28,4 +40,7 @@
             justify-content: space-between;
         }
     }
+    .pos-selection-title{
+        @include media-property(display, none, none, none, flex);
+      }
 }

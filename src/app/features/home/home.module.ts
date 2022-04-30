@@ -24,8 +24,7 @@ import { DemoComponent } from '../demo/components/demo.component';
         PositionSelectionComponent,
         MenuDirective,
         MenuComponent,
-        FullScreenComponent,
-        DemoComponent
+        FullScreenComponent
     ],
     imports: [
         CommonModule,

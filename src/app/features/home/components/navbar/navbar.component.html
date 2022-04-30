@@ -1,6 +1,19 @@
 <div class="navbar">
     <button type="button" class="btn-menu"  [appDropMenu] = menu></button>
     <div class="gameLogo"></div>
-    <app-menu [menuContent]="menuContent" [visible]="true"></app-menu>
+    <div class="menu-wrapper">
+        <app-menu [menuContent]="menuContent" [visible]="true"></app-menu>
+    </div>
+    <div class="gallery-language-wrapper">
+        <!-- <div class="gallery">
+            <p>Gallery</p>
+            <div class="gallery-icon"></div>
+        </div> -->
+        <div class="language">
+            <!-- <p>USA</p> -->
+            <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">
+        </div>
+    </div>
 </div>
 <app-menu #menu [menuContent]="menuContent" [mode]="'drop'"></app-menu>
+

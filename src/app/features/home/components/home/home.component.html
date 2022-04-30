@@ -2,7 +2,7 @@
   <app-navbar></app-navbar>
   <img src="../../assets/images/bg-tanks.png" alt="#">
   <div class="row title">
-    <h1>WELCOME!</h1>
+    <h1>EXAMPLE</h1>
     <p>
       Hello!
       If you are new and have not yet tasted victory on a real battlefield -
@@ -11,24 +11,28 @@
       We hope you enjoy it and you stay with us!
     </p>
   </div>
-  <app-slider (eventFullScreen) = "galleryMode = $event"></app-slider>
+  <!-- <app-slider (eventFullScreen) = "galleryMode = $event"></app-slider> -->
   <div class="row">
     <button class="btn play" (click)="onDemo()">PLAY DEMO</button>
   </div>
+  <div class="row">
+    <small>or play completely after registration</small>
+  </div>
+  <div class="row sign-in-wrapper">
+    <div class="sign-in-google"></div>
+    <div class="sign-in-facebook"></div>
+  </div>
   <div class="row settings-title">
-    <h2>SETTINGS:</h2>
     <div class="p-wrapper">
       <p>You can correct some settings of the game for your comfortable playing!</p>
     </div>
   </div>
   <div class="row pos-selection-wrapper">
-    <div class="pos-selection-title">
-      <strong>Select your position</strong>
-    </div>
     <div class="pos-selection">
       <app-settings></app-settings>
     </div>
   </div>
+  <app-slider (eventFullScreen) = "galleryMode = $event"></app-slider>
 </div>
 
 <ng-template #galleryFullScreen>

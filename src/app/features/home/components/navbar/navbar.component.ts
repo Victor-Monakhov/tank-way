@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  public menuContent: string[] = ['Sign up', 'Sign in', 'About game'];
+  public menuContent: string[] = ['Sign in', 'About game'];
 
   constructor() {
   }

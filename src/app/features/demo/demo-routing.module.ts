@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DemoComponent } from './components/demo.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { DemoComponent } from '../demo/components/demo.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
-  },
-  {
-    path: 'demo',
-    loadChildren: () => import('../demo/demo.module').then(m => m.DemoModule),
+    component: DemoComponent
   },
 ];
 
@@ -23,4 +18,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class DemoRoutingModule { }

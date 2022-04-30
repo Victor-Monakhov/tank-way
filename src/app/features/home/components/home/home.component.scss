@@ -16,19 +16,48 @@
       object-fit: cover;
     }
     .title{
-      @include media-property(padding, 20px, 30px, 0 20%, 0 20%);
+      @include media-property(padding, 0 20px, 0 30px, 0 20%, 0 20%);
       animation: row_go_down 1s ease 1 both;
       h1{
         color: $red;
         margin: 50px 0 20px 0;
+        font-family: Risque, sans-serif;
       }
 
       p{
         margin-bottom: 50px;
       }
     }
+    .play{
+      @include media-property(font-size, 3rem, 4rem, 5rem, 5.3rem);
+      //margin-top: 70px;
+      margin-bottom: 5px;
+      padding: 10px;
+    }
+    .sign-in-wrapper{
+      flex-direction: row;
+      padding-bottom: 50px;
+      padding-top: 5px;
+      .sign-in-google{
+        width: 40px;
+        height: 40px;
+        background-image: $img-google-icon;
+        background-repeat: no-repeat;
+        background-size: 40px 40px;
+        margin-right: 40px;
+      }
+      .sign-in-facebook{
+        width: 40px;
+        height: 40px;
+        background-image: $img-facebook-icon;
+        background-repeat: no-repeat;
+        background-size: 40px 40px;
+        //margin-right: 50px;
+      }
+    }
+    
     .settings-title{
-      @include media-property(padding, 10px, 20px, 30px, 40px);
+      @include media-property(padding, 0 10px 40px, 0 20px 40px, 0 30px 40px, 0 40px 40px);
       @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
       @include media-property(flex-direction, column, column, row, row);
       justify-content: start;
@@ -44,25 +73,11 @@
         width: 100%;
       }
     }
-    .play{
-      @include media-property(font-size, 3rem, 4rem, 5rem, 5.3rem);
-      margin-top: 70px;
-      padding: 10px;
-    }
     .pos-selection-wrapper{
-      @include media-property(flex-direction, column, column, row, row);
-      @include media-property(justify-content, center, center, start, start);
-      @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
-      .pos-selection-title{
-        @include media-property(padding, 10px, 20px, 30px, 40px);
-        @include media-property(width, auto,auto, 25%, 25%);
-        flex-shrink: 0;
-        strong{
-          font-weight: bold;
-        }
-      }
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 50px;
       .pos-selection{
-        //@include media-property(padding, 10px, 20px, 30px, 40px);
         display: flex;
         background-color: $black;
         width: 100%;
