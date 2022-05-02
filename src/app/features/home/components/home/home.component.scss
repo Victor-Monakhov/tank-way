@@ -21,7 +21,7 @@
       h1{
         color: $red;
         margin: 50px 0 20px 0;
-        font-family: Risque, sans-serif;
+        //font-family: Risque, sans-serif;
       }
 
       p{
@@ -79,50 +79,36 @@
       }
     }
     .pos-selection-wrapper{
-      flex-direction: column;
-      justify-content: center;
       margin-bottom: 50px;
       .pos-selection{
         display: flex;
-        //background-color: $black;
-        //background-color:$black;opacity:0.8;
-        //width: 100%;
+        width: 100%;
+        background-color: $black;
         flex-direction: column;
       }
     }
 
 a{
+  @include media-property(margin, 0 10px, 0 20px, 0 30px, 0 40px);
   position: relative;
-  padding: 20px 60px;
+  padding: 20px 40px;
+  cursor:pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  margin: 5px;
   text-decoration: none;
-  transition: 1s;
-  border-radius: 4px;
+  border-radius: 60px;
   overflow: hidden;
-}
-a:hover{
-  background: var(--clr);
-  box-shadow: 0 0 10px var(--clr),
-  0 0 30px var(--clr),
-  0 0 60px var(--clr),
-  0 0 100px var(--clr);
 }
 a:before{
   content: '';
   position: absolute;
-  width: 40px;
-  height: 400%;
-  background: var(--clr);
+  width: 200%;
+  height: 40px;
+  background-image: linear-gradient(to right, $red 50%, $blue 50%);
   transition: 1s;
-  animation: animate 2s linear infinite;
+  animation: animate 2.5s linear infinite;
   animation-delay: calc(0.33s * var(--1));
-}
-a:hover:before{
-  width: 120%;
 }
 @keyframes animate{
   0%{
@@ -135,22 +121,19 @@ a:hover:before{
 a:after{
   content: '';
   position: absolute;
-  inset: 4px;
-  background: #0e1538;
+  border-radius: 60px;
+  inset: 1px;
+  background: radial-gradient(ellipse at center, $red, $black 70%);
 }
 a:hover:after{
-  background: var(--clr);
+  background: radial-gradient(ellipse at center, $red, $black 100%);
+  transition: 2s;
 }
 a span{
+  @include media-property(font-size, 1.5rem, 2rem, 2.5rem, 3rem);
   position: relative;
   z-index: 1;
-  font-size: 2em;
-  color: #fff;
-  opacity: 0.5;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  transition: 0.5s;
-}
-a:hover span{
-  opacity: 1;
+  font-family: Raleway-Bold, sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 4px;
 }
