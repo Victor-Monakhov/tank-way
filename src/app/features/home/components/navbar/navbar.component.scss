@@ -3,6 +3,25 @@
 @import '../../../../../assets/styles/variables';
 @import '../../../../../assets/styles/images';
 
+hr {
+  @include media-property(display, block, block, none, none);
+  margin: 3px;
+}
+
+p {
+  @include media-property(margin, 0, 0, 0 20px 0 0, 0 30px 0 0);
+  text-align: start;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 5px;
+  white-space: nowrap;
+}
+
+p:hover {
+  @include media-property(border-bottom-color, transparent, transparent, $red, $red);
+  @include media-property(color, $red, $red, #fff, #fff);
+}
+
 .navbar {
   @include media-property(justify-content, space-between, space-between, start, start);
   @include media-property(padding, 10px, 10px 20px, 10px 30px, 10px 40px);
@@ -20,7 +39,6 @@
       @include media-property(display, flex, flex, none, none);
       width: $img-logo-width;
       height: $img-logo-height;
-      border-radius: 5px;
       background-image: $img-logo;
       transition: 1s;
       border: solid transparent 0;
@@ -29,11 +47,6 @@
 
     .btn-menu:hover {
       transform: rotateZ(90deg);
-    }
-
-    .btn-menu:active {
-      transition: 0s;
-      box-shadow: $click-shadow;
     }
 
     .gameLogo {
@@ -62,12 +75,6 @@
         align-items: center;
         p{
           @include media-property(display, none, none, inline, inline);
-          cursor: pointer;
-          border: 1px solid transparent;
-          padding: 5px;
-        }
-        p:hover{
-          border-bottom: 1px solid $red;
         }
         .gallery-icon{
           width: 40px;
@@ -90,8 +97,4 @@
         }
       }
     }
-    app-menu {
-      @include media-property(display, none, none, flex, flex);
-    }
-    
 }

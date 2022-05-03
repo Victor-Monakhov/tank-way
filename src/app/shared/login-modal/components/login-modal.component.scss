@@ -1,0 +1,27 @@
+@import "colors.scss";
+@import "variables.scss";
+@import "animations.scss";
+@import "mixins.scss";
+.wrapper{
+    @include media-property(width, 90%, 80%, 60%, 40%);
+    display: flex;
+    position: absolute;
+    z-index: 5000;
+    top: $header-height + 20px;
+    height: 500px;
+    background-color: $red;
+    border-radius: 5px;
+    pointer-events: fill;
+}
+
+.modal-go-left {
+    @include media-property(animation,
+        modal_go_left_xs 0.5s ease-out 1 both,
+        modal_go_left_sm 0.5s ease-out 1 both,
+        modal_go_left_md 0.5s ease-out 1 both,
+        modal_go_left_lg 0.5s ease-out 1 both);
+  }
+  
+.modal-go-right {
+    animation: menu_go_left 0.5s ease-out 1 both;
+}

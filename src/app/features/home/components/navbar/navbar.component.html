@@ -2,7 +2,7 @@
     <button type="button" class="btn-menu"  [appDropMenu] = menu></button>
     <div class="gameLogo"></div>
     <div class="menu-wrapper">
-        <app-menu [menuContent]="menuContent" [visible]="true"></app-menu>
+        <ng-container *ngTemplateOutlet="menuContent"></ng-container>
     </div>
     <div class="gallery-language-wrapper">
         <!-- <div class="gallery">
@@ -15,5 +15,18 @@
         </div>
     </div>
 </div>
-<app-menu #menu [menuContent]="menuContent" [mode]="'drop'"></app-menu>
+<app-menu #menu [emitClosed]="closeDropElement">
+    <ng-container *ngTemplateOutlet="menuContent"></ng-container>
+</app-menu>
+
+<app-login-modal #login></app-login-modal>
+
+<ng-template #menuContent>
+    <p class="item-text" [appDropMenu]="login" (click)="closeDropElement = !closeDropElement">Sign Up</p>
+    <hr>
+    <p class="item-text" [appDropMenu]="login" (click)="closeDropElement = !closeDropElement">Sign In</p>
+    <hr>
+    <p>About</p>
+    <hr>
+</ng-template>
 

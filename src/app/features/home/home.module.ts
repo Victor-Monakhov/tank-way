@@ -13,6 +13,7 @@ import {GalleryInterceptor} from "../../shared/slider/interceptors/gallery.inter
 import {FullScreenComponent} from "../../shared/slider/components/full-screen/full-screen.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoComponent } from '../demo/components/demo.component';
+import { LoginModalComponent } from 'src/app/shared/login-modal/components/login-modal.component';
 
 
 
@@ -24,7 +25,8 @@ import { DemoComponent } from '../demo/components/demo.component';
         PositionSelectionComponent,
         MenuDirective,
         MenuComponent,
-        FullScreenComponent
+        FullScreenComponent,
+        LoginModalComponent,
     ],
     imports: [
         CommonModule,

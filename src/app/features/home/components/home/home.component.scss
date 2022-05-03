@@ -5,6 +5,7 @@
 @import 'src/assets/styles/images';
 @import 'src/assets/styles/variables';
 
+.home-wrapper{   
     img{
       position: fixed;
       width: 105%;
@@ -78,3 +79,4 @@
         flex-direction: column;
       }
     }
+  }

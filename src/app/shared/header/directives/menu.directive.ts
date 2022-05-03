@@ -1,8 +1,9 @@
-import {Directive, ElementRef, HostListener, Input, Optional, ViewContainerRef} from '@angular/core';
+import {Directive, ElementRef, Input, Optional} from '@angular/core';
 import {MenuComponent} from "../components/menu/menu.component";
 import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {merge, Observable} from "rxjs";
 import {ComponentPortal, TemplatePortal} from "@angular/cdk/portal";
+import { DropMenu } from '../interfaces/drop-menu.interface';
 
 @Directive({
   selector: '[appDropMenu]',
@@ -12,7 +13,7 @@ import {ComponentPortal, TemplatePortal} from "@angular/cdk/portal";
 })
 export class MenuDirective {
 
-  @Input() public appDropMenu: MenuComponent;
+  @Input() public appDropMenu: DropMenu;
   private closeHandler;
 
   constructor(public overlay: Overlay,
@@ -29,7 +30,7 @@ export class MenuDirective {
     this.appDropMenu.visible = true;
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
-      scrollStrategy: this.overlay.scrollStrategies.close(),
+      //scrollStrategy: this.overlay.scrollStrategies.close(),
       positionStrategy: this.overlay
         .position()
         .flexibleConnectedTo(this.elementRef)
@@ -63,11 +64,5 @@ export class MenuDirective {
     this.appDropMenu.anim = false;
     this.closeHandler.unsubscribe();
     this.overlayRef.detach();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.appDropMenu.visible = false;
-    this.destroyMenu();
   }
 }
