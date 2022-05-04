@@ -1,4 +1,51 @@
 <div *ngIf="visible"
      class="wrapper"
-     [ngClass]="anim ? 'modal-go-left' : 'modal-go-right'">
+     [ngClass]="anim ? 'modal-go-left' : 'modal-go-hidden'">
+  <h3>{{message}}</h3>
+  <form class="form"
+        [formGroup]="message === 'Sign Up' ? signUpForm : signInForm"
+        (ngSubmit)="onSubmit()">
+    <div *ngIf="message === 'Sign Up'" class="form-item-wrapper">
+      <label for="nickname">Nickname</label>
+      <input class="form-control"
+             type="text"
+             id="nickname"
+             formControlName="nickname"
+             placeholder="nickname">
+      <small class="invalid-input"
+             *ngIf="isInvalid(signUpForm.get('nickname'), 'nickname')">
+        {{invalidMsg['nickname']}}
+      </small>
+
+    </div>
+    <div class="form-item-wrapper">
+      <label for="email">Email</label>
+      <input class="form-control"
+             type="text"
+             id="email"
+             formControlName="email"
+             placeholder="email">
+      <small class="invalid-input"
+             *ngIf="isInvalid(signUpForm.get('email'), 'email')">
+        {{invalidMsg['email']}}
+      </small>
+    </div>
+    <div class="form-item-wrapper">
+      <label for="password">Password</label>
+      <input class="form-control"
+             type="text"
+             id="password"
+             formControlName="password"
+             placeholder="password">
+    </div>
+    <div *ngIf="message === 'Sign Up'" class="form-item-wrapper">
+      <label for="confirm">Confirm password</label>
+      <input class="form-control"
+             type="text"
+             id="confirm"
+             formControlName="confirm"
+             placeholder="password">
+    </div>
+    <button class="btn" type="submit">SUBMIT</button>
+  </form>
 </div>

@@ -10,7 +10,7 @@ export class MenuComponent implements OnInit, OnChanges, DropMenu{
 
   @Input() public visible: boolean = false;
   @Input() public emitClosed: boolean;
-  @Input('menuContent') public menuContent: string[];
+  public message: string = '';
   public closed: EventEmitter<void> = new EventEmitter<void>();
   public anim: boolean = false;
 

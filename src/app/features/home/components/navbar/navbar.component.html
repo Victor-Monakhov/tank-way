@@ -22,9 +22,13 @@
 <app-login-modal #login></app-login-modal>
 
 <ng-template #menuContent>
-    <p class="item-text" [appDropMenu]="login" (click)="closeDropElement = !closeDropElement">Sign Up</p>
+    <p [appDropMenu]="login" 
+        [message]="'Sign Up'"
+        (click)="onMenuItem()">Sign Up</p>
     <hr>
-    <p class="item-text" [appDropMenu]="login" (click)="closeDropElement = !closeDropElement">Sign In</p>
+    <p [appDropMenu]="login" 
+        [message]="'Sign In'"
+        (click)="onMenuItem()">Sign In</p>
     <hr>
     <p>About</p>
     <hr>

@@ -14,6 +14,7 @@ import { DropMenu } from '../interfaces/drop-menu.interface';
 export class MenuDirective {
 
   @Input() public appDropMenu: DropMenu;
+  @Input() public message: string;
   private closeHandler;
 
   constructor(public overlay: Overlay,
@@ -24,6 +25,7 @@ export class MenuDirective {
   public toggleDropdown(){
     this.openMenu();
     this.appDropMenu.anim = true;
+    this.appDropMenu.message = this.message;
   }
 
   private openMenu(){
