@@ -1,7 +1,7 @@
-@import "src/assets/styles/mixins";
-@import "src/assets/styles/variables";
-@import "src/assets/styles/animations";
-@import "colors.scss";
+@import "../../../../assets/styles/mixins";
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/animations";
+@import "src/assets/styles/colors";
 
 .menu-go-right {
   animation: menu_go_right 0.5s ease-out 1 both;

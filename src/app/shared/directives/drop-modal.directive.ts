@@ -2,18 +2,18 @@ import {Directive, ElementRef, Input, Optional} from '@angular/core';
 import {MenuComponent} from "../components/menu/menu.component";
 import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {merge, Observable} from "rxjs";
-import {ComponentPortal, TemplatePortal} from "@angular/cdk/portal";
-import { DropMenu } from '../interfaces/drop-menu.interface';
+import {ComponentPortal} from "@angular/cdk/portal";
+import { IDropModal } from '../interfaces/drop-menu.interface';
 
 @Directive({
-  selector: '[appDropMenu]',
+  selector: '[dropModal]',
   host: {
-    "(click)": "toggleDropdown()",
+    "(click)": "onDrop()",
   },
 })
-export class MenuDirective {
+export class DropModalDirective {
 
-  @Input() public appDropMenu: DropMenu;
+  @Input() public dropModal: IDropModal;
   @Input() public message: string;
   private closeHandler;
 
@@ -22,17 +22,17 @@ export class MenuDirective {
               @Optional() public overlayRef: OverlayRef) {
   }
 
-  public toggleDropdown(){
+  public onDrop(){
     this.openMenu();
-    this.appDropMenu.anim = true;
-    this.appDropMenu.message = this.message;
+    this.dropModal.anim = true;
+    this.dropModal.message.next(this.message);
   }
 
   private openMenu(){
-    this.appDropMenu.visible = true;
+    this.dropModal.visible = true;
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
-      //scrollStrategy: this.overlay.scrollStrategies.close(),
+      scrollStrategy: this.overlay.scrollStrategies.block(),
       positionStrategy: this.overlay
         .position()
         .flexibleConnectedTo(this.elementRef)
@@ -55,7 +55,7 @@ export class MenuDirective {
   private dropdownClosingActions(): Observable<MouseEvent | void> {
     const backdropClick$ = this.overlayRef.backdropClick();
     const detachment$ = this.overlayRef.detachments();
-    const closeMenu = this.appDropMenu.closed
+    const closeMenu = this.dropModal.closed
     return  merge(backdropClick$, detachment$, closeMenu);
   }
 
@@ -63,7 +63,7 @@ export class MenuDirective {
     if (!this.overlayRef) {
       return;
     }
-    this.appDropMenu.anim = false;
+    this.dropModal.anim = false;
     this.closeHandler.unsubscribe();
     this.overlayRef.detach();
   }

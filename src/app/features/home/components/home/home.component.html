@@ -2,7 +2,7 @@
   <app-navbar></app-navbar>
   <img src="../../assets/images/bg-tanks.png" alt="#">
   <div class="row title">
-   <h1>EXAMPLE</h1>
+    <h1>EXAMPLE</h1>
     <p>
       Hello!
       If you are new and have not yet tasted victory on a real battlefield -
@@ -12,31 +12,38 @@
     </p>
   </div>
   <div class="row">
-   <button class="btn-start play" (click)="onDemo()"><span>PLAY DEMO</span></button>
+    <button class="btn-start play" (click)="onDemo()"><span>PLAY DEMO</span></button>
   </div>
   <div class="row">
-    <small>or play completely after registration</small>
+    <small>
+      or play completely after
+      <small class="link" [dropModal]="login" [message]="'Sign Up'">
+        registration
+      </small>
+    </small>
   </div>
   <div class="row sign-in-wrapper">
-    <div class="sign-in-facebook"></div>
-    <div class="sign-in-google"></div>
+    <div (click)="onLoginWithFacebook()" class="sign-in-facebook"></div>
+    <div (click)="onLoginWithGoogle()" class="sign-in-google"></div>
   </div>
- <div class="row settings-title">-->
-   <div class="p-wrapper">
-     <p>You can correct some settings of the game for your comfortable playing!</p>
-   </div>
+  <div class="row settings-title">-->
+    <div class="p-wrapper">
+      <p>You can correct some settings of the game for your comfortable playing!</p>
+    </div>
   </div>
   <div class="row pos-selection-wrapper">
     <div class="pos-selection">
       <app-settings></app-settings>
     </div>
   </div>
-  <app-slider (eventFullScreen) = "galleryMode = $event"></app-slider>
+  <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>
 </div>
+
+<app-login-modal #login></app-login-modal>
 
 <ng-template #galleryFullScreen>
   <app-full-screen-gallery
-    (eventFullScreen) = "galleryMode = $event"
+    (eventFullScreen)="galleryMode = $event"
     [initialId]="galleryMode">
 
   </app-full-screen-gallery>

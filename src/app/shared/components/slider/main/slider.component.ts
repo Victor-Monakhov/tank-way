@@ -7,7 +7,7 @@ import {
   OnInit, Output,
   ViewChild
 } from '@angular/core';
-import {GalleryService, Image} from "../../services/gallery.service";
+import {GalleryService, Image} from "../../../services/gallery.service";
 import {SubSink} from "subsink";
 import {WIN_SIZES} from "../../../../app.config";
 import {Observable} from "rxjs";

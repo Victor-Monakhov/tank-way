@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {GalleryService, Image} from "../../services/gallery.service";
+import {GalleryService, Image} from "../../../services/gallery.service";
 import {switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {SubSink} from "subsink";

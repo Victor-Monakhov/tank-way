@@ -1,7 +1,7 @@
-@import "colors.scss";
-@import "variables.scss";
-@import "animations.scss";
-@import "mixins.scss";
+@import "../../../../assets/styles/colors";
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/animations";
+@import "../../../../assets/styles/mixins";
 .wrapper{
     @include media-property(width, 90%, 80%, 70%, 60%);
     @include media-property(padding, 30px 0, 30px 0, 50px 0, 50px 0);
