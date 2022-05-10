@@ -25,7 +25,7 @@ export class DropModalDirective {
   public onDrop(){
     this.openMenu();
     this.dropModal.anim = true;
-    this.dropModal.message.next(this.message);
+    this.dropModal.type.next(this.message);
   }
 
   private openMenu(){

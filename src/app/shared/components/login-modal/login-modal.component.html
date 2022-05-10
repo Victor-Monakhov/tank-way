@@ -1,11 +1,11 @@
 <div *ngIf="visible"
      class="wrapper"
      [ngClass]="anim ? 'modal-go-left' : 'modal-go-hidden'">
-  <h3>{{message.value}}</h3>
+  <h3>{{type.value}}</h3>
   <form class="form"
         [formGroup]="form"
         (ngSubmit)="onSubmit()">
-    <div *ngIf="message.value === 'Sign Up'" class="form-item-wrapper">
+    <div *ngIf="type.value === 'Sign Up'" class="form-item-wrapper">
       <label for="nickname">Nickname</label>
       <input class="form-control"
              type="text"
@@ -13,7 +13,7 @@
              formControlName="nickname"
              placeholder="nickname">
       <small class="invalid-input"
-             *ngIf="isInvalid(form.get('nickname'), 'nickname')">
+             *ngIf="isErrorReq['nickname'] || isInvalid('nickname', form.get('nickname'))">
         {{invalidMsg['nickname']}}
       </small>
 
@@ -26,7 +26,7 @@
              formControlName="email"
              placeholder="email">
       <small class="invalid-input"
-             *ngIf="isInvalid(form.get('email'), 'email')">
+             *ngIf="isErrorReq['email'] || isInvalid('email', form.get('email'))">
         {{invalidMsg['email']}}
       </small>
     </div>
@@ -38,11 +38,11 @@
              formControlName="password"
              placeholder="password">
       <small class="invalid-input"
-             *ngIf="isInvalid(form.get('password'), 'password')">
+             *ngIf="isInvalid('password', form.get('password'))">
         {{invalidMsg['password']}}
       </small>
     </div>
-    <div *ngIf="message.value === 'Sign Up'" class="form-item-wrapper">
+    <div *ngIf="type.value === 'Sign Up'" class="form-item-wrapper">
       <label for="confirm">Confirm password</label>
       <input class="form-control"
              type="text"
@@ -50,7 +50,7 @@
              formControlName="confirm"
              placeholder="password">
       <small class="invalid-input"
-             *ngIf="isInvalid(form.get('confirm'), 'confirm')">
+             *ngIf="isInvalid('confirm', form.get('confirm'))">
         {{invalidMsg['confirm']}}
       </small>
     </div>

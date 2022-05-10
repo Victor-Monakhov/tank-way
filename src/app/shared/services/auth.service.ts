@@ -1,25 +1,54 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IUser} from "../interfaces/user.interface";
 import {Paths} from "../enums/paths.enum";
+import {SocialUser} from "angularx-social-login";
+import {AbstractControl} from "@angular/forms";
+import {IResponseMessage} from "../interfaces/response-message.interface";
+import {LoginModalComponent} from "../components/login-modal/login-modal.component";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
+  public user: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(null) ;
+  public response: BehaviorSubject<IResponseMessage> = new BehaviorSubject<IResponseMessage>(null) ;
+
   constructor(private http: HttpClient) {
+    //this.response.subscribe(response => console.log(response));
   }
 
-  public signUp(user: IUser): Observable<any> {
-    return this.http.post(Paths.signUp,
-      {
-        username: user.nickname,
-        email: user.email,
-        password: user.password,
-        //role: user.role,
-        token: user.token
-      });
+  public userInitBySocialUser(user: SocialUser): void {
+    this.user.next({
+      nickname: user.email,
+      email: user.email,
+      password: '12345678',
+      token: user.authToken,
+      avatarUrl: user.photoUrl,
+    } as IUser);
   }
+
+  public userInitByForm(form: AbstractControl): void {
+    this.user.next( {
+      nickname: form.value['nickname'] ?? '',
+      email: form.value['email'],
+      password: form.value['password'],
+      token: '',
+      avatarUrl: '',
+    } as IUser);
+  }
+
+  public signUp(): Observable<any> {
+    return this.http.post(Paths.signUp, this.user.value);
+  }
+
+  public signIn(): Observable<any> {
+    return this.http.post(Paths.signIn, this.user.value);
+  }
+
+  public getUserByEmail(): Observable<IUser> {
+    return this.http.get<IUser>(Paths.userByEmail + `${this.user.value.email}`);
+  };
 }

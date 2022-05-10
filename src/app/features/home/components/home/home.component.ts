@@ -2,13 +2,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from "../../../../shared/services/auth.service";
 import {SubSink} from "subsink";
-import {IUser} from "../../../../shared/interfaces/user.interface";
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService} from "angularx-social-login";
 import {LocalStorageService} from "../../../../shared/services/local-storage.service";
 import {switchMap} from "rxjs/operators";
 import {LSKeys} from "../../../../shared/enums/local-storage-keys.enum";
-import {of} from "rxjs";
-import {Paths} from "../../../../shared/enums/paths.enum";
+import {IResponseMessage} from "../../../../shared/interfaces/response-message.interface";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -28,28 +27,42 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.add(this.socialAuthService.authState.pipe(
-      switchMap((socialUser) => {
+    this.subs.add(this.socialAuthService.authState.subscribe(
+      (socialUser) => {
         if (socialUser) {
-          const user: IUser = {
-            nickname: socialUser.email,
-            email: socialUser.email,
-            password: '12345678',
-            role: 'user',
-            token: socialUser.authToken
+          this.authService.userInitBySocialUser(socialUser);
+        }
+      }));
+    this.subs.add(this.authService.user.pipe(
+        switchMap(user => {
+          if (user) {
+            if (user.nickname) {
+              return this.authService.signUp() as Observable<IResponseMessage>
+            } else {
+              return this.authService.signIn() as Observable<IResponseMessage>
+            }
+          } else {
+            return of(null);
           }
-          return this.authService.signUp(user);
+        })
+      ).subscribe((response) => {
+        if (!response) {
+          return;
         }
-        return null;
-      })
-      ).subscribe((response)=>{
-        if(response){
+      this.authService.response.next(response);
+        if (response.success) {
           this.isLoggedIn = true;
-          console.log(response);
+          this.lSService.setItem(LSKeys.authToken, this.authService.user.value.token);
+          console.log(response.message);
+        } else if (!response.success && this.authService.user.value.token) {
+          this.isLoggedIn = false;
+          this.signOut(() => {
+            console.log(response.message);
+          });
+        } else {
+          this.isLoggedIn = false;
         }
-        console.log(response);
-        //this.lSService.setItem(LSKeys.authToken, user.authToken);
-    })
+      })
     );
   }
 
@@ -57,13 +70,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
+
   public loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then();
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(
+      (data) => {
+        if (data['error'] === 'popup_closed_by_user') {
+          window.location.reload();
+        }
+      }
+    );
     this.lSService.setItem(LSKeys.authProviderID, GoogleLoginProvider.PROVIDER_ID);
   }
 
   public loginWithFacebook(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then();
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).catch(
+      (data) => {
+        if (data === 'User cancelled login or did not fully authorize.') {
+          window.location.reload();
+        }
+      }
+    );
     this.lSService.setItem(LSKeys.authProviderID, FacebookLoginProvider.PROVIDER_ID);
 
   }
@@ -78,10 +104,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
   }
 
-  public onLoginWithGoogle(): void{
+  public onLoginWithGoogle(): void {
     this.loginWithGoogle();
   }
-  public onLoginWithFacebook(): void{
+
+  public onLoginWithFacebook(): void {
     this.loginWithFacebook();
   }
 

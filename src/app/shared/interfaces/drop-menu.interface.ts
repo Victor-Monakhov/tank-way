@@ -5,5 +5,5 @@ export interface IDropModal {
     closed: EventEmitter<void>;
     visible: boolean;
     anim: boolean;
-    message: BehaviorSubject<string>;
+    type: BehaviorSubject<string>;
 }

@@ -14,6 +14,7 @@ import {FullScreenComponent} from "../../shared/components/slider/full-screen/fu
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DemoComponent } from '../demo/components/demo.component';
 import { LoginModalComponent } from 'src/app/shared/components/login-modal/login-modal.component';
+import {AuthService} from "../../shared/services/auth.service";
 
 
 
