@@ -6,7 +6,7 @@ import {Paths} from "../enums/paths.enum";
 import {SocialUser} from "angularx-social-login";
 import {AbstractControl} from "@angular/forms";
 import {IResponseMessage} from "../interfaces/response-message.interface";
-import {LoginModalComponent} from "../components/login-modal/login-modal.component";
+import {SignUpComponent} from "../components/auth-modal/sign-up/sign-up.component";
 
 @Injectable({
   providedIn: 'root',

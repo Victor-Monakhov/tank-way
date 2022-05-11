@@ -1,6 +1,16 @@
-import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import { IDropModal } from '../../interfaces/drop-menu.interface';
-import {BehaviorSubject} from "rxjs";
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
+import { IDropModal } from '../../interfaces/drop-modal.interface';
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-menu',
@@ -9,9 +19,9 @@ import {BehaviorSubject} from "rxjs";
 })
 export class MenuComponent implements OnInit, OnChanges, IDropModal{
 
-  @Input() public visible: boolean = false;
+  @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
   @Input() public emitClosed: boolean;
-  public type: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public visible: Subject<boolean> = new Subject<boolean>();
   public closed: EventEmitter<void> = new EventEmitter<void>();
   public anim: boolean = false;
 
@@ -28,8 +38,7 @@ export class MenuComponent implements OnInit, OnChanges, IDropModal{
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
-      this.visible = false;
+  onResize() {
       this.closed.emit();
   }
 }

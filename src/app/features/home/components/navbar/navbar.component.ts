@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ContentChild, OnInit, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',

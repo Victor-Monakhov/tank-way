@@ -1,9 +1,8 @@
-import {Directive, ElementRef, Input, Optional} from '@angular/core';
-import {MenuComponent} from "../components/menu/menu.component";
+import {Directive, ElementRef, Input, Optional, TemplateRef, ViewContainerRef} from '@angular/core';
 import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {merge, Observable} from "rxjs";
-import {ComponentPortal} from "@angular/cdk/portal";
-import { IDropModal } from '../interfaces/drop-menu.interface';
+import {TemplatePortal} from "@angular/cdk/portal";
+import { IDropModal } from '../interfaces/drop-modal.interface';
 
 @Directive({
   selector: '[dropModal]',
@@ -12,24 +11,23 @@ import { IDropModal } from '../interfaces/drop-menu.interface';
   },
 })
 export class DropModalDirective {
-
   @Input() public dropModal: IDropModal;
   @Input() public message: string;
   private closeHandler;
 
   constructor(public overlay: Overlay,
               public elementRef: ElementRef,
+              public viewContainerRef: ViewContainerRef,
               @Optional() public overlayRef: OverlayRef) {
   }
 
-  public onDrop(){
+  public onDrop() {
     this.openMenu();
     this.dropModal.anim = true;
-    this.dropModal.type.next(this.message);
   }
 
-  private openMenu(){
-    this.dropModal.visible = true;
+  private openMenu() {
+    this.dropModal.visible.next(true);
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
       scrollStrategy: this.overlay.scrollStrategies.block(),
@@ -45,10 +43,13 @@ export class DropModalDirective {
           }
         ])
     });
-    const componentPortal = new ComponentPortal(MenuComponent);
-    this.overlayRef.attach(componentPortal);
+    const templatePortal = new TemplatePortal(
+      this.dropModal.templateRef as TemplateRef<any>,
+      this.viewContainerRef
+    );
+    this.overlayRef.attach(templatePortal);
     this.closeHandler = this.dropdownClosingActions().subscribe(
-      () =>this.destroyMenu()
+      () => this.destroyMenu()
     );
   }
 
@@ -56,15 +57,18 @@ export class DropModalDirective {
     const backdropClick$ = this.overlayRef.backdropClick();
     const detachment$ = this.overlayRef.detachments();
     const closeMenu = this.dropModal.closed
-    return  merge(backdropClick$, detachment$, closeMenu);
+    return merge(backdropClick$, detachment$, closeMenu);
   }
 
-  private destroyMenu(){
+  private destroyMenu() {
     if (!this.overlayRef) {
       return;
     }
     this.dropModal.anim = false;
-    this.closeHandler.unsubscribe();
-    this.overlayRef.detach();
+    setTimeout(() => {
+      this.closeHandler.unsubscribe();
+      this.overlayRef.detach();
+      this.dropModal.visible.next(false);
+    }, 500);
   }
 }

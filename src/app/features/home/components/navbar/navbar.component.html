@@ -8,19 +8,20 @@
     <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">
   </div>
 </div>
+
+
 <app-menu #menu [emitClosed]="closeDropElement">
   <ng-container *ngTemplateOutlet="menuContent"></ng-container>
 </app-menu>
 
-<app-login-modal #login></app-login-modal>
+<app-sign-up #signUp></app-sign-up>
+<app-sign-in #signIn></app-sign-in>
 
 <ng-template #menuContent>
-  <p [dropModal]="login"
-     [message]="'Sign Up'"
+  <p [dropModal]="signUp"
      (click)="onMenuItem()">Sign Up</p>
   <hr>
-  <p [dropModal]="login"
-     [message]="'Sign In'"
+  <p [dropModal]="signIn"
      (click)="onMenuItem()">Sign In</p>
   <hr>
   <p>About</p>

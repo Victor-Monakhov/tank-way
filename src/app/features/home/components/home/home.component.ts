@@ -27,12 +27,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.subscribeToAuthState();
+    this.subscribeToUser();
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
+  private subscribeToAuthState(): void {
     this.subs.add(this.socialAuthService.authState.subscribe(
       (socialUser) => {
         if (socialUser) {
           this.authService.userInitBySocialUser(socialUser);
         }
       }));
+  }
+
+  private subscribeToUser():void{
     this.subs.add(this.authService.user.pipe(
         switchMap(user => {
           if (user) {
@@ -49,7 +61,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (!response) {
           return;
         }
-      this.authService.response.next(response);
+        this.authService.response.next(response);
         if (response.success) {
           this.isLoggedIn = true;
           this.lSService.setItem(LSKeys.authToken, this.authService.user.value.token);
@@ -64,10 +76,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       })
     );
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe();
   }
 
 
@@ -94,7 +102,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   }
 
-  public signOut(callback: Function) {
+  public signOut(callback: Function): void {
     this.socialAuthService.signOut(true).then(
       () => {
         localStorage.removeItem(LSKeys.authToken);
@@ -112,7 +120,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loginWithFacebook();
   }
 
-  onDemo() {
+  onDemo(): void {
     this.router.navigate(['demo']);
   }
 }
