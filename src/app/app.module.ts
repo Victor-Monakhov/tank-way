@@ -9,7 +9,6 @@ import {GalleryInterceptor} from "./shared/interceptors/gallery.interceptor";
 import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
 import {ReactiveFormsModule} from "@angular/forms";
-import { SignInComponent } from './shared/components/auth-modal/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,7 @@ import { SignInComponent } from './shared/components/auth-modal/sign-in/sign-in.
       } as SocialAuthServiceConfig,
     },
   ],
-  exports: [],
+    exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

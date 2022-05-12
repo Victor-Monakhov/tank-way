@@ -40,6 +40,11 @@
 </div>
 
 <app-sign-up #signUp></app-sign-up>
+<app-secret-code #secretCode
+                 [dropModal]="secretCode"
+                 [trigger]="dropTrigger$ | async">
+
+</app-secret-code>
 
 <ng-template #galleryFullScreen>
   <app-full-screen-gallery

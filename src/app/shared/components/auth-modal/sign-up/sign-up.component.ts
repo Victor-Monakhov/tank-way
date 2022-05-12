@@ -8,6 +8,7 @@ import {AuthService} from "../../../services/auth.service";
 import {RegularExp} from "../../../enums/regular-exp.enum";
 import {ISignUpForm} from "../../../interfaces/forms.interface";
 import {Auth} from "../auth.class";
+import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
 
 @Component({
   selector: 'app-sign-up',
@@ -25,8 +26,8 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
 
   public form: FormGroup = this.fb.group({
     nickname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15), Validators.pattern(RegularExp.nickname)]],
-    email: ['', [Validators.required, Validators.email, Validators.pattern(RegularExp.email)]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+    email: ['', [Validators.required, VMValidator.email]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), VMValidator.password]],
     confirm: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
   });
   private bufferForm: FormGroup = this.fb.group({} as ISignUpForm);
@@ -38,6 +39,7 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscribeToFormChanges();
     this.subscribeToVisible();
+    VMValidator.equalControls(this.form.get('confirm'), this.form.get('password'));
   }
 
   public ngOnDestroy(): void {
@@ -60,6 +62,10 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
 
   public onSubmit(): void {
     this.authService.userInitByForm(this.form);
+  }
+
+  public successResponse() {
+    this.authService.isCode.next(true);
   }
 
   @HostListener('window:resize', ['$event'])

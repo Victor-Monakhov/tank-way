@@ -1,23 +1,22 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of} from "rxjs";
+import {BehaviorSubject, Observable, of, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IUser} from "../interfaces/user.interface";
 import {Paths} from "../enums/paths.enum";
 import {SocialUser} from "angularx-social-login";
 import {AbstractControl} from "@angular/forms";
 import {IResponseMessage} from "../interfaces/response-message.interface";
-import {SignUpComponent} from "../components/auth-modal/sign-up/sign-up.component";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
+  public isCode: Subject<boolean> = new Subject<boolean>()
   public user: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(null) ;
   public response: BehaviorSubject<IResponseMessage> = new BehaviorSubject<IResponseMessage>(null) ;
 
   constructor(private http: HttpClient) {
-    //this.response.subscribe(response => console.log(response));
   }
 
   public userInitBySocialUser(user: SocialUser): void {

@@ -19,11 +19,15 @@
       </div>
       <div class="form-item-wrapper">
         <label for="password">Password</label>
-        <input class="form-control"
-               type="text"
-               id="password"
-               formControlName="password"
-               placeholder="password">
+        <div class="password-wrapper">
+          <input class="form-control"
+                 id="password"
+                 formControlName="password"
+                 placeholder="password"
+                 [type]="isVisiblePassword ? 'text' : 'password'">
+          <i *ngIf="!isVisiblePassword" class="fa-solid fa-eye" (click)="onVisiblePassword()"></i>
+          <i *ngIf="isVisiblePassword" class="fa-solid fa-eye-slash" (click)="onVisiblePassword()"></i>
+        </div>
         <small class="invalid-input"
                *ngIf="isInvalid('password', form.get('password'))">
           {{invalidMsg['password']}}

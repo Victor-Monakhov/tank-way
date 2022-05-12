@@ -1,19 +1,13 @@
 import {
   Component,
-  EventEmitter,
   HostListener, OnDestroy,
   OnInit, TemplateRef, ViewChild
 } from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {IDropModal} from '../../../interfaces/drop-modal.interface';
-import {BehaviorSubject, of, Subject} from "rxjs";
-import {SubSink} from "subsink";
-import {ValidationInfo} from "../../../classes/validator-info.class";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../services/auth.service";
-import {switchMap} from "rxjs/operators";
-import {RegularExp} from "../../../enums/regular-exp.enum";
-import {ISignInForm, ISignUpForm} from "../../../interfaces/forms.interface";
+import {ISignInForm} from "../../../interfaces/forms.interface";
 import {Auth} from "../auth.class";
+import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
 
 @Component({
   selector: 'app-sign-in',
@@ -29,8 +23,8 @@ export class SignInComponent extends Auth implements OnInit, OnDestroy {
   }
 
   public form: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email, Validators.pattern(RegularExp.email)]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+    email: ['', [Validators.required, VMValidator.email]],
+    password: ['', [Validators.required]],
   });
   private bufferForm: FormGroup = this.fb.group({} as ISignInForm);
 
@@ -59,6 +53,9 @@ export class SignInComponent extends Auth implements OnInit, OnDestroy {
 
   public onSubmit(): void {
     this.authService.userInitByForm(this.form);
+  }
+
+  public successResponse() {
   }
 
   @HostListener('window:resize', ['$event'])

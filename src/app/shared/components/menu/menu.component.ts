@@ -25,7 +25,7 @@ export class MenuComponent implements OnInit, OnChanges, IDropModal{
   public closed: EventEmitter<void> = new EventEmitter<void>();
   public anim: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }

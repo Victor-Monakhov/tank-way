@@ -17,8 +17,11 @@ import {Observable, of} from "rxjs";
 export class HomeComponent implements OnInit, OnDestroy {
 
   public galleryMode: string = '';
-  public subs: SubSink = new SubSink();
   public isLoggedIn = false;
+  public subs: SubSink = new SubSink();
+  public get dropTrigger$(){
+    return this.authService.isCode;
+  }
 
   constructor(private authService: AuthService,
               private router: Router,

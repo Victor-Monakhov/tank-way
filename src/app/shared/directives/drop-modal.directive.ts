@@ -1,4 +1,13 @@
-import {Directive, ElementRef, Input, Optional, TemplateRef, ViewContainerRef} from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  Optional,
+  SimpleChanges,
+  TemplateRef,
+  ViewContainerRef
+} from '@angular/core';
 import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {merge, Observable} from "rxjs";
 import {TemplatePortal} from "@angular/cdk/portal";
@@ -10,15 +19,24 @@ import { IDropModal } from '../interfaces/drop-modal.interface';
     "(click)": "onDrop()",
   },
 })
-export class DropModalDirective {
+export class DropModalDirective implements OnChanges{
+
   @Input() public dropModal: IDropModal;
-  @Input() public message: string;
+  @Input() public trigger: boolean = false;
   private closeHandler;
 
   constructor(public overlay: Overlay,
               public elementRef: ElementRef,
               public viewContainerRef: ViewContainerRef,
               @Optional() public overlayRef: OverlayRef) {
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.trigger){
+      this.onDrop();
+      this.trigger = false;
+    }
   }
 
   public onDrop() {
@@ -66,6 +84,7 @@ export class DropModalDirective {
     }
     this.dropModal.anim = false;
     setTimeout(() => {
+      this.trigger = false;
       this.closeHandler.unsubscribe();
       this.overlayRef.detach();
       this.dropModal.visible.next(false);

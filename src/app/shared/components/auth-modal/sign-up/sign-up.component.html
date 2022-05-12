@@ -24,7 +24,7 @@
                type="text"
                id="email"
                formControlName="email"
-               placeholder="email">
+               placeholder="text@mail.com">
         <small class="invalid-input"
                *ngIf="isErrorReq['email'] || isInvalid('email', form.get('email'))">
           {{invalidMsg['email']}}
@@ -32,11 +32,15 @@
       </div>
       <div class="form-item-wrapper">
         <label for="password">Password</label>
-        <input class="form-control"
-               type="text"
-               id="password"
-               formControlName="password"
-               placeholder="password">
+        <div class="password-wrapper">
+          <input class="form-control"
+                 id="password"
+                 formControlName="password"
+                 placeholder="aaaaaaaA1"
+                 [type]="isVisiblePassword ? 'text' : 'password'">
+          <i *ngIf="!isVisiblePassword" class="fa-solid fa-eye" (click)="onVisiblePassword()"></i>
+          <i *ngIf="isVisiblePassword" class="fa-solid fa-eye-slash" (click)="onVisiblePassword()"></i>
+        </div>
         <small class="invalid-input"
                *ngIf="isInvalid('password', form.get('password'))">
           {{invalidMsg['password']}}
@@ -45,12 +49,12 @@
       <div class="form-item-wrapper">
         <label for="confirm">Confirm password</label>
         <input class="form-control"
-               type="text"
                id="confirm"
                formControlName="confirm"
-               placeholder="password">
+               placeholder="password"
+               [type]="isVisiblePassword ? 'text' : 'password'">
         <small class="invalid-input"
-               *ngIf="isInvalid('confirm', form.get('password'), form.get('confirm'))">
+               *ngIf="isInvalid('confirm', form.get('confirm'))">
           {{invalidMsg['confirm']}}
         </small>
       </div>
