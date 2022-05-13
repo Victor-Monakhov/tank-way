@@ -14,7 +14,7 @@ export class AuthService {
 
   public isCode: Subject<boolean> = new Subject<boolean>()
   public user: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(null) ;
-  public response: BehaviorSubject<IResponseMessage> = new BehaviorSubject<IResponseMessage>(null) ;
+  public response: BehaviorSubject<IResponseMessage> = new BehaviorSubject<IResponseMessage>(null);
 
   constructor(private http: HttpClient) {
   }

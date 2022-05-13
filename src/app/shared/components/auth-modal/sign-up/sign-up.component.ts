@@ -9,6 +9,7 @@ import {RegularExp} from "../../../enums/regular-exp.enum";
 import {ISignUpForm} from "../../../interfaces/forms.interface";
 import {Auth} from "../auth.class";
 import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
+import {IResponseMessage} from "../../../interfaces/response-message.interface";
 
 @Component({
   selector: 'app-sign-up',
@@ -65,6 +66,7 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
   }
 
   public successResponse() {
+    this.authService.response.next({} as IResponseMessage);
     this.authService.isCode.next(true);
   }
 

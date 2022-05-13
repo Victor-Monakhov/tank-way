@@ -55,6 +55,7 @@ export abstract class Auth implements IDropModal{
         this.closeModal();
         return;
       }
+      console.log(response.success, response.message);
       if (response.success) {
         this.closeModal();
         this.successResponse();
