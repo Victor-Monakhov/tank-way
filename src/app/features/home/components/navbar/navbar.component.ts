@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ContentChild, OnInit, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +7,15 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  public menuContent: string[] = ['Sign in', 'About game'];
+  public closeDropElement: boolean;
 
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  public onMenuItem(){
+    this.closeDropElement = !this.closeDropElement;
   }
 }

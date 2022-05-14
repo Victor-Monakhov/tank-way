@@ -3,6 +3,25 @@
 @import '../../../../../assets/styles/variables';
 @import '../../../../../assets/styles/images';
 
+hr {
+  @include media-property(display, block, block, none, none);
+  margin: 3px;
+}
+
+p {
+  @include media-property(margin, 0, 0, 0 20px 0 0, 0 30px 0 0);
+  text-align: start;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 5px;
+  white-space: nowrap;
+}
+
+p:hover {
+  @include media-property(border-bottom-color, transparent, transparent, $red, $red);
+  @include media-property(color, $red, $red, #fff, #fff);
+}
+
 .navbar {
   @include media-property(justify-content, space-between, space-between, start, start);
   @include media-property(padding, 10px, 10px 20px, 10px 30px, 10px 40px);
@@ -16,82 +35,53 @@
   right: 0;
   top: 0;
   z-index: 10;
-    .btn-menu {
-      @include media-property(display, flex, flex, none, none);
-      width: $img-logo-width;
-      height: $img-logo-height;
-      border-radius: 5px;
-      background-image: $img-logo;
-      transition: 1s;
-      border: solid transparent 0;
+
+  .btn-menu {
+    @include media-property(display, flex, flex, none, none);
+    width: $img-logo-width;
+    height: $img-logo-height;
+    background-image: $img-logo;
+    transition: 1s;
+    border: solid transparent 0;
+    cursor: pointer;
+  }
+
+  .btn-menu:hover {
+    transform: rotate(90deg);
+  }
+
+  .gameLogo {
+    @include media-property(margin, 0 10px, 0 20px, 0 20px 0 0, 0 30px 0 0);
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: $black;
+    background-image: $img-gameLogo;
+    width: $img-gameLogo-width;
+    height: $img-gameLogo-height;
+    border-radius: 5px;
+  }
+
+  .menu-wrapper {
+    @include media-property(display, none, none, flex, flex);
+    justify-content: end;
+    width: 100%
+  }
+
+  .language {
+    @include media-property(margin, 0 10px 0 0, 0 20px 0 0, 0 20px 0 0, 0 30px 0 0);
+    display: flex;
+    align-items: center;
+
+    .language-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      //border: 1px solid #ffffff;
       cursor: pointer;
+      padding: 2px;
+      object-fit: contain;
     }
-
-    .btn-menu:hover {
-      transform: rotateZ(90deg);
-    }
-
-    .btn-menu:active {
-      transition: 0s;
-      box-shadow: $click-shadow;
-    }
-
-    .gameLogo {
-      @include media-property(margin, 0 10px, 0 20px, 0 20px 0 0, 0 30px 0 0);
-      display: flex;
-      flex-shrink: 0;
-      justify-content: center;
-      align-items: center;
-      background-color: $black;
-      background-image: $img-gameLogo;
-      width: $img-gameLogo-width;
-      height: $img-gameLogo-height;
-      border-radius: 5px;
-    }
-    .menu-wrapper{
-      @include media-property(display, none, none, flex, flex);
-      justify-content: end;
-      width: 100%
-    }
-    .gallery-language-wrapper{
-      display: flex;
-      align-items: center;
-      .gallery, .language{
-        @include media-property(margin, 0 10px 0 0, 0 20px 0 0, 0 20px 0 0, 0 30px 0 0);
-        display: flex;
-        align-items: center;
-        p{
-          @include media-property(display, none, none, inline, inline);
-          cursor: pointer;
-          border: 1px solid transparent;
-          padding: 5px;
-        }
-        p:hover{
-          border-bottom: 1px solid $red;
-        }
-        .gallery-icon{
-          width: 40px;
-          height: 40px;
-          background-image: $img-gallery-icon;
-          background-repeat: no-repeat;
-          background-size: 40px 40px;
-          border-radius: 50%;
-          //border: 1px solid #ffffff;
-          cursor: pointer;
-        }
-        .language-icon{
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          //border: 1px solid #ffffff;
-          cursor: pointer;
-          padding: 2px;
-          object-fit: contain;
-        }
-      }
-    }
-    app-menu {
-      @include media-property(display, none, none, flex, flex);
-    }
-    
+  }
 }

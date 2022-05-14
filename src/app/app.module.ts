@@ -3,11 +3,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MenuDirective} from './shared/header/directives/menu.directive';
-import {MenuComponent} from './shared/header/components/menu/menu.component';
-import {Overlay, OverlayModule} from "@angular/cdk/overlay";
+import {OverlayModule} from "@angular/cdk/overlay";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {GalleryInterceptor} from "./shared/slider/interceptors/gallery.interceptor";
+import {GalleryInterceptor} from "./shared/interceptors/gallery.interceptor";
+import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
+import {GoogleLoginProvider} from 'angularx-social-login';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import {GalleryInterceptor} from "./shared/slider/interceptors/gallery.intercept
     BrowserAnimationsModule,
     OverlayModule,
     HttpClientModule,
+    SocialLoginModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
@@ -26,8 +29,28 @@ import {GalleryInterceptor} from "./shared/slider/interceptors/gallery.intercept
       multi: true,
       useClass: GalleryInterceptor,
     },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '697267962581-foca2h6t0adjapalls9f9sv2oad9a1he.apps.googleusercontent.com',
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '539128910997140'
+            )
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
   ],
-  exports: [],
+    exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

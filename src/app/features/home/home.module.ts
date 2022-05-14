@@ -1,40 +1,44 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from 'src/app/features/home/components/navbar/navbar.component';
-import { SliderComponent } from 'src/app/shared/slider/components/main/slider.component';
-import { PositionSelectionComponent } from 'src/app/features/home/components/settings/components/position-selection/position-selection.component';
-import {AppModule} from "../../app.module";
-import {MenuDirective} from "../../shared/header/directives/menu.directive";
-import {MenuComponent} from "../../shared/header/components/menu/menu.component";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {GalleryInterceptor} from "../../shared/slider/interceptors/gallery.interceptor";
-import {FullScreenComponent} from "../../shared/slider/components/full-screen/full-screen.component";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DemoComponent } from '../demo/components/demo.component';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HomeRoutingModule} from './home-routing.module';
+import {HomeComponent} from './components/home/home.component';
+import {NavbarComponent} from 'src/app/features/home/components/navbar/navbar.component';
+import {SliderComponent} from 'src/app/shared/components/slider/main/slider.component';
+import {
+  PositionSelectionComponent
+} from 'src/app/features/home/components/settings/position-selection/position-selection.component';
+import {DropModalDirective} from "../../shared/directives/drop-modal.directive";
+import {MenuComponent} from "../../shared/components/menu/menu.component";
+import {FullScreenComponent} from "../../shared/components/slider/full-screen/full-screen.component";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SignUpComponent} from 'src/app/shared/components/auth-modal/sign-up/sign-up.component';
+import {SignInComponent} from "../../shared/components/auth-modal/sign-in/sign-in.component";
+import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-code/secret-code.component";
 
 
 @NgModule({
-    declarations: [
-        HomeComponent,
-        NavbarComponent,
-        SliderComponent,
-        PositionSelectionComponent,
-        MenuDirective,
-        MenuComponent,
-        FullScreenComponent
-    ],
-    imports: [
-        CommonModule,
-        HomeRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-    ],
+  declarations: [
+    HomeComponent,
+    NavbarComponent,
+    SliderComponent,
+    PositionSelectionComponent,
+    DropModalDirective,
+    MenuComponent,
+    FullScreenComponent,
+    SignUpComponent,
+    SignInComponent,
+    SecretCodeComponent,
+  ],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [
-    MenuDirective,
+    DropModalDirective,
     MenuComponent
   ],
 })
-export class HomeModule { }
+export class HomeModule {
+}

@@ -1,0 +1,25 @@
+@import "../../../../assets/styles/mixins";
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/animations";
+@import "src/assets/styles/colors";
+
+.menu-go-right {
+  animation: menu_go_right 0.5s ease-out 1 both;
+}
+
+.menu-go-left {
+  animation: menu_go_left 0.5s ease-out 1 both;
+}
+
+.nav-menu {
+  @include media-property(display, block, block, none, none);
+  @include media-property(padding, 10px, 10px, 0, 0);
+  background-color: $black;
+  border-radius: 5px;
+  z-index: 5000;
+  width: 40%;
+  top: $header-height + 20px;
+  position: fixed;
+  margin: 0;
+}
+

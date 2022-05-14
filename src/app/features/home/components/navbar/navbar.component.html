@@ -1,19 +1,30 @@
 <div class="navbar">
-    <button type="button" class="btn-menu"  [appDropMenu] = menu></button>
-    <div class="gameLogo"></div>
-    <div class="menu-wrapper">
-        <app-menu [menuContent]="menuContent" [visible]="true"></app-menu>
-    </div>
-    <div class="gallery-language-wrapper">
-        <!-- <div class="gallery">
-            <p>Gallery</p>
-            <div class="gallery-icon"></div>
-        </div> -->
-        <div class="language">
-            <!-- <p>USA</p> -->
-            <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">
-        </div>
-    </div>
+  <button type="button" class="btn-menu" [dropModal]=menu></button>
+  <div class="gameLogo"></div>
+  <div class="menu-wrapper">
+    <ng-container *ngTemplateOutlet="menuContent"></ng-container>
+  </div>
+  <div class="language">
+    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">
+  </div>
 </div>
-<app-menu #menu [menuContent]="menuContent" [mode]="'drop'"></app-menu>
+
+
+<app-menu #menu [emitClosed]="closeDropElement">
+  <ng-container *ngTemplateOutlet="menuContent"></ng-container>
+</app-menu>
+
+<app-sign-up #signUp></app-sign-up>
+<app-sign-in #signIn></app-sign-in>
+
+<ng-template #menuContent>
+  <p [dropModal]="signUp"
+     (click)="onMenuItem()">Sign Up</p>
+  <hr>
+  <p [dropModal]="signIn"
+     (click)="onMenuItem()">Sign In</p>
+  <hr>
+  <p>About</p>
+  <hr>
+</ng-template>
 

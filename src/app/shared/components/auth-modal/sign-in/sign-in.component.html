@@ -1,0 +1,44 @@
+<ng-template>
+  <div class="wrapper"
+       [ngClass]="anim ? 'modal-go-left' : 'modal-go-hidden'">
+    <h3>Sign in</h3>
+    <form class="form"
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()">
+      <div class="form-item-wrapper">
+        <label for="email">Email</label>
+        <input class="form-control"
+               type="text"
+               id="email"
+               formControlName="email"
+               placeholder="email">
+        <small class="invalid-input"
+               *ngIf="isErrorReq['email'] || isInvalid('email', form.get('email'))">
+          {{invalidMsg['email']}}
+        </small>
+      </div>
+      <div class="form-item-wrapper">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input class="form-control"
+                 id="password"
+                 formControlName="password"
+                 placeholder="password"
+                 [type]="isVisiblePassword ? 'text' : 'password'">
+          <i *ngIf="!isVisiblePassword" class="fa-solid fa-eye" (click)="onVisiblePassword()"></i>
+          <i *ngIf="isVisiblePassword" class="fa-solid fa-eye-slash" (click)="onVisiblePassword()"></i>
+        </div>
+        <small class="invalid-input"
+               *ngIf="isInvalid('password', form.get('password'))">
+          {{invalidMsg['password']}}
+        </small>
+      </div>
+      <button class="btn"
+              type="submit"
+              [disabled]="form.invalid">
+        SUBMIT
+      </button>
+    </form>
+  </div>
+</ng-template>
+

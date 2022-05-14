@@ -11,18 +11,22 @@
       We hope you enjoy it and you stay with us!
     </p>
   </div>
-  <!-- <app-slider (eventFullScreen) = "galleryMode = $event"></app-slider> -->
   <div class="row">
-    <button class="btn play" (click)="onDemo()">PLAY DEMO</button>
+    <button class="btn-start play" (click)="onDemo()"><span>PLAY DEMO</span></button>
   </div>
   <div class="row">
-    <small>or play completely after registration</small>
+    <small>
+      or play completely after
+      <small class="link" [dropModal]="signUp">
+        registration
+      </small>
+    </small>
   </div>
   <div class="row sign-in-wrapper">
-    <div class="sign-in-google"></div>
-    <div class="sign-in-facebook"></div>
+    <div (click)="onLoginWithFacebook()" class="sign-in-facebook"></div>
+    <div (click)="onLoginWithGoogle()" class="sign-in-google"></div>
   </div>
-  <div class="row settings-title">
+  <div class="row settings-title">-->
     <div class="p-wrapper">
       <p>You can correct some settings of the game for your comfortable playing!</p>
     </div>
@@ -32,12 +36,19 @@
       <app-settings></app-settings>
     </div>
   </div>
-  <app-slider (eventFullScreen) = "galleryMode = $event"></app-slider>
+  <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>
 </div>
+
+<app-sign-up #signUp></app-sign-up>
+<app-secret-code #secretCode
+                 [dropModal]="secretCode"
+                 [trigger]="dropTrigger$ | async">
+
+</app-secret-code>
 
 <ng-template #galleryFullScreen>
   <app-full-screen-gallery
-    (eventFullScreen) = "galleryMode = $event"
+    (eventFullScreen)="galleryMode = $event"
     [initialId]="galleryMode">
 
   </app-full-screen-gallery>

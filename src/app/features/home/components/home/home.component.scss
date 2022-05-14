@@ -5,6 +5,7 @@
 @import 'src/assets/styles/images';
 @import 'src/assets/styles/variables';
 
+.home-wrapper{
     img{
       position: fixed;
       width: 105%;
@@ -20,44 +21,56 @@
       animation: row_go_down 1s ease 1 both;
       h1{
         color: $red;
-        margin: 50px 0 20px 0;
-        font-family: Risque, sans-serif;
+        margin-top: 50px;
       }
 
       p{
-        margin-bottom: 50px;
+        margin: 30px 0;
       }
     }
     .play{
-      @include media-property(font-size, 3rem, 4rem, 5rem, 5.3rem);
-      //margin-top: 70px;
-      margin-bottom: 5px;
-      padding: 10px;
+      @include media-property(margin, 0 10px, 0 20px, 0 30px, 0 40px);
+      padding: 20px 40px;
+    }
+    .link{
+      border-bottom: 1px solid #ffffff;
+      cursor: pointer;
+    }
+    .link:hover{
+      color: $blue;
+      border-color: $blue;
     }
     .sign-in-wrapper{
       flex-direction: row;
-      padding-bottom: 50px;
+      padding-bottom: 30px;
       padding-top: 5px;
       .sign-in-google{
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         background-image: $img-google-icon;
         background-repeat: no-repeat;
-        background-size: 40px 40px;
-        margin-right: 40px;
+        background-size: 35px 35px;
+        border-radius: 50%;
       }
       .sign-in-facebook{
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
         background-image: $img-facebook-icon;
         background-repeat: no-repeat;
-        background-size: 40px 40px;
-        //margin-right: 50px;
+        background-size: 38px 38px;
+        margin-right: 15px;
+        border-radius: 50%;
+      }
+      .sign-in-google:hover, .sign-in-facebook:hover{
+        box-shadow: 0 0 3px 3px $blue;
+      }
+      .sign-in-google:active, .sign-in-facebook:active{
+        box-shadow: 0 0 1px 2px $blue;
       }
     }
-    
+
     .settings-title{
-      @include media-property(padding, 0 10px 40px, 0 20px 40px, 0 30px 40px, 0 40px 40px);
+      @include media-property(padding, 0 10px 30px, 0 20px 30px, 0 30px 30px, 0 40px 30px);
       @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
       @include media-property(flex-direction, column, column, row, row);
       justify-content: start;
@@ -74,13 +87,12 @@
       }
     }
     .pos-selection-wrapper{
-      flex-direction: column;
-      justify-content: center;
       margin-bottom: 50px;
       .pos-selection{
         display: flex;
-        background-color: $black;
         width: 100%;
+        background-color: $black;
         flex-direction: column;
       }
     }
+  }
