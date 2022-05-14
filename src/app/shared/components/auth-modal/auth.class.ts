@@ -15,11 +15,16 @@ export abstract class Auth implements IDropModal{
   abstract invalidMsg: Object;
   abstract authService: AuthService;
 
+
   protected subs: SubSink = new SubSink();
   public visible: Subject<boolean> = new Subject<boolean>();
   public closed: EventEmitter<void> = new EventEmitter<void>();
   public anim: boolean = false;
   public isVisiblePassword: boolean = false;
+
+
+  protected constructor() {
+  }
 
   abstract subscribeToFormChanges(): void;
   abstract successResponse(): void;
@@ -55,7 +60,6 @@ export abstract class Auth implements IDropModal{
         this.closeModal();
         return;
       }
-      console.log(response.success, response.message);
       if (response.success) {
         this.closeModal();
         this.successResponse();

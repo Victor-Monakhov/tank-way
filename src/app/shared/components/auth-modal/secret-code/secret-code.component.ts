@@ -2,6 +2,8 @@ import {Component, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild} from
 import {Auth} from "../auth.class";
 import {AuthService} from "../../../services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ISecretCode} from "../../../interfaces/auth/secert-code.interface";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-secret-code',
@@ -29,6 +31,7 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeToFormChanges();
+    this.subscribeToVisible();
   }
 
   ngOnDestroy() {
@@ -46,7 +49,10 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
   }
 
   public onSubmit(): void {
-    //this.authService.userInitByForm(this.form);
+    this.authService.code.next({
+      code: this.form.get('code').value,
+      email: this.authService.user.value.email
+    } as ISecretCode);
   }
 
   public successResponse() {

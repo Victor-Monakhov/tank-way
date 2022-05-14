@@ -6,10 +6,11 @@ import {
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../services/auth.service";
 import {RegularExp} from "../../../enums/regular-exp.enum";
-import {ISignUpForm} from "../../../interfaces/forms.interface";
+import {ISignUpForm} from "../../../interfaces/auth/forms.interface";
 import {Auth} from "../auth.class";
 import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
-import {IResponseMessage} from "../../../interfaces/response-message.interface";
+import {IResponseMessage} from "../../../interfaces/auth/response-message.interface";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-sign-up',

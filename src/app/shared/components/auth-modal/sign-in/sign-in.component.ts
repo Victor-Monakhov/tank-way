@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../services/auth.service";
-import {ISignInForm} from "../../../interfaces/forms.interface";
+import {ISignInForm} from "../../../interfaces/auth/forms.interface";
 import {Auth} from "../auth.class";
 import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
 

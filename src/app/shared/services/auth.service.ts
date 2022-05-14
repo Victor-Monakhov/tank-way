@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {IUser} from "../interfaces/user.interface";
+import {IUser} from "../interfaces/auth/user.interface";
 import {Paths} from "../enums/paths.enum";
 import {SocialUser} from "angularx-social-login";
 import {AbstractControl} from "@angular/forms";
-import {IResponseMessage} from "../interfaces/response-message.interface";
+import {IResponseMessage} from "../interfaces/auth/response-message.interface";
+import {ISecretCode} from "../interfaces/auth/secert-code.interface";
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ import {IResponseMessage} from "../interfaces/response-message.interface";
 export class AuthService {
 
   public isCode: Subject<boolean> = new Subject<boolean>()
+  public code: BehaviorSubject<ISecretCode> = new BehaviorSubject<ISecretCode>( null);
   public user: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(null) ;
   public response: BehaviorSubject<IResponseMessage> = new BehaviorSubject<IResponseMessage>(null);
 
@@ -47,7 +49,8 @@ export class AuthService {
     return this.http.post(Paths.signIn, this.user.value);
   }
 
-  public getUserByEmail(): Observable<IUser> {
-    return this.http.get<IUser>(Paths.userByEmail + `${this.user.value.email}`);
-  };
+  public sendCode(): Observable<any> {
+    return this.http.post(Paths.sendCode, this.code.value);
+  }
+
 }

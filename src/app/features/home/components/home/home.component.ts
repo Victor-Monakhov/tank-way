@@ -6,7 +6,7 @@ import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService} from "ang
 import {LocalStorageService} from "../../../../shared/services/local-storage.service";
 import {switchMap} from "rxjs/operators";
 import {LSKeys} from "../../../../shared/enums/local-storage-keys.enum";
-import {IResponseMessage} from "../../../../shared/interfaces/response-message.interface";
+import {IResponseMessage} from "../../../../shared/interfaces/auth/response-message.interface";
 import {Observable, of} from "rxjs";
 
 @Component({
@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   public galleryMode: string = '';
   public isLoggedIn = false;
   public subs: SubSink = new SubSink();
-  public get dropTrigger$(){
+
+  public get dropTrigger$() {
     return this.authService.isCode;
   }
 
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribeToAuthState();
     this.subscribeToUser();
+    this.subscribeToCode();
   }
 
   ngOnDestroy() {
@@ -47,17 +49,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       }));
   }
 
-  private subscribeToUser():void{
+  private subscribeToUser(): void {
     this.subs.add(this.authService.user.pipe(
         switchMap(user => {
-          if (user) {
-            if (user.nickname) {
-              return this.authService.signUp() as Observable<IResponseMessage>
-            } else {
-              return this.authService.signIn() as Observable<IResponseMessage>
-            }
-          } else {
+          if (!user) {
             return of(null);
+          }
+          if (user.nickname) {
+            return this.authService.signUp() as Observable<IResponseMessage>
+          } else {
+            return this.authService.signIn() as Observable<IResponseMessage>
           }
         })
       ).subscribe((response) => {
@@ -66,19 +67,30 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
         this.authService.response.next(response);
         if (response.success) {
-          this.isLoggedIn = true;
           this.lSService.setItem(LSKeys.authToken, this.authService.user.value.token);
-          console.log(response.message);
         } else if (!response.success && this.authService.user.value.token) {
-          this.isLoggedIn = false;
           this.signOut(() => {
-            console.log(response.message);
           });
-        } else {
-          this.isLoggedIn = false;
         }
+        console.log(response.message);
       })
     );
+  }
+
+  private subscribeToCode(): void {
+    this.subs.add(this.authService.code.pipe(
+      switchMap((code) => {
+        if (!code) {
+          return of(null);
+        }
+        return this.authService.sendCode() as Observable<IResponseMessage>
+      })).subscribe((response) => {
+      if (!response) {
+        return;
+      }
+      this.authService.response.next(response);
+      console.log(response.message);
+    }))
   }
 
 
