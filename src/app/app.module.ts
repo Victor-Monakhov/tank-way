@@ -50,7 +50,8 @@ import {ReactiveFormsModule} from "@angular/forms";
       } as SocialAuthServiceConfig,
     },
   ],
-    exports: [],
+    exports: [
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

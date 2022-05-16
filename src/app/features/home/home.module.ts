@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SignUpComponent} from 'src/app/shared/components/auth-modal/sign-up/sign-up.component';
 import {SignInComponent} from "../../shared/components/auth-modal/sign-in/sign-in.component";
 import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-code/secret-code.component";
+import {AuthMenuComponent} from "../../shared/components/auth-modal/auth-menu/auth-menu.component";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-cod
     SignUpComponent,
     SignInComponent,
     SecretCodeComponent,
+    AuthMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,6 @@ import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-cod
   ],
   exports: [
     DropModalDirective,
-    MenuComponent
   ],
 })
 export class HomeModule {
