@@ -30,6 +30,7 @@
     }
     .play{
       @include media-property(margin, 0 10px, 0 20px, 0 30px, 0 40px);
+      @include media-property(width, 90%, 400px, 400px, 400px);
       padding: 20px 40px;
     }
 

@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
   onSelect(lang: string): void {
     localStorage.setItem('language', lang);
     this.localizationService.initService();
-    console.log(lang);
+    //console.log(lang);
   }
 
   ngOnInit(): void {

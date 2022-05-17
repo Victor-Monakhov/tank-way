@@ -13,6 +13,9 @@ import {Subject} from "rxjs";
 export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
+  public get email(): string {
+    return this.authService.user.value.email ?? '';
+  };
   public invalidMsg: Object = {
     code: ''
   };
