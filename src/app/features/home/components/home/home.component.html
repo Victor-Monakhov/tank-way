@@ -2,29 +2,25 @@
   <app-navbar></app-navbar>
   <img src="../../assets/images/bg-tanks.png" alt="#">
   <div class="row title">
-    <h1>EXAMPLE</h1>
+    <h1>{{'HOME.TITLE'|translate}}</h1>
     <p>
-      Hello!
-      If you are new and have not yet tasted victory on a real battlefield -
-      try the mini version of the game. Or register immediately and
-      get access to the full version of the game and the opportunity to play with friends.
-      We hope you enjoy it and you stay with us!
+      {{'HOME.DESCRIPTION'|translate}}
     </p>
   </div>
   <div class="row">
-    <button class="btn-start play" (click)="onDemo()"><span>PLAY DEMO</span></button>
+    <button class="btn-start play" (click)="onDemo()"><span>{{'HOME.DEMO'|translate}}</span></button>
   </div>
   <div class="row">
     <small>
-      or play completely after
+      {{'HOME.DEMO_MESSAGE'|translate}}
       <small class="link" [dropModal]="authMenu">
-        registration
+        {{'HOME.DEMO_MESSAGE_LINK'|translate}}
       </small>
     </small>
   </div>
   <div class="row settings-title">
     <div class="p-wrapper">
-      <p>You can correct some settings of the game for your comfortable playing!</p>
+      <p>{{'HOME.DEMO_SETTINGS_TEXT'|translate}}</p>
     </div>
   </div>
   <div class="row pos-selection-wrapper">

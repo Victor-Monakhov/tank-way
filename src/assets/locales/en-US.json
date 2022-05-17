@@ -1,0 +1,15 @@
+{
+  "NAVBAR": {
+    "SIGNUP": "Sign Up",
+    "SIGNIN": "Sign In",
+    "ABOUT": "About"
+  },
+  "HOME": {
+    "TITLE": "Example",
+    "DESCRIPTION": "Hello! If you are new and have not yet tasted victory on a real battlefield - try the mini version of the game. Or register immediately and get access to the full version of the game and the opportunity to play with friends. We hope you enjoy it and you stay with us!",
+    "DEMO": "Demo",
+    "DEMO_MESSAGE": "or play completely after ",
+    "DEMO_MESSAGE_LINK": "registration",
+    "DEMO_SETTINGS_TEXT": "You can correct some settings of the game for your comfortable playing!"
+  }
+}

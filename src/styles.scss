@@ -5,6 +5,7 @@
 @import 'buttons.scss';
 @import 'animations.scss';
 @import 'variables.scss';
+@import 'spinner.scss';
 
 
 body {
@@ -30,33 +31,34 @@ p, label {
   color: #ffffff;
 }
 
-strong{
+strong {
   @include media-property(font-size, 1.7rem, 1.8rem, 1.9rem, 2rem);
   font-weight: unset;
   color: #ffffff;
 }
 
-small{
+small {
   @include media-property(font-size, 0.8rem, 0.8rem, 1rem, 1rem);
   text-align: justify;
   color: #ffffff;
   margin: 0;
 }
 
-h1, h2, h3, p, strong{
+h1, h2, h3, p, strong {
   font-family: Raleway-Thin, sans-serif;
   text-align: center;
   margin: 0;
 }
-h1, h2, h3{
+
+h1, h2, h3 {
   text-shadow: $text-shadow;
 }
 
-h1{
+h1 {
   @include media-property(font-size, 3.3rem, 4.2rem, 5.4rem, 5.6rem);
 }
 
-h2{
+h2 {
   @include media-property(font-size, 2.7rem, 2.8rem, 2.9rem, 3rem);
 }
 

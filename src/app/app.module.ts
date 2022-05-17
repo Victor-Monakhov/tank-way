@@ -4,11 +4,24 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {OverlayModule} from "@angular/cdk/overlay";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {GalleryInterceptor} from "./shared/interceptors/gallery.interceptor";
 import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
 import {ReactiveFormsModule} from "@angular/forms";
+import {InternationalizationModule} from "./shared/services/internationalization/internationalization.module";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+/**
+ * The http loader factory : Loads the files from define path.
+ * @param {HttpClient} http
+ * @returns {TranslateHttpLoader}
+ * @constructor
+ */
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '../assets/locales/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -21,7 +34,15 @@ import {ReactiveFormsModule} from "@angular/forms";
     OverlayModule,
     HttpClientModule,
     SocialLoginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InternationalizationModule.forRoot({locale_id: 'en-US'}),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [
     {
@@ -50,8 +71,7 @@ import {ReactiveFormsModule} from "@angular/forms";
       } as SocialAuthServiceConfig,
     },
   ],
-    exports: [
-    ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -8,8 +8,14 @@
   <div class="menu-wrapper">
     <ng-container *ngTemplateOutlet="menuContent"></ng-container>
   </div>
-  <div class="language">
-    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">
+<!--  <div class="language">-->
+<!--    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">-->
+<!--  </div>-->
+
+  <div>
+    <select name="language" [(ngModel)]='language' (ngModelChange)="onSelect($event)">
+      <option *ngFor="let language of languages" [ngValue]="language.value">{{language.label}}</option>
+    </select>
   </div>
 </div>
 
@@ -26,4 +32,3 @@
   <p>About</p>
   <hr>
 </ng-template>
-
