@@ -33,8 +33,8 @@ export class NavbarComponent implements OnInit {
     return this.languages[0].value;
   }
 
-  get name(): string {
-    return this.localizationService.translate('banner.world');
+  get title(): string {
+    return this.localizationService.translate('HOME.TITLE');
   }
 
   onSelect(lang: string): void {

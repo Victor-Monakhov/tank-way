@@ -8,9 +8,9 @@
   <div class="menu-wrapper">
     <ng-container *ngTemplateOutlet="menuContent"></ng-container>
   </div>
-<!--  <div class="language">-->
-<!--    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">-->
-<!--  </div>-->
+  <!--  <div class="language">-->
+  <!--    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">-->
+  <!--  </div>-->
 
   <div>
     <select name="language" [(ngModel)]='language' (ngModelChange)="onSelect($event)">
@@ -27,8 +27,8 @@
 
 <ng-template #menuContent>
   <p [dropModal]="authMenu"
-     (click)="onMenuItem()">Cabinet</p>
+     (click)="onMenuItem()">{{'NAVBAR.SIGNIN'|translate}}</p>
   <hr>
-  <p>About</p>
+  <p>{{'NAVBAR.ABOUT'|translate}}</p>
   <hr>
 </ng-template>
