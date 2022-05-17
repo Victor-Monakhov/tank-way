@@ -14,7 +14,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SignUpComponent} from 'src/app/shared/components/auth-modal/sign-up/sign-up.component';
 import {SignInComponent} from "../../shared/components/auth-modal/sign-in/sign-in.component";
 import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-code/secret-code.component";
-
+import {SpinnerModule} from "../../shared/components/spinner/spinner.module";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,10 @@ import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-cod
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SpinnerModule,
+    TranslateModule.forChild({
+      extend: true
+    }),
   ],
   exports: [
     DropModalDirective,

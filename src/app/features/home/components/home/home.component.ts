@@ -8,6 +8,8 @@ import {switchMap} from "rxjs/operators";
 import {LSKeys} from "../../../../shared/enums/local-storage-keys.enum";
 import {IResponseMessage} from "../../../../shared/interfaces/auth/response-message.interface";
 import {Observable, of} from "rxjs";
+import {TranslateService} from "@ngx-translate/core";
+import {LocalizationService} from "../../../../shared/services/internationalization/localization.service";
 
 @Component({
   selector: 'app-home',
@@ -27,7 +29,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService,
               private router: Router,
               private socialAuthService: SocialAuthService,
-              private lSService: LocalStorageService) {
+              private lSService: LocalStorageService,
+              private localizationService: LocalizationService) {
   }
 
   ngOnInit(): void {
@@ -51,16 +54,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private subscribeToUser(): void {
     this.subs.add(this.authService.user.pipe(
-        switchMap(user => {
-          if (!user) {
-            return of(null);
-          }
-          if (user.nickname) {
-            return this.authService.signUp() as Observable<IResponseMessage>
-          } else {
-            return this.authService.signIn() as Observable<IResponseMessage>
-          }
-        })
+      switchMap(user => {
+        if (!user) {
+          return of(null);
+        }
+        if (user.nickname) {
+          return this.authService.signUp() as Observable<IResponseMessage>
+        } else {
+          return this.authService.signIn() as Observable<IResponseMessage>
+        }
+      })
       ).subscribe((response) => {
         if (!response) {
           return;

@@ -7,7 +7,7 @@
   @include media-property(padding, 30px 0, 30px 0, 50px 0, 50px 0);
   @include media-property(top, 40px, 40px, 80px, 80px);
   @include media-property(bottom, 40px, 40px, 80px, 80px);
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@
     @include media-property(margin, 20px 10px 0, 20px 20px 0, 25px 30px 0, 30px 40px 0);
   }
   .form{
-    @include media-property(margin, 20px 10px, 20px 20px, 25px 30px, 30px 40px);
+    //@include media-property(margin, 20px 10px, 20px 20px, 25px 30px, 30px 40px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,7 +34,7 @@
     .form-item-wrapper{
       display: flex;
       width: 100%;
-      margin: 10px;
+      margin: 5px;
       flex-direction: column;
       align-items: center;
       justify-content: center;

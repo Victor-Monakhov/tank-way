@@ -27,9 +27,11 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
   }
 
   public form: FormGroup = this.fb.group({
-    nickname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15), Validators.pattern(RegularExp.nickname)]],
+    nickname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15),
+      Validators.pattern(RegularExp.nickname)]],
     email: ['', [Validators.required, VMValidator.email]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15), VMValidator.password]],
+    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15),
+      VMValidator.password]],
     confirm: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
   });
   private bufferForm: FormGroup = this.fb.group({} as ISignUpForm);

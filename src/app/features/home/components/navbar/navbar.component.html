@@ -4,27 +4,32 @@
   <div class="menu-wrapper">
     <ng-container *ngTemplateOutlet="menuContent"></ng-container>
   </div>
-  <div class="language">
-    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">
+<!--  <div class="language">-->
+<!--    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">-->
+<!--  </div>-->
+
+  <div>
+    <select name="language" [(ngModel)]='language' (ngModelChange)="onSelect($event)">
+      <option *ngFor="let language of languages" [ngValue]="language.value">{{language.label}}</option>
+    </select>
   </div>
+
+
+  <app-menu #menu [emitClosed]="closeDropElement">
+    <ng-container *ngTemplateOutlet="menuContent"></ng-container>
+  </app-menu>
+
+  <app-sign-up #signUp></app-sign-up>
+  <app-sign-in #signIn></app-sign-in>
+
+  <ng-template #menuContent>
+    <p [dropModal]="signUp"
+       (click)="onMenuItem()">{{'NAVBAR.SIGNUP' | translate}}</p>
+    <hr>
+    <p [dropModal]="signIn"
+       (click)="onMenuItem()">{{'NAVBAR.SIGNIN' | translate}}</p>
+    <hr>
+    <p>{{'NAVBAR.ABOUT' | translate}}</p>
+    <hr>
+  </ng-template>
 </div>
-
-
-<app-menu #menu [emitClosed]="closeDropElement">
-  <ng-container *ngTemplateOutlet="menuContent"></ng-container>
-</app-menu>
-
-<app-sign-up #signUp></app-sign-up>
-<app-sign-in #signIn></app-sign-in>
-
-<ng-template #menuContent>
-  <p [dropModal]="signUp"
-     (click)="onMenuItem()">Sign Up</p>
-  <hr>
-  <p [dropModal]="signIn"
-     (click)="onMenuItem()">Sign In</p>
-  <hr>
-  <p>About</p>
-  <hr>
-</ng-template>
-
