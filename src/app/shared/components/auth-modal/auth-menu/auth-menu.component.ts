@@ -1,71 +1,61 @@
-import {Component, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, EventEmitter, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {AuthService} from "../../../services/auth.service";
-import {ISecretCode} from "../../../interfaces/auth/secert-code.interface";
-import {Auth} from "../auth.class";
+import {Subject} from "rxjs";
+import {SubSink} from "subsink";
 
 @Component({
   selector: 'app-auth-menu',
   templateUrl: './auth-menu.component.html',
   styleUrls: ['./auth-menu.component.scss']
 })
-export class AuthMenuComponent extends Auth implements OnInit, OnDestroy {
+export class AuthMenuComponent implements OnInit, OnDestroy {
   @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
-  public invalidMsg: Object = {
-    code: ''
-  };
-  public isErrorReq: Object = {
-    code: false,
-  }
+  protected subs: SubSink = new SubSink();
+  public visible: Subject<boolean> = new Subject<boolean>();
+  public closed: EventEmitter<void> = new EventEmitter<void>();
+  public anim: boolean = false;
 
-  public form: FormGroup = this.fb.group({
-    code: ['', [Validators.required]],
-  });
-  private bufferForm: FormGroup = this.fb.group({code: ''});
-
-  constructor(private fb: FormBuilder, public authService: AuthService) {
-    super();
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.subscribeToFormChanges();
-    this.subscribeToVisible();
+    this.subs.add(this.visible.subscribe(
+      (isVisible) => {
+        if(!isVisible){
+          this.closed.emit();
+        }
+      }
+    ))
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
 
-  onLoginWithFacebook(){
-
+  public onLoginWithGoogle(): void {
+    this.authService.loginWithGoogle();
   }
 
-  onLoginWithGoogle(){
-
+  public onLoginWithFacebook(): void {
+    this.authService.loginWithFacebook();
   }
 
-  public subscribeToFormChanges(): void {
-    this.subs.add(this.form.valueChanges.subscribe((changes) => {
-      if (changes['code'] !== this.bufferForm.value['code']) {
-        this.isErrorReq['code'] = false;
-        this.invalidMsg['code'] = '';
-      }
-      Object.assign(this.bufferForm, this.form);
-    }));
+  public onSignIn(){
+    this.closed.emit();
+    this.authService.isSignIn.next(true);
   }
 
-  public onSubmit(): void {
-    this.authService.code.next({
-      code: this.form.get('code').value,
-      email: this.authService.user.value.email
-    } as ISecretCode);
+  public onSignUp(){
+    this.closed.emit();
+    this.authService.isSignUp.next(true);
   }
 
-  public successResponse() {
+  public onExit(){
+    this.closed.emit();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(): void {
-    this.closeModal();
+    this.closed.emit();
   }
 }

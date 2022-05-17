@@ -1,24 +1,7 @@
 @import "../../../../../assets/styles/modals/loginModal";
 
 .header {
-  width: 100%;
-  display: flex;
   justify-content: flex-end;
-  align-items: center;
-  height: 1.5rem;
-  padding-top: 15px;
-
-  i {
-    color: #FFFFFF;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border-radius: 50%;
-    padding: 0 20px;
-  }
-
-  i:active {
-    font-size: 1.3rem;
-  }
 }
 .service-wrapper{
   @include media-property(width, 90%, 80%, 80%, 80%);

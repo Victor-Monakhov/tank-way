@@ -1,7 +1,9 @@
 <ng-template>
   <div class="wrapper"
        [ngClass]="anim ? 'modal-go-left' : 'modal-go-hidden'">
-    <h3>Sign up</h3>
+    <div class="header">
+      <i class="fa-solid fa-arrow-left" (click)="onBack()"></i>
+    </div>
     <form class="form"
           [formGroup]="form"
           (ngSubmit)="onSubmit()">
@@ -61,7 +63,7 @@
       <button class="btn"
               type="submit"
               [disabled]="form.invalid">
-        SUBMIT
+        SIGN UP
       </button>
     </form>
   </div>

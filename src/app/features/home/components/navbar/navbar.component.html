@@ -1,5 +1,9 @@
 <div class="navbar">
-  <button type="button" class="btn-menu" [dropModal]=menu></button>
+  <button type="button"
+          class="btn-menu"
+          [dropModal]=menu
+          [staticBackdrop]="false">
+  </button>
   <div class="gameLogo"></div>
   <div class="menu-wrapper">
     <ng-container *ngTemplateOutlet="menuContent"></ng-container>
@@ -14,13 +18,8 @@
   <ng-container *ngTemplateOutlet="menuContent"></ng-container>
 </app-menu>
 <app-auth-menu #authMenu></app-auth-menu>
-<!--<app-sign-up #signUp></app-sign-up>-->
-<!--<app-sign-in #signIn></app-sign-in>-->
 
 <ng-template #menuContent>
-<!--  <p [dropModal]="signUp"-->
-<!--     (click)="onMenuItem()">Sign Up</p>-->
-<!--  <hr>-->
   <p [dropModal]="authMenu"
      (click)="onMenuItem()">Cabinet</p>
   <hr>

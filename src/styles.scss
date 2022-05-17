@@ -74,4 +74,13 @@ h3 {
   padding: 0;
 }
 
+.link{
+  border-bottom: 1px solid #ffffff;
+  cursor: pointer;
+}
+.link:hover{
+  color: $blue;
+  border-color: $blue;
+}
+
 

@@ -2,22 +2,22 @@
   <div class="wrapper"
        [ngClass]="anim ? 'modal-go-left' : 'modal-go-hidden'">
     <div class="header">
-      <i class="fa-solid fa-xmark"></i>
+      <i class="fa-solid fa-xmark" (click)="onExit()"></i>
     </div>
-    <div class="service-wrapper">
-      <div (click)="onLoginWithFacebook()" class="sign-in-facebook"></div>
+    <div class="service-wrapper" (click)="onLoginWithFacebook()">
+      <div class="sign-in-facebook"></div>
       <p>Login with Facebook</p>
     </div>
-    <div class="service-wrapper">
-      <div (click)="onLoginWithGoogle()" class="sign-in-google"></div>
+    <div class="service-wrapper" (click)="onLoginWithGoogle()">
+      <div class="sign-in-google"></div>
       <p>Login with Google</p>
     </div>
     <div class="container">
       <p>Or use your email address</p>
     </div>
     <div class="btn-wrapper">
-      <button class="btn">SIGN IN</button>
-      <button class="btn">SIGN UP</button>
+      <button class="btn" (click)="onSignIn()">SIGN IN</button>
+      <button class="btn" (click)="onSignUp()">SIGN UP</button>
     </div>
   </div>
 </ng-template>
