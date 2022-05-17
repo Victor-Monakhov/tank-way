@@ -11,23 +11,33 @@
   0% { left: 0;}
   100% {left: -100%;}
 }
-
 //modal-go
 @keyframes modal_go_left_lg{
   0% { left: 100%;}
-  100% {left: 20%;}
+  //100% {left: 20%;}
+  100% {left: calc(50% - 200px);}
 }
 @keyframes modal_go_left_md{
   0% { left: 100%;}
-  100% {left: 15%;}
+ // 100% {left: 15%;}
+  100% {left: calc(50% - 200px);}
 }
 @keyframes modal_go_left_sm{
   0% { left: 100%;}
-  100% {left: 10%;}
+  //100% {left: 10%;}
+  100% {left: calc(50% - 200px);}
 }
 @keyframes modal_go_left_xs{
   0% { left: 100%;}
   100% {left: 5%;}
+}
+@keyframes modal_go_left_hidden_sm_md_lg{
+  0% { left: calc(50% - 200px);}
+  100% {left: 0 - 400px;}
+}
+@keyframes modal_go_left_hidden_xs{
+  0% { left: 5%;}
+  100% {left: 0 - 90%;}
 }
 
 //row-go

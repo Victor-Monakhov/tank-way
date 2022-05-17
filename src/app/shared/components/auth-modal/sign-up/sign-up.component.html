@@ -3,12 +3,14 @@
 
   <div class="wrapper"
        [ngClass]="anim ? 'modal-go-left' : 'modal-go-hidden'">
-    <h3>Sign up</h3>
+    <div class="header">
+      <i class="fa-solid fa-arrow-left" (click)="onBack()"></i>
+    </div>
     <form class="form"
           [formGroup]="form"
           (ngSubmit)="onSubmit()">
       <div class="form-item-wrapper">
-<!--        <label for="nickname">Nickname</label>-->
+        <label for="nickname">Nickname</label>
         <input class="form-control"
                type="text"
                id="nickname"
@@ -21,7 +23,7 @@
 
       </div>
       <div class="form-item-wrapper">
-<!--        <label for="email">Email</label>-->
+        <label for="email">Email</label>
         <input class="form-control"
                type="text"
                id="email"
@@ -33,7 +35,7 @@
         </small>
       </div>
       <div class="form-item-wrapper">
-<!--        <label for="password">Password</label>-->
+        <label for="password">Password</label>
         <div class="password-wrapper">
           <input class="form-control"
                  id="password"
@@ -49,7 +51,7 @@
         </small>
       </div>
       <div class="form-item-wrapper">
-<!--        <label for="confirm">Confirm password</label>-->
+        <label for="confirm">Confirm password</label>
         <input class="form-control"
                id="confirm"
                formControlName="confirm"
@@ -60,11 +62,11 @@
           {{invalidMsg['confirm']}}
         </small>
       </div>
-        <button class="btn"
-                type="submit"
-                [disabled]="form.invalid">
-          SUBMIT
-        </button>
+      <button class="btn"
+              type="submit"
+              [disabled]="form.invalid">
+        SIGN UP
+      </button>
     </form>
   </div>
 </ng-template>

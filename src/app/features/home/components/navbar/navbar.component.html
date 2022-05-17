@@ -1,5 +1,9 @@
 <div class="navbar">
-  <button type="button" class="btn-menu" [dropModal]=menu></button>
+  <button type="button"
+          class="btn-menu"
+          [dropModal]=menu
+          [staticBackdrop]="false">
+  </button>
   <div class="gameLogo"></div>
   <div class="menu-wrapper">
     <ng-container *ngTemplateOutlet="menuContent"></ng-container>
@@ -13,23 +17,18 @@
       <option *ngFor="let language of languages" [ngValue]="language.value">{{language.label}}</option>
     </select>
   </div>
-
-
-  <app-menu #menu [emitClosed]="closeDropElement">
-    <ng-container *ngTemplateOutlet="menuContent"></ng-container>
-  </app-menu>
-
-  <app-sign-up #signUp></app-sign-up>
-  <app-sign-in #signIn></app-sign-in>
-
-  <ng-template #menuContent>
-    <p [dropModal]="signUp"
-       (click)="onMenuItem()">{{'NAVBAR.SIGNUP' | translate}}</p>
-    <hr>
-    <p [dropModal]="signIn"
-       (click)="onMenuItem()">{{'NAVBAR.SIGNIN' | translate}}</p>
-    <hr>
-    <p>{{'NAVBAR.ABOUT' | translate}}</p>
-    <hr>
-  </ng-template>
 </div>
+
+
+<app-menu #menu [emitClosed]="closeDropElement">
+  <ng-container *ngTemplateOutlet="menuContent"></ng-container>
+</app-menu>
+<app-auth-menu #authMenu></app-auth-menu>
+
+<ng-template #menuContent>
+  <p [dropModal]="authMenu"
+     (click)="onMenuItem()">Cabinet</p>
+  <hr>
+  <p>About</p>
+  <hr>
+</ng-template>

@@ -28,6 +28,7 @@ export abstract class Auth implements IDropModal{
 
   abstract subscribeToFormChanges(): void;
   abstract successResponse(): void;
+  abstract onBack():void;
 
   private clearMsg() {
     for (let key in this.isErrorReq) {

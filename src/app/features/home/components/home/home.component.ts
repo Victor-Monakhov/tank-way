@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from "../../../../shared/services/auth.service";
 import {SubSink} from "subsink";
-import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService} from "angularx-social-login";
+import {SocialAuthService} from "angularx-social-login";
 import {LocalStorageService} from "../../../../shared/services/local-storage.service";
 import {switchMap} from "rxjs/operators";
 import {LSKeys} from "../../../../shared/enums/local-storage-keys.enum";
@@ -19,11 +19,21 @@ import {LocalizationService} from "../../../../shared/services/internationalizat
 export class HomeComponent implements OnInit, OnDestroy {
 
   public galleryMode: string = '';
-  public isLoggedIn = false;
   public subs: SubSink = new SubSink();
 
-  public get dropTrigger$() {
+  public get codeTrigger$() {
     return this.authService.isCode;
+  }
+
+  public get signUpTrigger$() {
+    return this.authService.isSignUp;
+  }
+
+  public get signInTrigger$() {
+    return this.authService.isSignIn;
+  }
+  public get authMenuTrigger$() {
+    return this.authService.isAuthMenu;
   }
 
   constructor(private authService: AuthService,
@@ -72,7 +82,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (response.success) {
           this.lSService.setItem(LSKeys.authToken, this.authService.user.value.token);
         } else if (!response.success && this.authService.user.value.token) {
-          this.signOut(() => {
+          this.authService.signOut(() => {
           });
         }
         console.log(response.message);
@@ -96,47 +106,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     }))
   }
 
-
-  public loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(
-      (data) => {
-        if (data['error'] === 'popup_closed_by_user') {
-          window.location.reload();
-        }
-      }
-    );
-    this.lSService.setItem(LSKeys.authProviderID, GoogleLoginProvider.PROVIDER_ID);
+  public signUpTriggerHandler(trigger: boolean) {
+    this.authService.isSignUp.next(trigger);
   }
 
-  public loginWithFacebook(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).catch(
-      (data) => {
-        if (data === 'User cancelled login or did not fully authorize.') {
-          window.location.reload();
-        }
-      }
-    );
-    this.lSService.setItem(LSKeys.authProviderID, FacebookLoginProvider.PROVIDER_ID);
-
+  public signInTriggerHandler(trigger: boolean) {
+    this.authService.isSignIn.next(trigger);
   }
 
-  public signOut(callback: Function): void {
-    this.socialAuthService.signOut(true).then(
-      () => {
-        localStorage.removeItem(LSKeys.authToken);
-        localStorage.removeItem(LSKeys.authProviderID);
-        callback();
-      }
-    );
+  public codeTriggerHandler(trigger: boolean) {
+    this.authService.isCode.next(trigger);
+  }
+  public authMenuTriggerHandler(trigger: boolean) {
+    this.authService.isAuthMenu.next(trigger);
   }
 
-  public onLoginWithGoogle(): void {
-    this.loginWithGoogle();
-  }
-
-  public onLoginWithFacebook(): void {
-    this.loginWithFacebook();
-  }
 
   onDemo(): void {
     this.router.navigate(['demo']);

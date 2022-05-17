@@ -54,6 +54,10 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
       email: this.authService.user.value.email
     } as ISecretCode);
   }
+  public onBack():void {
+    this.closeModal();
+    this.authService.isSignUp.next(true);
+  }
 
   public successResponse() {
   }

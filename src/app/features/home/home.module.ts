@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SignUpComponent} from 'src/app/shared/components/auth-modal/sign-up/sign-up.component';
 import {SignInComponent} from "../../shared/components/auth-modal/sign-in/sign-in.component";
 import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-code/secret-code.component";
+import {AuthMenuComponent} from "../../shared/components/auth-modal/auth-menu/auth-menu.component";
 import {SpinnerModule} from "../../shared/components/spinner/spinner.module";
 import {TranslateModule} from "@ngx-translate/core";
 
@@ -29,6 +30,7 @@ import {TranslateModule} from "@ngx-translate/core";
     SignUpComponent,
     SignInComponent,
     SecretCodeComponent,
+    AuthMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,6 @@ import {TranslateModule} from "@ngx-translate/core";
   ],
   exports: [
     DropModalDirective,
-    MenuComponent
   ],
 })
 export class HomeModule {

@@ -1,9 +1,9 @@
 import {
   Directive,
-  ElementRef,
+  ElementRef, EventEmitter,
   Input,
   OnChanges,
-  Optional,
+  Optional, Output,
   SimpleChanges,
   TemplateRef,
   ViewContainerRef
@@ -11,7 +11,7 @@ import {
 import {Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {merge, Observable} from "rxjs";
 import {TemplatePortal} from "@angular/cdk/portal";
-import { IDropModal } from '../interfaces/drop-modal.interface';
+import {IDropModal} from '../interfaces/drop-modal.interface';
 
 @Directive({
   selector: '[dropModal]',
@@ -19,10 +19,12 @@ import { IDropModal } from '../interfaces/drop-modal.interface';
     "(click)": "onDrop()",
   },
 })
-export class DropModalDirective implements OnChanges{
+export class DropModalDirective implements OnChanges {
 
   @Input() public dropModal: IDropModal;
   @Input() public trigger: boolean = false;
+  @Input() public staticBackdrop: boolean = true;
+  @Output() public triggerEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   private closeHandler;
 
   constructor(public overlay: Overlay,
@@ -33,9 +35,8 @@ export class DropModalDirective implements OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.trigger){
+    if (this.trigger) {
       this.onDrop();
-      this.trigger = false;
     }
   }
 
@@ -74,8 +75,11 @@ export class DropModalDirective implements OnChanges{
   private dropdownClosingActions(): Observable<MouseEvent | void> {
     const backdropClick$ = this.overlayRef.backdropClick();
     const detachment$ = this.overlayRef.detachments();
-    const closeMenu = this.dropModal.closed
-    return merge(backdropClick$, detachment$, closeMenu);
+    const closeMenu$ = this.dropModal.closed
+    if(this.staticBackdrop){
+      return merge(detachment$, closeMenu$);
+    }
+    return merge(backdropClick$, detachment$, closeMenu$);
   }
 
   private destroyMenu() {
@@ -84,7 +88,7 @@ export class DropModalDirective implements OnChanges{
     }
     this.dropModal.anim = false;
     setTimeout(() => {
-      this.trigger = false;
+      this.triggerEvent.emit(false);
       this.closeHandler.unsubscribe();
       this.overlayRef.detach();
       this.dropModal.visible.next(false);

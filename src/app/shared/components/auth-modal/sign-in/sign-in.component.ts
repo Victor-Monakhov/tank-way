@@ -55,6 +55,11 @@ export class SignInComponent extends Auth implements OnInit, OnDestroy {
     this.authService.userInitByForm(this.form);
   }
 
+  public onBack(){
+    this.closeModal();
+    this.authService.isAuthMenu.next(true);
+  }
+
   public successResponse() {
   }
 

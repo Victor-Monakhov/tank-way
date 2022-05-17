@@ -32,45 +32,9 @@
       @include media-property(margin, 0 10px, 0 20px, 0 30px, 0 40px);
       padding: 20px 40px;
     }
-    .link{
-      border-bottom: 1px solid #ffffff;
-      cursor: pointer;
-    }
-    .link:hover{
-      color: $blue;
-      border-color: $blue;
-    }
-    .sign-in-wrapper{
-      flex-direction: row;
-      padding-bottom: 30px;
-      padding-top: 5px;
-      .sign-in-google{
-        width: 35px;
-        height: 35px;
-        background-image: $img-google-icon;
-        background-repeat: no-repeat;
-        background-size: 35px 35px;
-        border-radius: 50%;
-      }
-      .sign-in-facebook{
-        width: 38px;
-        height: 38px;
-        background-image: $img-facebook-icon;
-        background-repeat: no-repeat;
-        background-size: 38px 38px;
-        margin-right: 15px;
-        border-radius: 50%;
-      }
-      .sign-in-google:hover, .sign-in-facebook:hover{
-        box-shadow: 0 0 3px 3px $blue;
-      }
-      .sign-in-google:active, .sign-in-facebook:active{
-        box-shadow: 0 0 1px 2px $blue;
-      }
-    }
 
     .settings-title{
-      @include media-property(padding, 0 10px 30px, 0 20px 30px, 0 30px 30px, 0 40px 30px);
+      @include media-property(padding, 30px 10px, 30px 20px, 30px 30px, 30px 40px);
       @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
       @include media-property(flex-direction, column, column, row, row);
       justify-content: start;
