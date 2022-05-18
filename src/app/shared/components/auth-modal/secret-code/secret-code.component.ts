@@ -3,7 +3,8 @@ import {Auth} from "../auth.class";
 import {AuthService} from "../../../services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ISecretCode} from "../../../interfaces/auth/secert-code.interface";
-import {Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
+import {IResponseMessage} from "../../../interfaces/auth/response-message.interface";
 
 @Component({
   selector: 'app-secret-code',
@@ -13,9 +14,13 @@ import {Subject} from "rxjs";
 export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
+  private date: Date = new Date();
+  public timer: string = '';
+
   public get email(): string {
     return this.authService.user.value.email ?? '';
   };
+
   public invalidMsg: Object = {
     code: ''
   };
@@ -35,6 +40,7 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribeToFormChanges();
     this.subscribeToVisible();
+    this.subscribeToIsCode();
   }
 
   ngOnDestroy() {
@@ -57,9 +63,39 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
       email: this.authService.user.value.email
     } as ISecretCode);
   }
-  public onBack():void {
+
+  public onBack(): void {
     this.closeModal();
     this.authService.isSignUp.next(true);
+  }
+
+  public subscribeToIsCode(): void {
+    this.subs.add(this.authService.isCode.subscribe((isCode) => {
+      if (isCode) {
+        this.startTimer(0, 15);
+      }
+    }));
+  }
+
+  public startTimer(minutes: number, seconds: number) {
+    this.date.setMinutes(minutes);
+    this.date.setSeconds(seconds);
+    const interval = setInterval(() => {
+      this.date.setSeconds(this.date.getSeconds() - 1);
+      minutes = this.date.getMinutes();
+      seconds = this.date.getSeconds();
+      if (this.date.getMinutes() === 0 && this.date.getSeconds() === 0) {
+        clearInterval(interval);
+        this.timer = '';
+      } else {
+        this.timer = `${(minutes < 10) ? `0${minutes}` : minutes} :
+                      ${(seconds < 10) ? `0${seconds}` : seconds}`
+      }
+    }, 1000);
+  }
+
+  public onSendCode() {
+    this.startTimer(0, 15);
   }
 
   public successResponse() {

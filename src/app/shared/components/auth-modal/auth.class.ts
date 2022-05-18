@@ -1,11 +1,12 @@
 import {switchMap} from "rxjs/operators";
-import {of, Subject} from "rxjs";
+import {BehaviorSubject, of, Subject} from "rxjs";
 import {SubSink} from "subsink";
 import {EventEmitter, TemplateRef} from "@angular/core";
 import {VMValidator} from "../../classes/form-validation/vm-validator.class";
 import {IDropModal} from "../../interfaces/drop-modal.interface";
 import {AuthService} from "../../services/auth.service";
 import {AbstractControl, FormGroup} from "@angular/forms";
+import {IResponseMessage} from "../../interfaces/auth/response-message.interface";
 
 export abstract class Auth implements IDropModal{
 
@@ -39,6 +40,10 @@ export abstract class Auth implements IDropModal{
     }
   }
 
+  protected modalIsVisible(): BehaviorSubject<IResponseMessage>{
+    return this.authService.response;
+  }
+
   protected closeModal() {
     this.isVisiblePassword = false;
     this.form.reset();
@@ -51,7 +56,7 @@ export abstract class Auth implements IDropModal{
     this.subs.add(this.visible.pipe(
       switchMap((isVisible) => {
         if (isVisible) {
-          return this.authService.response;
+          return this.modalIsVisible();
         } else {
           return of(null);
         }
