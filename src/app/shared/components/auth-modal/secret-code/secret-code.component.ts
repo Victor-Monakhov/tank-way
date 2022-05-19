@@ -1,44 +1,37 @@
-import {Component, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Auth} from "../auth.class";
+import {Component, EventEmitter, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {AuthService} from "../../../services/auth.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ISecretCode} from "../../../interfaces/auth/secert-code.interface";
-import {BehaviorSubject} from "rxjs";
-import {IResponseMessage} from "../../../interfaces/auth/response-message.interface";
+import {of, Subject} from "rxjs";
+import {SubSink} from "subsink";
+import {IDropModal} from "../../../interfaces/drop-modal.interface";
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-secret-code',
   templateUrl: './secret-code.component.html',
   styleUrls: ['./secret-code.component.scss']
 })
-export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
+export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
   private date: Date = new Date();
+  protected subs: SubSink = new SubSink();
+  public visible: Subject<boolean> = new Subject<boolean>();
+  public closed: EventEmitter<void> = new EventEmitter<void>();
+  public anim: boolean = false;
+  public readonly capacity: number = 6;
   public timer: string = '';
 
   public get email(): string {
     return this.authService.user.value.email ?? '';
   };
 
-  public invalidMsg: Object = {
-    code: ''
-  };
-  public isErrorReq: Object = {
-    code: false,
-  }
+  public invalidMsg: string = '';
 
-  public form: FormGroup = this.fb.group({
-    code: ['', [Validators.required]],
-  });
-  private bufferForm: FormGroup = this.fb.group({code: ''});
-
-  constructor(private fb: FormBuilder, public authService: AuthService) {
-    super();
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.subscribeToFormChanges();
     this.subscribeToVisible();
     this.subscribeToIsCode();
   }
@@ -47,21 +40,41 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  public subscribeToFormChanges(): void {
-    this.subs.add(this.form.valueChanges.subscribe((changes) => {
-      if (changes['code'] !== this.bufferForm.value['code']) {
-        this.isErrorReq['code'] = false;
-        this.invalidMsg['code'] = '';
+  private subscribeToVisible(): void {
+    this.subs.add(this.visible.pipe(
+      switchMap((isVisible) => {
+        return (isVisible) ? this.authService.response : of(null);
+      })
+    ).subscribe((response) => {
+      if (!response || !Object.keys(response).length) {
+        this.closeModal();
+        return;
       }
-      Object.assign(this.bufferForm, this.form);
+      if (response.success) {
+        this.closeModal();
+        this.successResponse();
+        return;
+      } else {
+        this.invalidMsg = 'Invalid code';
+      }
     }));
   }
 
-  public onSubmit(): void {
-    this.authService.code.next({
-      code: this.form.get('code').value,
-      email: this.authService.user.value.email
-    } as ISecretCode);
+  private closeModal() {
+    this.invalidMsg = '';
+    this.closed.emit();
+  }
+
+  public codeHandler(subCode: Subject<string>): void {
+    this.subs.add(subCode.subscribe((code)=>{
+      this.invalidMsg = '';
+      if(code.length === this.capacity){
+        setTimeout(() => this.authService.code.next({
+          code: code,
+          email: this.authService.user.value.email
+        } as ISecretCode), 100);
+      }
+    }));
   }
 
   public onBack(): void {
@@ -72,7 +85,7 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
   public subscribeToIsCode(): void {
     this.subs.add(this.authService.isCode.subscribe((isCode) => {
       if (isCode) {
-        this.startTimer(0, 15);
+        this.startTimer(2, 0);
       }
     }));
   }
@@ -95,7 +108,7 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
   }
 
   public onSendCode() {
-    this.startTimer(0, 15);
+    this.startTimer(2, 0);
   }
 
   public successResponse() {
@@ -105,5 +118,4 @@ export class SecretCodeComponent extends Auth implements OnInit, OnDestroy {
   onResize(): void {
     this.closeModal();
   }
-
 }

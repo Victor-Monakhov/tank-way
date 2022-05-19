@@ -1,11 +1,7 @@
-<div *ngFor="let value of values">
-  <input type="text"
+<div *vmFor="capacity; let i = index">
+  <input #input
+         type="text"
+         class="code-input-cell"
          maxlength="1"
-         [style.width]="cellWidth"
-         [style.border]="cellBorder"
-         [style.margin]="cellMargin"
-         [style.padding]="cellPadding"
-         [style.border-radius]="cellBorderRadius"
-         [style.background]="cellBackground"
-         (keydown)="onKeyDown($event)">
+         (keydown)="onKeyDown($event, i)">
 </div>

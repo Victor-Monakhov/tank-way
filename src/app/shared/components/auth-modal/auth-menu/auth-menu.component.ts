@@ -2,13 +2,14 @@ import {Component, EventEmitter, HostListener, OnDestroy, OnInit, TemplateRef, V
 import {AuthService} from "../../../services/auth.service";
 import {Subject} from "rxjs";
 import {SubSink} from "subsink";
+import {IDropModal} from "../../../interfaces/drop-modal.interface";
 
 @Component({
   selector: 'app-auth-menu',
   templateUrl: './auth-menu.component.html',
   styleUrls: ['./auth-menu.component.scss']
 })
-export class AuthMenuComponent implements OnInit, OnDestroy {
+export class AuthMenuComponent implements OnInit, OnDestroy, IDropModal {
   @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
   protected subs: SubSink = new SubSink();
   public visible: Subject<boolean> = new Subject<boolean>();

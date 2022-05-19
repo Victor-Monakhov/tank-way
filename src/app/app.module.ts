@@ -12,7 +12,6 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {InternationalizationModule} from "./shared/services/internationalization/internationalization.module";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import { CodeInputComponent } from './shared/components/code-input/code-input.component';
 
 /**
  * The http loader factory : Loads the files from define path.
@@ -26,7 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
