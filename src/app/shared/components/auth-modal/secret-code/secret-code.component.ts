@@ -5,6 +5,7 @@ import {of, Subject} from "rxjs";
 import {SubSink} from "subsink";
 import {IDropModal} from "../../../interfaces/drop-modal.interface";
 import {switchMap} from "rxjs/operators";
+import {IResponseMessage} from "../../../interfaces/auth/response-message.interface";
 
 @Component({
   selector: 'app-secret-code',
@@ -23,7 +24,7 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
   public timer: string = '';
 
   public get email(): string {
-    return this.authService.user.value.email ?? '';
+    return this.authService.tmpUser.email ?? '';
   };
 
   public invalidMsg: string = '';
@@ -60,6 +61,14 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
     }));
   }
 
+  private subscribeToIsCode(): void {
+    this.subs.add(this.authService.isCode.subscribe((isCode) => {
+      if (isCode) {
+        this.startTimer(0, 30);
+      }
+    }));
+  }
+
   private closeModal() {
     this.invalidMsg = '';
     this.closed.emit();
@@ -71,7 +80,7 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
       if(code.length === this.capacity){
         setTimeout(() => this.authService.code.next({
           code: code,
-          email: this.authService.user.value.email
+          email: this.authService.tmpUser.email,
         } as ISecretCode), 100);
       }
     }));
@@ -82,15 +91,7 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
     this.authService.isSignUp.next(true);
   }
 
-  public subscribeToIsCode(): void {
-    this.subs.add(this.authService.isCode.subscribe((isCode) => {
-      if (isCode) {
-        this.startTimer(2, 0);
-      }
-    }));
-  }
-
-  public startTimer(minutes: number, seconds: number) {
+  private startTimer(minutes: number, seconds: number) {
     this.date.setMinutes(minutes);
     this.date.setSeconds(seconds);
     const interval = setInterval(() => {
@@ -100,6 +101,10 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
       if (this.date.getMinutes() === 0 && this.date.getSeconds() === 0) {
         clearInterval(interval);
         this.timer = '';
+        this.authService.deleteCode();
+        // this.subs.add(this.authService.deleteCode().subscribe((response) => {
+        //   console.log(response.value.message);
+        // }));
       } else {
         this.timer = `${(minutes < 10) ? `0${minutes}` : minutes} :
                       ${(seconds < 10) ? `0${seconds}` : seconds}`
@@ -108,10 +113,11 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
   }
 
   public onSendCode() {
-    this.startTimer(2, 0);
+    this.startTimer(0, 30);
   }
 
   public successResponse() {
+    this.authService.response.next({} as IResponseMessage);
   }
 
   @HostListener('window:resize', ['$event'])

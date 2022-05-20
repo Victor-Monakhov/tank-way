@@ -22,7 +22,6 @@ export class CodeInputComponent implements OnInit, AfterViewInit {
   private code: Subject<string> = new Subject<string>();
   public inputs: HTMLInputElement[] = [];
 
-
   constructor() {}
 
   ngOnInit(): void {

@@ -26,14 +26,13 @@ export class SignInComponent extends Auth implements OnInit, OnDestroy {
     email: ['', [Validators.required, VMValidator.email]],
     password: ['', [Validators.required]],
   });
-  private bufferForm: FormGroup = this.fb.group({} as ISignInForm);
 
   constructor(private fb: FormBuilder, public authService: AuthService) {
     super();
   }
 
   public ngOnInit(): void {
-    this.subscribeToFormChanges();
+    this.subscribeToPassword();
     this.subscribeToVisible();
   }
 
@@ -41,13 +40,10 @@ export class SignInComponent extends Auth implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  public subscribeToFormChanges(): void {
-    this.subs.add(this.form.valueChanges.subscribe((changes) => {
-      if (changes['password'] !== this.bufferForm.value['password']) {
+  public subscribeToPassword(): void {
+    this.subs.add(this.form.get('password').valueChanges.subscribe(() => {
         this.isErrorReq['password'] = false;
         this.invalidMsg['password'] = '';
-      }
-      Object.assign(this.bufferForm, this.form);
     }));
   }
 

@@ -10,7 +10,6 @@ import {ISignUpForm} from "../../../interfaces/auth/forms.interface";
 import {Auth} from "../auth.class";
 import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
 import {IResponseMessage} from "../../../interfaces/auth/response-message.interface";
-import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-sign-up',
@@ -34,14 +33,15 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
       VMValidator.password]],
     confirm: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
   });
-  private bufferForm: FormGroup = this.fb.group({} as ISignUpForm);
 
   constructor(private fb: FormBuilder, public authService: AuthService) {
     super();
   }
 
   public ngOnInit(): void {
-    this.subscribeToFormChanges();
+    this.subscribeToNickname();
+    this.subscribeToEmail();
+    this.subscribeToPassword();
     this.subscribeToVisible();
     VMValidator.equalControls(this.form.get('confirm'), this.form.get('password'));
   }
@@ -50,21 +50,27 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  public subscribeToFormChanges(): void {
-    this.subs.add(this.form.valueChanges.subscribe((changes) => {
-      if (changes['nickname'] !== this.bufferForm.value['nickname']) {
-        this.isErrorReq['nickname'] = false;
-        this.invalidMsg['nickname'] = '';
-      }
-      if (changes['email'] !== this.bufferForm.value['email']) {
-        this.isErrorReq['email'] = false;
-        this.invalidMsg['email'] = '';
-      }
-      Object.assign(this.bufferForm, this.form);
+  private subscribeToNickname(): void {
+    this.subs.add(this.form.get('nickname').valueChanges.subscribe((nickname) =>{
+      this.isErrorReq['nickname'] = false;
+      this.invalidMsg['nickname'] = '';
     }));
   }
 
-  public onBack(): void{
+  private subscribeToEmail(): void {
+    this.subs.add(this.form.get('email').valueChanges.subscribe((email) =>{
+      this.isErrorReq['email'] = false;
+      this.invalidMsg['email'] = '';
+    }));
+  }
+
+  private subscribeToPassword(): void {
+    this.form.get('password').valueChanges.subscribe((password)=>{
+      this.form.get('confirm').updateValueAndValidity();
+    });
+  }
+
+  public onBack(): void {
     this.closeModal();
     this.authService.isAuthMenu.next(true);
   }

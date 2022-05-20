@@ -27,7 +27,6 @@ export abstract class Auth implements IDropModal{
   protected constructor() {
   }
 
-  abstract subscribeToFormChanges(): void;
   abstract successResponse(): void;
   abstract onBack():void;
 

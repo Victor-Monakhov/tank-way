@@ -65,43 +65,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscribeToUser(): void {
     this.subs.add(this.authService.user.pipe(
       switchMap(user => {
-        if (!user) {
-          return of(null);
-        }
-        if (user.nickname) {
-          return this.authService.signUp() as Observable<IResponseMessage>
-        } else {
-          return this.authService.signIn() as Observable<IResponseMessage>
-        }
+          return this.authService.signUp(user) as Observable<IResponseMessage>
       })
       ).subscribe((response) => {
-        if (!response) {
-          return;
-        }
-        this.authService.response.next(response);
-        if (response.success) {
-          this.lSService.setItem(LSKeys.authToken, this.authService.user.value.token);
-        } else if (!response.success && this.authService.user.value.token) {
-          this.authService.signOut(() => {
-          });
-        }
-        console.log(response.message);
-      })
-    );
+      this.authService.response.next(response);
+      if (response.token) {
+        this.lSService.setItem(LSKeys.authToken, response.token);
+      }
+      console.log(response.message);
+    }));
   }
 
   private subscribeToCode(): void {
     this.subs.add(this.authService.code.pipe(
       switchMap((code) => {
-        if (!code) {
-          return of(null);
-        }
         return this.authService.sendCode() as Observable<IResponseMessage>
       })).subscribe((response) => {
-      if (!response) {
-        return;
-      }
       this.authService.response.next(response);
+      if(response.token){
+        this.authService.tmpUser.token = response.token;
+        this.authService.user.next(this.authService.tmpUser);
+      }
       console.log(response.message);
     }))
   }
