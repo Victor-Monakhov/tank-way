@@ -18,8 +18,8 @@ import {AuthMenuComponent} from "../../shared/components/auth-modal/auth-menu/au
 import {SpinnerModule} from "../../shared/components/spinner/spinner.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {CodeInputComponent} from "../../shared/components/code-input/code-input.component";
-import {AppModule} from "../../app.module";
 import {VmForDirective} from "../../shared/directives/vm-for.directive";
+
 
 @NgModule({
   declarations: [
@@ -37,19 +37,20 @@ import {VmForDirective} from "../../shared/directives/vm-for.directive";
     CodeInputComponent,
     VmForDirective
   ],
-    imports: [
-        CommonModule,
-        HomeRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        SpinnerModule,
-        TranslateModule.forChild({
-            extend: true
-        }),
-    ],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SpinnerModule,
+    TranslateModule.forChild({
+      extend: true
+    }),
+  ],
   exports: [
     DropModalDirective,
   ],
+  providers: []
 })
 export class HomeModule {
 }

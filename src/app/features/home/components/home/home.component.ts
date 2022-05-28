@@ -4,12 +4,13 @@ import {AuthService} from "../../../../shared/services/auth.service";
 import {SubSink} from "subsink";
 import {SocialAuthService} from "angularx-social-login";
 import {LocalStorageService} from "../../../../shared/services/local-storage.service";
-import {switchMap} from "rxjs/operators";
+import {map, switchMap} from "rxjs/operators";
 import {LSKeys} from "../../../../shared/enums/local-storage-keys.enum";
 import {IResponseMessage} from "../../../../shared/interfaces/auth/response-message.interface";
 import {Observable, of} from "rxjs";
-import {TranslateService} from "@ngx-translate/core";
 import {LocalizationService} from "../../../../shared/services/internationalization/localization.service";
+import {WebSocket} from "../../../../shared/classes/web-sockets/web-socket.class";
+
 
 @Component({
   selector: 'app-home',
@@ -32,16 +33,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   public get signInTrigger$() {
     return this.authService.isSignIn;
   }
+
   public get authMenuTrigger$() {
     return this.authService.isAuthMenu;
   }
+
+  public webSocket: WebSocket;
 
   constructor(private authService: AuthService,
               private router: Router,
               private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService,
-              private localizationService: LocalizationService) {
-  }
+              private localizationService: LocalizationService) {}
 
   ngOnInit(): void {
     this.subscribeToAuthState();
@@ -65,9 +68,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscribeToUser(): void {
     this.subs.add(this.authService.user.pipe(
       switchMap(user => {
-          return this.authService.signUp(user) as Observable<IResponseMessage>
+        return this.authService.signUp(user) as Observable<IResponseMessage>
       })
-      ).subscribe((response) => {
+    ).subscribe((response) => {
       this.authService.response.next(response);
       if (response.token) {
         this.lSService.setItem(LSKeys.authToken, response.token);
@@ -82,7 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         return this.authService.sendCode() as Observable<IResponseMessage>
       })).subscribe((response) => {
       this.authService.response.next(response);
-      if(response.token){
+      if (response.token) {
         this.authService.tmpUser.token = response.token;
         this.authService.user.next(this.authService.tmpUser);
       }
@@ -101,6 +104,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public codeTriggerHandler(trigger: boolean) {
     this.authService.isCode.next(trigger);
   }
+
   public authMenuTriggerHandler(trigger: boolean) {
     this.authService.isAuthMenu.next(trigger);
   }

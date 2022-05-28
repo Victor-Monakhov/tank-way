@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Observer, of, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {IUser} from "../interfaces/auth/user.interface";
-import {Paths} from "../enums/paths.enum";
+import {Paths} from "../classes/paths.class";
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {AbstractControl} from "@angular/forms";
 import {IResponseMessage} from "../interfaces/auth/response-message.interface";
-import {ISecretCode} from "../interfaces/auth/secert-code.interface";
+import {IAuthCode} from "../interfaces/auth/secert-code.interface";
 import {LSKeys} from "../enums/local-storage-keys.enum";
 import {LocalStorageService} from "./local-storage.service";
 import {catchError} from "rxjs/operators";
@@ -21,7 +21,7 @@ export class AuthService {
   public isSignIn: Subject<boolean> = new Subject<boolean>();
   public isAuthMenu: Subject<boolean> = new Subject<boolean>();
   public user: Subject<IUser> = new Subject<IUser>();
-  public code: BehaviorSubject<ISecretCode> = new BehaviorSubject<ISecretCode>(null);
+  public code: BehaviorSubject<IAuthCode> = new BehaviorSubject<IAuthCode>(null);
   public response: BehaviorSubject<IResponseMessage> = new BehaviorSubject<IResponseMessage>(null);
   public tmpUser: IUser = {} as IUser;
 

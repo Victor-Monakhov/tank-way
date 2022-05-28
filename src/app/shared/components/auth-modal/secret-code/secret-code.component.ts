@@ -1,11 +1,13 @@
 import {Component, EventEmitter, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {AuthService} from "../../../services/auth.service";
-import {ISecretCode} from "../../../interfaces/auth/secert-code.interface";
+import {IAuthCode, IAuthTimer} from "../../../interfaces/auth/secert-code.interface";
 import {of, Subject} from "rxjs";
 import {SubSink} from "subsink";
 import {IDropModal} from "../../../interfaces/drop-modal.interface";
 import {switchMap} from "rxjs/operators";
 import {IResponseMessage} from "../../../interfaces/auth/response-message.interface";
+import {WebSocket} from "../../../classes/web-sockets/web-socket.class";
+import {Paths} from "../../../classes/paths.class";
 
 @Component({
   selector: 'app-secret-code',
@@ -15,19 +17,24 @@ import {IResponseMessage} from "../../../interfaces/auth/response-message.interf
 export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
-  private date: Date = new Date();
+  private isConnected: boolean = false;
   protected subs: SubSink = new SubSink();
   public visible: Subject<boolean> = new Subject<boolean>();
   public closed: EventEmitter<void> = new EventEmitter<void>();
   public anim: boolean = false;
   public readonly capacity: number = 6;
   public timer: string = '';
+  public invalidMsg: string = '';
+  public webSocket: WebSocket = new WebSocket(Paths.wsEndPointTanksAuth, Paths.wsTopicAuthTimer);
+  public timerConfig: IAuthTimer = {
+    minutes: 0,
+    seconds: 30,
+    email: '',
+  };
 
   public get email(): string {
     return this.authService.tmpUser.email ?? '';
   };
-
-  public invalidMsg: string = '';
 
   constructor(public authService: AuthService) {
   }
@@ -35,6 +42,7 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
   ngOnInit(): void {
     this.subscribeToVisible();
     this.subscribeToIsCode();
+    this.subscribeToWebSocket();
   }
 
   ngOnDestroy() {
@@ -44,33 +52,55 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
   private subscribeToVisible(): void {
     this.subs.add(this.visible.pipe(
       switchMap((isVisible) => {
-        return (isVisible) ? this.authService.response : of(null);
-      })
+        this.webSocket.connect();
+        return isVisible ? this.authService.response : of();
+      }),
     ).subscribe((response) => {
-      if (!response || !Object.keys(response).length) {
-        this.closeModal();
-        return;
-      }
-      if (response.success) {
+      if ((response as IResponseMessage).token) {
         this.closeModal();
         this.successResponse();
-        return;
-      } else {
+      } else if(Object.keys(response).length){
         this.invalidMsg = 'Invalid code';
       }
     }));
   }
 
   private subscribeToIsCode(): void {
-    this.subs.add(this.authService.isCode.subscribe((isCode) => {
-      if (isCode) {
-        this.startTimer(0, 30);
+    this.subs.add(this.authService.isCode.pipe(
+      switchMap((isCode) => {
+        this.timerConfig.email = this.email;
+        return isCode ? this.webSocket.isConnected : of(null);
+      })
+    ).subscribe((isConnected)=>{
+      if(isConnected){
+        this.isConnected = true;
+        this.webSocket.sendMessage(Paths.wsSendAuthCode, this.timerConfig);
       }
     }));
   }
 
+  private subscribeToWebSocket(){
+    this.subs.add(this.webSocket.response.subscribe((timer)=> {
+      const minutes = timer['minutes'];
+      const seconds = timer['seconds'];
+      this.timer = `${(minutes < 10) ? `0${minutes}` : minutes} :
+                      ${(seconds < 10) ? `0${seconds}` : seconds}`
+      if(minutes === 0 && seconds === 0){
+        this.timer = '';
+      }
+    }))
+  }
+
   private closeModal() {
+    this.isConnected = false;
+    setTimeout(()=>this.webSocket.disconnect(), 0);
     this.invalidMsg = '';
+    this.timer = '';
+    this.timerConfig = {
+      minutes: 0,
+      seconds: 30,
+      email: '',
+    } as IAuthTimer;
     this.closed.emit();
   }
 
@@ -81,7 +111,7 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
         setTimeout(() => this.authService.code.next({
           code: code,
           email: this.authService.tmpUser.email,
-        } as ISecretCode), 100);
+        } as IAuthCode), 100);
       }
     }));
   }
@@ -91,29 +121,11 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
     this.authService.isSignUp.next(true);
   }
 
-  private startTimer(minutes: number, seconds: number) {
-    this.date.setMinutes(minutes);
-    this.date.setSeconds(seconds);
-    const interval = setInterval(() => {
-      this.date.setSeconds(this.date.getSeconds() - 1);
-      minutes = this.date.getMinutes();
-      seconds = this.date.getSeconds();
-      if (this.date.getMinutes() === 0 && this.date.getSeconds() === 0) {
-        clearInterval(interval);
-        this.timer = '';
-        this.authService.deleteCode();
-        // this.subs.add(this.authService.deleteCode().subscribe((response) => {
-        //   console.log(response.value.message);
-        // }));
-      } else {
-        this.timer = `${(minutes < 10) ? `0${minutes}` : minutes} :
-                      ${(seconds < 10) ? `0${seconds}` : seconds}`
-      }
-    }, 1000);
-  }
-
   public onSendCode() {
-    this.startTimer(0, 30);
+     if(this.isConnected){
+       this.authService.user.next(this.authService.tmpUser);
+       this.webSocket.sendMessage(Paths.wsSendAuthCode, this.timerConfig);
+     }
   }
 
   public successResponse() {
