@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {AuthService} from "../../../services/auth.service";
 import {Subject} from "rxjs";
 import {SubSink} from "subsink";
@@ -52,11 +52,6 @@ export class AuthMenuComponent implements OnInit, OnDestroy, IDropModal {
   }
 
   public onExit(){
-    this.closed.emit();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(): void {
     this.closed.emit();
   }
 }

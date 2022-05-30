@@ -13,3 +13,4 @@ export enum WIN_SIZES {
 export enum CONFIG {
   SERVER_HOST = 'http://localhost:8080',
 }
+

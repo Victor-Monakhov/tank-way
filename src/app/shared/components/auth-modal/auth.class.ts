@@ -6,7 +6,7 @@ import {VMValidator} from "../../classes/form-validation/vm-validator.class";
 import {IDropModal} from "../../interfaces/drop-modal.interface";
 import {AuthService} from "../../services/auth.service";
 import {AbstractControl, FormGroup} from "@angular/forms";
-import {IResponseMessage} from "../../interfaces/auth/response-message.interface";
+import {IAuthResponse} from "../../interfaces/auth/auth.interface";
 
 export abstract class Auth implements IDropModal{
 
@@ -39,7 +39,7 @@ export abstract class Auth implements IDropModal{
     }
   }
 
-  protected modalIsVisible(): BehaviorSubject<IResponseMessage>{
+  protected modalIsVisible(): BehaviorSubject<IAuthResponse>{
     return this.authService.response;
   }
 

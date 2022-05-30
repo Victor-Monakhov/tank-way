@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Observer, of, Subject} from "rxjs";
+import {BehaviorSubject, Observable, of, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {IUser} from "../interfaces/auth/user.interface";
 import {Paths} from "../classes/paths.class";
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {AbstractControl} from "@angular/forms";
-import {IResponseMessage} from "../interfaces/auth/response-message.interface";
-import {IAuthCode} from "../interfaces/auth/secert-code.interface";
 import {LSKeys} from "../enums/local-storage-keys.enum";
 import {LocalStorageService} from "./local-storage.service";
 import {catchError} from "rxjs/operators";
+import {IAuthCode, IAuthResponse, IUser} from "../interfaces/auth/auth.interface";
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +19,8 @@ export class AuthService {
   public isSignIn: Subject<boolean> = new Subject<boolean>();
   public isAuthMenu: Subject<boolean> = new Subject<boolean>();
   public user: Subject<IUser> = new Subject<IUser>();
-  public code: BehaviorSubject<IAuthCode> = new BehaviorSubject<IAuthCode>(null);
-  public response: BehaviorSubject<IResponseMessage> = new BehaviorSubject<IResponseMessage>(null);
+  public code: Subject<IAuthCode> = new Subject<IAuthCode>();
+  public response: BehaviorSubject<IAuthResponse> = new BehaviorSubject<IAuthResponse>(null);
   public tmpUser: IUser = {} as IUser;
 
   constructor(private http: HttpClient,
@@ -72,8 +70,8 @@ export class AuthService {
     );
   }
 
-  public sendCode(): Observable<any> {
-    return this.http.post(Paths.sendCode, this.code.value).pipe(
+  public sendCode(code: IAuthCode): Observable<any> {
+    return this.http.post(Paths.sendCode, code).pipe(
       catchError((error) => {
           this.response.next(error['error']);
           return of();
@@ -82,15 +80,15 @@ export class AuthService {
     );
   }
 
-  public deleteCode(): Observable<any> {
-    return this.http.post(Paths.deleteCode, this.code.value).pipe(
-      catchError((error) => {
-          this.response.next(error['error']);
-          return of();
-        }
-      )
-    );
-  }
+  // public deleteCode(): Observable<any> {
+  //   return this.http.post(Paths.deleteCode, this.code.value).pipe(
+  //     catchError((error) => {
+  //         this.response.next(error['error']);
+  //         return of();
+  //       }
+  //     )
+  //   );
+  // }
 
   public loginWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(

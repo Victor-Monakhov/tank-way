@@ -1,15 +1,13 @@
 import {
-  Component,
-  HostListener, OnDestroy,
+  Component, OnDestroy,
   OnInit, TemplateRef, ViewChild
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../services/auth.service";
 import {RegularExp} from "../../../enums/regular-exp.enum";
-import {ISignUpForm} from "../../../interfaces/auth/forms.interface";
 import {Auth} from "../auth.class";
 import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
-import {IResponseMessage} from "../../../interfaces/auth/response-message.interface";
+import {IAuthResponse, ISignUpForm} from "../../../interfaces/auth/auth.interface";
 
 @Component({
   selector: 'app-sign-up',
@@ -80,12 +78,7 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
   }
 
   public successResponse() {
-    this.authService.response.next({} as IResponseMessage);
+    this.authService.response.next({} as IAuthResponse);
     this.authService.isCode.next(true);
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(): void {
-    this.closeModal();
   }
 }

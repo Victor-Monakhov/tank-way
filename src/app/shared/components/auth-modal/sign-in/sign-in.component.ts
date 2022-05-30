@@ -1,13 +1,12 @@
 import {
-  Component,
-  HostListener, OnDestroy,
+  Component, OnDestroy,
   OnInit, TemplateRef, ViewChild
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../services/auth.service";
-import {ISignInForm} from "../../../interfaces/auth/forms.interface";
 import {Auth} from "../auth.class";
 import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
+import {ISignInForm} from "../../../interfaces/auth/auth.interface";
 
 @Component({
   selector: 'app-sign-in',
@@ -57,10 +56,5 @@ export class SignInComponent extends Auth implements OnInit, OnDestroy {
   }
 
   public successResponse() {
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(): void {
-    this.closeModal();
   }
 }

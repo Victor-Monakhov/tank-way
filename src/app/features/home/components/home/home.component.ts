@@ -4,12 +4,12 @@ import {AuthService} from "../../../../shared/services/auth.service";
 import {SubSink} from "subsink";
 import {SocialAuthService} from "angularx-social-login";
 import {LocalStorageService} from "../../../../shared/services/local-storage.service";
-import {map, switchMap} from "rxjs/operators";
+import {switchMap} from "rxjs/operators";
 import {LSKeys} from "../../../../shared/enums/local-storage-keys.enum";
-import {IResponseMessage} from "../../../../shared/interfaces/auth/response-message.interface";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {LocalizationService} from "../../../../shared/services/internationalization/localization.service";
 import {WebSocket} from "../../../../shared/classes/web-sockets/web-socket.class";
+import {IAuthResponse} from "../../../../shared/interfaces/auth/auth.interface";
 
 
 @Component({
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscribeToCode();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscribeToUser(): void {
     this.subs.add(this.authService.user.pipe(
       switchMap(user => {
-        return this.authService.signUp(user) as Observable<IResponseMessage>
+        return this.authService.signUp(user) as Observable<IAuthResponse>
       })
     ).subscribe((response) => {
       this.authService.response.next(response);
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscribeToCode(): void {
     this.subs.add(this.authService.code.pipe(
       switchMap((code) => {
-        return this.authService.sendCode() as Observable<IResponseMessage>
+        return this.authService.sendCode(code) as Observable<IAuthResponse>
       })).subscribe((response) => {
       this.authService.response.next(response);
       if (response.token) {
@@ -93,24 +93,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     }))
   }
 
-  public signUpTriggerHandler(trigger: boolean) {
+  public signUpTriggerHandler(trigger: boolean): void {
     this.authService.isSignUp.next(trigger);
   }
 
-  public signInTriggerHandler(trigger: boolean) {
+  public signInTriggerHandler(trigger: boolean): void {
     this.authService.isSignIn.next(trigger);
   }
 
-  public codeTriggerHandler(trigger: boolean) {
+  public codeTriggerHandler(trigger: boolean): void {
     this.authService.isCode.next(trigger);
   }
 
-  public authMenuTriggerHandler(trigger: boolean) {
+  public authMenuTriggerHandler(trigger: boolean): void {
     this.authService.isAuthMenu.next(trigger);
   }
 
-
-  onDemo(): void {
-    this.router.navigate(['demo']);
+  public onDemo(): void {
+    this.router.navigate(['demo']).then();
   }
 }
