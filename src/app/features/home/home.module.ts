@@ -19,6 +19,7 @@ import {SpinnerModule} from "../../shared/components/spinner/spinner.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {CodeInputComponent} from "../../shared/components/code-input/code-input.component";
 import {VmForDirective} from "../../shared/directives/vm-for.directive";
+import {BlockCopyPastDirective} from "../../shared/directives/block-copy-past.directive";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {VmForDirective} from "../../shared/directives/vm-for.directive";
     SecretCodeComponent,
     AuthMenuComponent,
     CodeInputComponent,
-    VmForDirective
+    VmForDirective,
+    BlockCopyPastDirective
   ],
   imports: [
     CommonModule,

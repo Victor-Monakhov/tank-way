@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {InternationalizationModule} from "./shared/services/internationalization/internationalization.module";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { BlockCopyPastDirective } from './shared/directives/block-copy-past.directive';
 
 /**
  * The http loader factory : Loads the files from define path.

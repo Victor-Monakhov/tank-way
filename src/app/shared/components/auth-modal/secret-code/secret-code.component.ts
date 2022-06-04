@@ -17,7 +17,6 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
   private isConnected: boolean = false;
-  private isWaiting: boolean = false;
   private webSocket: WebSocket = new WebSocket();
   private timerConfig: IAuthTimer = {
     minutes: 1,
@@ -25,6 +24,7 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
     email: '',
   } as IAuthTimer;
   protected subs: SubSink = new SubSink();
+  public isWaiting: boolean = false;
   public visible: Subject<boolean> = new Subject<boolean>();
   public closed: EventEmitter<void> = new EventEmitter<void>();
   public anim: boolean = false;
@@ -96,25 +96,19 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
   }
 
   private closeModal() {
-    //this.isConnected = false;
-    //this.webSocket.disconnect();
     this.invalidMsg = '';
     this.authService.isCode.next(false);
-    //this.timer = '';
-    //this.timerConfig = {} as IAuthTimer;
     this.closed.emit();
   }
 
-  public codeHandler(subCode: Subject<string>): void {
-    this.subs.add(subCode.subscribe((code) => {
+  public codeHandler(code: string): void {
       this.invalidMsg = '';
       if (code.length === this.capacity) {
-        setTimeout(() => this.authService.code.next({
+        this.authService.code.next({
           code: code,
           email: this.email,
-        } as IAuthCode), 100);
+        } as IAuthCode);
       }
-    }));
   }
 
   public onBack(): void {
