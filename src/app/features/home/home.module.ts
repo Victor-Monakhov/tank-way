@@ -17,6 +17,8 @@ import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-cod
 import {AuthMenuComponent} from "../../shared/components/auth-modal/auth-menu/auth-menu.component";
 import {SpinnerModule} from "../../shared/components/spinner/spinner.module";
 import {TranslateModule} from "@ngx-translate/core";
+import { ProfileCardsComponent } from './components/profile-cards/profile-cards.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import {TranslateModule} from "@ngx-translate/core";
     SignInComponent,
     SecretCodeComponent,
     AuthMenuComponent,
+    ProfileCardsComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

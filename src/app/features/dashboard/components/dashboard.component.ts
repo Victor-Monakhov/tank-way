@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {UserService} from "../../../shared/services/user.service";
+import {IUser} from "../../../shared/interfaces/auth/user.interface";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,11 +8,21 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  constructor() {
+
+  resData: any = [];
+
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.getUserItems();
     this.switchThemeMode();
+  }
+
+  public getUserItems(): void {
+    this.userService.getUserItems().subscribe((res: IUser[]) => {
+      this.resData = res;
+    });
   }
 
   private switchThemeMode(): void {

@@ -8,14 +8,14 @@ const routes: Routes = [
     redirectTo: `/${NAVIGATE.HOME}`,
     pathMatch: 'full',
   },
-  // {
-  //   path: NAVIGATE.HOME,
-  //   loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
-  // },
   {
     path: NAVIGATE.HOME,
-    loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
-  }
+    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
+  },
+  // {
+  //   path: NAVIGATE.HOME,
+  //   loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
+  // }
 ];
 
 @NgModule({
