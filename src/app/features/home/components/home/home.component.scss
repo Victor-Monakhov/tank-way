@@ -4,6 +4,7 @@
 @import 'src/assets/styles/animations';
 @import 'src/assets/styles/images';
 @import 'src/assets/styles/variables';
+@import 'https://unicons.iconscout.com/release/v4.0.0/css/line.css';
 
 .home-wrapper {
   img {
@@ -21,6 +22,7 @@
   .title {
     @include media-property(padding, 0 20px, 0 30px, 0 20%, 0 20%);
     animation: row_go_down 1s ease 1 both;
+
     h1 {
       color: $red;
       margin-top: 50px;
@@ -41,6 +43,8 @@
     @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
     @include media-property(flex-direction, column, column, row, row);
     justify-content: start;
+    background-color: $black;
+    margin-top: 30px;
 
     h2 {
       @include media-property(margin, 40px 10px 40px 0, 40px 20px 40px 0, 40px 30px 40px 0, 40px 40px 40px 0);
@@ -57,13 +61,29 @@
   }
 
   .pos-selection-wrapper {
-    margin-bottom: 50px;
+    //margin-bottom: 50px;
 
     .pos-selection {
       display: flex;
       width: 100%;
-      //background-color: $black;
+      background-color: $black;
       flex-direction: column;
     }
+  }
+
+  #btnToTop {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: transparent; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 10px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 20px; /* Increase font size */
   }
 }

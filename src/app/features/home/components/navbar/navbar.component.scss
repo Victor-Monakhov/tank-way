@@ -69,6 +69,18 @@ p:hover {
     width: 100%
   }
 
+  .gameTitleLogo {
+    @include media-property(display, none, none, flex, flex);
+    width: 100%;
+    position: absolute;
+    padding-right: 65px;
+    text-align: center;
+    justify-content: center;
+    color: #FFF;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
   .language {
     @include media-property(margin, 0 10px 0 0, 0 20px 0 0, 0 20px 0 0, 0 30px 0 0);
     display: flex;
