@@ -5,13 +5,13 @@ import {EventEmitter, TemplateRef} from "@angular/core";
 import {VMValidator} from "../../classes/form-validation/vm-validator.class";
 import {IDropModal} from "../../interfaces/drop-modal.interface";
 import {AuthService} from "../../services/auth.service";
-import {AbstractControl, FormGroup} from "@angular/forms";
+import {AbstractControl, UntypedFormGroup} from "@angular/forms";
 import {IAuthResponse} from "../../interfaces/auth/auth.interface";
 
 export abstract class Auth implements IDropModal{
 
   abstract templateRef: TemplateRef<any>;
-  abstract form: FormGroup;
+  abstract form: UntypedFormGroup;
   abstract isErrorReq: Object;
   abstract invalidMsg: Object;
   abstract authService: AuthService;

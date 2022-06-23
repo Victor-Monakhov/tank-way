@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup } from '@angular/forms';
 import { DemoService } from 'src/app/features/demo/services/demo.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class PositionSelectionComponent implements OnInit {
     position: 0,
   });
 
-  constructor(private fb: FormBuilder, private demoService: DemoService) {
+  constructor(private fb: UntypedFormBuilder, private demoService: DemoService) {
   }
   ngOnInit(): void {
   }

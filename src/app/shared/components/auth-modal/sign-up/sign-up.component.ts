@@ -2,7 +2,7 @@ import {
   Component, OnDestroy,
   OnInit, TemplateRef, ViewChild
 } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../services/auth.service";
 import {RegularExp} from "../../../enums/regular-exp.enum";
 import {Auth} from "../auth.class";
@@ -23,7 +23,7 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
     email: false,
   }
 
-  public form: FormGroup = this.fb.group({
+  public form: UntypedFormGroup = this.fb.group({
     nickname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15),
       Validators.pattern(RegularExp.nickname)]],
     email: ['', [Validators.required, VMValidator.email]],
@@ -32,7 +32,7 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
     confirm: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
   });
 
-  constructor(private fb: FormBuilder, public authService: AuthService) {
+  constructor(private fb: UntypedFormBuilder, public authService: AuthService) {
     super();
   }
 

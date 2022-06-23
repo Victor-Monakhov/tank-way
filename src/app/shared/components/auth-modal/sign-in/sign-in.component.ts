@@ -2,7 +2,7 @@ import {
   Component, OnDestroy,
   OnInit, TemplateRef, ViewChild
 } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../../services/auth.service";
 import {Auth} from "../auth.class";
 import {VMValidator} from "../../../classes/form-validation/vm-validator.class";
@@ -21,12 +21,12 @@ export class SignInComponent extends Auth implements OnInit, OnDestroy {
     password: false,
   }
 
-  public form: FormGroup = this.fb.group({
+  public form: UntypedFormGroup = this.fb.group({
     email: ['', [Validators.required, VMValidator.email]],
     password: ['', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder, public authService: AuthService) {
+  constructor(private fb: UntypedFormBuilder, public authService: AuthService) {
     super();
   }
 
