@@ -4,7 +4,7 @@
   justify-content: flex-end;
 }
 .service-wrapper{
-  @include media-property(width, 90%, 80%, 80%, 80%);
+  @include media-property(H, width, 90%, 80%, 80%, 80%);
   display: flex;
   margin-top: 10px;
   padding: 5px;

@@ -12,8 +12,8 @@
 }
 
 .nav-menu {
-  @include media-property(display, block, block, none, none);
-  @include media-property(padding, 10px, 10px, 0, 0);
+  @include media-property(H, display, block, block, none, none);
+  @include media-property(H, padding, 10px, 10px, 0, 0);
   background-color: $black;
   border-radius: 5px;
   z-index: 5000;

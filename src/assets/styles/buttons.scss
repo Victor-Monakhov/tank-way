@@ -50,7 +50,7 @@
   overflow: hidden;
 
   span {
-    @include media-property(font-size, 2rem, 2.2rem, 2.5rem, 3rem);
+    @include media-property(H, font-size, 2rem, 2.2rem, 2.5rem, 3rem);
     z-index: 1;
     font-family: Raleway-Bold, sans-serif;
     color: rgba(255, 255, 255, 0.8);

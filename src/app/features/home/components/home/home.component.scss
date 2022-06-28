@@ -18,7 +18,7 @@
   }
 
   .title {
-    @include media-property(padding, 0 20px, 0 30px, 0 20%, 0 20%);
+    @include media-property(H, padding, 0 20px, 0 30px, 0 20%, 0 20%);
     animation: row_go_down 1s ease 1 both;
 
     h1 {
@@ -32,19 +32,19 @@
   }
 
   .play {
-    @include media-property(margin, 0 10px, 0 20px, 0 30px, 0 40px);
-    @include media-property(width, 90%, 400px, 400px, 400px);
+    @include media-property(H, margin, 0 10px, 0 20px, 0 30px, 0 40px);
+    @include media-property(H, width, 90%, 400px, 400px, 400px);
     padding: 20px 40px;
   }
 
   .settings-title {
-    @include media-property(padding, 30px 10px, 30px 20px, 30px 30px, 30px 40px);
-    @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
-    @include media-property(flex-direction, column, column, row, row);
+    @include media-property(H, padding, 30px 10px, 30px 20px, 30px 30px, 30px 40px);
+    @include media-property(H, flex-wrap, wrap, wrap, nowrap, nowrap);
+    @include media-property(H, flex-direction, column, column, row, row);
     justify-content: start;
 
     h2 {
-      @include media-property(margin, 40px 10px 40px 0, 40px 20px 40px 0, 40px 30px 40px 0, 40px 40px 40px 0);
+      @include media-property(H, margin, 40px 10px 40px 0, 40px 20px 40px 0, 40px 30px 40px 0, 40px 40px 40px 0);
       color: $red;
       margin: 40px 0 40px 0;
       flex-shrink: 0;

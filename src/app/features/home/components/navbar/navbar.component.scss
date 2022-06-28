@@ -4,12 +4,12 @@
 @import '../../../../../assets/styles/images';
 
 hr {
-  @include media-property(display, block, block, none, none);
+  @include media-property(H, display, block, block, none, none);
   margin: 3px;
 }
 
 p {
-  @include media-property(margin, 0, 0, 0 20px 0 0, 0 30px 0 0);
+  @include media-property(H, margin, 0, 0, 0 20px 0 0, 0 30px 0 0);
   text-align: start;
   border: 1px solid transparent;
   cursor: pointer;
@@ -18,13 +18,13 @@ p {
 }
 
 p:hover {
-  @include media-property(border-bottom-color, transparent, transparent, $red, $red);
-  @include media-property(color, $red, $red, #fff, #fff);
+  @include media-property(H, border-bottom-color, transparent, transparent, $red, $red);
+  @include media-property(H, color, $red, $red, #fff, #fff);
 }
 
 .navbar {
-  @include media-property(justify-content, space-between, space-between, start, start);
-  @include media-property(padding, 10px, 10px 20px, 10px 30px, 10px 40px);
+  @include media-property(H, justify-content, space-between, space-between, start, start);
+  @include media-property(H, padding, 10px, 10px 20px, 10px 30px, 10px 40px);
   display: flex;
   align-items: center;
   height: $header-height;
@@ -37,7 +37,7 @@ p:hover {
   z-index: 10;
 
   .btn-menu {
-    @include media-property(display, flex, flex, none, none);
+    @include media-property(H, display, flex, flex, none, none);
     width: $img-logo-width;
     height: $img-logo-height;
     background-image: $img-logo;
@@ -51,7 +51,7 @@ p:hover {
   }
 
   .gameLogo {
-    @include media-property(margin, 0 10px, 0 20px, 0 20px 0 0, 0 30px 0 0);
+    @include media-property(H, margin, 0 10px, 0 20px, 0 20px 0 0, 0 30px 0 0);
     display: flex;
     flex-shrink: 0;
     justify-content: center;
@@ -64,13 +64,13 @@ p:hover {
   }
 
   .menu-wrapper {
-    @include media-property(display, none, none, flex, flex);
+    @include media-property(H, display, none, none, flex, flex);
     justify-content: end;
     width: 100%
   }
 
   .language {
-    @include media-property(margin, 0 10px 0 0, 0 20px 0 0, 0 20px 0 0, 0 30px 0 0);
+    @include media-property(H, margin, 0 10px 0 0, 0 20px 0 0, 0 20px 0 0, 0 30px 0 0);
     display: flex;
     align-items: center;
 
