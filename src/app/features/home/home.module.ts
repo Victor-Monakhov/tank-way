@@ -7,19 +7,20 @@ import {SliderComponent} from 'src/app/shared/components/slider/main/slider.comp
 import {
   PositionSelectionComponent
 } from 'src/app/features/home/components/settings/position-selection/position-selection.component';
-import {DropModalDirective} from "../../shared/directives/drop-modal.directive";
-import {MenuComponent} from "../../shared/components/menu/menu.component";
-import {FullScreenComponent} from "../../shared/components/slider/full-screen/full-screen.component";
+import {DropPanelDirective} from '../../shared/directives/vm-lib/drop-panel.directive';
+import {DropPanelComponent} from '../../shared/components/vm-lib/drop-panel/drop-panel.component';
+import {FullScreenComponent} from '../../shared/components/slider/full-screen/full-screen.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SignUpComponent} from 'src/app/shared/components/auth-modal/sign-up/sign-up.component';
-import {SignInComponent} from "../../shared/components/auth-modal/sign-in/sign-in.component";
-import {SecretCodeComponent} from "../../shared/components/auth-modal/secret-code/secret-code.component";
-import {AuthMenuComponent} from "../../shared/components/auth-modal/auth-menu/auth-menu.component";
-import {SpinnerModule} from "../../shared/components/spinner/spinner.module";
-import {TranslateModule} from "@ngx-translate/core";
-import {CodeInputComponent} from "../../shared/components/code-input/code-input.component";
-import {VmForDirective} from "../../shared/directives/vm-for.directive";
-import {BlockCopyPastDirective} from "../../shared/directives/block-copy-past.directive";
+import {SignInComponent} from '../../shared/components/auth-modal/sign-in/sign-in.component';
+import {SecretCodeComponent} from '../../shared/components/auth-modal/secret-code/secret-code.component';
+import {AuthMenuComponent} from '../../shared/components/auth-modal/auth-menu/auth-menu.component';
+import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
+import {TranslateModule} from '@ngx-translate/core';
+import {CodeInputComponent} from '../../shared/components/code-input/code-input.component';
+import {VmForDirective} from '../../shared/directives/vm-for.directive';
+import {BlockCopyPastDirective} from '../../shared/directives/block-copy-past.directive';
+import {NavMenuComponent} from './components/navbar/nav-menu/nav-menu.component';
 
 
 @NgModule({
@@ -28,8 +29,8 @@ import {BlockCopyPastDirective} from "../../shared/directives/block-copy-past.di
     NavbarComponent,
     SliderComponent,
     PositionSelectionComponent,
-    DropModalDirective,
-    MenuComponent,
+    DropPanelDirective,
+    DropPanelComponent,
     FullScreenComponent,
     SignUpComponent,
     SignInComponent,
@@ -37,7 +38,8 @@ import {BlockCopyPastDirective} from "../../shared/directives/block-copy-past.di
     AuthMenuComponent,
     CodeInputComponent,
     VmForDirective,
-    BlockCopyPastDirective
+    BlockCopyPastDirective,
+    NavMenuComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,7 @@ import {BlockCopyPastDirective} from "../../shared/directives/block-copy-past.di
     }),
   ],
   exports: [
-    DropModalDirective,
+    DropPanelDirective,
   ],
   providers: []
 })

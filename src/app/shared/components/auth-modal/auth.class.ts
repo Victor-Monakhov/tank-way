@@ -1,14 +1,14 @@
-import {switchMap} from "rxjs/operators";
-import {BehaviorSubject, of, Subject} from "rxjs";
-import {SubSink} from "subsink";
-import {EventEmitter, TemplateRef} from "@angular/core";
-import {VMValidator} from "../../classes/form-validation/vm-validator.class";
-import {IDropModal} from "../../interfaces/drop-modal.interface";
-import {AuthService} from "../../services/auth.service";
-import {AbstractControl, UntypedFormGroup} from "@angular/forms";
-import {IAuthResponse} from "../../interfaces/auth/auth.interface";
+import {switchMap} from 'rxjs/operators';
+import {BehaviorSubject, of, Subject} from 'rxjs';
+import {SubSink} from 'subsink';
+import {EventEmitter, TemplateRef} from '@angular/core';
+import {VMValidator} from '../../classes/form-validation/vm-validator.class';
+import {IDropPanel} from '../../interfaces/drop-panel.interface';
+import {AuthService} from '../../services/auth.service';
+import {AbstractControl, UntypedFormGroup} from '@angular/forms';
+import {IAuthResponse} from '../../interfaces/auth/auth.interface';
 
-export abstract class Auth implements IDropModal{
+export abstract class Auth implements IDropPanel {
 
   abstract templateRef: TemplateRef<any>;
   abstract form: UntypedFormGroup;
@@ -28,7 +28,7 @@ export abstract class Auth implements IDropModal{
   }
 
   abstract successResponse(): void;
-  abstract onBack():void;
+  abstract onBack(): void;
 
   private clearMsg() {
     for (let key in this.isErrorReq) {
@@ -39,7 +39,7 @@ export abstract class Auth implements IDropModal{
     }
   }
 
-  protected modalIsVisible(): BehaviorSubject<IAuthResponse>{
+  protected modalIsVisible(): BehaviorSubject<IAuthResponse> {
     return this.authService.response;
   }
 

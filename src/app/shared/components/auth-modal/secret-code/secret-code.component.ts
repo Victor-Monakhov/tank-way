@@ -1,27 +1,27 @@
 import {Component, EventEmitter, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {AuthService} from "../../../services/auth.service";
-import {of, Subject} from "rxjs";
-import {SubSink} from "subsink";
-import {IDropModal} from "../../../interfaces/drop-modal.interface";
-import {switchMap} from "rxjs/operators";
-import {WebSocket} from "../../../classes/web-sockets/web-socket.class";
-import {Paths} from "../../../classes/paths.class";
-import {IAuthCode, IAuthTimer, IAuthResponse} from "../../../interfaces/auth/auth.interface";
+import {AuthService} from '../../../services/auth.service';
+import {of, Subject} from 'rxjs';
+import {SubSink} from 'subsink';
+import {IDropPanel} from '../../../interfaces/drop-panel.interface';
+import {switchMap} from 'rxjs/operators';
+import {WebSocket} from '../../../classes/web-sockets/web-socket.class';
+import {Paths} from '../../../classes/paths.class';
+import {IAuthCode, IAuthTimer, IAuthResponse} from '../../../interfaces/auth/auth.interface';
 
 @Component({
   selector: 'app-secret-code',
   templateUrl: './secret-code.component.html',
   styleUrls: ['./secret-code.component.scss']
 })
-export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
+export class SecretCodeComponent implements OnInit, OnDestroy, IDropPanel {
 
-  @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
+  @ViewChild(TemplateRef) public templateRef: TemplateRef<any> = {} as TemplateRef<any>;
   private isConnected: boolean = false;
   private webSocket: WebSocket = new WebSocket();
   private timerConfig: IAuthTimer = {
     minutes: 1,
     seconds: 40,
-    email: '',
+    email: ''
   } as IAuthTimer;
   protected subs: SubSink = new SubSink();
   public isWaiting: boolean = false;
@@ -31,37 +31,60 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
   public readonly capacity: number = 6;
   public timer: string = '';
   public invalidMsg: string = '';
-  public get email(): string {
-    return this.authService.tmpUser.email ?? '';
-  };
 
-  constructor(public authService: AuthService) {
+  public constructor(public authService: AuthService) {
     this.webSocket.connect(Paths.wsEndPointTanksAuth, Paths.wsTopicAuthTimer);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscribeToVisible();
     this.subscribeToConnection();
     this.subscribeToWebSocket();
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subs.unsubscribe();
     this.webSocket.disconnect();
+  }
+
+  public codeHandler(code: string): void {
+    this.invalidMsg = '';
+    if (code.length === this.capacity) {
+      this.authService.code.next({
+        code: code,
+        email: this.email
+      } as IAuthCode);
+    }
+  }
+
+  public onBack(): void {
+    this.closeModal();
+    this.authService.isSignUp.next(true);
+  }
+
+  public onSendCode(): void {
+    if (this.isConnected) {
+      this.authService.user.next(this.authService.tmpUser);
+      this.webSocket.sendMessage(Paths.wsSendAuthCode, this.timerConfig);
+    }
+  }
+
+  public successResponse(): void {
+    this.authService.response.next({} as IAuthResponse);
   }
 
   private subscribeToVisible(): void {
     this.subs.add(this.visible.pipe(
       switchMap((isVisible) => {
         if (isVisible) {
-          if(this.isConnected && !this.isWaiting){
+          if (this.isConnected && !this.isWaiting) {
             this.timerConfig.email = this.email;
             this.webSocket.sendMessage(Paths.wsSendAuthCode, this.timerConfig);
           }
           return this.authService.response;
         }
         return of()
-      }),
+      })
     ).subscribe((response) => {
       if ((response as IAuthResponse).token) {
         this.closeModal();
@@ -90,40 +113,18 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropModal {
     this.subs.add(
       this.webSocket.isConnected.subscribe((isConnected) => {
         this.isConnected = isConnected;
-        console.log("connection-->", this.isConnected);
+        console.log('connection-->', this.isConnected);
       })
     );
   }
 
-  private closeModal() {
+  private closeModal(): void {
     this.invalidMsg = '';
     this.authService.isCode.next(false);
     this.closed.emit();
   }
 
-  public codeHandler(code: string): void {
-      this.invalidMsg = '';
-      if (code.length === this.capacity) {
-        this.authService.code.next({
-          code: code,
-          email: this.email,
-        } as IAuthCode);
-      }
-  }
-
-  public onBack(): void {
-    this.closeModal();
-    this.authService.isSignUp.next(true);
-  }
-
-  public onSendCode() {
-    if (this.isConnected) {
-      this.authService.user.next(this.authService.tmpUser);
-      this.webSocket.sendMessage(Paths.wsSendAuthCode, this.timerConfig);
-    }
-  }
-
-  public successResponse() {
-    this.authService.response.next({} as IAuthResponse);
-  }
+  public get email(): string {
+    return this.authService.tmpUser.email ?? '';
+  };
 }

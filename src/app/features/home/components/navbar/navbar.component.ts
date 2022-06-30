@@ -1,5 +1,5 @@
-import {Component, ContentChild, OnInit, TemplateRef} from '@angular/core';
-import {LocalizationService} from "../../../../shared/services/internationalization/localization.service";
+import {Component, OnInit} from '@angular/core';
+import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
 
 interface ILocal {
   value: string;
@@ -10,43 +10,42 @@ interface ILocal {
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
 
   public closeDropElement: boolean;
-
-  constructor(private localizationService: LocalizationService) {
-  }
-
   public languages: ILocal[] = [
     {value: 'uk-UA', label: ' UA', flag: 'flag-icon flag-icon-ua'},
     {value: 'en-US', label: ' EN', flag: '../../../../../assets/images/usa-icon.svg'},
   ];
+  public language = this.getLocal();
 
-  language = this.getLocal();
+  public constructor(private localizationService: LocalizationService) {
+  }
 
-  getLocal(): any {
+  public getLocal(): any {
     if ((localStorage.getItem('language') === this.languages[1].value)) {
       return this.languages[1].value;
     }
     return this.languages[0].value;
   }
 
-  get name(): string {
-    return this.localizationService.translate('banner.world');
-  }
-
-  onSelect(lang: string): void {
+  public onSelect(lang: string): void {
     localStorage.setItem('language', lang);
     this.localizationService.initService();
-    //console.log(lang);
+    // console.log(lang);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    return;
   }
 
-  public onMenuItem() {
+  public onMenuItem(): void {
     this.closeDropElement = !this.closeDropElement;
+  }
+
+  public get name(): string {
+    return this.localizationService.translate('banner.world');
   }
 }

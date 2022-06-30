@@ -13,9 +13,9 @@
   <div class="row">
     <small>
       {{'HOME.DEMO_MESSAGE'|translate}}
-      <small class="link" [dropModal]="authMenu">
-        {{'HOME.DEMO_MESSAGE_LINK'|translate}}
-      </small>
+<!--      <small class="link" [dropModal]="authMenu">-->
+<!--        {{'HOME.DEMO_MESSAGE_LINK'|translate}}-->
+<!--      </small>-->
     </small>
   </div>
   <div class="row settings-title">
@@ -31,26 +31,26 @@
   <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>
 </div>
 
-<app-auth-menu #authMenu
-               [dropModal]="authMenu"
-               [trigger]="authMenuTrigger$ | async"
-               (triggerEvent)="authMenuTriggerHandler($event)">
-</app-auth-menu>
-<app-sign-up #signUp
-             [dropModal]="signUp"
-             [trigger]="signUpTrigger$ | async"
-             (triggerEvent)="signUpTriggerHandler($event)">
-</app-sign-up>
-<app-sign-in #signIn
-             [dropModal]="signIn"
-             [trigger]="signInTrigger$ | async"
-             (triggerEvent)="signInTriggerHandler($event)">
-</app-sign-in>
-<app-secret-code #secretCode
-                 [dropModal]="secretCode"
-                 [trigger]="codeTrigger$ | async"
-                 (triggerEvent)="codeTriggerHandler($event)">
-</app-secret-code>
+<!--<app-auth-menu #authMenu-->
+<!--               [dropModal]="authMenu"-->
+<!--               [trigger]="authMenuTrigger$ | async"-->
+<!--               (triggerEvent)="authMenuTriggerHandler($event)">-->
+<!--</app-auth-menu>-->
+<!--<app-sign-up #signUp-->
+<!--             [dropModal]="signUp"-->
+<!--             [trigger]="signUpTrigger$ | async"-->
+<!--             (triggerEvent)="signUpTriggerHandler($event)">-->
+<!--</app-sign-up>-->
+<!--<app-sign-in #signIn-->
+<!--             [dropModal]="signIn"-->
+<!--             [trigger]="signInTrigger$ | async"-->
+<!--             (triggerEvent)="signInTriggerHandler($event)">-->
+<!--</app-sign-in>-->
+<!--<app-secret-code #secretCode-->
+<!--                 [dropModal]="secretCode"-->
+<!--                 [trigger]="codeTrigger$ | async"-->
+<!--                 (triggerEvent)="codeTriggerHandler($event)">-->
+<!--</app-secret-code>-->
 
 <ng-template #galleryFullScreen>
   <app-full-screen-gallery

@@ -93,7 +93,7 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "prefix": "app",
+            "prefix": ["app", "vmc", "okc"],
             "style": "kebab-case",
             "type": "element"
           }
@@ -101,7 +101,7 @@
         "@angular-eslint/directive-selector": [
           "error",
           {
-            //"prefix": "app",
+            "prefix": ["app", "vmd", "okd"],
             "style": "camelCase",
             "type": "attribute"
           }

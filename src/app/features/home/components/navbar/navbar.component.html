@@ -1,7 +1,7 @@
 <div class="navbar">
   <button type="button"
           class="btn-menu"
-          [dropModal]=menu
+          [vmdDropPanel] = navMenu
           [staticBackdrop]="false">
   </button>
   <div class="gameLogo"></div>
@@ -20,14 +20,14 @@
 </div>
 
 
-<app-menu #menu [emitClosed]="closeDropElement">
-  <ng-container *ngTemplateOutlet="menuContent"></ng-container>
-</app-menu>
-<app-auth-menu #authMenu></app-auth-menu>
+<vmc-drop-panel #navMenu>
+  <app-nav-menu>
+    <ng-container *ngTemplateOutlet="menuContent"></ng-container>
+  </app-nav-menu>
+</vmc-drop-panel>
 
 <ng-template #menuContent>
-  <p [dropModal]="authMenu"
-     (click)="onMenuItem()">Cabinet</p>
+  <p (click)="onMenuItem()">Cabinet</p>
   <hr>
   <p>About</p>
   <hr>
