@@ -52,14 +52,15 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/@angular/cdk/overlay-prebuilt.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+             "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "./src/assets/styles"
               ]
             },
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {

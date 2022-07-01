@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './components/home/home.component';
-import {NavbarComponent} from 'src/app/features/home/components/navbar/navbar.component';
+import {HeaderComponent} from 'src/app/features/home/components/header/header.component';
 import {SliderComponent} from 'src/app/shared/components/slider/main/slider.component';
 import {
   PositionSelectionComponent
@@ -20,13 +20,13 @@ import {TranslateModule} from '@ngx-translate/core';
 import {CodeInputComponent} from '../../shared/components/code-input/code-input.component';
 import {VmForDirective} from '../../shared/directives/vm-for.directive';
 import {BlockCopyPastDirective} from '../../shared/directives/block-copy-past.directive';
-import {NavMenuComponent} from './components/navbar/nav-menu/nav-menu.component';
+import {HeaderMenuComponent} from './components/header/header-menu/header-menu.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    NavbarComponent,
+    HeaderComponent,
     SliderComponent,
     PositionSelectionComponent,
     DropPanelDirective,
@@ -39,7 +39,7 @@ import {NavMenuComponent} from './components/navbar/nav-menu/nav-menu.component'
     CodeInputComponent,
     VmForDirective,
     BlockCopyPastDirective,
-    NavMenuComponent
+    HeaderMenuComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +49,7 @@ import {NavMenuComponent} from './components/navbar/nav-menu/nav-menu.component'
     SpinnerModule,
     TranslateModule.forChild({
       extend: true
-    }),
+    })
   ],
   exports: [
     DropPanelDirective,

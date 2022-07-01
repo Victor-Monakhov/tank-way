@@ -1,6 +1,11 @@
 @import 'colors.scss';
 
-$header-height: 60px;
+//header--------------------------------------------------------------------------
+$header-height: 90px;
+$header-z-index: 1;
+//--------------------------------------------------------------------------header
+
+
 $panel-shadow: 2px 2px 6px 2px #000;
 $panel-shadow-blue: 0 2px 4px 0 $blue;
 $panel-shadow-red: 0 2px 4px 0 $red;

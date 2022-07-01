@@ -1,0 +1,46 @@
+<div class="title-page-header-wrapper">
+  <div class="left-menu">
+    <button type="button"
+            class="btn-menu"
+            [vmdDropPanel]=navMenu
+            [staticBackdrop]="false">
+    </button>
+    <div class="gameLogo"></div>
+    <p>Game</p>
+    <p>Forum</p>
+  </div>
+  <div class="right-menu">
+    <p>Sign in</p>
+    <div class="vertical-slash"></div>
+    <div class="languages">
+      <p>EN</p>
+      <i class="fa-solid fa-angle-down"></i>
+    </div>
+    <!--      <select name="language" [(ngModel)]='language' (ngModelChange)="onSelect($event)">-->
+    <!--        <option *ngFor="let language of languages" [ngValue]="language.value">{{language.label}}</option>-->
+    <!--      </select>-->
+  </div>
+
+  <!--  <div class="menu-wrapper">-->
+  <!--    <ng-container *ngTemplateOutlet="menuContent"></ng-container>-->
+  <!--  </div>-->
+  <!--  <div class="language">-->
+  <!--    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">-->
+  <!--  </div>-->
+
+
+</div>
+
+
+<vmc-drop-panel #navMenu>
+  <app-header-menu>
+    <ng-container *ngTemplateOutlet="menuContent"></ng-container>
+  </app-header-menu>
+</vmc-drop-panel>
+
+<ng-template #menuContent>
+  <p (click)="onMenuItem()">Cabinet</p>
+  <hr>
+  <p>About</p>
+  <hr>
+</ng-template>
