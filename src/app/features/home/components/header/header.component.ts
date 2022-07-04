@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
+import {PanelService} from '../../../../shared/services/panel.service';
+import {Observable, Subject} from 'rxjs';
+import {tap} from "rxjs/operators";
 
 interface ILocal {
   value: string;
@@ -20,7 +23,8 @@ export class HeaderComponent implements OnInit {
   ];
   public language = this.getLocal();
 
-  public constructor(private localizationService: LocalizationService) {
+  public constructor(private localizationService: LocalizationService,
+                     private panelService: PanelService) {
   }
 
   public getLocal(): any {
@@ -40,11 +44,19 @@ export class HeaderComponent implements OnInit {
     return;
   }
 
-  public onMenuItem(): void {
-    this.closeDropElement = !this.closeDropElement;
+  public onMenu(): void {
+    this.headerMenuTrigger$.next(true);
+  }
+
+  public triggerHandler(result: boolean, trigger: Subject<boolean>): void {
+    trigger.next(result);
   }
 
   public get name(): string {
     return this.localizationService.translate('banner.world');
+  }
+
+  public get headerMenuTrigger$(): Subject<boolean> {
+    return this.panelService.titleHeaderMenu$;
   }
 }

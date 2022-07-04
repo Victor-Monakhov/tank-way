@@ -3,11 +3,11 @@
 
 
 //drop-panel-go
-@keyframes menu_go_right{
+@keyframes header_menu_go_right_visible {
   0% { left: -100%;}
   100% {left: 0;}
 }
-@keyframes menu_go_left{
+@keyframes header_menu_go_left_hidden {
   0% { left: 0;}
   100% {left: -100%;}
 }

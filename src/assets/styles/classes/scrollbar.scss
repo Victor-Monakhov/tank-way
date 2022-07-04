@@ -1,0 +1,21 @@
+@import "colors.scss";
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  height: 30%;
+}
+
+.home-wrapper:hover {
+
+  ::-webkit-scrollbar-thumb {
+    background: $golden05;
+  }
+}

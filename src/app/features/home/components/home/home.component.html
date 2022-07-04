@@ -1,34 +1,36 @@
 <div *ngIf="!galleryMode; else galleryFullScreen" class="home-wrapper">
   <app-header></app-header>
-  <img src="../../assets/images/bg-tanks.png" alt="#">
-  <div class="row title">
-    <h1>{{'HOME.TITLE'|translate}}</h1>
-    <p>
-      {{'HOME.DESCRIPTION'|translate}}
-    </p>
-  </div>
-  <div class="row">
-    <button class="btn-start play" (click)="onDemo()"><span>{{'HOME.DEMO'|translate}}</span></button>
-  </div>
-  <div class="row">
-    <small>
-      {{'HOME.DEMO_MESSAGE'|translate}}
-<!--      <small class="link" [dropModal]="authMenu">-->
-<!--        {{'HOME.DEMO_MESSAGE_LINK'|translate}}-->
-<!--      </small>-->
-    </small>
-  </div>
-  <div class="row settings-title">
-    <div class="p-wrapper">
-      <p>{{'HOME.DEMO_SETTINGS_TEXT'|translate}}</p>
+  <div class="home-content">
+    <img src="../../assets/images/bg-tanks.png" alt="#">
+    <div class="row title">
+      <h1>{{'HOME.TITLE'|translate}}</h1>
+      <p>
+        {{'HOME.DESCRIPTION'|translate}}
+      </p>
     </div>
-  </div>
-  <div class="row pos-selection-wrapper">
-    <div class="pos-selection">
-      <app-settings></app-settings>
+    <div class="row">
+      <button class="btn-start play" (click)="onDemo()"><span>{{'HOME.DEMO'|translate}}</span></button>
     </div>
+    <div class="row">
+      <small>
+        {{'HOME.DEMO_MESSAGE'|translate}}
+        <!--      <small class="link" [dropModal]="authMenu">-->
+        <!--        {{'HOME.DEMO_MESSAGE_LINK'|translate}}-->
+        <!--      </small>-->
+      </small>
+    </div>
+    <div class="row settings-title">
+      <div class="p-wrapper">
+        <p>{{'HOME.DEMO_SETTINGS_TEXT'|translate}}</p>
+      </div>
+    </div>
+    <div class="row pos-selection-wrapper">
+      <div class="pos-selection">
+        <app-settings></app-settings>
+      </div>
+    </div>
+    <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>
   </div>
-  <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>
 </div>
 
 <!--<app-auth-menu #authMenu-->

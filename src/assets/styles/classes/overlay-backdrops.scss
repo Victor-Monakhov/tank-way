@@ -1,0 +1,10 @@
+@import "colors.scss";
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    &.backdrop-black05 {
+        background: $black05;
+    }
+    &.backdrop-transparent {
+        background: transparent;
+    }
+}

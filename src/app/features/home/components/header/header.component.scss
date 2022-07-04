@@ -2,7 +2,8 @@
 @import '../../../../../assets/styles/mixins';
 @import '../../../../../assets/styles/variables';
 @import '../../../../../assets/styles/images';
-@import 'fonts.scss';
+@import 'animations.scss';
+@import 'html-elements/html-elements.scss';
 
 .title-page-header-wrapper {
   @include media-property(H, padding, 0 15px, 0 60px, 0 120px);
@@ -32,9 +33,8 @@
   }
 
   p {
-    font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
-    font-size: 1.3rem;
     cursor: pointer;
+    color: $white;
 
     &:hover {
       @extend .border-anim;
@@ -103,5 +103,24 @@
         font-size: 1.3rem;
       }
     }
+  }
+}
+
+vmc-drop-panel {
+  overflow: hidden;
+}
+
+.title-page-header-menu {
+  @include media-property(H, display, block, block, none);
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+
+  &.visible {
+    animation: header_menu_go_right_visible 0.5s ease-out 1 both;
+  }
+
+  &.hidden {
+    animation: header_menu_go_left_hidden 0.5s ease-out 1 both;
   }
 }

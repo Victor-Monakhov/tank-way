@@ -26,7 +26,7 @@ export class DropPanelDirective implements OnChanges {
   @Input() public staticBackdrop: boolean = true;
   @Input() public hasBackdrop: boolean = true;
   @Input() public animDaley: number = 0;
-  @Input() public backdropClass: string = 'backdrop-blackA05';
+  @Input() public backdropClass: string = 'backdrop-black05';
   @Output() public triggerEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   private subs: SubSink = new SubSink();
 
@@ -38,10 +38,7 @@ export class DropPanelDirective implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['trigger'] &&
-      changes['trigger'].previousValue !== changes['trigger'].currentValue) {
       (this.trigger) ? this.onDrop() : this.destroyMenu();
-    }
   }
 
   private onDrop(): void {
@@ -93,8 +90,8 @@ export class DropPanelDirective implements OnChanges {
     if (!this.overlayRef) {
       return;
     }
+    this.triggerEvent.emit(false);
     setTimeout(() => {
-      this.triggerEvent.emit(false);
       this.subs.unsubscribe();
       this.overlayRef.detach();
       this.vmdDropPanel.visible.next(false);
