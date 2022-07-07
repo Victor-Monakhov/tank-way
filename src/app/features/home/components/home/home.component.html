@@ -1,9 +1,9 @@
 <div *ngIf="!galleryMode; else galleryFullScreen" class="home-wrapper">
   <app-navbar></app-navbar>
   <!--  <img src="../../assets/images/bg-tanks.png" alt="#">-->
-  <img
-    src="https://static.vecteezy.com/system/resources/previews/002/922/429/original/military-and-army-pixel-camouflage-pattern-background-vector.jpg"
-    alt="">
+<!--  <img-->
+<!--    src="https://static.vecteezy.com/system/resources/previews/002/922/429/original/military-and-army-pixel-camouflage-pattern-background-vector.jpg"-->
+<!--    alt="">-->
   <div class="row title">
     <!--    <h1>{{'HOME.TITLE'|translate}}</h1>-->
     <p>
@@ -33,7 +33,7 @@
   </div>
     <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>
   <app-profile-cards></app-profile-cards>
-  <button (click)="topFunction()" id="btnToTop"><i class="uil uil-angle-up"></i></button>
+  <button (click)="topFunction()" id="btnToTop"><i class="fa-solid fa-circle-arrow-up"></i></button>
   <app-footer></app-footer>
 </div>
 
