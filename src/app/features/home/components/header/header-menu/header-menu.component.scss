@@ -10,7 +10,7 @@
   background: $black;
   .header {
     @include media-property(H, padding, 25px 15px, 25px, 60px);
-    @include media-property(H, width, calc(100% - 30px), calc(100% - 120px));
+    @include media-property(H, width, calc(100% - 30px), calc(100% - 50px), calc(100% - 120px));
     display: flex;
     justify-content: space-between;
     align-items: center;

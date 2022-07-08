@@ -6,7 +6,7 @@ import {HeaderComponent} from 'src/app/features/home/components/header/header.co
 import {SliderComponent} from 'src/app/shared/components/slider/main/slider.component';
 import {
   PositionSelectionComponent
-} from 'src/app/features/home/components/settings/position-selection/position-selection.component';
+} from 'src/app/features/home/components/demo-settings/position-selection/position-selection.component';
 import {DropPanelDirective} from '../../shared/directives/vm-lib/drop-panel.directive';
 import {DropPanelComponent} from '../../shared/components/vm-lib/drop-panel/drop-panel.component';
 import {FullScreenComponent} from '../../shared/components/slider/full-screen/full-screen.component';
@@ -21,6 +21,12 @@ import {CodeInputComponent} from '../../shared/components/code-input/code-input.
 import {VmForDirective} from '../../shared/directives/vm-for.directive';
 import {BlockCopyPastDirective} from '../../shared/directives/block-copy-past.directive';
 import {HeaderMenuComponent} from './components/header/header-menu/header-menu.component';
+import {VmScrollbarComponent} from '../../shared/components/vm-lib/scrollbar/vm-scrollbar.component';
+import {VmScrollbarDirective} from '../../shared/directives/vm-lib/vm-scrollbar.directive';
+import {NgScrollbarModule} from 'ngx-scrollbar';
+import { TankSelectionComponent } from './components/demo-settings/tank-selection/tank-selection.component';
+import { ContentFilterPipe } from './pipes/content-filter.pipe';
+
 
 
 @NgModule({
@@ -39,7 +45,11 @@ import {HeaderMenuComponent} from './components/header/header-menu/header-menu.c
     CodeInputComponent,
     VmForDirective,
     BlockCopyPastDirective,
-    HeaderMenuComponent
+    HeaderMenuComponent,
+    VmScrollbarComponent,
+    VmScrollbarDirective,
+    TankSelectionComponent,
+    ContentFilterPipe
   ],
   imports: [
     CommonModule,
@@ -47,6 +57,7 @@ import {HeaderMenuComponent} from './components/header/header-menu/header-menu.c
     FormsModule,
     ReactiveFormsModule,
     SpinnerModule,
+    NgScrollbarModule,
     TranslateModule.forChild({
       extend: true
     })

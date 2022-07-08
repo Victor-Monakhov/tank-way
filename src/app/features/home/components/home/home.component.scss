@@ -4,77 +4,101 @@
 @import 'src/assets/styles/animations';
 @import 'src/assets/styles/images';
 @import 'src/assets/styles/variables';
-//@import 'classes/scrollbar.scss';
+
 
 .home-wrapper {
   margin-top: $header-height;
-  height: 100%;
-  .home-content {
-    //width: 100%;
-    margin-right: 10px;
-    height: calc(100% - #{$header-height});
-    overflow-y: auto;
+  height: calc(100% - #{$header-height});
+  overflow: hidden;
 
-    img {
-      position: fixed;
-      width: 105%;
-      margin-left: -2.5%;
-      height: 105%;
-      top: 0;
-      z-index: -1;
-      filter: blur(8px) brightness(0.5);
+  .title-wrapper {
+    position: relative;
+
+    .title-img {
+      @include media-property(H, height, 300px, 300px, 500px);
+      width: 100%;
       object-fit: cover;
+      filter: brightness(0.5);
     }
 
     .title {
-      @include media-property(H, padding, 0 20px, 0 30px, 0 20%, 0 20%);
-      animation: row_go_down 1s ease 1 both;
+      @include media-property(H, padding,
+        0 30px + $scrollbar-size 0 30px,
+        0 80px + $scrollbar-size 0 80px,
+        0 150px + $scrollbar-size 0 150px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      row-gap: 20px;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
 
       h1 {
-        color: $red;
-        margin-top: 50px;
+        color: $golden;
       }
 
-      p {
-        margin: 30px 0;
-      }
-    }
-
-    .play {
-      @include media-property(H, margin, 0 10px, 0 20px, 0 30px, 0 40px);
-      @include media-property(H, width, 90%, 400px, 400px, 400px);
-      padding: 20px 40px;
-    }
-
-    .settings-title {
-      @include media-property(H, padding, 30px 10px, 30px 20px, 30px 30px, 30px 40px);
-      @include media-property(H, flex-wrap, wrap, wrap, nowrap, nowrap);
-      @include media-property(H, flex-direction, column, column, row, row);
-      justify-content: start;
-
-      h2 {
-        @include media-property(H, margin, 40px 10px 40px 0, 40px 20px 40px 0, 40px 30px 40px 0, 40px 40px 40px 0);
-        color: $red;
-        margin: 40px 0 40px 0;
-        flex-shrink: 0;
-      }
-
-      .p-wrapper {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-      }
-    }
-
-    .pos-selection-wrapper {
-      margin-bottom: 50px;
-
-      .pos-selection {
-        display: flex;
-        width: 100%;
-        background-color: $black;
-        flex-direction: column;
+      small {
+        color: $white;
       }
     }
   }
+
+  .settings {
+    @include media-property(H, padding,
+      15px 5px + $scrollbar-size 0 5px,
+      30px 40px + $scrollbar-size 0 40px,
+      45px 100px + $scrollbar-size 0 100px);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 20px;
+    row-gap: 15px;
+    background-color: $black;
+
+    app-tank-selection, app-position-selection {
+      flex-grow: 1;
+    }
+  }
+
+
+  //.play {
+  //  @include media-property(H, margin, 0 10px, 0 20px, 0 30px, 0 40px);
+  //  @include media-property(H, width, 90%, 400px, 400px, 400px);
+  //  padding: 20px 40px;
+  //}
+  //
+  //.demo-settings-title {
+  //  @include media-property(H, padding, 30px 10px, 30px 20px, 30px 30px, 30px 40px);
+  //  @include media-property(H, flex-wrap, wrap, wrap, nowrap, nowrap);
+  //  @include media-property(H, flex-direction, column, column, row, row);
+  //  justify-content: start;
+  //
+  //  h2 {
+  //    @include media-property(H, margin, 40px 10px 40px 0, 40px 20px 40px 0, 40px 30px 40px 0, 40px 40px 40px 0);
+  //    color: $red;
+  //    margin: 40px 0 40px 0;
+  //    flex-shrink: 0;
+  //  }
+  //
+  //  .p-wrapper {
+  //    display: flex;
+  //    justify-content: center;
+  //    width: 100%;
+  //  }
+  //}
+  //
+  //.pos-selection-wrapper {
+  //  margin-bottom: 50px;
+  //
+  //  .pos-selection {
+  //    display: flex;
+  //    width: 100%;
+  //    background-color: $black;
+  //    flex-direction: column;
+  //  }
+  //}
+
+  //}
 }

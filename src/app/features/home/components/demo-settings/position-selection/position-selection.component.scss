@@ -1,0 +1,120 @@
+@import '../../../../../../assets/styles/mixins';
+@import '../../../../../../assets/styles/variables';
+@import '../../../../../../assets/styles/colors';
+@import '../../../../../../assets/styles/animations';
+@import '../../../../../../assets/styles/images';
+@import 'src/assets/styles/fonts';
+
+.position-selection-wrapper {
+  @include media-property(H, padding, 15px 15px, 15px 15px 30px, 15px 15px 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid $golden;
+  border-radius: 20px;
+  row-gap: 15px;
+  h2 {
+    color: $golden;
+  }
+  .toggle-team {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    width: 260px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: $dark_grey;
+    .switcher {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      background: linear-gradient(to bottom, $red, $light-red);
+      transition: 0.5s;
+    }
+    p{
+      color: $light-grey;
+      font-size: 1.5rem;
+      z-index: $p-z-index;
+    }
+  }
+  .positions-wrapper {
+    @include media-property(H, column-gap, 35px, 50px);
+    display: flex;
+    .position {
+      display: flex;
+      column-gap: 10px;
+      .position-radio {
+        width: 20px;
+        height: 20px;
+      }
+      label {
+        color: $white;
+      }
+    }
+  }
+  .position-view {
+    @include media-property(H, width, 270px, 300px);
+    width: 270px;
+    height: 300px;
+    border-radius: 25px;
+    position: relative;
+    .map {
+      border-radius: 25px;
+    }
+    .pos-view {
+      position: absolute;
+      top: 80px;
+      left: 20px;
+      width: 80px;
+      height: 90px;
+      img {
+        object-fit: fill;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+
+//.pos-selection-title{
+//    @include media-property(H, display, flex, flex, flex, none);
+//    align-items: center;
+//    justify-content: center;
+//    padding: 10px;
+//    strong{
+//      display: flex;
+//      font-weight: bold;
+//      justify-content: center;
+//    }
+//  }
+//.positions{
+//    @include media-property(H, justify-content, center, center, space-around, space-around);
+//    margin: 10px;
+//    display: flex;
+//    gap: 10px;
+//    flex-wrap: wrap;
+//    label{
+//        font-size: 1rem;
+//        white-space: nowrap;
+//    }
+//    img{
+//        padding: 10px;
+//    }
+//    .red-side-positions, .blue-side-positions{
+//        display: flex;
+//        justify-content: space-between;
+//        .red-side-menu, .blue-side-menu{
+//            padding: 10px;
+//            display: flex;
+//            flex-direction: column;
+//            justify-content: space-between;
+//        }
+//    }
+//    .pos-selection-title{
+//        @include media-property(H, display, none, none, none, flex);
+//      }
+//}

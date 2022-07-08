@@ -1,36 +1,51 @@
-<div *ngIf="!galleryMode; else galleryFullScreen" class="home-wrapper">
-  <app-header></app-header>
-  <div class="home-content">
-    <img src="../../assets/images/bg-tanks.png" alt="#">
-    <div class="row title">
-      <h1>{{'HOME.TITLE'|translate}}</h1>
-      <p>
-        {{'HOME.DESCRIPTION'|translate}}
-      </p>
-    </div>
-    <div class="row">
-      <button class="btn-start play" (click)="onDemo()"><span>{{'HOME.DEMO'|translate}}</span></button>
-    </div>
-    <div class="row">
-      <small>
-        {{'HOME.DEMO_MESSAGE'|translate}}
-        <!--      <small class="link" [dropModal]="authMenu">-->
-        <!--        {{'HOME.DEMO_MESSAGE_LINK'|translate}}-->
-        <!--      </small>-->
-      </small>
-    </div>
-    <div class="row settings-title">
-      <div class="p-wrapper">
-        <p>{{'HOME.DEMO_SETTINGS_TEXT'|translate}}</p>
+<app-header></app-header>
+<div *ngIf="!galleryMode; else galleryFullScreen"
+     class="home-wrapper">
+  <ng-scrollbar class="scrollbar"
+                [thumbClass]="'thumb'"
+                [trackClass]="'track'">
+    <div class="title-wrapper">
+      <img class="title-img" src="../../assets/images/title-img.png" alt="#">
+      <div class="title">
+        <h1>Join to the most EPIC battle's in the WORLD</h1>
+        <small>2674 a.e. resources on Earth</small>
       </div>
     </div>
-    <div class="row pos-selection-wrapper">
-      <div class="pos-selection">
-        <app-settings></app-settings>
-      </div>
+    <div class="settings">
+      <app-tank-selection></app-tank-selection>
+      <app-position-selection></app-position-selection>
     </div>
-    <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>
-  </div>
+
+    <!--    <div class="row title">-->
+    <!--      <h1>{{'HOME.TITLE'|translate}}</h1>-->
+    <!--      <p>-->
+    <!--        {{'HOME.DESCRIPTION'|translate}}-->
+    <!--      </p>-->
+    <!--    </div>-->
+    <!--    <div class="row">-->
+    <!--      <button class="btn-start play" (click)="onDemo()"><span>{{'HOME.DEMO'|translate}}</span></button>-->
+    <!--    </div>-->
+    <!--    <div class="row">-->
+    <!--      <small>-->
+    <!--        {{'HOME.DEMO_MESSAGE'|translate}}-->
+    <!--        &lt;!&ndash;      <small class="link" [dropModal]="authMenu">&ndash;&gt;-->
+    <!--        &lt;!&ndash;        {{'HOME.DEMO_MESSAGE_LINK'|translate}}&ndash;&gt;-->
+    <!--        &lt;!&ndash;      </small>&ndash;&gt;-->
+    <!--      </small>-->
+    <!--    </div>-->
+    <!--    <div class="row demo-settings-title">-->
+    <!--      <div class="p-wrapper">-->
+    <!--        <p>{{'HOME.DEMO_SETTINGS_TEXT'|translate}}</p>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="row pos-selection-wrapper">-->
+    <!--      <div class="pos-selection">-->
+    <!--        <app-demo-settings></app-demo-settings>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>-->
+  </ng-scrollbar>
+  <!--  </div>-->
 </div>
 
 <!--<app-auth-menu #authMenu-->
