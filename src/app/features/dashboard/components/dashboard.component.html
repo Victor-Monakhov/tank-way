@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+      xmlns="http://www.w3.org/1999/html">
 
 <body>
 <nav>
@@ -103,44 +104,68 @@
         <i class="uil uil-clock-three"></i>
         <span class="text">Recent Activity</span>
       </div>
+
       <div class="activity-data">
-        <div class="data userid">
-          <span class="data-title">ID</span>
-          <span class="data-list">{{resData[0].id}}</span>
-          <span class="data-list">2</span>
-          <span class="data-list">3</span>
-        </div>
-        <div class="data nickname">
-          <span class="data-title">Nickname</span>
-          <span class="data-list">{{resData[0].nickname}}</span>
-          <span class="data-list">test</span>
-          <span class="data-list">test</span>
-        </div>
-        <div class="data email">
-          <span class="data-title">Email</span>
-          <span class="data-list">{{resData[0].email}}</span>
-          <span class="data-list">test</span>
-          <span class="data-list">test</span>
-        </div>
-        <div class="data password">
-          <span class="data-title">Password</span>
-          <span class="data-list">{{resData[0].password}}</span>
-          <span class="data-list">test</span>
-          <span class="data-list">test</span>
-        </div>
-        <div class="data token">
-          <span class="data-title">Token</span>
-          <span class="data-list">{{resData[0].token}}</span>
-          <span class="data-list">test</span>
-          <span class="data-list">test</span>
-        </div>
-        <div class="data status">
-          <span class="data-title">Status</span>
-          <span class="data-list">{{resData[0].status}}</span>
-          <span class="data-list">2</span>
-          <span class="data-list">3</span>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of displayedColumns">
+                <div class="data"><span class="data-title">{{column}}</span></div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td><div class="data"><span class="data-list">{{user.id}}</span></div></td>
+              <td><div class="data"><span class="data-list">{{user.nickname}}</span></div></td>
+              <td><div class="data"><span class="data-list">{{user.email}}</span></div></td>
+              <td><div class="data"><span class="data-list">{{user.password}}</span></div></td>
+              <td><div class="data"><span class="data-list">{{user.token}}</span></div></td>
+              <td><div class="data"><span class="data-list">{{user.status}}</span></div></td>
+              <td><div class="data">
+                  <span class="data-list">
+                    <a (click)="deleteUser(user.id)">
+                      <i class="uil uil-trash-alt"></i>
+                    </a>
+                  </span>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
+<!--      <div class="activity-data">-->
+<!--        <div class="data userid">-->
+<!--          <span class="data-title">ID</span>-->
+<!--          <span class="data-list">{{users[0].id}}</span>-->
+<!--        </div>-->
+<!--        <div class="data nickname">-->
+<!--          <span class="data-title">Nickname</span>-->
+<!--          <span class="data-list">{{users[0].nickname}}</span>-->
+<!--        </div>-->
+<!--        <div class="data email">-->
+<!--          <span class="data-title">Email</span>-->
+<!--          <span class="data-list">{{users[0].email}}</span>-->
+<!--        </div>-->
+<!--        <div class="data password">-->
+<!--          <span class="data-title">Password</span>-->
+<!--          <span class="data-list">{{users[0].password}}</span>-->
+<!--        </div>-->
+<!--        <div class="data token">-->
+<!--          <span class="data-title">Token</span>-->
+<!--          <span class="data-list">{{users[0].token}}</span>-->
+<!--        </div>-->
+<!--        <div class="data status">-->
+<!--          <span class="data-title">Status</span>-->
+<!--          <span class="data-list">{{users[0].status}}</span>-->
+<!--        </div>-->
+<!--        <div class="data actions">-->
+<!--          <span class="data-title">Actions</span>-->
+<!--          <span class="data-list">-->
+<!--            <button (click)="removeAllTutorials()"> Remove All </button>-->
+<!--          </span>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </section>

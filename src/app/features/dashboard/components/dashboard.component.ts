@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserService} from "../../../shared/services/user.service";
 import {IUser} from "../../../shared/interfaces/auth/user.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,20 +10,63 @@ import {IUser} from "../../../shared/interfaces/auth/user.interface";
 })
 export class DashboardComponent implements OnInit {
 
-  resData: any = [];
+  users?: IUser[];
+  public displayedColumns = ['ID', 'Nickname', 'Email', 'Password', 'Token', 'Status', 'Actions'];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.getUserItems();
+    this.getUsers();
     this.switchThemeMode();
   }
 
-  public getUserItems(): void {
-    this.userService.getUserItems().subscribe((res: IUser[]) => {
-      this.resData = res;
-    });
+  public getUsers(): void {
+    this.userService.getAll()
+      .subscribe({
+        next: (data) => {
+          this.users = data;
+          console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  public getUserById(id: number): any {
+    return this.users.find((el: any) => el.id === id);
+  }
+
+  public refreshList(): void {
+    this.getUsers();
+  }
+
+  public deleteUser(id: number): void {
+    if (confirm(`Are you sure want to delete the user ${this.getUserById(id).nickname} from the database?`)) {
+      this.userService.delete(id)
+        .subscribe({
+          next: (data) => {
+            console.log(data);
+            this.getUsers();
+          },
+          error: (e) => console.error(e)
+        });
+    } else {
+      // Do nothing!
+      console.log('Thing was not saved to the database.');
+    }
+
+
+  }
+
+  private removeAllUsers(): void {
+    this.userService.deleteAll()
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.getUsers();
+        },
+        error: (e) => console.error(e)
+      });
   }
 
   private switchThemeMode(): void {

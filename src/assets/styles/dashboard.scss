@@ -379,6 +379,14 @@ nav.close ~ .dashboard .top {
   background-color: var(--box3-color);
 }
 
+th {
+  text-align: left;
+}
+
+a {
+  cursor: pointer;
+}
+
 .dash-content .activity .activity-data {
   display: flex;
   justify-content: space-between;
