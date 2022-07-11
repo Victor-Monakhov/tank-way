@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { UntypedFormBuilder, FormGroup } from '@angular/forms';
-import { DemoService } from 'src/app/features/demo/services/demo.service';
+import {Component, OnInit} from '@angular/core';
+import {UntypedFormBuilder, FormGroup} from '@angular/forms';
+import {DemoService} from 'src/app/features/demo/services/demo.service';
 
 @Component({
   selector: 'app-position-selection',
@@ -9,20 +9,31 @@ import { DemoService } from 'src/app/features/demo/services/demo.service';
 })
 export class PositionSelectionComponent implements OnInit {
 
-  public form = this.demoService.form = this.fb.group({
-    position: 0,
-  });
+  public form: FormGroup = {} as FormGroup;
+  public team: string = 'red';
 
-  constructor(private fb: UntypedFormBuilder, private demoService: DemoService) {
+  public constructor(private fb: UntypedFormBuilder, private demoService: DemoService) {
+    this.form = this.demoService.form = this.fb.group({
+      position: 0,
+    });
   }
-  ngOnInit(): void {
+
+  public ngOnInit(): void {
+    return;
   }
 
-  public onSetPosition(){
-    // this.demoService.position = this.form.controls['position'].value;
-    // console.log(this.form.controls['position'].value);
+  //  public onSetPosition() {
+  // this.demoService.position = this.form.controls['position'].value;
+  // console.log(this.form.controls['position'].value);
 
-    // console.log(this.demoService.position);
+  // console.log(this.demoService.position);
+  // }
+
+  public onTeamChange(flag: boolean): void {
+    if (flag) {
+      this.team = (this.team === 'red') ? 'blue' : 'red';
+      this.form.get('position').setValue(0);
+    }
   }
 
 }

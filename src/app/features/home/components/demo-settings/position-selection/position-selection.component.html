@@ -1,130 +1,33 @@
 <div class="position-selection-wrapper">
   <h2>Select your position</h2>
   <div class="toggle-team">
-    <div class="switcher"></div>
-    <p>Red</p>
-    <p>Blue</p>
+    <div [ngClass]="['switcher', (team === 'red') ?
+                     'switch-red' :
+                     'switch-blue']"
+         (click)="onTeamChange(true)"></div>
+    <p [class]="{'white': team === 'red'}"
+       (click)="onTeamChange(team === 'red')">Red</p>
+    <p [class]="{'white': team === 'blue'}"
+       (click)="onTeamChange(team === 'blue')">Blue</p>
   </div>
-  <div class="positions-wrapper">
-    <div class="position">
-      <input class="position-radio" type="radio" id="1">
-      <label for="1">1</label>
-    </div>
-    <div class="position">
-      <input class="position-radio" type="radio" id="2">
-      <label for="2">2</label>
-    </div>
-    <div class="position">
-      <input class="position-radio" type="radio" id="3">
-      <label for="3">3</label>
-    </div>
-    <div class="position">
-      <input class="position-radio" type="radio" id="4">
-      <label for="4">4</label>
+  <div class="positions-wrapper" [formGroup]="form">
+    <div *vmFor="4; let i = index" class="position">
+      <input class="position-radio form-control"
+             type="radio"
+             formControlName="position"
+             [id]="'pos' + i"
+             [value]="i">
+      <label [for]="'pos' + i">{{i + 1}}</label>
     </div>
   </div>
   <div class="position-view">
-    <img class="map" src="../../assets/images/red-map-pos.png" alt="map">
-    <i class="fa-solid fa-flag"></i>
-    <div class="pos-view">
-      <img src="../../assets/images/pos-red.png" alt="">
+    <img *ngIf="team === 'red'" class="map" src="../../assets/images/red-map-pos.png" alt="map">
+    <img *ngIf="team === 'blue'" class="map" src="../../assets/images/blue-map-pos.png" alt="map">
+    <div [ngClass]="['pos-view', (team === 'red') ?
+                     'red-pos' + form.get('position').value :
+                     'blue-pos' + form.get('position').value]">
+      <img *ngIf="team === 'red'" src="../../assets/images/pos-red.png" alt="">
+      <img *ngIf="team === 'blue'" src="../../assets/images/pos-blue.png" alt="">
     </div>
-<!--    <img class="flag" src="#" alt="flag">-->
-<!--    <img src="#" alt="flag">-->
-<!--    <img src="#" alt="flag">-->
-<!--    <img src="#" alt="flag">-->
   </div>
 </div>
-
-
-
-<!--<div class="pos-selection-title">-->
-<!--    <strong>Select your position</strong>-->
-<!--</div>-->
-<!--<div class="positions" [formGroup]="form">-->
-<!--    <div class="red-side-positions">-->
-<!--        <div class="red-side-menu">-->
-<!--            <div>-->
-<!--                <input class="tank-radio-lbl radio-red form-control"-->
-<!--                        type="radio"-->
-<!--                        formControlName="position"-->
-<!--                        id="red_1"-->
-<!--                        [value]="0"-->
-<!--                        (click)="onSetPosition()">-->
-<!--                <label for="red_1">RED 1</label>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <input class="tank-radio-lbl radio-red form-control"-->
-<!--                        type="radio"-->
-<!--                        formControlName="position"-->
-<!--                        id="red_2"-->
-<!--                        [value]="1"-->
-<!--                        (click)="onSetPosition()">-->
-<!--                <label for="red_2">RED 2</label>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <input class="tank-radio-lbl radio-red form-control"-->
-<!--                        type="radio"-->
-<!--                        formControlName="position"-->
-<!--                        id="red_3"-->
-<!--                        [value]="2"-->
-<!--                        (click)="onSetPosition()">-->
-<!--                <label for="red_3">RED 3</label>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <input class="tank-radio-lbl radio-red form-control"-->
-<!--                        type="radio"-->
-<!--                        formControlName="position"-->
-<!--                        id="red_4"-->
-<!--                        [value]="3"-->
-<!--                        (click)="onSetPosition()">-->
-<!--                <label for="red_4">RED 4</label>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <img src="../../../../../../assets/images/game-settings/redBase.png" alt="redBase">-->
-<!--    </div>-->
-<!--    <div class="pos-selection-title">-->
-<!--        <strong>Select your position</strong>-->
-<!--    </div>-->
-<!--    <div class="blue-side-positions">-->
-<!--        <img src="../../../../../../assets/images/game-settings/blueBase.png" alt="blueBase">-->
-<!--        <div class="blue-side-menu">-->
-<!--            <div>-->
-<!--                <input class="lbl-tank-radio radio-blue form-control"-->
-<!--                        type="radio"-->
-<!--                        formControlName="position"-->
-<!--                        id="blue_1"-->
-<!--                        [value]="4"-->
-<!--                        (click)="onSetPosition()">-->
-<!--                <label for="blue_1">BLUE 1</label>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <input class="lbl-tank-radio radio-blue form-control"-->
-<!--                        type="radio"-->
-<!--                        formControlName="position"-->
-<!--                        id="blue_2"-->
-<!--                        [value]="5"-->
-<!--                        (click)="onSetPosition()">-->
-<!--                <label for="blue_2">BLUE 2</label>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <input class="lbl-tank-radio radio-blue form-control"-->
-<!--                        type="radio"-->
-<!--                        formControlName="position"-->
-<!--                        id="blue_3"-->
-<!--                        [value]="6"-->
-<!--                        (click)="onSetPosition()">-->
-<!--                <label for="blue_3">BLUE 3</label>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <input class="lbl-tank-radio radio-blue form-control"-->
-<!--                        type="radio"-->
-<!--                        formControlName="position"-->
-<!--                        id="blue_4"-->
-<!--                        [value]="7"-->
-<!--                        (click)="onSetPosition()">-->
-<!--                <label for="blue_4">BLUE 4</label>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->

@@ -24,6 +24,7 @@ export class TankSelectionComponent implements OnInit {
     '../../assets/images/tanks/gun_1.png',
     '../../assets/images/tanks/gun_2.png',
     '../../assets/images/tanks/gun_3.png',
+    '',
     '../../assets/images/tanks/gun_4.png',
     '../../assets/images/tanks/gun_5.png',
     '../../assets/images/tanks/gun_4.png',

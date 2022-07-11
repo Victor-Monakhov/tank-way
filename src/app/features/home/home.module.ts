@@ -24,10 +24,7 @@ import {HeaderMenuComponent} from './components/header/header-menu/header-menu.c
 import {VmScrollbarComponent} from '../../shared/components/vm-lib/scrollbar/vm-scrollbar.component';
 import {VmScrollbarDirective} from '../../shared/directives/vm-lib/vm-scrollbar.directive';
 import {NgScrollbarModule} from 'ngx-scrollbar';
-import { TankSelectionComponent } from './components/demo-settings/tank-selection/tank-selection.component';
-import { ContentFilterPipe } from './pipes/content-filter.pipe';
-
-
+import {TankSelectionComponent} from './components/demo-settings/tank-selection/tank-selection.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +46,6 @@ import { ContentFilterPipe } from './pipes/content-filter.pipe';
     VmScrollbarComponent,
     VmScrollbarDirective,
     TankSelectionComponent,
-    ContentFilterPipe
   ],
   imports: [
     CommonModule,

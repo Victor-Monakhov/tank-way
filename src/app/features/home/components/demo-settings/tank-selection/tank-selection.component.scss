@@ -3,6 +3,7 @@
 
 .tank-selection-wrapper {
   @include media-property(H, padding, 15px 15px, 15px 15px 30px, 15px 15px 40px);
+  @include media-property(H, height, 441px, 469px, 469px, 479px);
   display: flex;
   flex-direction: column;
   align-items: center;
