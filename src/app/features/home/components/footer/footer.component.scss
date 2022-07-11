@@ -18,8 +18,21 @@
   //padding: 80px;
 }
 
+.footer-container {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 0.5fr 1fr 1fr;
+  padding-bottom: 15px;
+  //padding-left: 3rem;
+}
+
+.column {
+  //background-color: yellow; /* Optional */
+  //padding: 1rem; /* Optional */
+}
+
 .footer .content {
- //max-width: 1350px;
+  //max-width: 1350px;
   margin: auto;
   //padding: 40px;
   display: flex;
@@ -61,16 +74,11 @@
 
 .footer .content .right input[type="text"] {
   height: 43px;
-  //width: 100%;
-  //outline: none;
-  //color: #d9d9d9;
-  //background: $black;
-  //border-radius: 5px;
-  //padding-left: 10px;
-  //font-size: 17px;
-  //border: 2px solid #222222;
   width: 230px;
-  border: 0;
+  border: none;
+  resize: none;
+  outline: none;
+  font-size: 20px;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   padding: 0.625rem;
@@ -78,19 +86,7 @@
 }
 
 .footer .content .right button[type="submit"] {
-  //height: 42px;
-  //width: 100%;
-  //font-size: 18px;
-  //color: #d9d9d9;
-  //background: $red;
-  //outline: none;
-  //border-radius: 5px;
-  //letter-spacing: 1px;
-  //cursor: pointer;
-  //margin-top: 12px;
-  //border: 2px solid $red;
-  //transition: all 0.3s ease-in-out;
-
+  font-size: 20px;
   height: 43px;
   width: 60px;
   background-color: #CE9F25;
@@ -103,23 +99,10 @@
   margin-top: 0.3125rem;
 }
 
-//.content .right input[type="submit"]:hover {
-//  background: none;
-//  color: $red;
-//}
-
 .footer .content .media-icons a {
   font-size: 24px;
-  //height: 45px;
-  //width: 45px;
   display: inline-block;
   padding: 30px 15px 0 0;
-  //text-align: center;
-  //line-height: 43px;
-  //border-radius: 5px;
-  //border: 2px solid #222222;
-  //margin: 30px 5px 0 0;
-  //transition: all 0.3s ease;
 }
 
 .footer a {
@@ -141,7 +124,7 @@
     //width: 50%;
   }
   .content .right {
-   // margin-top: 40px;
+    // margin-top: 40px;
   }
 }
 
@@ -159,14 +142,4 @@
   }
 }
 
-.footer-container {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 0.5fr 1fr 1fr;
-  //padding-left: 3rem;
-}
 
-.column {
-  //background-color: yellow; /* Optional */
-  //padding: 1rem; /* Optional */
-}
