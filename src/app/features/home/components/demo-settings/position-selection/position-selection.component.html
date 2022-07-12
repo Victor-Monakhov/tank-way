@@ -26,8 +26,14 @@
     <div [ngClass]="['pos-view', (team === 'red') ?
                      'red-pos' + form.get('position').value :
                      'blue-pos' + form.get('position').value]">
-      <img *ngIf="team === 'red'" src="../../assets/images/pos-red.png" alt="">
-      <img *ngIf="team === 'blue'" src="../../assets/images/pos-blue.png" alt="">
+      <div *ngIf="team === 'red'" class="pos-view-content">
+        <img  src="../../assets/images/pos-red.png" alt="">
+        <b>{{form.get('position').value + 1}}</b>
+      </div>
+      <div *ngIf="team === 'blue'" class="pos-view-content">
+        <img src="../../assets/images/pos-blue.png" alt="">
+        <b>{{form.get('position').value + 1}}</b>
+      </div>
     </div>
   </div>
 </div>

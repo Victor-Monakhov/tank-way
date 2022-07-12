@@ -1,13 +1,20 @@
 @import "fonts.scss";
 @import "colors.scss";
 @import "mixins.scss";
-p {
+p, a {
   margin: 0;
   font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
   font-size: 1.3rem;
 }
 
-label {
+a {
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+  border-bottom: 1px solid;
+}
+
+label, b, strong {
   margin: 0;
   font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
   font-size: 2.1rem;
@@ -36,3 +43,4 @@ small {
   font-weight: normal;
   font-family: Roboto-Light, Raleway-Thin, sans-serif;
 }
+

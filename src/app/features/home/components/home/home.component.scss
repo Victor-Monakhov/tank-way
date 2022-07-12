@@ -12,11 +12,13 @@
   overflow: hidden;
 
   .title-wrapper {
+    @include media-property(H, height, 300px, 300px, 500px);
+    width: 100%;
     position: relative;
 
     .title-img {
-      @include media-property(H, height, 300px, 300px, 500px);
       width: 100%;
+      height: 100%;
       object-fit: cover;
       filter: brightness(0.5);
     }
@@ -44,22 +46,66 @@
     }
   }
 
-  .settings {
+  .demo-settings-wrapper {
     @include media-property(H, padding,
-      15px 5px + $scrollbar-size 0 5px,
-      30px 40px + $scrollbar-size 0 40px,
-      45px 100px + $scrollbar-size 0 100px);
+      15px 5px + $scrollbar-size 15px 5px,
+      30px 40px + $scrollbar-size 30px 40px,
+      45px 80px + $scrollbar-size 45px 80px);
+    @include media-property(H, margin-bottom, 90px, 105px, 120px);
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    column-gap: 20px;
     row-gap: 15px;
-    background-color: $black;
+    background: $black;
+    .settings {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      column-gap: 20px;
+      row-gap: 15px;
+      width: 100%;
+      background-color: $black;
 
-    app-tank-selection, app-position-selection {
-      flex-grow: 1;
+      app-tank-selection {
+        flex-grow: 1;
+      }
+
+      app-position-selection {
+        flex-grow: 1;
+      }
     }
+
+    .demo-btn {
+      @include media-property(H, width, 270px, 380px);
+      height: 60px;
+      font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+      font-size: 2rem;
+      color: $white;
+      background-color: $golden;
+
+      &:active {
+        font-size: 1.9rem;
+      }
+    }
+    p {
+      @include media-property(H, margin-top, 0, 25px);
+      @include media-property(H, width, 150px, 300px);
+      display: inline-block;
+      text-align: center;
+      line-height: 1.4rem;
+      margin-top: 25px;
+      color: $white;
+    }
+    a {
+      color: $golden;
+    }
+  }
+
+  .temp {
+    width: 100%;
+    height: 1000px;
+    background: $black;
   }
 
 

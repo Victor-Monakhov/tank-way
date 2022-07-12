@@ -86,7 +86,20 @@
   background: radial-gradient(ellipse at center, $red, $black 100%);
 }
 
-//radio button position-radio
+//demo-btn--------------------------------------------------------------------
+.demo-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+//---------------------------------------------------------------------demo-btn
+
+//position-radio---------------------------------------------------------------
 .position-radio {
   position: absolute;
   z-index: -1;
@@ -120,5 +133,6 @@
 .position-radio:checked + label:before {
   background-color: $white;
 }
+//---------------------------------------------------------------position-radio
 
 

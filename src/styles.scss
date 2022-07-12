@@ -18,9 +18,8 @@ html, body {
 body {
   margin: 0;
   min-width: 320px;
-  //height: 100vh;
   font-family: Raleway-Thin, sans-serif;
-  background-color: $black;
+  background: linear-gradient(to bottom, $light-grey , $black);
 }
 
 //hr {

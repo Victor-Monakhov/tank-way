@@ -9,12 +9,12 @@ import {DemoService} from 'src/app/features/demo/services/demo.service';
 })
 export class PositionSelectionComponent implements OnInit {
 
-  public form: FormGroup = {} as FormGroup;
+  public form: FormGroup<number> = {} as FormGroup;
   public team: string = 'red';
 
   public constructor(private fb: UntypedFormBuilder, private demoService: DemoService) {
     this.form = this.demoService.form = this.fb.group({
-      position: 0,
+      position: 0
     });
   }
 
