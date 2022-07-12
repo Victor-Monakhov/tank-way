@@ -2,15 +2,46 @@
 @import "variables.scss";
 
 
-//menu-go
-@keyframes menu_go_right{
+//drop-panel-go
+@keyframes header_menu_go_right_visible {
   0% { left: -100%;}
   100% {left: 0;}
 }
-@keyframes menu_go_left{
+@keyframes header_menu_go_left_hidden {
   0% { left: 0;}
   100% {left: -100%;}
 }
+
+//team-switcher
+@keyframes switch-blue {
+  0% {left: 0; right: 50%}
+  100% {left: 50%; right: 0}
+}
+@keyframes switch-red {
+  0% {left: 50%; right: 0}
+  100% {left: 0; right: 50%}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //modal-go
 @keyframes modal_go_left_lg{
   0% { left: 100%;}

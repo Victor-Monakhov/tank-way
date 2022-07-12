@@ -201,3 +201,15 @@ $raleway: '../fonts/raleway';
   font-family: Raleway-Thin;
   src: url($raleway + '/Raleway-Thin.ttf');
 }
+@font-face{
+  font-family: RopaSans-Italic;
+  src: url('../fonts/ropa_sans/RopaSans-Italic.ttf');
+}
+@font-face{
+  font-family: RopaSans-Regular;
+  src: url('../fonts/ropa_sans/RopaSans-Regular.ttf');
+}
+@font-face{
+  font-family: RussoOne-Regular;
+  src: url('../fonts/russo_one/RussoOne-Regular.ttf');
+}

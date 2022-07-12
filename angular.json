@@ -1,7 +1,13 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "fc47d29b-1dbe-43d0-b53f-24f3d5e68992"
+    "cache": {
+      "enabled": false
+    },
+    "analytics": "fc47d29b-1dbe-43d0-b53f-24f3d5e68992",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -46,12 +52,15 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/@angular/cdk/overlay-prebuilt.css",
-              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+             "./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./src/assets/styles"]
+              "includePaths": [
+                "./src/assets/styles"
+              ]
             },
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -130,9 +139,20 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./src/assets/styles"]
+              "includePaths": [
+                "./src/assets/styles"
+              ]
             },
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }

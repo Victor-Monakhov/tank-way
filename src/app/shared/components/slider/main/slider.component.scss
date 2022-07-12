@@ -13,7 +13,7 @@
 
 .wrapper {
   background-color: $black;
-  @include media-property(padding, 10px 10px, 10px 20px, 10px 30px, 10px 40px);
+  @include media-property(H, padding, 10px 10px, 10px 20px, 10px 30px, 10px 40px);
 
   a{
     text-decoration: none;
@@ -43,10 +43,10 @@
   }
 
   .slider-content {
-    @include media-property(grid-template-rows, repeat(4, 75px), repeat(3, 115px), repeat(2, 150px), repeat(2, 150px));
-    @include media-property(grid-row-gap, 10px, 15px, 20px, 20px);
-    @include media-property(grid-column-gap, 10px, 15px, 20px, 20px);
-    @include media-property(grid-auto-flow, column, column, column, column);
+    @include media-property(H, grid-template-rows, repeat(4, 75px), repeat(3, 115px), repeat(2, 150px), repeat(2, 150px));
+    @include media-property(H, grid-row-gap, 10px, 15px, 20px, 20px);
+    @include media-property(H, grid-column-gap, 10px, 15px, 20px, 20px);
+    @include media-property(H, grid-auto-flow, column, column, column, column);
     position: relative;
     transition: 1s;
     height: 0;
@@ -56,8 +56,8 @@
     -ms-overflow-style: none;
 
     img {
-      @include media-property(width, 100px, 150px, 200px, 200px);
-      @include media-property(height, 75px, 115px, 150px, 150px);
+      @include media-property(H, width, 100px, 150px, 200px, 200px);
+      @include media-property(H, height, 75px, 115px, 150px, 150px);
       object-fit: cover;
       border: 1px solid $red;
       border-radius: 5px;

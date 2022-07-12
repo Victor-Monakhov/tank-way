@@ -6,75 +6,77 @@
 @import 'animations.scss';
 @import 'variables.scss';
 @import 'spinner.scss';
+@import 'classes/overlay-backdrops.scss';
+@import 'html-elements/html-elements.scss';
+@import 'classes/scrollbar.scss';
 
+html, body {
+  height: 100%;
+  overflow: hidden !important;
+}
 
 body {
   margin: 0;
-  min-width: 300px;
+  min-width: 320px;
   font-family: Raleway-Thin, sans-serif;
-  background-color: $black;
-  overflow-x: hidden;
+  background: linear-gradient(to bottom, $light-grey , $black);
 }
 
-hr {
-  margin: 0;
-  border: unset;
-  height: 1px;
-  background-color: $red;
-  opacity: 0.5;
-}
+//hr {
+//  margin: 0;
+//  border: unset;
+//  height: 1px;
+//  background-color: $red;
+//  opacity: 0.5;
+//}
 
-p, label {
-  @include media-property(font-size, 1.2rem, 1.3rem, 1.4rem, 1.5rem);
-  text-align: justify;
-  margin: 10px 0;
-  color: #ffffff;
-}
+
 
 strong {
-  @include media-property(font-size, 1.7rem, 1.8rem, 1.9rem, 2rem);
+  @include media-property(H, font-size, 1.7rem, 1.8rem, 1.9rem, 2rem);
   font-weight: unset;
   color: #ffffff;
 }
 
-small {
-  @include media-property(font-size, 0.8rem, 0.8rem, 1rem, 1rem);
-  text-align: justify;
-  color: #ffffff;
-  margin: 0;
-}
+//small {
+//  @include media-property(H, font-size, 0.8rem, 0.8rem, 1rem, 1rem);
+//  text-align: justify;
+//  color: #ffffff;
+//  margin: 0;
+//}
 
-h1, h2, h3, p, strong {
-  font-family: Raleway-Thin, sans-serif;
-  text-align: center;
-  margin: 0;
-}
+//h1, h2, h3, strong {
+//  font-family: Raleway-Thin, sans-serif;
+//  text-align: center;
+//  margin: 0;
+//}
 
-h1, h2, h3 {
-  text-shadow: $text-shadow;
-}
+//h1, h2, h3 {
+//  text-shadow: $text-shadow;
+//}
 
-h1 {
-  @include media-property(font-size, 3.3rem, 4.2rem, 5.4rem, 5.6rem);
-}
+//h1 {
+//  @include media-property(H, font-size, 3.3rem, 4.2rem, 5.4rem, 5.6rem);
+//}
 
-h2 {
-  @include media-property(font-size, 2.7rem, 2.8rem, 2.9rem, 3rem);
-}
+//h2 {
+//  @include media-property(H, font-size, 2.7rem, 2.8rem, 2.9rem, 3rem);
+//}
 
-h3 {
-  @include media-property(font-size, 2rem, 2.1rem, 2.2rem, 2.3rem);
-}
+//h3 {
+//  @include media-property(H, font-size, 2rem, 2.1rem, 2.2rem, 2.3rem);
+//}
 
-.row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  background-color: $black03;
-  padding: 0;
-}
+//.row {
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
+//  justify-content: center;
+//  flex-wrap: wrap;
+//  width: 100%;
+//  background-color: $white;
+//  padding: 0;
+//}
 
 .link{
   border-bottom: 1px solid #ffffff;

@@ -1,0 +1,126 @@
+@import '../../../../../assets/styles/colors';
+@import '../../../../../assets/styles/mixins';
+@import '../../../../../assets/styles/variables';
+@import '../../../../../assets/styles/images';
+@import 'animations.scss';
+@import 'html-elements/html-elements.scss';
+
+.title-page-header-wrapper {
+  @include media-property(H, padding, 0 15px, 0 60px, 0 120px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  height: $header-height;
+  margin: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: $header-z-index;
+  background-color: $black;
+
+  .menu {
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+  }
+
+  .border-anim {
+    @include gradient-expansion(border, BI, to right, transparent, $golden, transparent);
+    border-bottom: 2px solid transparent;
+    margin-top: 2px;
+    animation: border 0.3s ease-out 1 both;
+  }
+
+  p {
+    cursor: pointer;
+    color: $white;
+
+    &:hover {
+      @extend .border-anim;
+    }
+  }
+
+  .fa-bars {
+    @include media-property(H, display, block, block, none);
+    font-size: 2rem;
+    width: 60px;
+    cursor: pointer;
+    color: $white;
+
+    &:active {
+      font-size: 1.9rem;
+    }
+  }
+
+  .left-menu {
+    @extend .menu;
+
+    .gameLogo {
+      display: flex;
+      width: 50px;
+      height: $img-gameLogo-height;
+      border-radius: 5px;
+      background-color: $black;
+      background-image: $img-gameLogo;
+      background-position: center;
+    }
+
+    p {
+      @include media-property(H, display, none, none, inline);
+    }
+  }
+
+  .right-menu {
+    @include media-property(H, width, 60px, 60px, auto);
+    @extend .menu;
+
+    .vertical-slash {
+      @include media-property(H, display, none, none, block);
+      width: 2px;
+      height: 50px;
+      border-radius: 2px;
+      background: $golden;
+    }
+
+    .languages {
+      @include media-property(H, display, none, none, flex);
+      align-items: center;
+      column-gap: 10px;
+      cursor: pointer;
+
+      p:hover {
+        animation: none;
+      }
+
+      i {
+        font-size: 1.4rem;
+        width: 15px;
+        color: $golden;
+      }
+
+      &:active i {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+vmc-drop-panel {
+  overflow: hidden;
+}
+
+.title-page-header-menu {
+  @include media-property(H, display, block, block, none);
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+
+  &.visible {
+    animation: header_menu_go_right_visible 0.5s ease-out 1 both;
+  }
+
+  &.hidden {
+    animation: header_menu_go_left_hidden 0.5s ease-out 1 both;
+  }
+}

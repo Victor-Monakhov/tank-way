@@ -50,7 +50,7 @@
   overflow: hidden;
 
   span {
-    @include media-property(font-size, 2rem, 2.2rem, 2.5rem, 3rem);
+    @include media-property(H, font-size, 2rem, 2.2rem, 2.5rem, 3rem);
     z-index: 1;
     font-family: Raleway-Bold, sans-serif;
     color: rgba(255, 255, 255, 0.8);
@@ -86,45 +86,53 @@
   background: radial-gradient(ellipse at center, $red, $black 100%);
 }
 
-//radio button tank
-.tank-radio-lbl, .lbl-tank-radio {
+//demo-btn--------------------------------------------------------------------
+.demo-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+//---------------------------------------------------------------------demo-btn
+
+//position-radio---------------------------------------------------------------
+.position-radio {
   position: absolute;
   z-index: -1;
   opacity: 0;
 }
 
-.tank-radio-lbl + label, .lbl-tank-radio + label {
+.position-radio + label {
   display: inline-flex;
   align-items: center;
   user-select: none;
 }
 
-.tank-radio-lbl + label::before, .lbl-tank-radio + label::after {
+.position-radio + label::before {
   content: '';
   display: inline-block;
-  width: 20px;
-  height: 18px;
+  width: 10px;
+  height: 10px;
   flex-shrink: 0;
   flex-grow: 0;
   margin: 5px;
-  background-image: $img-radio-tank;
-  transform: rotateZ(270deg);
+  border-radius: 50%;
+  border: 5px solid $golden;
   cursor: pointer;
+  background-color: $golden;
 }
 
-.radio-red:not(:disabled):not(:checked) + label:hover::before {
-  background-image: $img-radio-tank-red;
+.position-radio:not(:disabled):not(:checked) + label:hover::before {
+  background-color: $golden;
 }
 
-.radio-blue:not(:disabled):not(:checked) + label:hover::after {
-  background-image: $img-radio-tank-blue;
+.position-radio:checked + label:before {
+  background-color: $white;
 }
+//---------------------------------------------------------------position-radio
 
-.radio-red:checked + label:before {
-  background-image: $img-radio-tank-red;
-}
-
-.radio-blue:checked + label:after {
-  background-image: $img-radio-tank-blue;
-}
 

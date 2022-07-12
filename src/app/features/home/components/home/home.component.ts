@@ -6,10 +6,11 @@ import {SocialAuthService} from "angularx-social-login";
 import {LocalStorageService} from "../../../../shared/services/local-storage.service";
 import {switchMap} from "rxjs/operators";
 import {LSKeys} from "../../../../shared/enums/local-storage-keys.enum";
-import {IResponseMessage} from "../../../../shared/interfaces/auth/response-message.interface";
-import {Observable, of} from "rxjs";
-import {TranslateService} from "@ngx-translate/core";
+import {Observable} from "rxjs";
 import {LocalizationService} from "../../../../shared/services/internationalization/localization.service";
+import {WebSocket} from "../../../../shared/classes/web-sockets/web-socket.class";
+import {IAuthResponse} from "../../../../shared/interfaces/auth/auth.interface";
+
 
 @Component({
   selector: 'app-home',
@@ -32,16 +33,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   public get signInTrigger$() {
     return this.authService.isSignIn;
   }
+
   public get authMenuTrigger$() {
     return this.authService.isAuthMenu;
   }
+
+  public webSocket: WebSocket;
 
   constructor(private authService: AuthService,
               private router: Router,
               private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService,
-              private localizationService: LocalizationService) {
-  }
+              private localizationService: LocalizationService) {}
 
   ngOnInit(): void {
     this.subscribeToAuthState();
@@ -49,7 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscribeToCode();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
@@ -65,64 +68,48 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subscribeToUser(): void {
     this.subs.add(this.authService.user.pipe(
       switchMap(user => {
-        if (!user) {
-          return of(null);
-        }
-        if (user.nickname) {
-          return this.authService.signUp() as Observable<IResponseMessage>
-        } else {
-          return this.authService.signIn() as Observable<IResponseMessage>
-        }
+        return this.authService.signUp(user) as Observable<IAuthResponse>
       })
-      ).subscribe((response) => {
-        if (!response) {
-          return;
-        }
-        this.authService.response.next(response);
-        if (response.success) {
-          this.lSService.setItem(LSKeys.authToken, this.authService.user.value.token);
-        } else if (!response.success && this.authService.user.value.token) {
-          this.authService.signOut(() => {
-          });
-        }
-        console.log(response.message);
-      })
-    );
+    ).subscribe((response) => {
+      this.authService.response.next(response);
+      if (response.token) {
+        this.lSService.setItem(LSKeys.authToken, response.token);
+      }
+      console.log(response.message);
+    }));
   }
 
   private subscribeToCode(): void {
     this.subs.add(this.authService.code.pipe(
       switchMap((code) => {
-        if (!code) {
-          return of(null);
-        }
-        return this.authService.sendCode() as Observable<IResponseMessage>
+        return this.authService.sendCode(code) as Observable<IAuthResponse>
       })).subscribe((response) => {
-      if (!response) {
-        return;
-      }
       this.authService.response.next(response);
+      if (response.token) {
+        this.authService.tmpUser.token = response.token;
+        this.authService.user.next(this.authService.tmpUser);
+      }
       console.log(response.message);
     }))
   }
 
-  public signUpTriggerHandler(trigger: boolean) {
+  public signUpTriggerHandler(trigger: boolean): void {
     this.authService.isSignUp.next(trigger);
   }
 
-  public signInTriggerHandler(trigger: boolean) {
+  public signInTriggerHandler(trigger: boolean): void {
     this.authService.isSignIn.next(trigger);
   }
 
-  public codeTriggerHandler(trigger: boolean) {
+  public codeTriggerHandler(trigger: boolean): void {
     this.authService.isCode.next(trigger);
   }
-  public authMenuTriggerHandler(trigger: boolean) {
+
+  public authMenuTriggerHandler(trigger: boolean): void {
     this.authService.isAuthMenu.next(trigger);
   }
 
-
-  onDemo(): void {
-    this.router.navigate(['demo']);
+  public onDemo(): void {
+    this.router.navigate(['demo']).then();
   }
 }

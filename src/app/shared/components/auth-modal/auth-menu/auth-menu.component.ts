@@ -1,34 +1,35 @@
-import {Component, EventEmitter, HostListener, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {AuthService} from "../../../services/auth.service";
-import {Subject} from "rxjs";
-import {SubSink} from "subsink";
+import {Component, EventEmitter, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {AuthService} from '../../../services/auth.service';
+import {Subject} from 'rxjs';
+import {SubSink} from 'subsink';
+import {IDropPanel} from '../../../interfaces/drop-panel.interface';
 
 @Component({
-  selector: 'app-auth-menu',
+  selector: 'app-auth-drop-panel',
   templateUrl: './auth-menu.component.html',
   styleUrls: ['./auth-menu.component.scss']
 })
-export class AuthMenuComponent implements OnInit, OnDestroy {
+export class AuthMenuComponent implements OnInit, OnDestroy, IDropPanel {
   @ViewChild(TemplateRef) templateRef: TemplateRef<any> = {} as TemplateRef<any>;
   protected subs: SubSink = new SubSink();
   public visible: Subject<boolean> = new Subject<boolean>();
   public closed: EventEmitter<void> = new EventEmitter<void>();
   public anim: boolean = false;
 
-  constructor(public authService: AuthService) {
+  public constructor(public authService: AuthService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subs.add(this.visible.subscribe(
       (isVisible) => {
-        if(!isVisible){
+        if (!isVisible) {
           this.closed.emit();
         }
       }
     ))
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
@@ -40,22 +41,17 @@ export class AuthMenuComponent implements OnInit, OnDestroy {
     this.authService.loginWithFacebook();
   }
 
-  public onSignIn(){
+  public onSignIn(): void{
     this.closed.emit();
     this.authService.isSignIn.next(true);
   }
 
-  public onSignUp(){
+  public onSignUp(): void{
     this.closed.emit();
     this.authService.isSignUp.next(true);
   }
 
-  public onExit(){
-    this.closed.emit();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(): void {
+  public onExit(): void {
     this.closed.emit();
   }
 }

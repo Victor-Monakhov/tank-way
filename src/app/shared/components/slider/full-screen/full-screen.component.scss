@@ -16,17 +16,17 @@
   overflow: hidden;
 
   i {
-    @include media-property(font-size, 1.5rem, 1.5rem, 2rem, 2rem);
-    @include media-property(top, 15px, 15px, 20px, 20px);
-    @include media-property(right, 20px, 20px, 30px, 30px);
+    @include media-property(H, font-size, 1.5rem, 1.5rem, 2rem, 2rem);
+    @include media-property(H, top, 15px, 15px, 20px, 20px);
+    @include media-property(H, right, 20px, 20px, 30px, 30px);
     position: absolute;
     color: #ffffff;
     cursor: pointer;
   }
 
   .image-wrapper {
-    @include media-property(grid-template-columns, 30px 1fr 30px, 40px 1fr 40px, 50px 1fr 50px, 50px 1fr 50px);
-    @include media-property(grid-column-gap, 10px, 10px, 20px, 20px);
+    @include media-property(H, grid-template-columns, 30px 1fr 30px, 40px 1fr 40px, 50px 1fr 50px, 50px 1fr 50px);
+    @include media-property(H, grid-column-gap, 10px, 10px, 20px, 20px);
     display: grid;
     grid-template-rows: 100vh;
     align-items: center;
@@ -34,7 +34,7 @@
       display: flex;
       justify-content: center;
       i {
-        @include media-property(font-size, 1.5rem, 1.5rem, 2rem, 2rem);
+        @include media-property(H, font-size, 1.5rem, 1.5rem, 2rem, 2rem);
         position: static;
         flex-shrink: 0;
       }

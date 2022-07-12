@@ -1,0 +1,140 @@
+@import '../../../../../../assets/styles/mixins';
+@import '../../../../../../assets/styles/variables';
+@import '../../../../../../assets/styles/colors';
+@import '../../../../../../assets/styles/animations';
+@import '../../../../../../assets/styles/images';
+@import 'src/assets/styles/fonts';
+
+.position-selection-wrapper {
+  @include media-property(H, padding, 15px 15px, 15px 15px 30px, 15px 15px 40px);
+  @include media-property(H, height, 441px, 469px, 469px, 479px);
+  @include media-property(H, min-width, auto, 370px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid $golden;
+  border-radius: 20px;
+  row-gap: 15px;
+  h2 {
+    color: $golden;
+  }
+  .toggle-team {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    width: 260px;
+    height: 35px;
+    border-radius: 10px;
+    color: $light-grey;
+    background-color: $dark_grey;
+    .switcher {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+    .switch-blue {
+      animation: switch-blue 0.3s ease-out 1 both;
+      background: linear-gradient(to bottom, $blue, $light-blue);
+    }
+    .switch-red {
+      animation: switch-red 0.3s ease-out 1 both;
+      background: linear-gradient(to bottom, $red, $light-red);
+    }
+    p{
+      font-size: 1.5rem;
+      cursor: pointer;
+      user-select: none;
+      z-index: $p-z-index;
+    }
+    .white {
+      color: $white;
+    }
+  }
+  .positions-wrapper {
+    @include media-property(H, column-gap, 35px, 50px);
+    display: flex;
+    .position {
+      display: flex;
+      column-gap: 10px;
+      .position-radio {
+        width: 20px;
+        height: 20px;
+      }
+      label {
+        color: $white;
+      }
+    }
+  }
+  .position-view {
+    @include media-property(H, width, 270px, 300px);
+    border-radius: 25px;
+    position: relative;
+    .map {
+      @include media-property(H, width, 270px, 300px);
+      border-radius: 25px;
+    }
+    .pos-view {
+      @include media-property(H, width, 72px, 80px);
+      @include media-property(H, height, 81px, 90px);
+      position: absolute;
+      .pos-view-content {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        img {
+          position: absolute;
+          object-fit: fill;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+        b {
+          @include media-property(H, margin-top, 12px, 15px);
+          margin-top: 15px;
+          color: $white;
+          user-select: none;
+          z-index: $b-z-index;
+        }
+      }
+    }
+    .red-pos0 {
+      @include media-property(H, top, 72px, 80px);
+      @include media-property(H, left, 18px, 20px);
+    }
+    .red-pos1 {
+      @include media-property(H, top, 104px, 115px);
+      @include media-property(H, left, 18px, 20px);
+    }
+    .red-pos2 {
+      @include media-property(H, top, 171px, 190px);
+      @include media-property(H, left, 84px, 93px);
+    }
+    .red-pos3 {
+      @include media-property(H, top, 171px, 190px);
+      @include media-property(H, left, 117px, 130px);
+    }
+    .blue-pos0 {
+      @include media-property(H, top, 68px, 75px);
+      @include media-property(H, left, 180px, 200px);
+    }
+    .blue-pos1 {
+      @include media-property(H, top, 101px, 112px);
+      @include media-property(H, left, 180px, 200px);
+    }
+    .blue-pos2 {
+      @include media-property(H, top, 171px, 190px);
+      @include media-property(H, left, 113px, 125px);
+    }
+    .blue-pos3 {
+      @include media-property(H, top, 171px, 190px);
+      @include media-property(H, left, 79px, 88px);
+    }
+  }
+}

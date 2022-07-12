@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, of, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {IUser} from "../interfaces/auth/user.interface";
-import {Paths} from "../enums/paths.enum";
+import {Paths} from "../classes/paths.class";
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
 import {AbstractControl} from "@angular/forms";
-import {IResponseMessage} from "../interfaces/auth/response-message.interface";
-import {ISecretCode} from "../interfaces/auth/secert-code.interface";
 import {LSKeys} from "../enums/local-storage-keys.enum";
 import {LocalStorageService} from "./local-storage.service";
+import {catchError} from "rxjs/operators";
+import {IAuthCode, IAuthResponse, IUser} from "../interfaces/auth/auth.interface";
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +18,10 @@ export class AuthService {
   public isSignUp: Subject<boolean> = new Subject<boolean>();
   public isSignIn: Subject<boolean> = new Subject<boolean>();
   public isAuthMenu: Subject<boolean> = new Subject<boolean>();
-  public code: BehaviorSubject<ISecretCode> = new BehaviorSubject<ISecretCode>( null);
-  public user: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(null) ;
-  public response: BehaviorSubject<IResponseMessage> = new BehaviorSubject<IResponseMessage>(null);
+  public user: Subject<IUser> = new Subject<IUser>();
+  public code: Subject<IAuthCode> = new Subject<IAuthCode>();
+  public response: BehaviorSubject<IAuthResponse> = new BehaviorSubject<IAuthResponse>(null);
+  public tmpUser: IUser = {} as IUser;
 
   constructor(private http: HttpClient,
               private socialAuthService: SocialAuthService,
@@ -29,36 +29,66 @@ export class AuthService {
   }
 
   public userInitBySocialUser(user: SocialUser): void {
-    this.user.next({
+    this.tmpUser = {
       nickname: user.email,
       email: user.email,
       password: '12345678',
       token: user.authToken,
       avatarUrl: user.photoUrl,
-    } as IUser);
+    } as IUser;
+    this.user.next(this.tmpUser);
   }
 
   public userInitByForm(form: AbstractControl): void {
-    this.user.next( {
+    this.tmpUser = {
       nickname: form.value['nickname'] ?? '',
       email: form.value['email'],
       password: form.value['password'],
       token: '',
       avatarUrl: '',
-    } as IUser);
+    } as IUser
+    this.user.next(this.tmpUser);
   }
 
-  public signUp(): Observable<any> {
-    return this.http.post(Paths.signUp, this.user.value);
+  public signUp(user: IUser): Observable<any> {
+    return this.http.post(Paths.signUp, user).pipe(
+      catchError((error) => {
+          this.response.next(error['error']);
+          return of();
+        }
+      )
+    );
   }
 
-  public signIn(): Observable<any> {
-    return this.http.post(Paths.signIn, this.user.value);
+  public signIn(user: IUser): Observable<any> {
+    return this.http.post(Paths.signIn, user).pipe(
+      catchError((error) => {
+          this.response.next(error['error']);
+          return of();
+        }
+      )
+    );
   }
 
-  public sendCode(): Observable<any> {
-    return this.http.post(Paths.sendCode, this.code.value);
+  public sendCode(code: IAuthCode): Observable<any> {
+    return this.http.post(Paths.sendCode, code).pipe(
+      catchError((error) => {
+          this.response.next(error['error']);
+          return of();
+        }
+      )
+    );
   }
+
+  // public deleteCode(): Observable<any> {
+  //   return this.http.post(Paths.deleteCode, this.code.value).pipe(
+  //     catchError((error) => {
+  //         this.response.next(error['error']);
+  //         return of();
+  //       }
+  //     )
+  //   );
+  // }
 
   public loginWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(
@@ -91,5 +121,4 @@ export class AuthService {
       }
     );
   }
-
 }

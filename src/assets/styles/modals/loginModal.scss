@@ -4,8 +4,8 @@
 @import "src/assets/styles/mixins";
 @import "images.scss";
 .wrapper{
-  @include media-property(width, 90%, 400px, 400px, 400px);
-  @include media-property(top, 80px, 80px, 80px, 80px);
+  @include media-property(H, width, 90%, 400px, 400px, 400px);
+  @include media-property(H, top, 80px, 80px, 80px, 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +35,7 @@
     }
   }
   .form{
-    @include media-property(width, 90%, 80%, 80%, 80%);
+    @include media-property(H, width, 90%, 80%, 80%, 80%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +58,7 @@
         background: #FFFFFF;
         border-radius: 50px;
         i{
-          @include media-property(font-size, 1.2rem, 1.3rem, 1.4rem, 1.5rem);
+          @include media-property(H, font-size, 1.2rem, 1.3rem, 1.4rem, 1.5rem);
           color: $black;
           cursor: pointer;
         }
@@ -69,7 +69,7 @@
         }
       }
       input[type=text], input[type=password]{
-        @include media-property(font-size, 1rem, 1.1rem, 1.2rem, 1.2rem);
+        @include media-property(H, font-size, 1rem, 1.1rem, 1.2rem, 1.2rem);
         width: 100%;
         font-family: Raleway-Light, sans-serif;
         border-radius: 50px;
@@ -96,14 +96,14 @@
     justify-content: space-around;
   }
   .btn{
-    @include media-property(font-size, 1.2rem, 1.3rem, 1.4rem, 1.5rem);
+    @include media-property(H, font-size, 1.2rem, 1.3rem, 1.4rem, 1.5rem);
     padding: 10px 20px;
     margin: 20px 0 30px;
   }
 }
 
 .modal-go-left {
-  @include media-property(animation,
+  @include media-property(H, animation,
     modal_go_left_xs 0.5s ease-out 1 both,
     modal_go_left_sm 0.5s ease-out 1 both,
     modal_go_left_md 0.5s ease-out 1 both,
@@ -111,7 +111,7 @@
 }
 
 .modal-go-hidden {
-  @include media-property(animation,
+  @include media-property(H, animation,
   modal_go_left_hidden_xs 0.5s ease-out 1 both,
   modal_go_left_hidden_sm_md_lg 0.5s ease-out 1 both,
   modal_go_left_hidden_sm_md_lg 0.5s ease-out 1 both,

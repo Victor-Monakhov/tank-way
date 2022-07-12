@@ -5,58 +5,146 @@
 @import 'src/assets/styles/images';
 @import 'src/assets/styles/variables';
 
-.home-wrapper{
-    img{
-      position: fixed;
-      width: 105%;
-      margin-left: -2.5%;
-      height: 105%;
-      top: 0;
-      z-index: -1;
-      filter: blur(8px) brightness(0.5);
+
+.home-wrapper {
+  margin-top: $header-height;
+  height: calc(100% - #{$header-height});
+  overflow: hidden;
+
+  .title-wrapper {
+    @include media-property(H, height, 300px, 300px, 500px);
+    width: 100%;
+    position: relative;
+
+    .title-img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-    }
-    .title{
-      @include media-property(padding, 0 20px, 0 30px, 0 20%, 0 20%);
-      animation: row_go_down 1s ease 1 both;
-      h1{
-        color: $red;
-        margin-top: 50px;
-      }
-
-      p{
-        margin: 30px 0;
-      }
-    }
-    .play{
-      @include media-property(margin, 0 10px, 0 20px, 0 30px, 0 40px);
-      padding: 20px 40px;
+      filter: brightness(0.5);
     }
 
-    .settings-title{
-      @include media-property(padding, 30px 10px, 30px 20px, 30px 30px, 30px 40px);
-      @include media-property(flex-wrap, wrap, wrap, nowrap, nowrap);
-      @include media-property(flex-direction, column, column, row, row);
-      justify-content: start;
-      h2{
-        @include media-property(margin, 40px 10px 40px 0, 40px 20px 40px 0, 40px 30px 40px 0, 40px 40px 40px 0);
-        color: $red;
-        margin: 40px 0 40px 0;
-        flex-shrink: 0;
+    .title {
+      @include media-property(H, padding,
+        0 30px + $scrollbar-size 0 30px,
+        0 80px + $scrollbar-size 0 80px,
+        0 150px + $scrollbar-size 0 150px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      row-gap: 20px;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+
+      h1 {
+        color: $golden;
       }
-      .p-wrapper{
-        display: flex;
-        justify-content: center;
-        width: 100%;
-      }
-    }
-    .pos-selection-wrapper{
-      margin-bottom: 50px;
-      .pos-selection{
-        display: flex;
-        width: 100%;
-        background-color: $black;
-        flex-direction: column;
+
+      small {
+        color: $white;
       }
     }
   }
+
+  .demo-settings-wrapper {
+    @include media-property(H, padding,
+      15px 5px + $scrollbar-size 15px 5px,
+      30px 40px + $scrollbar-size 30px 40px,
+      45px 80px + $scrollbar-size 45px 80px);
+    @include media-property(H, margin-bottom, 90px, 105px, 120px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
+    background: $black;
+    .settings {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      column-gap: 20px;
+      row-gap: 15px;
+      width: 100%;
+      background-color: $black;
+
+      app-tank-selection {
+        flex-grow: 1;
+      }
+
+      app-position-selection {
+        flex-grow: 1;
+      }
+    }
+
+    .demo-btn {
+      @include media-property(H, width, 270px, 380px);
+      height: 60px;
+      font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+      font-size: 2rem;
+      color: $white;
+      background-color: $golden;
+
+      &:active {
+        font-size: 1.9rem;
+      }
+    }
+    p {
+      @include media-property(H, margin-top, 0, 25px);
+      @include media-property(H, width, 150px, 300px);
+      display: inline-block;
+      text-align: center;
+      line-height: 1.4rem;
+      margin-top: 25px;
+      color: $white;
+    }
+    a {
+      color: $golden;
+    }
+  }
+
+  .temp {
+    width: 100%;
+    height: 1000px;
+    background: $black;
+  }
+
+
+  //.play {
+  //  @include media-property(H, margin, 0 10px, 0 20px, 0 30px, 0 40px);
+  //  @include media-property(H, width, 90%, 400px, 400px, 400px);
+  //  padding: 20px 40px;
+  //}
+  //
+  //.demo-settings-title {
+  //  @include media-property(H, padding, 30px 10px, 30px 20px, 30px 30px, 30px 40px);
+  //  @include media-property(H, flex-wrap, wrap, wrap, nowrap, nowrap);
+  //  @include media-property(H, flex-direction, column, column, row, row);
+  //  justify-content: start;
+  //
+  //  h2 {
+  //    @include media-property(H, margin, 40px 10px 40px 0, 40px 20px 40px 0, 40px 30px 40px 0, 40px 40px 40px 0);
+  //    color: $red;
+  //    margin: 40px 0 40px 0;
+  //    flex-shrink: 0;
+  //  }
+  //
+  //  .p-wrapper {
+  //    display: flex;
+  //    justify-content: center;
+  //    width: 100%;
+  //  }
+  //}
+  //
+  //.pos-selection-wrapper {
+  //  margin-bottom: 50px;
+  //
+  //  .pos-selection {
+  //    display: flex;
+  //    width: 100%;
+  //    background-color: $black;
+  //    flex-direction: column;
+  //  }
+  //}
+
+  //}
+}

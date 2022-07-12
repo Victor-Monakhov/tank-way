@@ -20,7 +20,7 @@
         height: 100%;
         .demo-canvas{
             border: 2px solid $red;
-            cursor:  url(../../../../assets/images/cursor.png) 20 20, auto;
+            cursor:  url('../../../../assets/images/cursor.png') 20 20, auto;
         }
     }
 }

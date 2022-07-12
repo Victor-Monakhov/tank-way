@@ -1,0 +1,78 @@
+@import "colors.scss";
+@import "mixins.scss";
+
+.tank-selection-wrapper {
+  @include media-property(H, padding, 15px 15px, 15px 15px 30px, 15px 15px 40px);
+  @include media-property(H, height, 441px, 469px, 469px, 479px);
+  @include media-property(H, min-width, auto, 370px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid $golden;
+  border-radius: 20px;
+  row-gap: 15px;
+  h2 {
+    color: $golden;
+  }
+  .tank-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 150px;
+    border: 1px solid $light-grey;
+    border-radius: 25px;
+    position: relative;
+    cursor: url('../../../../../../assets/images/cursor.png') 20 20, auto;
+    background: radial-gradient(circle at 50%, $golden, $black 45%);
+    img {
+      position: absolute;
+      user-select: none;
+      width: 60px;
+      height: 60px;
+    }
+  }
+  .selection-wrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    small{
+      color: $white;
+    }
+    .selection{
+      @include media-property(H, width, 246px, 346px);
+      @include media-property(H, height, 64px, 74px);
+      padding: 5px 10px;
+      border: 1px solid $light-grey;
+      border-radius: 10px;
+      overflow: hidden;
+      .selection-content{
+        @include media-property(H, column-gap, 10px, 30px);
+        display: flex;
+        margin-bottom: 15px;
+        img {
+          @include media-property(H, width, 50px, 60px);
+          @include media-property(H, height, 50px, 60px);
+          border: 2px solid transparent;
+          border-radius: 10px;
+          user-select: none;
+          cursor: pointer;
+          background: radial-gradient(circle at 50%, $golden, $black 45%);
+        }
+        .selected {
+          border-color: $golden;
+        }
+      }
+    }
+  }
+}
+
+.required-img {
+  @include media-property(H, width, 50px, 60px);
+  @include media-property(H, height, 50px, 60px);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  user-select: none;
+  cursor: pointer;
+  background: radial-gradient(circle at 50%, $golden, $black 45%);
+}
