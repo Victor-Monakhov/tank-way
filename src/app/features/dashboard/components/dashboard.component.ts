@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class DashboardComponent implements OnInit {
 
-  users?: IUser[];
+  users?: any[];
   public displayedColumns = ['ID', 'Nickname', 'Email', 'Password', 'Token', 'Status', 'Actions'];
 
   constructor(private userService: UserService, private router: Router) {
@@ -54,8 +54,6 @@ export class DashboardComponent implements OnInit {
       // Do nothing!
       console.log('Thing was not saved to the database.');
     }
-
-
   }
 
   private removeAllUsers(): void {
