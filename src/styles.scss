@@ -9,6 +9,8 @@
 @import 'classes/overlay-backdrops.scss';
 @import 'html-elements/html-elements.scss';
 @import 'classes/scrollbar.scss';
+@import 'dashboard.scss';
+@import 'https://unicons.iconscout.com/release/v4.0.0/css/line.css';
 
 html, body {
   height: 100%;
@@ -19,7 +21,7 @@ body {
   margin: 0;
   min-width: 320px;
   font-family: Raleway-Thin, sans-serif;
-  background: linear-gradient(to bottom, $light-grey , $black);
+  background: linear-gradient(to bottom, $light-grey, $black);
 }
 
 //hr {
@@ -29,7 +31,6 @@ body {
 //  background-color: $red;
 //  opacity: 0.5;
 //}
-
 
 
 strong {
@@ -78,13 +79,12 @@ strong {
 //  padding: 0;
 //}
 
-.link{
+.link {
   border-bottom: 1px solid #ffffff;
   cursor: pointer;
 }
-.link:hover{
+
+.link:hover {
   color: $blue;
   border-color: $blue;
 }
-
-

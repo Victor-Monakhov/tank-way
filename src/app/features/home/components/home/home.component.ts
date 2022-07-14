@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from "../../../../shared/services/auth.service";
 import {SubSink} from "subsink";
@@ -111,5 +111,25 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public onDemo(): void {
     this.router.navigate(['demo']).then();
+  }
+
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll() {
+    this.scrollFunction();
+  }
+
+  public scrollFunction(): void {
+    const btnToTop = document.getElementById("btnToTop");
+
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      btnToTop.style.display = "block";
+    } else {
+      btnToTop.style.display = "none";
+    }
+  }
+
+  public topFunction(): void {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 }
