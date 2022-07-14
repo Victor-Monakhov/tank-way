@@ -11,8 +11,8 @@ import {DropPanelDirective} from '../../shared/directives/vm-lib/drop-panel.dire
 import {DropPanelComponent} from '../../shared/components/vm-lib/drop-panel/drop-panel.component';
 import {FullScreenComponent} from '../../shared/components/slider/full-screen/full-screen.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SignUpComponent} from 'src/app/shared/components/auth-modal/sign-up/sign-up.component';
 import {SignInComponent} from '../../shared/components/auth-modal/sign-in/sign-in.component';
+import {SignUpComponent} from "../../shared/components/auth-modal/sign-up/sign-up.component";
 import {SecretCodeComponent} from '../../shared/components/auth-modal/secret-code/secret-code.component';
 import {AuthMenuComponent} from '../../shared/components/auth-modal/auth-menu/auth-menu.component';
 import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
@@ -25,6 +25,8 @@ import {VmScrollbarComponent} from '../../shared/components/vm-lib/scrollbar/vm-
 import {VmScrollbarDirective} from '../../shared/directives/vm-lib/vm-scrollbar.directive';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {TankSelectionComponent} from './components/demo-settings/tank-selection/tank-selection.component';
+import { ProfileCardsComponent } from './components/profile-cards/profile-cards.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import {TankSelectionComponent} from './components/demo-settings/tank-selection/
     VmScrollbarComponent,
     VmScrollbarDirective,
     TankSelectionComponent,
+    ProfileCardsComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

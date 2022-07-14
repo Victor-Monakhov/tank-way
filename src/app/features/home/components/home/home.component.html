@@ -19,38 +19,10 @@
       <button class="demo-btn">PLAY DEMO</button>
       <p>or <a>Sign In</a> and unlock more features</p>
     </div>
-    <div class="temp"></div>
-
-    <!--    <div class="row title">-->
-    <!--      <h1>{{'HOME.TITLE'|translate}}</h1>-->
-    <!--      <p>-->
-    <!--        {{'HOME.DESCRIPTION'|translate}}-->
-    <!--      </p>-->
-    <!--    </div>-->
-    <!--    <div class="row">-->
-    <!--      <button class="btn-start play" (click)="onDemo()"><span>{{'HOME.DEMO'|translate}}</span></button>-->
-    <!--    </div>-->
-    <!--    <div class="row">-->
-    <!--      <small>-->
-    <!--        {{'HOME.DEMO_MESSAGE'|translate}}-->
-    <!--        &lt;!&ndash;      <small class="link" [dropModal]="authMenu">&ndash;&gt;-->
-    <!--        &lt;!&ndash;        {{'HOME.DEMO_MESSAGE_LINK'|translate}}&ndash;&gt;-->
-    <!--        &lt;!&ndash;      </small>&ndash;&gt;-->
-    <!--      </small>-->
-    <!--    </div>-->
-    <!--    <div class="row demo-settings-title">-->
-    <!--      <div class="p-wrapper">-->
-    <!--        <p>{{'HOME.DEMO_SETTINGS_TEXT'|translate}}</p>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <div class="row pos-selection-wrapper">-->
-    <!--      <div class="pos-selection">-->
-    <!--        <app-demo-settings></app-demo-settings>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <app-slider (eventFullScreen)="galleryMode = $event"></app-slider>-->
+    <app-profile-cards></app-profile-cards>
+    <button (click)="topFunction()" id="btnToTop"><i class="fa-solid fa-circle-arrow-up"></i></button>
+    <app-footer></app-footer>
   </ng-scrollbar>
-  <!--  </div>-->
 </div>
 
 <!--<app-auth-menu #authMenu-->

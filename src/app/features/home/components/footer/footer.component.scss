@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap');
+@import 'src/assets/styles/colors';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  //font-family: 'Ropa Sans', sans-serif;
+  text-decoration: none;
+}
+
+.footer {
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: #1E1E1E;
+  padding: 64px 100px;
+  //padding: 80px;
+}
+
+.footer-container {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 0.5fr 1fr 1fr;
+  padding-bottom: 15px;
+  //padding-left: 3rem;
+}
+
+.column {
+  //background-color: yellow; /* Optional */
+  //padding: 1rem; /* Optional */
+}
+
+.footer .content {
+  //max-width: 1350px;
+  margin: auto;
+  //padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer .content p, a {
+  color: #F5F5F5;
+  border-bottom: none;
+}
+
+.footer-link {
+  margin-bottom: 5px;
+}
+
+.footer .content .box {
+  //width: 33%;
+  //transition: all 0.4s ease;
+}
+
+.footer .content .topic {
+  font-size: 20px;
+  font-weight: 400;
+  color: #CE9F25;
+  margin-bottom: 16px;
+}
+
+.footer .content .lower .topic {
+  margin: 24px 0 5px 0;
+}
+
+.footer .content .middle {
+  padding-left: 80px;
+}
+
+.footer .content .middle a {
+  line-height: 32px;
+}
+
+.footer .content .right input[type="text"] {
+  height: 43px;
+  width: 230px;
+  border: none;
+  resize: none;
+  outline: none;
+  //font-size: 20px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 0.625rem;
+  margin-top: 0.3125rem;
+}
+
+.footer .content .right button[type="submit"] {
+  //font-size: 20px;
+  height: 43px;
+  width: 60px;
+  background-color: #CE9F25;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 0.625rem 0.9375rem;
+  margin-top: 0.3125rem;
+}
+
+.footer .content .media-icons a {
+  font-size: 24px;
+  display: inline-block;
+  padding: 30px 15px 0 0;
+}
+
+.footer a {
+  transition: all 0.3s ease;
+}
+
+.footer a:hover {
+  color: #CE9F25;
+}
+
+@media (max-width: 1100px) {
+  .footer .content .middle {
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 950px) {
+  .footer .content .box {
+    //width: 50%;
+  }
+  .content .right {
+    // margin-top: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer {
+    position: relative;
+    padding: 30px;
+  }
+  .footer .content .box {
+    width: 100%;
+    margin-top: 30px;
+  }
+  .footer .content .middle {
+    padding-left: 0;
+  }
+}
+
+

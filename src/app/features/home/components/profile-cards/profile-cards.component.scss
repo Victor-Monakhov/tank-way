@@ -1,0 +1,86 @@
+@import 'src/assets/styles/colors';
+@import 'mixins.scss';
+
+.team {
+  width: 100%;
+  background: $black;
+  padding: 65px 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    color: $golden;
+    margin-bottom: 30px;
+  }
+
+  .profile-cards {
+    @include media-property(H, padding,
+      0 5px + $scrollbar-size 0 5px,
+      0 40px + $scrollbar-size 0 40px,
+      0 80px + $scrollbar-size 0 80px);
+
+    overflow: hidden;
+    height: 285px;
+    width: 100%;
+
+    .cards {
+      @include media-property(H, column-gap, 20px, 40px, 120px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      object-fit: cover;
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 15px;
+
+        .avatar {
+          width: 165px;
+          height: 165px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+          }
+        }
+
+        .details {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          row-gap: 2px;
+
+          .name {
+            color: $white;
+          }
+
+          .job {
+            padding: 3px 20px;
+            border-radius: 18px;
+            background-color: $golden;
+            color: $white;
+          }
+        }
+
+        .media-icons {
+          display: flex;
+          column-gap: 15px;
+
+          a {
+            border-bottom: none;
+
+            i {
+              color: $white;
+              font-size: 1.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
