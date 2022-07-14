@@ -21,11 +21,6 @@
       0 40px + $scrollbar-size 0 40px,
       0 80px + $scrollbar-size 0 80px);
 
-    //@include media-property(H, width,
-    //  calc(100% - 10px + #{$scrollbar-size}),
-    //  calc(100% - 80px + #{$scrollbar-size}),
-    //  calc(100% - 160px + #{$scrollbar-size}));
-
     overflow: hidden;
     height: 285px;
     width: 100%;
@@ -35,7 +30,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      //column-gap: 120px;
       object-fit: cover;
 
       .card {
@@ -90,129 +84,3 @@
     }
   }
 }
-
-//.cards > div {
-//  flex: none;
-//  max-width: 100%;
-//}
-//
-//.cards img {
-//  max-width: 100%;
-//  width: 100%;
-//}
-//
-//.cards::-webkit-scrollbar {
-//  display: none;
-//}
-
-//.cards .card {
-//  border-radius: 12px;
-//  margin: 10px 0 0 0;
-//  transition: all 0.4s ease;
-//}
-
-//.cards .card:hover {
-//  //transform: translateY(-8px);
-//}
-
-//.cards .card .content {
-//  width: 100%;
-//  display: flex;
-//  flex-direction: column;
-//  justify-content: center;
-//  align-items: center;
-//  text-align: center;
-//}
-//
-//.cards .card .content .img {
-//  height: 165px;
-//  width: 165px;
-//  border-radius: 50%;
-//  background: #FFFFFF;
-//  margin-bottom: 14px;
-//}
-//
-//.card .content .img img {
-//  height: 100%;
-//  width: 100%;
-//  border-radius: 50%;
-//  object-fit: cover;
-//}
-//
-//.card .content .name {
-//  font-size: 24px;
-//  font-weight: 400;
-//  color: #FFFFFF;
-//}
-//
-//.card .content .job {
-//  //width: auto;
-//  //height: 32px;
-//  padding: 3px 20px;
-//  //gap: 10px;
-//  background: #CE9F25;
-//  border-radius: 18px;
-//  font-size: 24px;
-//  font-weight: 400;
-//  color: #FFFFFF;
-//  //line-height: 26px;
-//}
-//
-//.card .content .media-icons {
-//  margin-top: 10px;
-//  display: flex;
-//}
-//
-//.media-icons a {
-//  margin: 0 4px;
-//  font-size: 24px;
-//  color: #FFFFFF;
-//  transition: all 0.3s ease;
-//  border-bottom: none;
-//}
-//
-//.media-icons a:hover {
-//  color: #CE9F25;
-//}
-
-//@media (max-width: 768px) {
-//  .cards .card .content {
-//    //width: 220%;
-//  }
-//}
-//
-//@media (min-width: 320px) {
-//  .profile-cards {
-//    padding: 0;
-//  }
-//
-//  .cards {
-//    overflow-x: scroll;
-//    -ms-overflow-style: none; /* IE and Edge */
-//    scrollbar-width: none; /* Firefox */
-//  }
-//
-//  .cards > div {
-//    flex-basis: 0;
-//    flex-grow: 1;
-//  }
-//
-//  .card {
-//    padding: 20px;
-//  }
-//}
-//
-//
-////@media (max-width: 768px) {
-////  .main-card .cards .card {
-////    margin: 5px 0 5px 0;
-////    width: calc(100% / 2 - 10px);
-////  }
-////}
-////
-////@media (max-width: 600px) {
-////  .main-card .cards .card {
-////    //margin: 20px 0 10px 0;
-////    width: 100%;
-////  }
-////}
