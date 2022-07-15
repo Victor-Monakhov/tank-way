@@ -68,10 +68,10 @@ export class DashboardComponent implements OnInit {
   }
 
   private switchThemeMode(): void {
-    const body = document.querySelector("body");
+    const body = document.querySelector(".dashboard-wrapper");
     const modeToggle = body.querySelector(".mode-toggle");
 
-    const sidebar = body.querySelector("nav");
+    const sidebar = body.querySelector(".sidebar");
     const sidebarToggle = body.querySelector(".sidebar-toggle");
 
     const getMode = localStorage.getItem("mode");
@@ -81,24 +81,25 @@ export class DashboardComponent implements OnInit {
 
     if (getMode && getMode === "dark") {
       body.classList.toggle("dark");
-      icon.className = "uil uil-sun";
+      icon.className = "fa-solid fa-sun";
       text.innerHTML = "Light Mode";
     }
 
     let getStatus = localStorage.getItem("status");
     if (getStatus && getStatus === "close") {
       sidebar.classList.toggle("close");
+      icon.className = "";
     }
 
     modeToggle.addEventListener("click", () => {
       body.classList.toggle("dark");
       if (body.classList.contains("dark")) {
         localStorage.setItem("mode", "dark");
-        icon.className = "uil uil-sun";
+        icon.className = "fa-solid fa-sun";
         text.innerHTML = "Light Mode";
       } else {
         localStorage.setItem("mode", "light");
-        icon.className = "uil uil-moon";
+        icon.className = "fa-solid fa-moon";
         text.innerHTML = "Dark Mode";
       }
     });
@@ -107,8 +108,13 @@ export class DashboardComponent implements OnInit {
       sidebar.classList.toggle("close");
       if (sidebar.classList.contains("close")) {
         localStorage.setItem("status", "close");
+        icon.className = "";
       } else {
         localStorage.setItem("status", "open");
+        if (body.classList.contains("dark")) {
+          icon.className = "fa-solid fa-sun";
+        }
+        icon.className = "fa-solid fa-moon";
       }
     });
   }

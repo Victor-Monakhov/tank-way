@@ -8,10 +8,6 @@ import {Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren} fr
 export class ProfileCardsComponent implements OnInit {
   @ViewChildren('card') public cardsList: QueryList<ElementRef>;
   public cards: HTMLElement[] = [];
-
-  constructor() {
-  }
-
   public developers: Array<any> = [
     {
       id: 1,
@@ -41,12 +37,14 @@ export class ProfileCardsComponent implements OnInit {
     // }
   ];
 
+  constructor() {
+  }
+
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
     this.scrollToTargetId(3);
-
   }
 
   scrollToTargetId(targetId) {
