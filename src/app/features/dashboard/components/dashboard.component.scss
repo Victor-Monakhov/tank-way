@@ -9,16 +9,16 @@
 .dashboard-wrapper {
   min-height: 100vh;
   /* ===== Colors ===== */
-  --primary-color: #009163;
-  --panel-color: #FFF;
-  --text-color: #000;
-  --black-light-color: #707070;
-  --border-color: #E6E5E5;
-  --toggle-color: #DDD;
-  --box1-color: #9ECD6D;
-  --box2-color: #D4D671;
-  --box3-color: #FFDE82;
-  --title-icon-color: #FFF;
+  --primary-color: #{$golden};
+  --panel-color: #{$white};
+  --text-color: #{$black};
+  --black-light-color: #{$light-grey};
+  --border-color: #{$border};
+  --toggle-color: #{$toggle};
+  --box1-color: #{$light-red};
+  --box2-color: #{$light-green};
+  --box3-color: #{$light-blue};
+  --title-icon-color: #{$white};
   /* ====== Transition ====== */
   --tran-05: all 0.5s ease;
   --tran-03: all 0.3s ease;
@@ -26,16 +26,16 @@
 }
 
 .dashboard-wrapper.dark {
-  --primary-color: #3A3B3C;
-  --panel-color: #242526;
-  --text-color: #CCC;
-  --black-light-color: #CCC;
-  --border-color: #4D4C4C;
-  --toggle-color: #FFF;
-  --box1-color: #3A3B3C;
-  --box2-color: #3A3B3C;
-  --box3-color: #3A3B3C;
-  --title-icon-color: #CCC;
+  --primary-color: #{$black-primary};
+  --panel-color: #{$black};
+  --text-color: #{$lighter-grey};
+  --black-light-color: #{$lighter-grey};
+  --border-color: #{$black-border};
+  --toggle-color: #{$toggle};
+  --box1-color: #{$black-primary};
+  --box2-color: #{$black-primary};
+  --box3-color: #{$black-primary};
+  --title-icon-color: #{$lighter-grey};
 }
 
 /* === Custom Scroll Bar CSS === */
@@ -378,6 +378,10 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
+
+        table {
+          width: 100%;
+        }
 
         th {
           text-align: left;

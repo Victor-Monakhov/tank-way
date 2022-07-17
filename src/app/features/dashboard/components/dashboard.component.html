@@ -9,26 +9,12 @@
 
     <div class="menu-items">
       <ul class="nav-links">
-        <li><a href="#">
-          <i class="fa-solid fa-gamepad"></i>
-          <span class="link-name">Dahsboard</span>
-        </a></li>
-        <li><a href="#">
-          <i class="fa-solid fa-play"></i>
-          <span class="link-name">Play</span>
-        </a></li>
-        <li><a href="#">
-          <i class="fa-solid fa-message"></i>
-          <span class="link-name">Chat</span>
-        </a></li>
-        <li><a href="#">
-          <i class="fa-solid fa-image"></i>
-          <span class="link-name">NFT Gallery</span>
-        </a></li>
-        <li><a href="#">
-          <i class="fa-solid fa-sliders"></i>
-          <span class="link-name">Settings</span>
-        </a></li>
+        <li *ngFor="let navLink of navLinks">
+          <a href="{{navLink.link}}">
+            <i class="{{navLink.icon}}"></i>
+            <span class="link-name">{{navLink.name}}</span>
+          </a>
+        </li>
       </ul>
 
       <ul class="logout-mode">
@@ -74,20 +60,10 @@
         </div>
 
         <div class="boxes">
-          <div class="box box1">
-            <i class="fa-solid fa-chart-column"></i>
-            <span class="text">Statistic1</span>
-            <span class="number">20,123</span>
-          </div>
-          <div class="box box2">
-            <i class="fa-solid fa-chart-column"></i>
-            <span class="text">Statistic2</span>
-            <span class="number">10,123</span>
-          </div>
-          <div class="box box3">
-            <i class="fa-solid fa-chart-column"></i>
-            <span class="text">Statistic3</span>
-            <span class="number">1,123</span>
+          <div *ngFor="let box of boxes" class="box box{{box.id}}">
+            <i class="{{box.icon}}"></i>
+            <span class="text">{{box.title}}</span>
+            <span class="number">{{box.data}}</span>
           </div>
         </div>
       </div>

@@ -1,7 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../shared/services/user.service";
-import {IUser} from "../../../shared/interfaces/auth/user.interface";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,9 +9,56 @@ import {Router} from "@angular/router";
 export class DashboardComponent implements OnInit {
 
   users?: any[];
+  public navLinks: Array<any> = [
+    {
+      link: '/',
+      icon: 'fa-solid fa-gamepad',
+      name: 'Dashboard'
+    },
+    {
+      link: '#',
+      icon: 'fa-solid fa-play',
+      name: 'Play'
+    },
+    {
+      link: '#',
+      icon: 'fa-solid fa-message',
+      name: 'Chat'
+    },
+    {
+      link: '#',
+      icon: 'fa-solid fa-image',
+      name: 'NFT Gallery'
+    },
+    {
+      link: '#',
+      icon: 'fa-solid fa-sliders',
+      name: 'Settings'
+    },
+  ];
+  public boxes: Array<any> = [
+    {
+      id: 1,
+      icon: 'fa-solid fa-chart-column',
+      title: 'Statistic1',
+      data: '20,123'
+    },
+    {
+      id: 2,
+      icon: 'fa-solid fa-chart-column',
+      title: 'Statistic2',
+      data: '10,123'
+    },
+    {
+      id: 3,
+      icon: 'fa-solid fa-chart-column',
+      title: 'Statistic3',
+      data: '1,123'
+    }
+  ]
   public displayedColumns = ['ID', 'Nickname', 'Email', 'Password', 'Token', 'Status', 'Actions'];
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -46,7 +91,7 @@ export class DashboardComponent implements OnInit {
         .subscribe({
           next: (data) => {
             console.log(data);
-            this.getUsers();
+            this.refreshList();
           },
           error: (e) => console.error(e)
         });
@@ -54,17 +99,6 @@ export class DashboardComponent implements OnInit {
       // Do nothing!
       console.log('Thing was not saved to the database.');
     }
-  }
-
-  private removeAllUsers(): void {
-    this.userService.deleteAll()
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.getUsers();
-        },
-        error: (e) => console.error(e)
-      });
   }
 
   private switchThemeMode(): void {
