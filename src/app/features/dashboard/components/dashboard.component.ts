@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../shared/services/user.service";
+import {LocalizationService} from "../../../shared/services/internationalization/localization.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,58 +8,27 @@ import {UserService} from "../../../shared/services/user.service";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
   users?: any[];
   public navLinks: Array<any> = [
-    {
-      link: '/',
-      icon: 'fa-solid fa-gamepad',
-      name: 'Dashboard'
-    },
-    {
-      link: '#',
-      icon: 'fa-solid fa-play',
-      name: 'Play'
-    },
-    {
-      link: '#',
-      icon: 'fa-solid fa-message',
-      name: 'Chat'
-    },
-    {
-      link: '#',
-      icon: 'fa-solid fa-image',
-      name: 'NFT Gallery'
-    },
-    {
-      link: '#',
-      icon: 'fa-solid fa-sliders',
-      name: 'Settings'
-    },
+    {link: '/', icon: 'fa-solid fa-gamepad', name: 'Dashboard'},
+    {link: '#', icon: 'fa-solid fa-play', name: 'Play'},
+    {link: '#', icon: 'fa-solid fa-message', name: 'Chat'},
+    {link: '#', icon: 'fa-solid fa-image', name: 'NFT Gallery'},
+    {link: '#', icon: 'fa-solid fa-sliders', name: 'Settings'},
   ];
   public boxes: Array<any> = [
-    {
-      id: 1,
-      icon: 'fa-solid fa-chart-column',
-      title: 'Statistic1',
-      data: '20,123'
-    },
-    {
-      id: 2,
-      icon: 'fa-solid fa-chart-column',
-      title: 'Statistic2',
-      data: '10,123'
-    },
-    {
-      id: 3,
-      icon: 'fa-solid fa-chart-column',
-      title: 'Statistic3',
-      data: '1,123'
-    }
+    {icon: 'fa-solid fa-chart-column', title: 'Statistic1', data: '20,123'},
+    {icon: 'fa-solid fa-chart-column', title: 'Statistic2', data: '10,123'},
+    {icon: 'fa-solid fa-chart-column', title: 'Statistic3', data: '1,123'}
   ]
   public displayedColumns = ['ID', 'Nickname', 'Email', 'Password', 'Token', 'Status', 'Actions'];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private localizationService: LocalizationService) {
+    //localizationService.useLanguage('en-US');
+
+    for (let index = 0; index < this.navLinks.length; index++) {
+      this.navLinks[index].name = 'DASHBOARD.NAV_' + index.toString();
+    }
   }
 
   ngOnInit(): void {
@@ -97,7 +67,7 @@ export class DashboardComponent implements OnInit {
         });
     } else {
       // Do nothing!
-      console.log('Thing was not saved to the database.');
+      console.log('Thing was not deleted in database.');
     }
   }
 
@@ -109,14 +79,10 @@ export class DashboardComponent implements OnInit {
     const sidebarToggle = body.querySelector(".sidebar-toggle");
 
     const getMode = localStorage.getItem("mode");
-
     const icon = document.querySelector("#mode-icon");
-    const text = document.querySelector("#mode-text");
 
     if (getMode && getMode === "dark") {
       body.classList.toggle("dark");
-      icon.className = "fa-solid fa-sun";
-      text.innerHTML = "Light Mode";
     }
 
     let getStatus = localStorage.getItem("status");
@@ -129,12 +95,8 @@ export class DashboardComponent implements OnInit {
       body.classList.toggle("dark");
       if (body.classList.contains("dark")) {
         localStorage.setItem("mode", "dark");
-        icon.className = "fa-solid fa-sun";
-        text.innerHTML = "Light Mode";
       } else {
         localStorage.setItem("mode", "light");
-        icon.className = "fa-solid fa-moon";
-        text.innerHTML = "Dark Mode";
       }
     });
 
@@ -145,12 +107,8 @@ export class DashboardComponent implements OnInit {
         icon.className = "";
       } else {
         localStorage.setItem("status", "open");
-        if (body.classList.contains("dark")) {
-          icon.className = "fa-solid fa-sun";
-        }
         icon.className = "fa-solid fa-moon";
       }
     });
   }
-
 }

@@ -14,7 +14,10 @@ import {TranslateModule} from "@ngx-translate/core";
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    TranslateModule.forChild({
+      extend: true
+    }),
   ]
 })
 export class DashboardModule { }

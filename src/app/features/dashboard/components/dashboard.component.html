@@ -12,7 +12,7 @@
         <li *ngFor="let navLink of navLinks">
           <a href="{{navLink.link}}">
             <i class="{{navLink.icon}}"></i>
-            <span class="link-name">{{navLink.name}}</span>
+            <span class="link-name">{{navLink.name | translate}}</span>
           </a>
         </li>
       </ul>
@@ -20,13 +20,13 @@
       <ul class="logout-mode">
         <li><a href="#">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <span class="link-name">Logout</span>
+          <span class="link-name">{{'DASHBOARD.MODE_LOGOUT' | translate}}</span>
         </a></li>
 
         <li class="mode">
           <a>
             <i class="fa-solid fa-moon" id="mode-icon"></i>
-            <span class="link-name" id="mode-text">Dark Mode</span>
+            <span class="link-name" id="mode-text">{{'DASHBOARD.MODE_DARK' | translate}}</span>
           </a>
 
           <div class="mode-toggle">
@@ -43,7 +43,7 @@
 
       <div class="search-box">
         <i class="uil uil-search"></i>
-        <input type="text" placeholder="Search here...">
+        <input type="text" placeholder="{{'DASHBOARD.SEARCH_BOX' | translate}}">
       </div>
 
       <img
@@ -56,11 +56,11 @@
       <div class="overview">
         <div class="title">
           <i class="fa-solid fa-gauge-high"></i>
-          <span class="text">Dashboard</span>
+          <span class="text">{{'DASHBOARD.CONTENT_TEXT_1' | translate}}</span>
         </div>
 
         <div class="boxes">
-          <div *ngFor="let box of boxes" class="box box{{box.id}}">
+          <div *ngFor="let box of boxes; let i = index" class="box box{{i+1}}">
             <i class="{{box.icon}}"></i>
             <span class="text">{{box.title}}</span>
             <span class="number">{{box.data}}</span>
@@ -71,7 +71,7 @@
       <div class="activity">
         <div class="title">
           <i class="fa-solid fa-users"></i>
-          <span class="text">Players</span>
+          <span class="text">{{'DASHBOARD.CONTENT_TEXT_2' | translate}}</span>
         </div>
 
         <div class="activity-data">
