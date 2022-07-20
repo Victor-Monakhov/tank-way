@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PanelService} from '../../../../../shared/services/panel-service/panel.service';
 
 @Component({
   selector: 'app-header-menu',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderMenuComponent implements OnInit {
 
-  constructor() { }
+  public constructor(private panelService: PanelService) {
+  }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    return;
+  }
+
+  public onClose(): void {
+    this.panelService.titleHeaderMenu$.next(false);
   }
 
 }

@@ -25,9 +25,9 @@
 
     .title {
       @include media-property(H, padding,
-        0 30px + $scrollbar-size 0 30px,
-        0 80px + $scrollbar-size 0 80px,
-        0 150px + $scrollbar-size 0 150px);
+        0 30px 0 30px,
+        0 80px 0 80px,
+        0 150px 0 150px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -48,9 +48,9 @@
 
   .demo-settings-wrapper {
     @include media-property(H, padding,
-      15px 5px + $scrollbar-size 15px 5px,
-      30px 40px + $scrollbar-size 30px 40px,
-      45px 80px + $scrollbar-size 45px 80px);
+      15px 5px 15px 5px,
+      30px 40px 30px 40px,
+      45px 80px 45px 80px);
     @include media-property(H, margin-bottom, 90px, 105px, 120px);
     display: flex;
     flex-direction: column;

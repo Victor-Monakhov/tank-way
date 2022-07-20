@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
-import {PanelService} from '../../../../shared/services/panel.service';
-import {Observable, Subject} from 'rxjs';
-import {tap} from "rxjs/operators";
+import {PanelService} from '../../../../shared/services/panel-service/panel.service';
+import {Subject} from 'rxjs';
 
 interface ILocal {
   value: string;

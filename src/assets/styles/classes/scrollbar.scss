@@ -17,7 +17,7 @@
   }
 }
 
-.selection {
+.selection, .profile-cards {
   .scrollbar {
     .track {
       border-radius: 0;
@@ -36,20 +36,20 @@
   }
 }
 
-.profile-cards {
-  .scrollbar {
-    .track {
-      border-radius: 0;
-      height: 0 !important;
-      background-color: transparent !important;
-      position: absolute !important;
-      bottom: 0 !important;
-    }
-    .thumb {
-      height: 0 !important;
-      position: absolute !important;
-      bottom: 0 !important;
-      background-color: transparent !important;
-    }
-  }
-}
+//.profile-cards {
+//  .scrollbar {
+//    .track {
+//      border-radius: 0;
+//      height: 0 !important;
+//      background-color: transparent !important;
+//      position: absolute !important;
+//      bottom: 0 !important;
+//    }
+//    .thumb {
+//      height: 0 !important;
+//      position: absolute !important;
+//      bottom: 0 !important;
+//      background-color: transparent !important;
+//    }
+//  }
+//}

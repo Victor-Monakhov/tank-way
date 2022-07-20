@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DemoService } from '../services/demo.service';
+import { DemoService } from '../services/demo-service/demo.service';
 import { Game } from '@victor_monakhov/tanks';
 
 @Component({
@@ -16,7 +16,7 @@ export class DemoComponent implements OnInit, AfterViewInit{
   constructor(private demoService: DemoService) {
   }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
   }
 
   ngAfterViewInit(){

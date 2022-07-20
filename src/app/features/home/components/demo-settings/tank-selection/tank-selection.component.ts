@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Calculations} from '../../../../../shared/classes/calculations/calculations.class';
 
 @Component({
   selector: 'app-tank-selection',
@@ -35,7 +36,7 @@ export class TankSelectionComponent implements OnInit {
   public readonly viewHeight: number = 150;
   public readonly viewWidth: number = 200;
 
-    public constructor() {
+  public constructor() {
   }
 
   public ngOnInit(): void {
@@ -43,15 +44,19 @@ export class TankSelectionComponent implements OnInit {
   }
 
   public onBody(index: number): void {
-    this.selectedTankBody = this.tankBodies[index];
+    if (this.tankBodies.length > index && index >= 0) {
+      this.selectedTankBody = this.tankBodies[index];
+    }
   }
 
   public onHead(index: number): void {
-    this.selectedTankHead = this.tankHeads[index];
+    if (this.tankHeads.length > index && index >= 0) {
+      this.selectedTankHead = this.tankHeads[index];
+    }
   }
 
   public checkBodySelection(index: number): boolean {
-      return this.selectedTankBody === this.tankBodies[index];
+    return this.selectedTankBody === this.tankBodies[index];
   }
 
   public checkHeadSelection(index: number): boolean {
@@ -59,10 +64,11 @@ export class TankSelectionComponent implements OnInit {
   }
 
   public onTarget(event: MouseEvent): void {
-    const tgA = (event.offsetY - this.viewHeight / 2) / (event.offsetX - this.viewWidth / 2);
-    if (this.viewWidth / 2 < event.offsetX)
-      this.targetAngle = Math.atan(tgA) * 180 / Math.PI;
-    else
-      this.targetAngle = Math.atan(tgA) * 180 / Math.PI + 180;
+    this.targetAngle = Calculations.getAngleBetweenCenterAndPoint(
+      this.viewWidth,
+      this.viewHeight,
+      event.offsetX,
+      event.offsetY
+    );
   }
 }

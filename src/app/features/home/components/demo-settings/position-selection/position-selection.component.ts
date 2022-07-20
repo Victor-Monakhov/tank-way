@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, FormGroup} from '@angular/forms';
-import {DemoService} from 'src/app/features/demo/services/demo.service';
+import {DemoService} from 'src/app/features/demo/services/demo-service/demo.service';
 
 @Component({
   selector: 'app-position-selection',
@@ -9,6 +9,8 @@ import {DemoService} from 'src/app/features/demo/services/demo.service';
 })
 export class PositionSelectionComponent implements OnInit {
 
+  private readonly team1 = 'red';
+  private readonly team2 = 'blue';
   public form: FormGroup<number> = {} as FormGroup;
   public team: string = 'red';
 
@@ -31,7 +33,7 @@ export class PositionSelectionComponent implements OnInit {
 
   public onTeamChange(flag: boolean): void {
     if (flag) {
-      this.team = (this.team === 'red') ? 'blue' : 'red';
+      this.team = (this.team === this.team1) ? this.team2 : this.team1;
       this.form.get('position').setValue(0);
     }
   }

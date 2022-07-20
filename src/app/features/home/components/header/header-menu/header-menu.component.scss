@@ -28,6 +28,12 @@
       color: $white;
       font-size: 2rem;
     }
+    i {
+      cursor: pointer;
+      &:active{
+        font-size: 1.9rem;
+      }
+    }
   }
   .content {
     @include media-property(H, padding, 0 25px, 0, 70px);
@@ -36,13 +42,19 @@
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
-    flex-shrink: 1;
     p{
       color: $white;
     }
     hr {
-      background: $golden;
+      border-color: $golden;
     }
+    .top-menu{
 
+    }
+    .bottom-menu{
+      display: flex;
+      flex-direction: column;
+      row-gap: 25px;
+    }
   }
 }

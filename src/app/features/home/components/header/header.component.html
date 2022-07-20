@@ -1,10 +1,5 @@
 <div class="title-page-header-wrapper">
-  <i class="fa-solid fa-bars" (click)="onMenu()"></i>
-<!--  <button type="button"-->
-<!--          class="btn-menu"-->
-<!--          [vmdDropPanel]=navMenu-->
-<!--          [staticBackdrop]="false">-->
-<!--  </button>-->
+  <i class="fa-solid fa-bars drop-menu" (click)="onMenu()"></i>
   <div class="left-menu">
     <div class="gameLogo"></div>
     <p>Game</p>
@@ -21,15 +16,6 @@
     <!--        <option *ngFor="let language of languages" [ngValue]="language.value">{{language.label}}</option>-->
     <!--      </select>-->
   </div>
-
-  <!--  <div class="menu-wrapper">-->
-  <!--    <ng-container *ngTemplateOutlet="menuContent"></ng-container>-->
-  <!--  </div>-->
-  <!--  <div class="language">-->
-  <!--    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">-->
-  <!--  </div>-->
-
-
 </div>
 
 
@@ -44,10 +30,3 @@
                                (headerMenuTrigger$ | async) ? 'visible' : 'hidden']">
   </app-header-menu>
 </vmc-drop-panel>
-
-<!--<ng-template #menuContent>-->
-<!--  <p (click)="onMenuItem()">Cabinet</p>-->
-<!--  <hr>-->
-<!--  <p>About</p>-->
-<!--  <hr>-->
-<!--</ng-template>-->
