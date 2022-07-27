@@ -40,19 +40,19 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public webSocket: WebSocket;
 
-  constructor(private authService: AuthService,
+  public constructor(private authService: AuthService,
               private router: Router,
               private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService,
               private localizationService: LocalizationService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscribeToAuthState();
     this.subscribeToUser();
     this.subscribeToCode();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
@@ -119,12 +119,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public scrollFunction(): void {
-    const btnToTop = document.getElementById("btnToTop");
+    const btnToTop = document.getElementById('btnToTop');
 
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      btnToTop.style.display = "block";
+      btnToTop.style.display = 'block';
     } else {
-      btnToTop.style.display = "none";
+      btnToTop.style.display = 'none';
     }
   }
 

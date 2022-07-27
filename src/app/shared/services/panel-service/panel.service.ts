@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PanelService {
-  public titleHeaderMenu$: Subject<boolean> = new Subject<boolean>();
-  public constructor() { }
+  public titleHeaderMenu$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public constructor() {
+  }
 }

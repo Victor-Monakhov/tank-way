@@ -2,6 +2,7 @@
 <div *ngIf="!galleryMode; else galleryFullScreen"
      class="home-wrapper">
   <ng-scrollbar class="scrollbar"
+                [viewClass]="'view'"
                 [thumbClass]="'thumb'"
                 [trackClass]="'track'">
     <div class="title-wrapper">
@@ -20,7 +21,8 @@
       <p>or <a>Sign In</a> and unlock more features</p>
     </div>
     <app-profile-cards></app-profile-cards>
-    <button (click)="topFunction()" id="btnToTop"><i class="fa-solid fa-circle-arrow-up"></i></button>
+    <app-home-gallery></app-home-gallery>
+<!--    <button (click)="topFunction()" id="btnToTop"><i class="fa-solid fa-circle-arrow-up"></i></button>-->
     <app-footer></app-footer>
   </ng-scrollbar>
 </div>

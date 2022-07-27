@@ -1,7 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PositionSelectionComponent} from './position-selection.component';
-import {UntypedFormBuilder} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, UntypedFormBuilder} from '@angular/forms';
 import {DemoService} from '../../../../demo/services/demo-service/demo.service';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {VmForDirective} from '../../../../../shared/directives/vm-for.directive';
+import {NgScrollbarModule} from 'ngx-scrollbar';
 
 class DemoServiceStub {
 
@@ -12,13 +15,20 @@ describe('PositionSelectionComponent', () => {
   let component: PositionSelectionComponent;
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        NgScrollbarModule,
+        FormsModule,
+        ReactiveFormsModule
+      ],
       declarations: [
-        PositionSelectionComponent
+        PositionSelectionComponent,
+        VmForDirective
       ],
       providers: [
         UntypedFormBuilder,
         {provide: DemoService, useClass: DemoServiceStub}
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
     fixture = TestBed.createComponent(PositionSelectionComponent);
     component = fixture.componentInstance;

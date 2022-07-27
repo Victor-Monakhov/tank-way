@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, from, Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {createClient} from "pexels";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, from, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
-export interface ImageType{
+export interface IImageType{
   original: string;
   large2x: string;
   large: string;
@@ -15,7 +14,7 @@ export interface ImageType{
   tiny: string;
 }
 
-export interface Image{
+export interface IImage{
   id: number;
   width: number;
   height: number;
@@ -24,15 +23,15 @@ export interface Image{
   photographer_url: string;
   photographer_id: number;
   avg_color: string;
-  src: ImageType;
+  src: IImageType;
   liked: boolean;
   alt: string;
 }
 
-export interface ImagesPage{
+export interface IImagesPage{
   page: number;
   per_page: number,
-  photos: Image[],
+  photos: IImage[],
   next_page: string;
 }
 
@@ -41,14 +40,14 @@ export interface ImagesPage{
 })
 export class GalleryService {
 
-  public images$: BehaviorSubject<Image[]> = new BehaviorSubject<Image[]>([]);
-  public image$: BehaviorSubject<Image> = new BehaviorSubject<Image>({} as Image);
+  public images$: BehaviorSubject<IImage[]> = new BehaviorSubject<IImage[]>([]);
+  public image$: BehaviorSubject<IImage> = new BehaviorSubject<IImage>({} as IImage);
 
-  constructor(public http: HttpClient) {
+  public constructor(public http: HttpClient) {
   }
 
-  public getImages(): Observable<Image[]>{
-    return this.http.get<ImagesPage>("https://api.pexels.com/v1/curated?per_page=80", {
+  public getImages(amount: number = 80): Observable<IImage[]> {
+    return this.http.get<IImagesPage>(`https://api.pexels.com/v1/curated?per_page=${amount}`, {
       headers: {
         Authorization: '563492ad6f917000010000018550af4ae3b941f1b5605270941a403b'
       }
@@ -59,8 +58,8 @@ export class GalleryService {
     );
   }
 
-  public getImage(id: number = 0): Observable<Image>{
-    return this.http.get<Image>(`https://api.pexels.com/v1/photos/${id}`, {
+  public getImage(id: number = 0): Observable<IImage> {
+    return this.http.get<IImage>(`https://api.pexels.com/v1/photos/${id}`, {
       headers: {
         Authorization: '563492ad6f917000010000018550af4ae3b941f1b5605270941a403b'
       }

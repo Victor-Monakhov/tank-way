@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TankSelectionComponent} from './tank-selection.component';
 import {Calculations} from '../../../../../shared/classes/calculations/calculations.class';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 describe('TankSelectionComponent', () => {
   let fixture: ComponentFixture<TankSelectionComponent>;
@@ -9,7 +10,8 @@ describe('TankSelectionComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         TankSelectionComponent
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
     fixture = TestBed.createComponent(TankSelectionComponent);
     component = fixture.componentInstance;

@@ -7,4 +7,10 @@ export class Calculations {
       return Math.atan(tgA) * 180 / Math.PI + 180;
     }
   }
+  public static degreeToRadian(degree: number): number {
+    return degree * Math.PI / 180;
+  }
+  public static radianToDegree(radian: number): number {
+    return radian * 180 / Math.PI;
+  }
 }

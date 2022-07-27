@@ -7,11 +7,11 @@ import {
   OnInit, Output,
   ViewChild
 } from '@angular/core';
-import {GalleryService, Image} from "../../../services/gallery.service";
-import {SubSink} from "subsink";
-import {WIN_SIZES} from "../../../../app.config";
-import {Observable} from "rxjs";
-import {Router} from "@angular/router";
+import {GalleryService, IImage} from '../../../services/gallery.service';
+import {SubSink} from 'subsink';
+import {WIN_SIZES} from '../../../../app.config';
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-slider',
@@ -27,19 +27,19 @@ export class SliderComponent implements OnInit, OnDestroy {
 
   private subs: SubSink = new SubSink();
   private screenSize: number = 0;
-  public images: Image[] = [];
+  public images: IImage[] = [];
   public scrollY: number = 0;
   public visible: boolean = false;
   public sliderStyles: CSSStyleDeclaration;
   public sliderWidth: number;
   public fullScreenMode: boolean = false;
 
-  constructor(private galleryService: GalleryService, private dChanges: ChangeDetectorRef, private router: Router) {
+  public constructor(private galleryService: GalleryService, private dChanges: ChangeDetectorRef, private router: Router) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.subs.add(
-      this.galleryService.getImages().subscribe(images => {
+      this.galleryService.getImages().subscribe((images) => {
         this.galleryService.images$.next(images);
         this.images = this.galleryService.images$.value;
       }));
@@ -62,7 +62,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
@@ -77,7 +77,7 @@ export class SliderComponent implements OnInit, OnDestroy {
       const dScrollRight = (futureScrollY < -scrollDistance) ? futureScrollY + scrollDistance : 0;
       const dScrollLeft = (futureScrollY > 0) ? futureScrollY : 0
       this.scrollY += scroll.deltaY - dScrollRight - dScrollLeft;
-      this.slider.nativeElement.scroll({left: -this.scrollY,});
+      this.slider.nativeElement.scroll({left: -this.scrollY});
     }
   }
 
@@ -88,7 +88,7 @@ export class SliderComponent implements OnInit, OnDestroy {
   }
 
   public onImage(id: number) {
-    //this.subs.add(this.galleryService.getImage().subscribe(image => this.galleryService.image$.next(image)));
+    // this.subs.add(this.galleryService.getImage().subscribe(image => this.galleryService.image$.next(image)));
     this.eventFullScreen.emit(id.toString());
   }
 

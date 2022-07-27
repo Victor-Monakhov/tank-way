@@ -68,11 +68,7 @@
       width: 100%;
       background-color: $black;
 
-      app-tank-selection {
-        flex-grow: 1;
-      }
-
-      app-position-selection {
+      app-tank-selection, app-position-selection {
         flex-grow: 1;
       }
     }

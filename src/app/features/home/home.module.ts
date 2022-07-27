@@ -12,7 +12,7 @@ import {DropPanelComponent} from '../../shared/components/vm-lib/drop-panel/drop
 import {FullScreenComponent} from '../../shared/components/slider/full-screen/full-screen.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SignInComponent} from '../../shared/components/auth-modal/sign-in/sign-in.component';
-import {SignUpComponent} from "../../shared/components/auth-modal/sign-up/sign-up.component";
+import {SignUpComponent} from '../../shared/components/auth-modal/sign-up/sign-up.component';
 import {SecretCodeComponent} from '../../shared/components/auth-modal/secret-code/secret-code.component';
 import {AuthMenuComponent} from '../../shared/components/auth-modal/auth-menu/auth-menu.component';
 import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
@@ -21,12 +21,12 @@ import {CodeInputComponent} from '../../shared/components/code-input/code-input.
 import {VmForDirective} from '../../shared/directives/vm-for.directive';
 import {BlockCopyPastDirective} from '../../shared/directives/block-copy-past.directive';
 import {HeaderMenuComponent} from './components/header/header-menu/header-menu.component';
-import {VmScrollbarComponent} from '../../shared/components/vm-lib/scrollbar/vm-scrollbar.component';
-import {VmScrollbarDirective} from '../../shared/directives/vm-lib/vm-scrollbar.directive';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {TankSelectionComponent} from './components/demo-settings/tank-selection/tank-selection.component';
-import { ProfileCardsComponent } from './components/profile-cards/profile-cards.component';
-import { FooterComponent } from './components/footer/footer.component';
+import {ProfileCardsComponent} from './components/profile-cards/profile-cards.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {BurgerComponent} from '../../shared/components/vm-lib/burger/burger.component';
+import {HomeGalleryComponent} from './components/home-gallery/home-gallery.component';
 
 @NgModule({
   declarations: [
@@ -45,11 +45,11 @@ import { FooterComponent } from './components/footer/footer.component';
     VmForDirective,
     BlockCopyPastDirective,
     HeaderMenuComponent,
-    VmScrollbarComponent,
-    VmScrollbarDirective,
     TankSelectionComponent,
     ProfileCardsComponent,
-    FooterComponent
+    FooterComponent,
+    BurgerComponent,
+    HomeGalleryComponent
   ],
   imports: [
     CommonModule,
