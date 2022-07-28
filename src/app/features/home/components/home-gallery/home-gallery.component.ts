@@ -1,6 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GalleryService, IImage} from '../../../../shared/services/gallery.service';
 import {SubSink} from 'subsink';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {Observable, timer} from 'rxjs';
+import {WIN_SIZES} from '../../../../app.config';
+import {debounce} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-gallery',
@@ -9,22 +13,46 @@ import {SubSink} from 'subsink';
 })
 export class HomeGalleryComponent implements OnInit, OnDestroy {
   private subs: SubSink = new SubSink();
-  public images: IImage[] = [];
+  public images$: Observable<IImage[]> = new Observable<IImage[]>();
 
-  public constructor(private galleryService: GalleryService) {
-  }
-
-  public ngOnInit(): void {
+  public constructor(private galleryService: GalleryService,
+                     private bpObserver: BreakpointObserver) {
     this.subs.add(
-      this.galleryService.getImages(8).subscribe((images) => {
-        this.galleryService.images$.next(images);
-        this.images = this.galleryService.images$.value;
+      bpObserver
+        .observe([
+          `(min-width: ${WIN_SIZES.XS}px)`,
+          `(min-width: ${WIN_SIZES.SM}px)`,
+          `(min-width: ${WIN_SIZES.MD}px)`,
+          `(min-width: ${WIN_SIZES.LG}px)`,
+          `(min-width: ${WIN_SIZES.XL}px)`
+        ]).pipe(
+        debounce(() => timer(500))
+      ).subscribe((result) => {
+        if (result['breakpoints'][`(min-width: ${WIN_SIZES.XL}px)`]) {
+          this.updateImages(12);
+        } else if (result['breakpoints'][`(min-width: ${WIN_SIZES.LG}px)`]) {
+          this.updateImages(10);
+        } else if (result['breakpoints'][`(min-width: ${WIN_SIZES.MD}px)`]) {
+          this.updateImages(8);
+        } else if (result['breakpoints'][`(min-width: ${WIN_SIZES.SM}px)`]) {
+          this.updateImages(6);
+        } else {
+          this.updateImages(4);
+        }
       })
     );
   }
 
+  public ngOnInit(): void {
+    return;
+  }
+
   public ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  private updateImages(imagesAmount: number): void {
+    this.images$ = this.galleryService.getImages(imagesAmount);
   }
 
 }

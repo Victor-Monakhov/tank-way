@@ -1,6 +1,7 @@
 <div class="gallery-wrapper">
-  <div *ngFor="let image of images" class="image">
+  <div *ngFor="let image of images$ | async" class="image">
     <img alt="image"
          [src]="image.src.medium">
   </div>
+  <button class="demo-btn">GO TO GALLERY</button>
 </div>
