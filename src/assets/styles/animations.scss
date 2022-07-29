@@ -12,6 +12,11 @@
   100% {left: -100%;}
 }
 
+@keyframes auth_menu_go_right_visible {
+  0% {left: 100%;}
+  100% {left: calc(50% - 200px);}
+}
+
 //team-switcher
 @keyframes switch-blue {
   0% {left: 0; right: 50%}

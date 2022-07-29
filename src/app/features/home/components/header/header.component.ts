@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
 import {PanelService} from '../../../../shared/services/panel-service/panel.service';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 interface ILocal {
   value: string;
@@ -45,10 +45,6 @@ export class HeaderComponent implements OnInit {
 
   public onMenu(isOpen: boolean): void {
     this.headerMenuTrigger$.next(isOpen);
-  }
-
-  public triggerHandler(result: boolean, trigger: Subject<boolean>): void {
-    trigger.next(result);
   }
 
   public get name(): string {

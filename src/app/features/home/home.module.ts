@@ -14,7 +14,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SignInComponent} from '../../shared/components/auth-modal/sign-in/sign-in.component';
 import {SignUpComponent} from '../../shared/components/auth-modal/sign-up/sign-up.component';
 import {SecretCodeComponent} from '../../shared/components/auth-modal/secret-code/secret-code.component';
-import {AuthMenuComponent} from '../../shared/components/auth-modal/auth-menu/auth-menu.component';
 import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {CodeInputComponent} from '../../shared/components/code-input/code-input.component';
@@ -27,6 +26,9 @@ import {ProfileCardsComponent} from './components/profile-cards/profile-cards.co
 import {FooterComponent} from './components/footer/footer.component';
 import {BurgerComponent} from '../../shared/components/vm-lib/burger/burger.component';
 import {HomeGalleryComponent} from './components/home-gallery/home-gallery.component';
+import {AuthMenuComponent} from './components/auth/auth-menu/auth-menu.component';
+import {HeaderMenuPanelComponent} from './components/drop-panels/header-menu-panel/header-menu-panel.component';
+import {AuthMenuPanelComponent} from './components/drop-panels/auth-menu-panel/auth-menu-panel.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import {HomeGalleryComponent} from './components/home-gallery/home-gallery.compo
     ProfileCardsComponent,
     FooterComponent,
     BurgerComponent,
-    HomeGalleryComponent
+    HomeGalleryComponent,
+    HeaderMenuPanelComponent,
+    AuthMenuPanelComponent
   ],
   imports: [
     CommonModule,

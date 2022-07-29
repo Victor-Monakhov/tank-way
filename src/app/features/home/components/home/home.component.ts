@@ -6,17 +6,18 @@ import {SocialAuthService} from 'angularx-social-login';
 import {LocalStorageService} from '../../../../shared/services/local-storage.service';
 import {switchMap} from 'rxjs/operators';
 import {LSKeys} from '../../../../shared/enums/local-storage-keys.enum';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
 import {WebSocket} from '../../../../shared/classes/web-sockets/web-socket.class';
 import {IAuthResponse} from '../../../../shared/interfaces/auth/auth.interface';
 import {NAVIGATE} from '../../../../app.config';
+import { PanelService } from 'src/app/shared/services/panel-service/panel.service';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.component.html',
-  styleUrls: ['home.component.scss'],
+  styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               private router: Router,
               private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService,
+              private panelService: PanelService,
               private localizationService: LocalizationService) {}
 
   public ngOnInit(): void {
@@ -39,6 +41,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  public onAuthMenu(): void {
+    this.panelService.authMenu$.next(true);
   }
 
   public signUpTriggerHandler(trigger: boolean): void {
@@ -130,7 +136,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this.authService.isSignIn;
   }
 
-  public get authMenuTrigger$(): Observable<boolean> {
-    return this.authService.isAuthMenu;
+  public get authMenuTrigger$(): BehaviorSubject<boolean> {
+    return this.panelService.authMenu$;
   }
 }

@@ -1,0 +1,10 @@
+@import "mixins.scss";
+@import "colors.scss";
+@import "variables.scss";
+
+.auth-menu-wrapper {
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    background: $golden;
+}

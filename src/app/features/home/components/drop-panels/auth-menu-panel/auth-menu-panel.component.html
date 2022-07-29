@@ -1,0 +1,11 @@
+<vmc-drop-panel #authMenu
+                [vmdDropPanel]="authMenu"
+                [trigger]="authMenuTrigger$.value"
+                [hasBackdrop]="true"
+                [staticBackdrop]="false"
+                [animDaley]="500"
+                (triggerEvent)="triggerHandler($event, authMenuTrigger$)">
+  <app-auth-menu [ngClass]="['auth-menu',
+                            (authMenuTrigger$.value) ? 'visible' : 'hidden']">
+  </app-auth-menu>
+</vmc-drop-panel>
