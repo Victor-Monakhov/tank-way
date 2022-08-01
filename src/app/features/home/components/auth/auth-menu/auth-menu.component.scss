@@ -3,8 +3,44 @@
 @import "variables.scss";
 
 .auth-menu-wrapper {
-    width: 500px;
-    height: 500px;
-    border-radius: 10px;
-    background: $golden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  row-gap: 25px;
+  padding: 25px;
+  background: $black;
+  h1 {
+    color: $golden;
+    font-size: 2.5rem;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    width: 100%;
+    margin: 0 25px;
+    .form-item {
+      input[type=text], input[type=email], input[type=password] {
+        width: 100%;
+        border-radius: 10px;
+        border: none;
+        padding: 10px 15px;
+        outline: none;
+      }
+    }
+  }
+  .demo-btn {
+    width: 100%;
+    height: 40px;
+    font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+    font-size: 1.5rem;
+    color: $white;
+    background-color: $golden;
+
+    &:active {
+      font-size: 1.4rem;
+    }
+  }
 }

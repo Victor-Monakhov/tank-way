@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { PanelService } from 'src/app/shared/services/panel-service/panel.service';
+import {BehaviorSubject, Subject} from 'rxjs';
+import {PanelService} from 'src/app/shared/services/panel-service/panel.service';
 
 @Component({
   selector: 'app-auth-menu-panel',
@@ -12,6 +12,7 @@ export class AuthMenuPanelComponent implements OnInit {
   public constructor(private panelService: PanelService) { }
 
   public ngOnInit(): void {
+    return;
   }
 
   public triggerHandler(result: boolean, trigger: Subject<boolean>): void {
@@ -21,5 +22,4 @@ export class AuthMenuPanelComponent implements OnInit {
   public get authMenuTrigger$(): BehaviorSubject<boolean> {
     return this.panelService.authMenu$;
   }
-
 }

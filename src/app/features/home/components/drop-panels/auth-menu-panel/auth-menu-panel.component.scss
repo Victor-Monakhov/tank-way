@@ -4,22 +4,22 @@
 @import "animations.scss";
 
 .auth-menu {
-    
-    @include media-property(H, display, block, block);
-    @include media-property(H, width, 100vw, 500px);
-    @include media-property(H, height, 100vh, 500px);
-    @include media-property(H, top, 0, $header-height);
-    display: block;
-    position: fixed;
-    overflow: hidden;
-  
-    &.visible {
-        // @include move-panel-anim(left, 100%, 500px);
-        animation: go 0.5s ease-out 1 both;
-    }
-  
-    &.hidden {
-       // @include move-panel-anim(left, 100%, 500px);
-        animation: hidden 0.5s ease-out 1 both;
-    }
+  @include media-property(H, display, block, block);
+  @include media-property(H, width, 90%, 450px);
+  //@include media-property(H, height, 100vh, 500px);
+  top: 50vh;
+  height: 500px;
+  display: block;
+  position: fixed;
+  border-radius: 20px;
+  border: 1px solid $golden;
+  overflow: hidden;
+
+  &.visible {
+    animation: make_visible_move_left_on_center 0.5s ease-out 1 both;
   }
+
+  &.hidden {
+    animation: make_hidden_move_left_from_center 0.5s ease-out 1 both;
+  }
+}

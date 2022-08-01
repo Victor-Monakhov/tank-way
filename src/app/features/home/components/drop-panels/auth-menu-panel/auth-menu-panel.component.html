@@ -4,6 +4,7 @@
                 [hasBackdrop]="true"
                 [staticBackdrop]="false"
                 [animDaley]="500"
+                [backdropClass]="'overlay-black08'"
                 (triggerEvent)="triggerHandler($event, authMenuTrigger$)">
   <app-auth-menu [ngClass]="['auth-menu',
                             (authMenuTrigger$.value) ? 'visible' : 'hidden']">
