@@ -2,17 +2,17 @@
 @import 'src/assets/styles/mixins';
 
 .footer-wrapper {
-  box-sizing: border-box;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  background: $black;
   @include media-property(H, padding,
     40px 25px,
     50px 50px,
     55px 65px,
     64px 100px
   );
+  // box-sizing: border-box;
+  width: 100%;
+  //bottom: 0;
+  //left: 0;
+  background: $black;
 
   .content {
     display: flex;
@@ -30,11 +30,11 @@
     }
 
     .left-side-content {
+      @include media-property(H, width, 100%, 100%, 350px);
       display: grid;
       grid-gap: 1rem;
       grid-template-columns: 0.5fr 1fr 0.5fr;
       padding-bottom: 15px;
-      @include media-property(H, width, 100%, 100%, 350px);
 
       .column {
         .footer-link {
@@ -51,27 +51,30 @@
     }
 
     .right-side-content {
-      @include media-property(H, margin, 10px 0, 10px 0, 0, 0);
+       @include media-property(H, margin, 10px 0, 10px 0, 0, 0);
+      form {
+        display: flex;
+        height: 40px;
+        input[type="text"] {
+          padding: 10px 15px;
+          width: 160px;
+          border: none;
+          outline: none;
+          border-bottom-left-radius: 5px;
+          border-top-left-radius: 5px;
+        }
 
-      input[type="text"] {
-        padding: 0 20px;
-        height: 43px;
-        width: 160px;
-        border: none;
-        outline: none;
-        border-bottom-left-radius: 5px;
-        border-top-left-radius: 5px;
-      }
-
-      button[type="submit"] {
-        height: 43px;
-        width: 60px;
-        background-color: $golden;
-        color: #fff;
-        cursor: pointer;
-        border: 0;
-        border-bottom-right-radius: 5px;
-        border-top-right-radius: 5px;
+        button[type="submit"] {
+          height: 100%;
+          padding: 0;
+          width: 60px;
+          background-color: $golden;
+          color: #fff;
+          cursor: pointer;
+          border: 0;
+          border-bottom-right-radius: 5px;
+          border-top-right-radius: 5px;
+        }
       }
     }
 

@@ -11,6 +11,10 @@
 @import 'classes/scrollbar.scss';
 @import 'classes/anim.scss';
 
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100vh;
   width: 100vw;
@@ -19,6 +23,7 @@ html, body {
 
 body {
   margin: 0;
+  padding: 0;
   min-width: 320px;
   font-family: Raleway-Thin, sans-serif;
   background: $black;

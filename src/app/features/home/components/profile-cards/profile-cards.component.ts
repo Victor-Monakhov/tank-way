@@ -62,11 +62,12 @@ export class ProfileCardsComponent implements OnInit, AfterViewInit {
     const cardsWidth = this.cardsRef.nativeElement.clientWidth;
     const offset = (cardsWidth - containerWidth) / 2;
     if (offset > 0) {
-      this.scrollRef.scrollTo({left: offset});
+      this.scrollRef.scrollTo({left: offset}).then();
     }
   }
 
-  @HostListener('window:resize') public onResize(): void {
+  @HostListener('window:resize')
+  public onResize(): void {
     this.updateScrollbar();
   }
 }
