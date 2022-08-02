@@ -62,9 +62,10 @@ import { FooterComponent } from './components/footer/footer.component';
       extend: true
     })
   ],
-  exports: [
-    DropPanelDirective,
-  ],
+    exports: [
+        DropPanelDirective,
+        HeaderComponent,
+    ],
   providers: []
 })
 export class HomeModule {

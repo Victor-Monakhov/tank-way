@@ -1,27 +1,13 @@
-<div class="footer">
+<div class="footer-wrapper">
   <div class="content">
-    <div class=" footer-container">
-      <div class="column">
-        <div class="topic">Game</div>
-        <div class="footer-link"><a href="#">Features</a></div>
-        <div class="footer-link"><a href="#">Rules</a></div>
-        <div style="color: #1E1E1E;">.</div>
-      </div>
-      <div class="column">
-        <div class="topic">About</div>
-        <div class="footer-link"><a href="#">Development Team</a></div>
-        <div class="footer-link"><a href="#">Term Of Use</a></div>
-        <div class="footer-link"><a href="#">Privacy</a></div>
-      </div>
-      <div class="column">
-        <div class="topic">Forum</div>
-        <div class="footer-link"><a href="#">News</a></div>
-        <div class="footer-link"><a href="#">Gallery</a></div>
-        <div class="footer-link"><a href="#">Support</a></div>
+    <div class="left-side-content">
+      <div class="column" *ngFor="let column of columns; let i = index">
+        <p class="topic">{{column.topic}}</p>
+        <div class="footer-link" *ngFor="let link of column.links;"><a href="{{link.url}}">{{link.title}}</a></div>
       </div>
     </div>
-    <div class="right box">
-      <div class="topic">Subscribe</div>
+    <div class="right-side-content">
+      <p class="topic">Subscribe</p>
       <form action="#">
         <input type="text" placeholder="Your Email">
         <button class="send-btn" type="submit"><i class="fa-solid fa-arrow-right"></i></button>
