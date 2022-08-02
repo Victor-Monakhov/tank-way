@@ -45,6 +45,7 @@ export class ProfileCardsComponent implements OnInit, AfterViewInit {
     }
   ];
 
+
   public constructor() {
   }
 

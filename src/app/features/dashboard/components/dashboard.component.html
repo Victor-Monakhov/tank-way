@@ -1,173 +1,122 @@
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
-      xmlns="http://www.w3.org/1999/html">
-
-<body>
-<nav>
-  <div class="logo-name">
-    <div class="logo-image">
-      <img src="assets/images/logo.png" alt="">
-    </div>
-    <span class="logo_name">Panzers</span>
-  </div>
-
-  <div class="menu-items">
-    <ul class="nav-links">
-      <li><a href="#">
-        <i class="uil uil-estate"></i>
-        <span class="link-name">Dahsboard</span>
-      </a></li>
-      <li><a href="#">
-        <i class="uil uil-database"></i>
-        <span class="link-name">Link2</span>
-      </a></li>
-      <li><a href="#">
-        <i class="uil uil-history"></i>
-        <span class="link-name">Link3</span>
-      </a></li>
-      <li><a href="#">
-        <i class="uil uil-image"></i>
-        <span class="link-name">Link4</span>
-      </a></li>
-      <li><a href="#">
-        <i class="uil uil-heart"></i>
-        <span class="link-name">Link5</span>
-      </a></li>
-      <li><a href="#">
-        <i class="uil uil-hipchat"></i>
-        <span class="link-name">Link6</span>
-      </a></li>
-    </ul>
-
-    <ul class="logout-mode">
-      <li><a href="#">
-        <i class="uil uil-signout"></i>
-        <span class="link-name">Logout</span>
-      </a></li>
-
-      <li class="mode">
-        <a>
-          <i class="uil uil-moon" id="mode-icon"></i>
-          <span class="link-name" id="mode-text">Dark Mode</span>
-        </a>
-
-        <div class="mode-toggle">
-          <span class="switch"></span>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<section class="dashboard">
-  <div class="top">
-    <i class="uil uil-bars sidebar-toggle"></i>
-
-    <div class="search-box">
-      <i class="uil uil-search"></i>
-      <input type="text" placeholder="Search here...">
+<div #dashboard_wrapper class="dashboard-wrapper">
+  <nav class="sidebar">
+    <div class="logo-name">
+      <div class="logo-image">
+        <img src="assets/images/logo.png" alt="">
+      </div>
+      <span class="logo_name">Panzers</span>
     </div>
 
-    <img
-      src="https://encrypted-tbn0.gstatic.com/
+    <div class="menu-items">
+      <ul class="nav-links">
+        <li *ngFor="let navLink of navLinks">
+          <a href="{{navLink.link}}">
+            <i class="{{navLink.icon}}"></i>
+            <span class="link-name">{{navLink.name | translate}}</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="logout-mode">
+        <li><a href="#">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span class="link-name">{{'DASHBOARD.MODE_LOGOUT' | translate}}</span>
+        </a></li>
+
+        <li class="mode">
+          <a>
+            <i #mode_icon class="fa-solid fa-moon" id="mode-icon"></i>
+            <span class="link-name" id="mode-text">{{'DASHBOARD.MODE_DARK' | translate}}</span>
+          </a>
+
+          <div class="mode-toggle">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="dashboard">
+    <div class="top">
+      <i class="fa-solid fa-bars sidebar-toggle"></i>
+
+      <div class="search-box">
+        <i class="uil uil-search"></i>
+        <input type="text" placeholder="{{'DASHBOARD.SEARCH_BOX' | translate}}">
+      </div>
+
+      <img
+        src="https://encrypted-tbn0.gstatic.com/
       images?q=tbn:ANd9GcT1DLuBDtz2945mZR71wAT0WSkktlbwpF3chZ8omSwo5km6q6NfxZDKtx5TXWcrWz-rZDA&usqp=CAU"
-      alt="">
-  </div>
-
-  <div class="dash-content">
-    <div class="overview">
-      <div class="title">
-        <i class="uil uil-tachometer-fast-alt"></i>
-        <span class="text">Dashboard</span>
-      </div>
-
-      <div class="boxes">
-        <div class="box box1">
-          <i class="uil uil-chart"></i>
-          <span class="text">Statistic1</span>
-          <span class="number">20,123</span>
-        </div>
-        <div class="box box2">
-          <i class="uil uil-chart"></i>
-          <span class="text">Statistic2</span>
-          <span class="number">10,123</span>
-        </div>
-        <div class="box box3">
-          <i class="uil uil-chart"></i>
-          <span class="text">Statistic3</span>
-          <span class="number">1,123</span>
-        </div>
-      </div>
+        alt="">
     </div>
 
-    <div class="activity">
-      <div class="title">
-        <i class="uil uil-clock-three"></i>
-        <span class="text">Recent Activity</span>
+    <div class="content">
+      <div class="overview">
+        <div class="title">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span class="text">{{'DASHBOARD.CONTENT_TEXT_1' | translate}}</span>
+        </div>
+
+        <div class="boxes">
+          <div *ngFor="let box of boxes; let i = index" class="box box{{i+1}}">
+            <i class="{{box.icon}}"></i>
+            <span class="text">{{box.title}}</span>
+            <span class="number">{{box.data}}</span>
+          </div>
+        </div>
       </div>
 
-      <div class="activity-data">
-        <table>
-          <thead>
+      <div class="activity">
+        <div class="title">
+          <i class="fa-solid fa-users"></i>
+          <span class="text">{{'DASHBOARD.CONTENT_TEXT_2' | translate}} ( {{users?.length}} )</span>
+        </div>
+
+        <div class="activity-data">
+          <table>
+            <thead>
             <tr>
               <th *ngFor="let column of displayedColumns">
                 <div class="data"><span class="data-title">{{column}}</span></div>
               </th>
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             <tr *ngFor="let user of users">
-              <td><div class="data"><span class="data-list">{{user.id}}</span></div></td>
-              <td><div class="data"><span class="data-list">{{user.nickname}}</span></div></td>
-              <td><div class="data"><span class="data-list">{{user.email}}</span></div></td>
-              <td><div class="data"><span class="data-list">{{user.password}}</span></div></td>
-              <td><div class="data"><span class="data-list">{{user.token}}</span></div></td>
-              <td><div class="data"><span class="data-list">{{user.status}}</span></div></td>
-              <td><div class="data">
+              <td>
+                <div class="data"><span class="data-list">{{user.id}}</span></div>
+              </td>
+              <td>
+                <div class="data"><span class="data-list">{{user.nickname}}</span></div>
+              </td>
+              <td>
+                <div class="data"><span class="data-list">{{user.email}}</span></div>
+              </td>
+              <td>
+                <div class="data"><span class="data-list">{{user.password}}</span></div>
+              </td>
+              <td>
+                <div class="data"><span class="data-list">{{user.token}}</span></div>
+              </td>
+              <td>
+                <div class="data"><span class="data-list">{{user.status}}</span></div>
+              </td>
+              <td>
+                <div class="data">
                   <span class="data-list">
-                    <a (click)="deleteUser(user.id)">
-                      <i class="uil uil-trash-alt"></i>
-                    </a>
+                      <a (click)="deleteUserById(user.id)">
+                        <i class="fa-solid fa-trash-can"></i>
+                      </a>
                   </span>
-              </div></td>
+                </div>
+              </td>
             </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
-
-<!--      <div class="activity-data">-->
-<!--        <div class="data userid">-->
-<!--          <span class="data-title">ID</span>-->
-<!--          <span class="data-list">{{users[0].id}}</span>-->
-<!--        </div>-->
-<!--        <div class="data nickname">-->
-<!--          <span class="data-title">Nickname</span>-->
-<!--          <span class="data-list">{{users[0].nickname}}</span>-->
-<!--        </div>-->
-<!--        <div class="data email">-->
-<!--          <span class="data-title">Email</span>-->
-<!--          <span class="data-list">{{users[0].email}}</span>-->
-<!--        </div>-->
-<!--        <div class="data password">-->
-<!--          <span class="data-title">Password</span>-->
-<!--          <span class="data-list">{{users[0].password}}</span>-->
-<!--        </div>-->
-<!--        <div class="data token">-->
-<!--          <span class="data-title">Token</span>-->
-<!--          <span class="data-list">{{users[0].token}}</span>-->
-<!--        </div>-->
-<!--        <div class="data status">-->
-<!--          <span class="data-title">Status</span>-->
-<!--          <span class="data-list">{{users[0].status}}</span>-->
-<!--        </div>-->
-<!--        <div class="data actions">-->
-<!--          <span class="data-title">Actions</span>-->
-<!--          <span class="data-list">-->
-<!--            <button (click)="removeAllTutorials()"> Remove All </button>-->
-<!--          </span>-->
-<!--        </div>-->
-<!--      </div>-->
     </div>
-  </div>
-</section>
-
-</body>
+  </section>
+</div>
