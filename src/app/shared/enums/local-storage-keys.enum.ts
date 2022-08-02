@@ -1,4 +1,5 @@
 export enum LSKeys {
   authToken = 'authToken',
-  authProviderID = 'authProviderID'
+  authProviderID = 'authProviderID',
+  inDemo = 'inDemo'
 }

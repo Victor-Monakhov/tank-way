@@ -1,0 +1,25 @@
+@import "mixins.scss";
+@import "colors.scss";
+@import "variables.scss";
+@import "animations.scss";
+
+.auth-menu {
+  @include media-property(H, display, block, block);
+  @include media-property(H, width, 90%, 450px);
+  //@include media-property(H, height, 100vh, 500px);
+  top: 50vh;
+  height: 500px;
+  display: block;
+  position: fixed;
+  border-radius: 20px;
+  border: 1px solid $golden;
+  overflow: hidden;
+
+  &.visible {
+    animation: make_visible_move_left_on_center 0.5s ease-out 1 both;
+  }
+
+  &.hidden {
+    animation: make_hidden_move_left_from_center 0.5s ease-out 1 both;
+  }
+}

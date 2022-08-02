@@ -15,7 +15,7 @@ export class LocalizationService {
    * @param {LocalizationServiceConfig} config - the localization config
    * @param {TranslateService} translateService - the translate service
    */
-  constructor(
+  public constructor(
     @Optional() @SkipSelf() private singleton: LocalizationService,
     private config: LocalizationServiceConfig,
     private translateService: TranslateService

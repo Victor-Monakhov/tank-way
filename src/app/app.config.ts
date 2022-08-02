@@ -1,5 +1,6 @@
 export enum NAVIGATE {
   HOME = '',
+  DEMO = 'demo'
 }
 
 export enum WIN_SIZES {

@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import {LSKeys} from "../enums/local-storage-keys.enum";
+import {Injectable} from '@angular/core';
+import {LSKeys} from '../enums/local-storage-keys.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
 
-  constructor() { }
+  public constructor() { }
 
   public getAuthToken(): string {
     return JSON.parse(localStorage.getItem(LSKeys.authToken) as string) ?? '';

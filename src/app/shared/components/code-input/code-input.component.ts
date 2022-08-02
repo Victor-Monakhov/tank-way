@@ -7,9 +7,9 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core';
-import {Subject, timer} from "rxjs";
-import {debounce} from "rxjs/operators";
-import {SubSink} from "subsink";
+import {Subject, timer} from 'rxjs';
+import {debounce} from 'rxjs/operators';
+import {SubSink} from 'subsink';
 
 @Component({
   selector: 'code-input',

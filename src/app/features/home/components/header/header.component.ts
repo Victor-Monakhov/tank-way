@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
-import {PanelService} from '../../../../shared/services/panel.service';
-import {Observable, Subject} from 'rxjs';
-import {tap} from "rxjs/operators";
+import {PanelService} from '../../../../shared/services/panel-service/panel.service';
+import {BehaviorSubject} from 'rxjs';
 
 interface ILocal {
   value: string;
@@ -19,7 +18,7 @@ export class HeaderComponent implements OnInit {
   public closeDropElement: boolean;
   public languages: ILocal[] = [
     {value: 'uk-UA', label: ' UA', flag: 'flag-icon flag-icon-ua'},
-    {value: 'en-US', label: ' EN', flag: '../../../../../assets/images/usa-icon.svg'},
+    {value: 'en-US', label: ' EN', flag: '../../../../../assets/images/usa-icon.svg'}
   ];
   public language = this.getLocal();
 
@@ -44,19 +43,15 @@ export class HeaderComponent implements OnInit {
     return;
   }
 
-  public onMenu(): void {
-    this.headerMenuTrigger$.next(true);
-  }
-
-  public triggerHandler(result: boolean, trigger: Subject<boolean>): void {
-    trigger.next(result);
+  public onMenu(isOpen: boolean): void {
+    this.headerMenuTrigger$.next(isOpen);
   }
 
   public get name(): string {
     return this.localizationService.translate('banner.world');
   }
 
-  public get headerMenuTrigger$(): Subject<boolean> {
+  public get headerMenuTrigger$(): BehaviorSubject<boolean> {
     return this.panelService.titleHeaderMenu$;
   }
 }

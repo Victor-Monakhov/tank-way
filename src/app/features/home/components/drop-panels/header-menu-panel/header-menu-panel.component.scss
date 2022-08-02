@@ -1,0 +1,26 @@
+@import "mixins.scss";
+@import "colors.scss";
+@import "variables.scss";
+@import "animations.scss";
+
+  vmc-drop-panel {
+    overflow: hidden;
+  }
+
+  .title-page-header-menu {
+    @include media-property(H, display, block, block, none);
+    @include media-property(H, width, 100vw, 50%, 400px);
+    @include media-property(H, border-right, none, 1px solid $golden06);
+    top: calc(50vh + #{$header-height / 2});
+    height: calc(100vh - #{$header-height});
+    position: fixed;
+    overflow: hidden;
+
+    &.visible {
+      animation: make_visible_move_right_on_start 0.5s ease-out 1 both;
+    }
+
+    &.hidden {
+      animation: make_hidden_move_left_from_start 0.5s ease-out 1 both;
+    }
+  }

@@ -1,4 +1,4 @@
-import {CONFIG} from "../../app.config";
+import {CONFIG} from '../../app.config';
 
 export class Paths {
   public static signUp: string = `${CONFIG.SERVER_HOST}/api/auth/signup`;

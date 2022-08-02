@@ -1,59 +1,70 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from "../../../../shared/services/auth.service";
-import {SubSink} from "subsink";
-import {SocialAuthService} from "angularx-social-login";
-import {LocalStorageService} from "../../../../shared/services/local-storage.service";
-import {switchMap} from "rxjs/operators";
-import {LSKeys} from "../../../../shared/enums/local-storage-keys.enum";
-import {Observable} from "rxjs";
-import {LocalizationService} from "../../../../shared/services/internationalization/localization.service";
-import {WebSocket} from "../../../../shared/classes/web-sockets/web-socket.class";
-import {IAuthResponse} from "../../../../shared/interfaces/auth/auth.interface";
+import {AuthService} from '../../../../shared/services/auth.service';
+import {SubSink} from 'subsink';
+import {SocialAuthService} from 'angularx-social-login';
+import {LocalStorageService} from '../../../../shared/services/local-storage.service';
+import {switchMap} from 'rxjs/operators';
+import {LSKeys} from '../../../../shared/enums/local-storage-keys.enum';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
+import {WebSocket} from '../../../../shared/classes/web-sockets/web-socket.class';
+import {IAuthResponse} from '../../../../shared/interfaces/auth/auth.interface';
+import {NAVIGATE} from '../../../../app.config';
+import { PanelService } from 'src/app/shared/services/panel-service/panel.service';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.component.html',
-  styleUrls: ['home.component.scss'],
+  styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
   public galleryMode: string = '';
   public subs: SubSink = new SubSink();
 
-  public get codeTrigger$() {
-    return this.authService.isCode;
-  }
-
-  public get signUpTrigger$() {
-    return this.authService.isSignUp;
-  }
-
-  public get signInTrigger$() {
-    return this.authService.isSignIn;
-  }
-
-  public get authMenuTrigger$() {
-    return this.authService.isAuthMenu;
-  }
-
   public webSocket: WebSocket;
 
-  constructor(private authService: AuthService,
+  public constructor(private authService: AuthService,
               private router: Router,
               private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService,
+              private panelService: PanelService,
               private localizationService: LocalizationService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscribeToAuthState();
     this.subscribeToUser();
     this.subscribeToCode();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  public onAuthMenu(): void {
+    this.panelService.authMenu$.next(true);
+  }
+
+  public signUpTriggerHandler(trigger: boolean): void {
+    this.authService.isSignUp.next(trigger);
+  }
+
+  public signInTriggerHandler(trigger: boolean): void {
+    this.authService.isSignIn.next(trigger);
+  }
+
+  public codeTriggerHandler(trigger: boolean): void {
+    this.authService.isCode.next(trigger);
+  }
+
+  public authMenuTriggerHandler(trigger: boolean): void {
+    this.authService.isAuthMenu.next(trigger);
+  }
+
+  public onDemo(): void {
+    this.router.navigate([NAVIGATE.DEMO]).then();
   }
 
   private subscribeToAuthState(): void {
@@ -93,43 +104,39 @@ export class HomeComponent implements OnInit, OnDestroy {
     }))
   }
 
-  public signUpTriggerHandler(trigger: boolean): void {
-    this.authService.isSignUp.next(trigger);
+  // @HostListener('window:scroll', ['$event']) // for window scroll events
+  // onScroll() {
+  //   this.scrollFunction();
+  // }
+  //
+  // public scrollFunction(): void {
+  //   const btnToTop = document.getElementById('btnToTop');
+  //
+  //   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  //     btnToTop.style.display = 'block';
+  //   } else {
+  //     btnToTop.style.display = 'none';
+  //   }
+  // }
+
+  // public topFunction(): void {
+  //   document.body.scrollTop = 0; // For Safari
+  //   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  // }
+
+  public get codeTrigger$(): Observable<boolean> {
+    return this.authService.isCode;
   }
 
-  public signInTriggerHandler(trigger: boolean): void {
-    this.authService.isSignIn.next(trigger);
+  public get signUpTrigger$(): Observable<boolean> {
+    return this.authService.isSignUp;
   }
 
-  public codeTriggerHandler(trigger: boolean): void {
-    this.authService.isCode.next(trigger);
+  public get signInTrigger$(): Observable<boolean> {
+    return this.authService.isSignIn;
   }
 
-  public authMenuTriggerHandler(trigger: boolean): void {
-    this.authService.isAuthMenu.next(trigger);
-  }
-
-  public onDemo(): void {
-    this.router.navigate(['demo']).then();
-  }
-
-  @HostListener('window:scroll', ['$event']) // for window scroll events
-  onScroll() {
-    this.scrollFunction();
-  }
-
-  public scrollFunction(): void {
-    const btnToTop = document.getElementById("btnToTop");
-
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      btnToTop.style.display = "block";
-    } else {
-      btnToTop.style.display = "none";
-    }
-  }
-
-  public topFunction(): void {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  public get authMenuTrigger$(): BehaviorSubject<boolean> {
+    return this.panelService.authMenu$;
   }
 }

@@ -1,0 +1,11 @@
+<vmc-drop-panel #navMenu
+                [vmdDropPanel]="navMenu"
+                [trigger]="headerMenuTrigger$.value"
+                [hasBackdrop]="false"
+                [staticBackdrop]="false"
+                [animDaley]="500"
+                (triggerEvent)="triggerHandler($event, headerMenuTrigger$)">
+  <app-header-menu [ngClass]="['title-page-header-menu',
+                               (headerMenuTrigger$.value) ? 'visible' : 'hidden']">
+  </app-header-menu>
+</vmc-drop-panel>

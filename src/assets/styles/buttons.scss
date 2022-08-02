@@ -2,89 +2,89 @@
 @import "colors.scss";
 @import "images.scss";
 @import "animations.scss";
-//simple btn
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: Raleway-Bold, sans-serif;
-  color: #ffffff;
-  border-radius: 50px;
-  border: none;
-  box-shadow: 0 0 10px 5px $red;
-  background-color: transparent;
-}
-
-.btn:disabled {
-  box-shadow: 0 0 2px 2px $red;
-  opacity: 0.6;
-}
-
-.btn:disabled:hover {
-  background-color: $black;
-}
-
-.btn:hover {
-  background-color: $red;
-  transition: 1.5s;
-}
-
-.btn:active {
-  box-shadow: 0 0 2px 2px $red;
-  transition: 0.5s;
-}
-
-//btn for start game
-.btn-start {
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  border: none;
-  border-radius: 60px;
-  background: transparent;
-  overflow: hidden;
-
-  span {
-    @include media-property(H, font-size, 2rem, 2.2rem, 2.5rem, 3rem);
-    z-index: 1;
-    font-family: Raleway-Bold, sans-serif;
-    color: rgba(255, 255, 255, 0.8);
-    letter-spacing: 4px;
-    user-select: none;
-  }
-}
-
-.btn-start:before {
-  content: '';
-  position: absolute;
-  width: 110%;
-  height: 50%;
-  background-image: linear-gradient(to right, $red 50%, $blue 50%);
-  animation: anim-btn-start 2.5s linear infinite;
-}
-
-.btn-start:active:before {
-  height: 110%;
-  animation: none;
-  transition: 0.7s;
-}
-
-.btn-start:after {
-  content: '';
-  position: absolute;
-  border-radius: 60px;
-  inset: 1px;
-  background: radial-gradient(ellipse at center, $red, $black 70%);
-}
-
-.btn-start:hover:after {
-  background: radial-gradient(ellipse at center, $red, $black 100%);
-}
+////simple btn
+//.btn {
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  cursor: pointer;
+//  text-decoration: none;
+//  font-family: Raleway-Bold, sans-serif;
+//  color: #ffffff;
+//  border-radius: 50px;
+//  border: none;
+//  box-shadow: 0 0 10px 5px $red;
+//  background-color: transparent;
+//}
+//
+//.btn:disabled {
+//  box-shadow: 0 0 2px 2px $red;
+//  opacity: 0.6;
+//}
+//
+//.btn:disabled:hover {
+//  background-color: $black;
+//}
+//
+//.btn:hover {
+//  background-color: $red;
+//  transition: 1.5s;
+//}
+//
+//.btn:active {
+//  box-shadow: 0 0 2px 2px $red;
+//  transition: 0.5s;
+//}
+//
+////btn for start game
+//.btn-start {
+//  position: relative;
+//  cursor: pointer;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  text-decoration: none;
+//  border: none;
+//  border-radius: 60px;
+//  background: transparent;
+//  overflow: hidden;
+//
+//  span {
+//    @include media-property(H, font-size, 2rem, 2.2rem, 2.5rem, 3rem);
+//    z-index: 1;
+//    font-family: Raleway-Bold, sans-serif;
+//    color: rgba(255, 255, 255, 0.8);
+//    letter-spacing: 4px;
+//    user-select: none;
+//  }
+//}
+//
+//.btn-start:before {
+//  content: '';
+//  position: absolute;
+//  width: 110%;
+//  height: 50%;
+//  background-image: linear-gradient(to right, $red 50%, $blue 50%);
+//  animation: anim-btn-start 2.5s linear infinite;
+//}
+//
+//.btn-start:active:before {
+//  height: 110%;
+//  animation: none;
+//  transition: 0.7s;
+//}
+//
+//.btn-start:after {
+//  content: '';
+//  position: absolute;
+//  border-radius: 60px;
+//  inset: 1px;
+//  background: radial-gradient(ellipse at center, $red, $black 70%);
+//}
+//
+//.btn-start:hover:after {
+//  background: radial-gradient(ellipse at center, $red, $black 100%);
+//}
 
 //demo-btn--------------------------------------------------------------------
 .demo-btn {
@@ -134,5 +134,6 @@
   background-color: $white;
 }
 //---------------------------------------------------------------position-radio
+
 
 
