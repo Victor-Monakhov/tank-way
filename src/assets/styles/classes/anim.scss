@@ -1,0 +1,7 @@
+@import 'animations.scss';
+.border-anim {
+  @include gradient-expansion(border, BI, to right, transparent, $golden, transparent);
+  border-bottom: 2px solid transparent;
+  margin-top: 2px;
+  animation: border 0.3s ease-out 1 both;
+}

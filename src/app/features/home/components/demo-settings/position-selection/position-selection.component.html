@@ -1,10 +1,11 @@
 <div class="position-selection-wrapper">
   <h2>Select your position</h2>
-  <div class="toggle-team">
+  <div class="toggle-team" (click)="onTeamChange(true)">
     <div [ngClass]="['switcher', (team === 'red') ?
                      'switch-red' :
                      'switch-blue']"
-         (click)="onTeamChange(true)"></div>
+         (click)="$event.stopPropagation()">
+    </div>
     <p [class]="{'white': team === 'red'}"
        (click)="onTeamChange(team === 'red')">Red</p>
     <p [class]="{'white': team === 'blue'}"
@@ -27,7 +28,7 @@
                      'red-pos' + form.get('position').value :
                      'blue-pos' + form.get('position').value]">
       <div *ngIf="team === 'red'" class="pos-view-content">
-        <img  src="../../assets/images/pos-red.png" alt="">
+        <img src="../../assets/images/pos-red.png" alt="">
         <b>{{form.get('position').value + 1}}</b>
       </div>
       <div *ngIf="team === 'blue'" class="pos-view-content">

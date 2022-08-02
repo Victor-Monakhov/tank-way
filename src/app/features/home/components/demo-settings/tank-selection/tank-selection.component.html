@@ -5,10 +5,10 @@
        [style.height]="viewHeight + 'px'"
        (mousemove)="onTarget($event)"
        (mouseout)="targetAngle = 0">
-    <img *ngIf="selectedTankBody" alt="" [src]="selectedTankBody">
-    <img *ngIf="selectedTankHead"
+    <img *ngIf="selectedTankBody.path" alt="" [src]="selectedTankBody.path">
+    <img *ngIf="selectedTankHead.path"
          alt=""
-         [src]="selectedTankHead"
+         [src]="selectedTankHead.path"
          [style]="{'transform': 'rotate(' + targetAngle + 'deg)'}">
   </div>
   <div class="selection-wrapper">
@@ -20,10 +20,10 @@
                     [trackClass]="'track'">
         <div class="selection-content">
           <div *ngFor="let head of tankHeads; let i = index">
-            <img *ngIf="head; else requiredImg"
+            <img *ngIf="head.path; else requiredImg"
                  alt="tankHead"
                  [ngClass]="{'selected' : checkHeadSelection(i)}"
-                 [src]="head"
+                 [src]="head.path"
                  (click)="onHead(i)">
           </div>
         </div>
@@ -40,10 +40,10 @@
                     [trackClass]="'track'">
         <div class="selection-content">
           <div *ngFor="let body of tankBodies; let i = index">
-            <img *ngIf="body; else requiredImg"
+            <img *ngIf="body.path; else requiredImg"
                  alt="tankBody"
                  [ngClass]="{'selected' : checkBodySelection(i)}"
-                 [src]="body"
+                 [src]="body.path"
                  (click)="onBody(i)">
           </div>
         </div>

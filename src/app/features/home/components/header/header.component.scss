@@ -4,6 +4,7 @@
 @import '../../../../../assets/styles/images';
 @import 'animations.scss';
 @import 'html-elements/html-elements.scss';
+@import 'classes/anim.scss';
 
 .title-page-header-wrapper {
   @include media-property(H, padding, 0 15px, 0 60px, 0 120px);
@@ -25,13 +26,6 @@
     column-gap: 30px;
   }
 
-  .border-anim {
-    @include gradient-expansion(border, BI, to right, transparent, $golden, transparent);
-    border-bottom: 2px solid transparent;
-    margin-top: 2px;
-    animation: border 0.3s ease-out 1 both;
-  }
-
   p {
     cursor: pointer;
     color: $white;
@@ -41,16 +35,9 @@
     }
   }
 
-  .fa-bars {
+  vmc-burger {
     @include media-property(H, display, block, block, none);
-    font-size: 2rem;
     width: 60px;
-    cursor: pointer;
-    color: $white;
-
-    &:active {
-      font-size: 1.9rem;
-    }
   }
 
   .left-menu {
@@ -104,23 +91,8 @@
       }
     }
   }
-}
-
-vmc-drop-panel {
-  overflow: hidden;
-}
-
-.title-page-header-menu {
-  @include media-property(H, display, block, block, none);
-  position: fixed;
-  overflow: hidden;
-  top: 0;
-
-  &.visible {
-    animation: header_menu_go_right_visible 0.5s ease-out 1 both;
-  }
-
-  &.hidden {
-    animation: header_menu_go_left_hidden 0.5s ease-out 1 both;
+  .stub {
+    @include media-property(H, width, 60px, 60px, auto);
   }
 }
+

@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
-import {GalleryInterceptor} from './shared/interceptors/gallery.interceptor';
 import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -47,11 +46,6 @@ export function HttpLoaderFactory(http: HttpClient): any {
   ],
   providers: [
     {
-      provide: HTTP_INTERCEPTORS,
-      multi: true,
-      useClass: GalleryInterceptor
-    },
-    {
       provide: 'SocialAuthServiceConfig',
       useValue: {
         autoLogin: false,
@@ -72,7 +66,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
       } as SocialAuthServiceConfig
     }
   ],
-    exports: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

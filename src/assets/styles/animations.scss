@@ -2,87 +2,75 @@
 @import "variables.scss";
 
 
-//drop-panel-go
-@keyframes header_menu_go_right_visible {
-  0% { left: -100%;}
-  100% {left: 0;}
-}
-@keyframes header_menu_go_left_hidden {
-  0% { left: 0;}
-  100% {left: -100%;}
+//drop-panel-moving----------------------------------------------------------------------
+@keyframes make_visible_move_right_on_start {
+  0% {left: 0; transform: translate(-100%, -50%);}
+  100% {left: 0; transform: translate(0, -50%);}
 }
 
-//team-switcher
+@keyframes make_hidden_move_left_from_start {
+  0% {left: 0; transform: translate(0, -50%);}
+  100% {left: 0; transform: translate(-100%, -50%);}
+}
+
+@keyframes make_visible_move_right_on_center {
+  0% {left: 0; transform: translate(-100%, -50%);}
+  100% {left: 50%; transform: translate(-50%, -50%);}
+}
+
+@keyframes make_hidden_move_left_from_center {
+  0% {left: 50%; transform: translate(-50%, -50%);}
+  100% {left: 0; transform: translate(-100%, -50%);}
+}
+
+@keyframes make_visible_move_right_on_end {
+  0% {left: 0; transform: translate(-100%, -50%);}
+  100% {left: 100%; transform: translate(-100%, -50%);}
+}
+
+@keyframes make_hidden_move_left_from_end {
+  0% {left: 100%; transform: translate(-100%, -50%);}
+  100% {left: 0; transform: translate(-100%, -50%);}
+}
+
+@keyframes make_visible_move_left_on_end {
+  0% {left: 100%; transform: translate(0, -50%);}
+  100% {left: 100%; transform: translate(-100%, -50%);}
+}
+
+@keyframes make_hidden_move_right_from_end {
+  0% {left: 100%; transform: translate(-100%, -50%);}
+  100% {left: 100%; transform: translate(0, -50%);}
+}
+
+@keyframes make_visible_move_left_on_center {
+  0% {left: 100%; transform: translate(0, -50%);}
+  100% {left: 50%; transform: translate(-50%, -50%);}
+}
+
+@keyframes make_hidden_move_right_from_center {
+  0% {left: 50%; transform: translate(-50%, -50%);}
+  100% {left: 100%; transform: translate(0, -50%);}
+}
+
+@keyframes make_visible_move_left_on_start {
+  0% {left: 100%; transform: translate(0, -50%);}
+  100% {left: 0; transform: translate(0, -50%);}
+}
+
+@keyframes make_hidden_move_right_from_start {
+  0% {left: 0; transform: translate(0, -50%);}
+  100% {left: 100%; transform: translate(0, -50%);}
+}
+
+//team-switching-------------------------------------------------------------------------
 @keyframes switch-blue {
   0% {left: 0; right: 50%}
   100% {left: 50%; right: 0}
 }
+
 @keyframes switch-red {
-  0% {left: 50%; right: 0}
-  100% {left: 0; right: 50%}
+  0% {left: 50%; right: 0;}
+  100% {left: 0; right: 50%;}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//modal-go
-@keyframes modal_go_left_lg{
-  0% { left: 100%;}
-  //100% {left: 20%;}
-  100% {left: calc(50% - 200px);}
-}
-@keyframes modal_go_left_md{
-  0% { left: 100%;}
- // 100% {left: 15%;}
-  100% {left: calc(50% - 200px);}
-}
-@keyframes modal_go_left_sm{
-  0% { left: 100%;}
-  //100% {left: 10%;}
-  100% {left: calc(50% - 200px);}
-}
-@keyframes modal_go_left_xs{
-  0% { left: 100%;}
-  100% {left: 5%;}
-}
-@keyframes modal_go_left_hidden_sm_md_lg{
-  0% { left: calc(50% - 200px);}
-  100% {left: 0 - 400px;}
-}
-@keyframes modal_go_left_hidden_xs{
-  0% { left: 5%;}
-  100% {left: 0 - 90%;}
-}
-
-//row-go
-@keyframes row_go_down {
-  0% { margin-top: -100%;}
-  100% {margin-top: $header-height + 20px;}
-}
-
-//btn-back-rotate
-@keyframes anim-btn-start{
-  0%{
-    transform: rotate(0deg);
-  }
-  100%{
-    transform: rotate(360deg);
-  }
-}

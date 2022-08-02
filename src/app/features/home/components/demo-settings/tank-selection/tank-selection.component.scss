@@ -3,7 +3,7 @@
 
 .tank-selection-wrapper {
   @include media-property(H, padding, 15px 15px, 15px 15px 30px, 15px 15px 40px);
-  @include media-property(H, height, 441px, 469px, 469px, 479px);
+  @include media-property(H, height, 491px, 519px, 519px, 529px);
   @include media-property(H, min-width, auto, 370px);
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
     }
     .selection{
       @include media-property(H, width, 246px, 346px);
-      @include media-property(H, height, 64px, 74px);
+      @include media-property(H, height, 74px, 84px);
       padding: 5px 10px;
       border: 1px solid $light-grey;
       border-radius: 10px;

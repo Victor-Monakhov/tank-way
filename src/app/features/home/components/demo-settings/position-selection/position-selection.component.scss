@@ -7,7 +7,7 @@
 
 .position-selection-wrapper {
   @include media-property(H, padding, 15px 15px, 15px 15px 30px, 15px 15px 40px);
-  @include media-property(H, height, 441px, 469px, 469px, 479px);
+  @include media-property(H, height, 491px, 519px, 519px, 529px);
   @include media-property(H, min-width, auto, 370px);
   display: flex;
   flex-direction: column;
@@ -26,6 +26,7 @@
     width: 260px;
     height: 35px;
     border-radius: 10px;
+    cursor: pointer;
     color: $light-grey;
     background-color: $dark_grey;
     .switcher {
@@ -33,7 +34,6 @@
       width: 50%;
       height: 100%;
       border-radius: 10px;
-      cursor: pointer;
       transition: 0.5s;
     }
     .switch-blue {

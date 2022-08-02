@@ -1,16 +1,16 @@
 <div class="title-page-header-wrapper">
-  <i class="fa-solid fa-bars" (click)="onMenu()"></i>
-<!--  <button type="button"-->
-<!--          class="btn-menu"-->
-<!--          [vmdDropPanel]=navMenu-->
-<!--          [staticBackdrop]="false">-->
-<!--  </button>-->
+  <vmc-burger [size]="'26px'"
+              [weight]="'4px'"
+              [color]="'#ffffff'"
+              [isOpen]="headerMenuTrigger$.value"
+              (isOpenEvent)="onMenu($event)">
+  </vmc-burger>
   <div class="left-menu">
     <div class="gameLogo"></div>
     <p>Game</p>
     <p>Forum</p>
   </div>
-  <div class="right-menu">
+  <div *ngIf="!headerMenuTrigger$.value" class="right-menu">
     <p>Sign In</p>
     <div class="vertical-slash"></div>
     <div class="languages">
@@ -21,33 +21,6 @@
     <!--        <option *ngFor="let language of languages" [ngValue]="language.value">{{language.label}}</option>-->
     <!--      </select>-->
   </div>
-
-  <!--  <div class="menu-wrapper">-->
-  <!--    <ng-container *ngTemplateOutlet="menuContent"></ng-container>-->
-  <!--  </div>-->
-  <!--  <div class="language">-->
-  <!--    <img src="../../../../../assets/images/usa-icon.svg" alt="lang" class="language-icon">-->
-  <!--  </div>-->
-
-
+  <div class="stub" *ngIf="headerMenuTrigger$.value === true"></div>
 </div>
 
-
-<vmc-drop-panel #navMenu
-                [vmdDropPanel]="navMenu"
-                [trigger]="headerMenuTrigger$ | async"
-                [hasBackdrop]="true"
-                [staticBackdrop]="true"
-                [animDaley]="500"
-                (triggerEvent)="triggerHandler($event, headerMenuTrigger$)">
-  <app-header-menu [ngClass]="['title-page-header-menu',
-                               (headerMenuTrigger$ | async) ? 'visible' : 'hidden']">
-  </app-header-menu>
-</vmc-drop-panel>
-
-<!--<ng-template #menuContent>-->
-<!--  <p (click)="onMenuItem()">Cabinet</p>-->
-<!--  <hr>-->
-<!--  <p>About</p>-->
-<!--  <hr>-->
-<!--</ng-template>-->

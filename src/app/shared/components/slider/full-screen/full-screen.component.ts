@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {GalleryService, Image} from "../../../services/gallery.service";
+import {GalleryService, IImage} from '../../../services/gallery.service';
 import {switchMap} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {SubSink} from "subsink";
+import {Observable} from 'rxjs';
+import {SubSink} from 'subsink';
 
 @Component({
   selector: 'app-full-screen-gallery',
@@ -13,7 +13,7 @@ import {SubSink} from "subsink";
 export class FullScreenComponent implements OnInit, OnDestroy {
 
   private subs: SubSink = new SubSink();
-  public image$?: Observable<Image>;
+  public image$?: Observable<IImage>;
   @Output() public eventFullScreen: EventEmitter<string> = new EventEmitter<string>();
   @Input() public initialId: string;
 

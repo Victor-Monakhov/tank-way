@@ -3,11 +3,13 @@
 
 .home-wrapper {
   .scrollbar {
+    .view {
+      width: 100%;
+    }
     .track {
       background: transparent;
       border-radius: 0;
       width: 100% !important;
-
     }
     .thumb {
       border-radius: 10px;
@@ -17,7 +19,7 @@
   }
 }
 
-.selection {
+.selection, .profile-cards {
   .scrollbar {
     .track {
       border-radius: 0;
@@ -32,24 +34,6 @@
       position: absolute !important;
       bottom: 0 !important;
       background-color: $golden !important;
-    }
-  }
-}
-
-.profile-cards {
-  .scrollbar {
-    .track {
-      border-radius: 0;
-      height: 0 !important;
-      background-color: transparent !important;
-      position: absolute !important;
-      bottom: 0 !important;
-    }
-    .thumb {
-      height: 0 !important;
-      position: absolute !important;
-      bottom: 0 !important;
-      background-color: transparent !important;
     }
   }
 }
