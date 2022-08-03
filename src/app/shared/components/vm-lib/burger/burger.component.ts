@@ -29,6 +29,7 @@ export class BurgerComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   @Input() public background: string = 'transparent';
   @Output() public isOpenEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   private subs: SubSink = new SubSink();
+  private clickLocker: boolean = false;
   private burger: HTMLElement = {} as HTMLElement;
   private items: HTMLElement[] = [];
   private itemHeight: number = 0;
@@ -71,7 +72,11 @@ export class BurgerComponent implements OnInit, OnChanges, AfterViewInit, OnDest
   }
 
   public onBurger(): void {
-    this.isOpenEvent.emit(!this.isOpen);
+    if (!this.clickLocker) {
+      this.isOpenEvent.emit(!this.isOpen);
+      this.clickLocker = true;
+      setTimeout(() => this.clickLocker = false, 500);
+    }
   }
 
   private init(): void {

@@ -22,12 +22,11 @@
       display: inline;
       color: $white;
       cursor: pointer;
-      &:hover{
-        @extend .border-anim;
-      }
+      @extend .border-golden-anim;
     }
     hr {
       border-color: $golden;
+      width: 100%;
     }
     .top-menu{
       display: flex;

@@ -34,7 +34,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     OverlayModule,
     HttpClientModule,
     SocialLoginModule,
-    ReactiveFormsModule,
+    // ReactiveFormsModule,
     InternationalizationModule.forRoot({locale_id: 'en-US'}),
     TranslateModule.forRoot({
       loader: {

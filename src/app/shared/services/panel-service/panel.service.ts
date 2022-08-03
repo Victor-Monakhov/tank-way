@@ -7,6 +7,7 @@ import {BehaviorSubject, Subject} from 'rxjs';
 export class PanelService {
   public titleHeaderMenu$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public authMenu$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public signUp$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public constructor() {
   }
 

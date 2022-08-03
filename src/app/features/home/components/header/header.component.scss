@@ -29,10 +29,7 @@
   p {
     cursor: pointer;
     color: $white;
-
-    &:hover {
-      @extend .border-anim;
-    }
+    @extend .border-golden-anim;
   }
 
   vmc-burger {

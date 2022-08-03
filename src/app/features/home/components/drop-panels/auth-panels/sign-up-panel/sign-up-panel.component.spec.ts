@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthMenuPanelComponent } from './auth-menu-panel.component';
+import { SignUpPanelComponent } from './sign-up-panel.component';
 
-describe('AuthMenuPanelComponent', () => {
-  let component: AuthMenuPanelComponent;
-  let fixture: ComponentFixture<AuthMenuPanelComponent>;
+describe('SignUpPanelComponent', () => {
+  let component: SignUpPanelComponent;
+  let fixture: ComponentFixture<SignUpPanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthMenuPanelComponent ]
+      declarations: [SignUpPanelComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AuthMenuPanelComponent);
+    fixture = TestBed.createComponent(SignUpPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

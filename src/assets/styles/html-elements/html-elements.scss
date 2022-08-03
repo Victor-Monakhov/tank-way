@@ -11,7 +11,7 @@ a {
   text-decoration: none;
   user-select: none;
   cursor: pointer;
-  border-bottom: 1px solid;
+  @extend .border-golden-anim;
 }
 
 label, b, strong {
@@ -35,6 +35,14 @@ h2 {
   margin: 0;
   font-weight: normal;
   font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+}
+
+h3 {
+  margin: 0;
+  font-weight: bold;
+  font-family: Koulen, RopaSans-Regular, Raleway-Thin, sans-serif;
+  line-height: 2.5rem;
+  font-size: 2.5rem;
 }
 
 small {

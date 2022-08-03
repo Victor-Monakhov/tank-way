@@ -11,7 +11,7 @@
     <p>Forum</p>
   </div>
   <div *ngIf="!headerMenuTrigger$.value" class="right-menu">
-    <p>Sign In</p>
+    <p (click)="onAuthMenu()">Sign In</p>
     <div class="vertical-slash"></div>
     <div class="languages">
       <p>EN</p>

@@ -1,0 +1,12 @@
+<vmc-drop-panel #authMenu
+                [vmdDropPanel]="authMenu"
+                [trigger]="signUpTrigger$.value"
+                [hasBackdrop]="true"
+                [staticBackdrop]="false"
+                [animDaley]="500"
+                [backdropClass]="'overlay-black08'"
+                (triggerEvent)="triggerHandler($event, signUpTrigger$)">
+  <app-sign-up [ngClass]="['sign-up',
+                            (signUpTrigger$.value) ? 'visible' : 'hidden']">
+  </app-sign-up>
+</vmc-drop-panel>

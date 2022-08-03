@@ -12,7 +12,6 @@ import {DropPanelComponent} from '../../shared/components/vm-lib/drop-panel/drop
 import {FullScreenComponent} from '../../shared/components/slider/full-screen/full-screen.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SignInComponent} from '../../shared/components/auth-modal/sign-in/sign-in.component';
-import {SignUpComponent} from '../../shared/components/auth-modal/sign-up/sign-up.component';
 import {SecretCodeComponent} from '../../shared/components/auth-modal/secret-code/secret-code.component';
 import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
 import {TranslateModule} from '@ngx-translate/core';
@@ -28,7 +27,9 @@ import {BurgerComponent} from '../../shared/components/vm-lib/burger/burger.comp
 import {HomeGalleryComponent} from './components/home-gallery/home-gallery.component';
 import {AuthMenuComponent} from './components/auth/auth-menu/auth-menu.component';
 import {HeaderMenuPanelComponent} from './components/drop-panels/header-menu-panel/header-menu-panel.component';
-import {AuthMenuPanelComponent} from './components/drop-panels/auth-menu-panel/auth-menu-panel.component';
+import {AuthMenuPanelComponent} from './components/drop-panels/auth-panels/auth-menu-panel/auth-menu-panel.component';
+import {SignUpPanelComponent} from './components/drop-panels/auth-panels/sign-up-panel/sign-up-panel.component';
+import {SignUpComponent} from './components/auth/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {AuthMenuPanelComponent} from './components/drop-panels/auth-menu-panel/a
     BurgerComponent,
     HomeGalleryComponent,
     HeaderMenuPanelComponent,
-    AuthMenuPanelComponent
+    AuthMenuPanelComponent,
+    SignUpPanelComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +70,7 @@ import {AuthMenuPanelComponent} from './components/drop-panels/auth-menu-panel/a
   ],
     exports: [
         DropPanelDirective,
-        HeaderComponent,
+        HeaderComponent
     ],
   providers: []
 })

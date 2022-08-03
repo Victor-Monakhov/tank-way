@@ -47,6 +47,10 @@ export class HeaderComponent implements OnInit {
     this.headerMenuTrigger$.next(isOpen);
   }
 
+  public onAuthMenu(): void {
+    this.panelService.authMenu$.next(true);
+  }
+
   public get name(): string {
     return this.localizationService.translate('banner.world');
   }

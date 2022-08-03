@@ -35,4 +35,9 @@ export class HeaderMenuComponent implements OnInit, OnDestroy {
   public onClose(): void {
     this.panelService.titleHeaderMenu$.next(false);
   }
+
+  public onAuthMenu(): void {
+    this.onClose();
+    this.panelService.authMenu$.next(true);
+  }
 }
