@@ -1,4 +1,4 @@
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {AbstractControl, ValidationErrors} from '@angular/forms';
 import {RegularExp} from '../../enums/regular-exp.enum';
 
 export class VMValidator {

@@ -12,7 +12,7 @@ import {debounce} from 'rxjs/operators';
 import {SubSink} from 'subsink';
 
 @Component({
-  selector: 'code-input',
+  selector: 'vmc-code-input',
   templateUrl: './code-input.component.html',
   styleUrls: ['./code-input.component.scss']
 })
@@ -25,7 +25,7 @@ export class CodeInputComponent implements OnInit, AfterViewInit, OnDestroy {
   private code: Subject<string> = new Subject<string>();
   public inputs: HTMLInputElement[] = [];
 
-  constructor() {
+  public constructor() {
   }
 
   public ngOnInit(): void {
@@ -44,77 +44,8 @@ export class CodeInputComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.subs.unsubscribe();
-  }
-
-  private isDigit(e: KeyboardEvent): boolean {
-    return Number.parseInt(e.key) >= 0 && Number.parseInt(e.key) <= 9;
-  }
-
-  private isBackspace(e: KeyboardEvent): boolean {
-    return e.key.toLowerCase() === 'backspace';
-  }
-
-  private isDelete(e: KeyboardEvent): boolean {
-    return e.key.toLowerCase() === 'delete';
-  }
-
-  private isArrowRight(e: KeyboardEvent): boolean {
-    return e.key.toLowerCase() === 'arrowright';
-  }
-
-  private isArrowLeft(e: KeyboardEvent): boolean {
-    return e.key.toLowerCase() === 'arrowleft';
-  }
-
-  private focusGoRight(index: number): number {
-    if (index >= 0 && index < this.inputs.length - 1) {
-     setTimeout(() => {
-        this.inputs[index + 1].focus();
-      }, 0);
-     return index + 1;
-    }
-    return index;
-  }
-
-  private focusGoLeft(index: number): void {
-    if (index > 0 && index <= this.inputs.length - 1) {
-      setTimeout(() => this.inputs[index - 1].focus(), 0);
-    }
-  }
-
-  private keyFilter(e: KeyboardEvent): boolean {
-    return !this.isDigit(e) &&
-      !this.isBackspace(e) &&
-      !this.isDelete(e) &&
-      !this.isArrowLeft(e) &&
-      !this.isArrowRight(e)
-  }
-
-  private getCode(): string {
-    let code = '';
-    this.inputs.forEach((input) => {
-      code += input.value;
-    });
-    return code;
-  }
-
-  private digitHandler(e: KeyboardEvent, index: number): void{
-    if(!this.inputs[index].value){
-      this.inputs[index].value = e.key;
-      this.focusGoRight(index);
-    } else {
-      const newIndex = this.focusGoRight(index);
-      this.inputs[newIndex].value = e.key;
-    }
-  }
-
-  private backspaceHandler(e: KeyboardEvent, index: number): void{
-    if(!this.inputs[index].value){
-      this.focusGoLeft(index);
-    }
-    this.inputs[index].value = '';
   }
 
   public onKeyDown(e: KeyboardEvent, index: number): void {
@@ -141,5 +72,74 @@ export class CodeInputComponent implements OnInit, AfterViewInit, OnDestroy {
       this.digitHandler(e, index);
     }
     this.code.next(this.getCode());
+  }
+
+  private isDigit(e: KeyboardEvent): boolean {
+    return Number.parseInt(e.key) >= 0 && Number.parseInt(e.key) <= 9;
+  }
+
+  private isBackspace(e: KeyboardEvent): boolean {
+    return e.key.toLowerCase() === 'backspace';
+  }
+
+  private isDelete(e: KeyboardEvent): boolean {
+    return e.key.toLowerCase() === 'delete';
+  }
+
+  private isArrowRight(e: KeyboardEvent): boolean {
+    return e.key.toLowerCase() === 'arrowright';
+  }
+
+  private isArrowLeft(e: KeyboardEvent): boolean {
+    return e.key.toLowerCase() === 'arrowleft';
+  }
+
+  private focusGoRight(index: number): number {
+    if (index >= 0 && index < this.inputs.length - 1) {
+      setTimeout(() => {
+        this.inputs[index + 1].focus();
+      }, 50);
+      return index + 1;
+    }
+    return index;
+  }
+
+  private focusGoLeft(index: number): void {
+    if (index > 0 && index <= this.inputs.length - 1) {
+      setTimeout(() => this.inputs[index - 1].focus(), 0);
+    }
+  }
+
+  private keyFilter(e: KeyboardEvent): boolean {
+    return !this.isDigit(e) &&
+      !this.isBackspace(e) &&
+      !this.isDelete(e) &&
+      !this.isArrowLeft(e) &&
+      !this.isArrowRight(e);
+  }
+
+  private getCode(): string {
+    let code = '';
+    this.inputs.forEach((input) => {
+      code += input.value;
+    });
+    return code;
+  }
+
+  private digitHandler(e: KeyboardEvent, index: number): void {
+    if (!this.inputs[index].value) {
+      this.inputs[index].value = e.key;
+      this.focusGoRight(index);
+    } else {
+      const newInput = this.focusGoRight(index);
+      this.inputs[newInput].value = e.key;
+    }
+  }
+
+  private backspaceHandler(e: KeyboardEvent, index: number): void {
+    if (!this.inputs[index].value) {
+      this.focusGoLeft(index);
+    }
+    this.inputs[index].value = '';
   }
 }

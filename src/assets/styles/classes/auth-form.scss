@@ -1,0 +1,81 @@
+@import "colors.scss";
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  width: 100%;
+  margin: 0 25px;
+
+  .form-item {
+    padding: 2px;
+    border-radius: 10px;
+
+    input[type=text], input[type=email], input[type=password] {
+      width: 100%;
+      border-radius: 10px;
+      border: none;
+      padding: 10px 15px;
+      outline: none;
+    }
+
+    .password-wrapper {
+      width: 100%;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+      border-radius: 10px;
+
+      i {
+        color: $golden;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      input {
+        padding: 0 15px 0 0;
+        border-radius: 0;
+      }
+    }
+  }
+
+  .errors-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: -10px;
+
+    small {
+      margin-left: 10px;
+      font-size: 1rem;
+      color: $white;
+    }
+
+    .error-msg {
+      color: $red;
+    }
+
+    hr {
+      border-color: $light-grey;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+  }
+
+  .invalid-input {
+    @extend .background-red-anim;
+  }
+
+  .demo-btn {
+    width: 100%;
+    height: 40px;
+    font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+    font-size: 1.5rem;
+    color: $white;
+    background-color: $golden;
+
+    &:active {
+      font-size: 1.4rem;
+    }
+  }
+}

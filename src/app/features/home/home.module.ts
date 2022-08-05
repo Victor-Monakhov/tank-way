@@ -30,6 +30,8 @@ import {HeaderMenuPanelComponent} from './components/drop-panels/header-menu-pan
 import {AuthMenuPanelComponent} from './components/drop-panels/auth-panels/auth-menu-panel/auth-menu-panel.component';
 import {SignUpPanelComponent} from './components/drop-panels/auth-panels/sign-up-panel/sign-up-panel.component';
 import {SignUpComponent} from './components/auth/sign-up/sign-up.component';
+import { AuthCodeComponent } from './components/auth/auth-code/auth-code.component';
+import { AuthCodePanelComponent } from './components/drop-panels/auth-panels/auth-code-panel/auth-code-panel.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import {SignUpComponent} from './components/auth/sign-up/sign-up.component';
     HomeGalleryComponent,
     HeaderMenuPanelComponent,
     AuthMenuPanelComponent,
-    SignUpPanelComponent
+    SignUpPanelComponent,
+    AuthCodeComponent,
+    AuthCodePanelComponent
   ],
   imports: [
     CommonModule,

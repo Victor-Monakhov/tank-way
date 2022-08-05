@@ -38,6 +38,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     VMValidator.equalControls(this.form.get('confirm'), this.form.get('password'));
+    this.listenPasswordChanges();
   }
 
   public ngOnDestroy(): void {
@@ -54,9 +55,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   public checkControlLength(control: AbstractControl<string>): boolean {
     return !((control.hasError('minlength') ||
-            control.hasError('maxlength') ||
-            control.hasError('required')) &&
-            control.touched);
+        control.hasError('maxlength') ||
+        control.hasError('required')) &&
+      control.touched);
   }
 
   public checkControlNumber(control: AbstractControl<string>): boolean {
@@ -64,19 +65,29 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   public checkControlUppercase(control: AbstractControl<string>): boolean {
-    return !(!control.value.split('').
-            find((char) => !/[a-z]/.test(char) && /[A-Z]/.test(char)) &&
-            control.touched);
+    return !(!control.value.split('').find((char) => !/[a-z]/.test(char) && /[A-Z]/.test(char)) &&
+      control.touched);
   }
 
   public checkControlLowercase(control: AbstractControl<string>): boolean {
-    return !(!control.value.split('').
-      find((char) => /[a-z]/.test(char) && !/[A-Z]/.test(char)) &&
+    return !(!control.value.split('').find((char) => /[a-z]/.test(char) && !/[A-Z]/.test(char)) &&
       control.touched);
   }
 
   public onCreate(): void {
-
+    if (!this.form.invalid) {
+      this.panelService.signUp$.next(false);
+      this.panelService.authCode$.next(true);
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 
+  private listenPasswordChanges(): void {
+    this.subs.add(
+      this.form.get('password').valueChanges.subscribe((password) => {
+        this.form.get('confirm').updateValueAndValidity();
+      })
+    );
+  }
 }

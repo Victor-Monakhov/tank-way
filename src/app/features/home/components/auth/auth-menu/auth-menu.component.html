@@ -4,7 +4,7 @@
               [trackClass]="'track'">
   <div class="auth-menu-wrapper">
     <h3>PANZER</h3>
-    <div class="form"
+    <form class="auth-form"
          [formGroup]="form">
       <div [ngClass]="{'form-item': true,
                      'invalid-input': isInvalidForm}">
@@ -24,12 +24,14 @@
           <i *ngIf="isVisiblePassword" class="fa-solid fa-eye-slash" (click)="onVisiblePassword()"></i>
         </div>
       </div>
-      <small class="error-msg"
-             [ngStyle]="{'visibility': isInvalidForm ? 'visible' : 'hidden'}">
-        invalid email or password
-      </small>
+      <div class="errors-wrapper">
+        <small class="error-msg"
+               [ngStyle]="{'visibility': isInvalidForm ? 'visible' : 'hidden'}">
+          invalid email or password
+        </small>
+      </div>
       <button class="demo-btn" (click)="onLogin()">Login in</button>
-    </div>
+    </form>
     <div class="separator">
       <hr>
       <p>or login in with</p>

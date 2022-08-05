@@ -7,7 +7,7 @@
       <h3>PANZER</h3>
       <p>Create new account</p>
     </div>
-    <div class="form"
+    <form class="auth-form"
          [formGroup]="form">
       <div [ngClass]="{'form-item': true,
                      'invalid-input': form.get('nickname').invalid &&
@@ -87,7 +87,7 @@
         <hr>
       </div>
       <button class="demo-btn" (click)="onCreate()">Create</button>
-    </div>
+    </form>
   </div>
 </ng-scrollbar>
 
