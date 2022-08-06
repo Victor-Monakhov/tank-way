@@ -1,0 +1,58 @@
+@import 'src/assets/styles/colors';
+@import 'src/assets/styles/mixins';
+
+.gameboard-wrapper {
+  @include media-property(H, margin-top, 92px, 98px + 40px);
+  height: calc(100% - 98px);
+
+  .navigation-menu {
+    display: flex;
+    justify-content: center;
+
+    .buttons {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      position: relative;
+
+      li {
+        float: left;
+        position: relative;
+
+        a {
+          @include media-property(H, width, 56px, 56px, 148px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 56px;
+          background: #A18E7B;
+          color: $white;
+          margin: 0 10px;
+          padding: 2px 5px;
+          border: none;
+          border-radius: 20px;
+          font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          text-decoration: none;
+
+          i {
+            @include media-property(H, margin-right, 0, 0, 5px);
+            vertical-align: baseline;
+            margin-right: 5px;
+          }
+
+          span {
+            @include media-property(H, visibility, hidden, hidden, visible);
+            @include media-property(H, display, none, none, inline-block);
+          }
+        }
+
+        a:hover {
+          background: $golden;
+        }
+      }
+    }
+  }
+}

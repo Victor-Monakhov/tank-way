@@ -1,2 +1,10 @@
 <app-gameboard-header></app-gameboard-header>
-<p>gameboard works!</p>
+<div class="gameboard-wrapper">
+  <div class="navigation-menu">
+    <ul class="buttons" *ngFor="let button of navLinks">
+      <li>
+        <a href="{{button.link}}"><i class="{{button.icon}}"></i><span>{{button.title}}</span></a>
+      </li>
+    </ul>
+  </div>
+</div>

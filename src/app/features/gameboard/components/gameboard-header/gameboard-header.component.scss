@@ -1,0 +1,197 @@
+@import 'src/assets/styles/colors';
+@import 'src/assets/styles/mixins';
+
+header {
+  @include media-property(H, height, 80px, 98px);
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  width: 100%;
+  background-color: $black;
+  color: $white;
+  box-shadow: 0 4px 30px $golden;
+  font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+
+  .panel {
+    @include media-property(H, padding, 10px 34px, 16px 0);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .first-column {
+      max-width: fit-content;
+
+      hr {
+        margin: 6px 0;
+        border: none;
+      }
+
+      .text {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+
+        span {
+          @include media-property(H, font-size, 14px, 20px);
+          font-style: italic;
+          font-weight: 400;
+          text-align: center;
+          color: $golden;
+        }
+
+        p {
+          @include media-property(H, font-size, 14px, 20px);
+          font-style: normal;
+          font-weight: 400;
+          text-align: center;
+          color: $white;
+        }
+
+        .icon-golden {
+          @include media-property(H, width, 18px, 26px);
+          @include media-property(H, height, 18px, 26px);
+          @include media-property(H, line-height, 18px, 26px);
+          margin-left: 8px;
+          background: $golden;
+          border-radius: 50%;
+          text-align: center;
+          vertical-align: middle;
+        }
+
+        .icon-blue {
+          @include media-property(H, width, 18px, 26px);
+          @include media-property(H, height, 18px, 26px);
+          @include media-property(H, line-height, 18px, 26px);
+          margin-left: 8px;
+          background: $blue;
+          border-radius: 50%;
+          text-align: center;
+          vertical-align: middle;
+        }
+      }
+    }
+
+    .line {
+      @include media-property(V, height, 50px, 66px);
+      @include media-property(H, margin, 0 10px, 0 20px);
+
+      padding: 0;
+      border: 1px solid #CE9F25;
+    }
+
+    .second-column {
+      @include media-property(H, margin, 0 8px, 0);
+      max-width: fit-content;
+
+      .icon-level {
+        margin: 6px auto;
+        border: 3px solid $white;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 36px;
+        vertical-align: middle;
+
+        p {
+          font-style: italic;
+          font-weight: 400;
+          font-size: 20px;
+          text-align: center;
+          color: $white;
+        }
+      }
+
+      span {
+        @include media-property(H, visibility, hidden, visible);
+        @include media-property(H, display, none, inline-block);
+        font-style: italic;
+        font-weight: 400;
+        //font-size: 16px;
+        line-height: 17px;
+        text-align: center;
+
+        color: $white;
+      }
+    }
+
+    .third-column {
+      @include media-property(H, padding, 3px 0, 0);
+      @include media-property(H, height, 54px, 58px);
+      max-width: fit-content;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .player-avatar {
+        @include media-property(H, visibility, hidden, visible);
+        @include media-property(H, display, none, block);
+        height: 100%;
+        margin-right: 10px;
+
+        .avatar {
+          width: 54px;
+          height: 54px;
+
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+      }
+
+      .player-profile {
+        position: relative;
+        height: 100%;
+        width: 100%;
+
+        .nickname {
+          top: 0;
+
+          p {
+            @include media-property(H, font-size, 14px, 20px);
+            font-style: normal;
+            font-weight: 400;
+            text-align: center;
+            color: $white;
+          }
+        }
+
+        .logout {
+          @include media-property(H, width, 84px, 102px);
+          white-space: nowrap;
+          position: absolute;
+          bottom: 0;
+
+          background-color: transparent;
+          color: $golden;
+          height: 26px;
+          border: 1px solid $golden;
+          border-radius: 8px;
+          padding: 0;
+          margin: 0;
+          cursor: pointer;
+
+          i {
+            @include media-property(H, font-size, 16px, 20px);
+            color: $golden;
+            margin-right: 4px;
+          }
+
+          span {
+            @include media-property(H, font-size, 14px, 20px);
+            font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            color: $golden;
+          }
+        }
+      }
+    }
+  }
+}
