@@ -55,4 +55,91 @@
       }
     }
   }
+
+  .play-box {
+    margin: 50px;
+    display: flex;
+    width: 174px + 346px + 10px;
+
+    .left-side-content {
+      flex-direction: column;
+      display: flex;
+      flex-grow: 1;
+      margin-right: 10px;
+      color: $white;
+
+      .btn-play {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 174px;
+        height: 174px;
+        margin-bottom: 14px;
+
+        font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 43px;
+
+        border: none;
+        border-radius: 8px;
+
+        color: $white;
+        background: $golden;
+
+        text-decoration: none !important;
+      }
+
+      .btn-gameMode {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 174px;
+        height: 50px;
+
+        font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 21px;
+
+        border: 1px solid $white;
+        border-radius: 8px;
+
+        color: $white;
+        text-decoration: none !important;
+      }
+    }
+
+    .right-side-content {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 10px 5px;
+
+      flex: 0 0 346px;
+      border: 1px solid $white;
+      border-radius: 8px;
+      color: $white;
+
+      background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("~src/assets/images/title-img.png");
+      background-clip: content-box;
+      background-size: cover;
+
+      .btn-randomMap {
+        position: relative;
+        padding: 4px 54px;
+        border: none;
+        border-radius: 8px;
+        color: $white;
+        background-color: $golden;
+        text-decoration: none !important;
+      }
+    }
+  }
 }
