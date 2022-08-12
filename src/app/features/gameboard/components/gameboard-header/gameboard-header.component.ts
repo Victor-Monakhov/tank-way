@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-gameboard-header',
@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class GameboardHeaderComponent implements OnInit {
 
-  public constructor() {
+  public constructor(private ElByClassName: ElementRef) {
   }
 
   public ngOnInit(): void {
@@ -15,16 +15,18 @@ export class GameboardHeaderComponent implements OnInit {
   }
 
   private initProgressBar(): void {
-    let progressBar = document.querySelector('.progress-bar');
-    let value = document.querySelector('.level');
+    const progressBar = (<HTMLElement> this.ElByClassName.nativeElement).querySelector(
+      '.progress-bar');
+    const level = (<HTMLElement> this.ElByClassName.nativeElement).querySelector(
+      '.level');
 
     let progressValue = 0;
     let progressEndValue = 65;
-    let speed = 100;
+    let speed = 50;
 
     let progress = setInterval(() => {
       progressValue++;
-      value.textContent = `${progressValue}`;
+      level.textContent = `${progressValue}`;
 
       (progressBar as HTMLElement).style.background = `conic-gradient(#CE9F25FF ${progressValue * 3.6}deg,
        #F5F5F5 ${progressValue * 3.6}deg)`;
