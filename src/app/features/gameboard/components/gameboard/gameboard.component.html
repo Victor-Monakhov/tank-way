@@ -1,4 +1,5 @@
 <app-gameboard-header></app-gameboard-header>
+
 <div class="gameboard-wrapper">
   <div class="navigation-menu">
     <ul class="buttons" *ngFor="let button of navLinks">
@@ -8,12 +9,15 @@
     </ul>
   </div>
 
-
-  <div class='content-wrapper'>
-    <div class='row'>
-      <div class='column center'>
-        <div class='play-box-column'>
-          <div class="play-box">
+  <ng-scrollbar class="scrollbar"
+                [viewClass]="'view'"
+                [thumbClass]="'thumb'"
+                [trackClass]="'track'">
+    <div class='content-wrapper'>
+      <div class='row center'>
+        <div class='column center'>
+          <h2 class="hide-text">My Stats</h2>
+          <div class="play-box-column">
             <div class="left-side-content">
               <a href="#" class="btn-play">PLAY</a>
               <a href="#" class="btn-gameMode">Game Mode</a>
@@ -23,29 +27,28 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class='column'>
-        <div class='my-stats-column'>
-          <h2>My Stats</h2>
-          <hr>
-          <div class="row">
-            <div class="column">
-              <div class="rank">
-                <img src="" class="rank-img">
-                <h1 class="rank-text">General VII</h1>
-                <p class="rank-digit">Rating: 789</p>
+        <div class='column hide-column'>
+          <div class='my-stats-column'>
+            <h2>My Stats</h2>
+            <hr>
+            <div class="row">
+              <div class="column">
+                <div class="rank">
+                  <img src="" class="rank-img" alt="">
+                  <h1 class="rank-text">General VII</h1>
+                  <p class="rank-digit">Rating: 789</p>
+                </div>
+              </div>
+              <div class="column">
+                test
               </div>
             </div>
-            <div class="column">
-              daad
-            </div>
-          </div>
 
-          <a href="#" class="btn-showAll">See All</a>
+            <a href="#" class="btn-showAll">See All</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
+  </ng-scrollbar>
 
 </div>

@@ -68,7 +68,7 @@ import {AuthMenuPanelComponent} from './components/drop-panels/auth-menu-panel/a
   ],
     exports: [
         DropPanelDirective,
-        HeaderComponent,
+        HeaderComponent
     ],
   providers: []
 })

@@ -2,6 +2,7 @@
 @import 'src/assets/styles/mixins';
 
 header {
+  z-index: 100;
   @include media-property(H, height, 80px, 98px);
   padding: 0;
   margin: 0;

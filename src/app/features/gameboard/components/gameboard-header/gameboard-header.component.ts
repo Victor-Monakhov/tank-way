@@ -7,6 +7,8 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 })
 export class GameboardHeaderComponent implements OnInit {
 
+  public valueToNextLevel: number = 2345;
+
   public constructor(private ElByClassName: ElementRef) {
   }
 
@@ -22,11 +24,16 @@ export class GameboardHeaderComponent implements OnInit {
 
     let progressValue = 0;
     let progressEndValue = 65;
+    let levelValue = 0;
     let speed = 50;
+
+    if (this.valueToNextLevel >= 2000 && this.valueToNextLevel <= 2500) {
+      levelValue = 10;
+    }
 
     let progress = setInterval(() => {
       progressValue++;
-      level.textContent = `${progressValue}`;
+      level.textContent = `${levelValue}`;
 
       (progressBar as HTMLElement).style.background = `conic-gradient(#CE9F25FF ${progressValue * 3.6}deg,
        #F5F5F5 ${progressValue * 3.6}deg)`;

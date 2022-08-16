@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: NAVIGATE.DEMO,
-    loadChildren: () => import('../demo/demo.module').then(m => m.DemoModule),
+    loadChildren: () => import('../demo/demo.module').then((m) => m.DemoModule)
   }
 ];
 
@@ -19,8 +19,8 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class HomeRoutingModule { }
