@@ -5,6 +5,53 @@
   @include media-property(H, margin-top, 92px, 98px + 40px);
   height: calc(100% - 198px);
 
+  h2 {
+    @include media-property(H, font-size, 14px, 24px);
+    @include media-property(H, line-height, 15px, 26px);
+    font-family: RopaSans-Regular, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: $white;
+  }
+
+  hr {
+    width: 100%;
+    padding: 0;
+    margin: 10px 0;
+    border: 1px solid $golden;
+  }
+
+  .hide-text {
+    @include media-property(H, visibility, visible, hidden);
+  }
+
+  .hide-column {
+    @include media-property(H, visibility, hidden, visible);
+    @include media-property(H, display, none, inline-block);
+  }
+
+  .content-wrapper {
+    @include media-property(H, margin, 0, 40px 10px);
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    //width: 100vw;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    //flex: 1;
+  }
+
+  .center {
+    justify-content: center;
+    align-items: center;
+  }
+
   .navigation-menu {
     display: flex;
     justify-content: center;
@@ -158,46 +205,61 @@
       }
     }
   }
+
+  .notification {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    border: 1px solid $golden;
+    background-color: $white;
+    color: $golden;
+    text-decoration: none;
+    padding: 20px;
+    //position: relative;
+    display: inline-block;
+
+    .badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      padding: 5px 10px;
+      border-radius: 50%;
+      background: $golden;
+      color: $white;
+    }
+  }
 }
 
-h2 {
-  @include media-property(H, font-size, 14px, 24px);
-  @include media-property(H, line-height, 15px, 26px);
-  font-family: RopaSans-Regular, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  color: $white;
-}
+.invite-players {
+  text-align: center;
 
-.hide-text {
-  @include media-property(H, visibility, visible, hidden);
-}
+  .my-team {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    grid-row-gap: 20px;
+    grid-column-gap: 10px;
+    grid-template-columns: repeat(6, auto);
 
-.hide-column {
-  @include media-property(H, visibility, hidden, visible);
-  @include media-property(H, display, none, inline-block);
-}
+    .add-player {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid $golden;
+      display: grid;
+      place-items: center;
 
-.content-wrapper {
-  @include media-property(H, margin, 0, 40px 10px);
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  //width: 100vw;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  //flex: 1;
-}
-
-.center {
-  justify-content: center;
-  align-items: center;
+      i::before {
+        font-size: 16px;
+        line-height: 24px;
+        color: $golden;
+      }
+    }
+  }
 }
 
 .my-stats-column {
@@ -213,40 +275,33 @@ h2 {
   box-shadow: inset 0 3px 15px rgba(0, 0, 0, 0.6);
   border-radius: 8px;
 
-  hr {
-    width: 100%;
-    padding: 0;
-    margin: 10px 0;
-    border: 1px solid $golden;
-  }
-
   .rank {
     margin-top: 36px;
     margin-bottom: 66px;
-  }
 
-  .rank-img {
-    width: 186px;
-    height: 186px;
-  }
+    .rank-img {
+      width: 186px;
+      height: 186px;
+    }
 
-  .rank-text {
-    font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 43px;
+    .rank-text {
+      font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 43px;
 
-    color: $golden;
-  }
+      color: $golden;
+    }
 
-  .rank-digit {
-    font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 26px;
-    color: $white;
+    .rank-digit {
+      font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 26px;
+      color: $white;
+    }
   }
 
   .btn-showAll {

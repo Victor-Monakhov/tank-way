@@ -26,6 +26,16 @@
               <a href="#" class="btn-randomMap">Random Map</a>
             </div>
           </div>
+          <div class="invite-players">
+            <h2>Invite to Session</h2>
+            <hr>
+            <div class="my-team">
+              <h2>My team</h2>
+              <div *ngFor="let player of invitePlayers">
+                <a href="{{player.link}}" class="add-player"><i class="fa-solid fa-user-plus"></i></a>
+              </div>
+            </div>
+          </div>
         </div>
         <div class='column hide-column'>
           <div class='my-stats-column'>
@@ -49,6 +59,9 @@
         </div>
       </div>
     </div>
+    <a href="#" class="notification">
+      <span><i class="fa-solid fa-comment-dots"></i></span>
+      <span class="badge">3</span>
+    </a>
   </ng-scrollbar>
-
 </div>

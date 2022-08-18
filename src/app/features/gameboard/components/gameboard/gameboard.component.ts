@@ -14,6 +14,14 @@ export class GameboardComponent {
     {link: '#', icon: 'fa-solid fa-gear', title: 'Settings'}
   ];
 
+  public invitePlayers: Array<any> = [
+    {link: '#'},
+    {link: '#1'},
+    {link: '#2'},
+    {link: '#'},
+    {link: '#'}
+  ];
+
   public constructor() {
   }
 }
