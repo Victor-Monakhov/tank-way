@@ -5,6 +5,19 @@
   @include media-property(H, margin-top, 92px, 98px + 40px);
   height: calc(100% - 198px);
 
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    //width: 100vw;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    //flex: 1;
+  }
+
   h2 {
     @include media-property(H, font-size, 14px, 24px);
     @include media-property(H, line-height, 15px, 26px);
@@ -34,19 +47,6 @@
     @include media-property(H, margin, 0, 40px 10px);
   }
 
-  .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    //width: 100vw;
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    //flex: 1;
-  }
-
   .center {
     justify-content: center;
     align-items: center;
@@ -73,7 +73,7 @@
           align-items: center;
           justify-content: center;
           height: 56px;
-          background: #A18E7B;
+          background: $golden-light;
           color: $white;
           margin: 0 10px;
           padding: 2px 5px;
@@ -142,7 +142,7 @@
       }
 
       .btn-play:hover {
-        background: #A18E7B;
+        background: $golden-light;
       }
 
       .btn-gameMode {
@@ -201,14 +201,14 @@
       }
 
       .btn-randomMap:hover {
-        background: #A18E7B;
+        background: $golden-light;
       }
     }
   }
 
   .notification {
     position: fixed;
-    bottom: 40px;
+    bottom: 15px;
     right: 40px;
     width: 62px;
     height: 62px;
@@ -218,7 +218,6 @@
     color: $golden;
     text-decoration: none;
     padding: 20px;
-    //position: relative;
     display: inline-block;
 
     .badge {
@@ -252,12 +251,18 @@
       border: 1px solid $golden;
       display: grid;
       place-items: center;
+      color: $golden;
 
       i::before {
         font-size: 16px;
         line-height: 24px;
-        color: $golden;
       }
+    }
+
+    .add-player:hover {
+      border-color: $white;
+      color: $white;
+      scale: 1.1;
     }
   }
 }
@@ -326,6 +331,6 @@
   }
 
   .btn-showAll:hover {
-    background: #A18E7B;
+    background: $golden-light;
   }
 }

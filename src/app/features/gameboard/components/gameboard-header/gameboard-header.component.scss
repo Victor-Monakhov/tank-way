@@ -189,7 +189,6 @@ header {
 
           i {
             @include media-property(H, font-size, 16px, 20px);
-            color: $golden;
             margin-right: 4px;
           }
 
@@ -198,8 +197,12 @@ header {
             font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
             font-style: normal;
             font-weight: 400;
-            color: $golden;
           }
+        }
+
+        .logout:hover {
+          border-color: $golden-light;
+          color: $golden-light;
         }
       }
     }
