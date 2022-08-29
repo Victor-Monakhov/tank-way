@@ -48,19 +48,19 @@ export class SignUpComponent extends Auth implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  public onBack(): void {
-    this.closeModal();
-    this.authService.isAuthMenu.next(true);
-  }
+  // public onBack(): void {
+  //   this.closeModal();
+  //   this.authService.isAuthMenu.next(true);
+  // }
 
   public onSubmit(): void {
     this.authService.userInitByForm(this.form);
   }
 
-  public successResponse(): void {
-    this.authService.response.next({} as IAuthResponse);
-    this.authService.isCode.next(true);
-  }
+  // public successResponse(): void {
+  //   this.authService.response.next({} as IAuthResponse);
+  //   this.authService.isCode.next(true);
+  // }
 
   private subscribeToNickname(): void {
     this.subs.add(this.form.get('nickname').valueChanges.subscribe((nickname) => {

@@ -11,11 +11,8 @@ import {DropPanelDirective} from '../../shared/directives/vm-lib/drop-panel.dire
 import {DropPanelComponent} from '../../shared/components/vm-lib/drop-panel/drop-panel.component';
 import {FullScreenComponent} from '../../shared/components/slider/full-screen/full-screen.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SignInComponent} from '../../shared/components/auth-modal/sign-in/sign-in.component';
-import {SecretCodeComponent} from '../../shared/components/auth-modal/secret-code/secret-code.component';
 import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
 import {TranslateModule} from '@ngx-translate/core';
-import {CodeInputComponent} from '../../shared/components/code-input/code-input.component';
 import {VmForDirective} from '../../shared/directives/vm-for.directive';
 import {BlockCopyPastDirective} from '../../shared/directives/block-copy-past.directive';
 import {HeaderMenuComponent} from './components/header/header-menu/header-menu.component';
@@ -30,8 +27,9 @@ import {HeaderMenuPanelComponent} from './components/drop-panels/header-menu-pan
 import {AuthMenuPanelComponent} from './components/drop-panels/auth-panels/auth-menu-panel/auth-menu-panel.component';
 import {SignUpPanelComponent} from './components/drop-panels/auth-panels/sign-up-panel/sign-up-panel.component';
 import {SignUpComponent} from './components/auth/sign-up/sign-up.component';
-import { AuthCodeComponent } from './components/auth/auth-code/auth-code.component';
-import { AuthCodePanelComponent } from './components/drop-panels/auth-panels/auth-code-panel/auth-code-panel.component';
+import {AuthCodeComponent} from './components/auth/auth-code/auth-code.component';
+import {AuthCodePanelComponent} from './components/drop-panels/auth-panels/auth-code-panel/auth-code-panel.component';
+import {CodeInputComponent} from '../../shared/components/code-input/code-input.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +41,7 @@ import { AuthCodePanelComponent } from './components/drop-panels/auth-panels/aut
     DropPanelComponent,
     FullScreenComponent,
     SignUpComponent,
-    SignInComponent,
-    SecretCodeComponent,
     AuthMenuComponent,
-    CodeInputComponent,
     VmForDirective,
     BlockCopyPastDirective,
     HeaderMenuComponent,
@@ -59,7 +54,8 @@ import { AuthCodePanelComponent } from './components/drop-panels/auth-panels/aut
     AuthMenuPanelComponent,
     SignUpPanelComponent,
     AuthCodeComponent,
-    AuthCodePanelComponent
+    AuthCodePanelComponent,
+    CodeInputComponent
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {VMValidator} from '../../../../../shared/classes/form-validation/vm-validator.class';
 import {SubSink} from 'subsink';
 import {PanelService} from '../../../../../shared/services/panel-service/panel.service';
+import {AuthService} from "../../../../../shared/services/auth.service";
 
 interface ILoginForm {
   email: FormControl<string>
@@ -22,6 +23,7 @@ export class AuthMenuComponent implements OnInit, OnDestroy {
   public form: FormGroup<ILoginForm> = {} as FormGroup<ILoginForm>;
 
   public constructor(private panelService: PanelService,
+                     private authService: AuthService,
                      private fb: FormBuilder) {
     this.form = fb.group({
       email: ['', [Validators.required, VMValidator.email]],
@@ -56,5 +58,13 @@ export class AuthMenuComponent implements OnInit, OnDestroy {
   public onSignUp(): void {
     this.panelService.authMenu$.next(false);
     this.panelService.signUp$.next(true);
+  }
+
+  public onLoginWithGoogle(): void {
+    this.authService.loginWithGoogle();
+  }
+
+  public onLoginWithFacebook(): void {
+    this.authService.loginWithFacebook();
   }
 }

@@ -1,4 +1,4 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../../shared/services/auth.service';
 import {SubSink} from 'subsink';
@@ -11,7 +11,7 @@ import {LocalizationService} from '../../../../shared/services/internationalizat
 import {WebSocket} from '../../../../shared/classes/web-sockets/web-socket.class';
 import {IAuthResponse} from '../../../../shared/interfaces/auth/auth.interface';
 import {NAVIGATE} from '../../../../app.config';
-import { PanelService } from 'src/app/shared/services/panel-service/panel.service';
+import {PanelService} from 'src/app/shared/services/panel-service/panel.service';
 
 
 @Component({
@@ -47,22 +47,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.panelService.authMenu$.next(true);
   }
 
-  public signUpTriggerHandler(trigger: boolean): void {
-    this.authService.isSignUp.next(trigger);
-  }
-
-  public signInTriggerHandler(trigger: boolean): void {
-    this.authService.isSignIn.next(trigger);
-  }
-
-  public codeTriggerHandler(trigger: boolean): void {
-    this.authService.isCode.next(trigger);
-  }
-
-  public authMenuTriggerHandler(trigger: boolean): void {
-    this.authService.isAuthMenu.next(trigger);
-  }
-
   public onDemo(): void {
     this.router.navigate([NAVIGATE.DEMO]).then();
   }
@@ -77,7 +61,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToUser(): void {
-    this.subs.add(this.authService.user.pipe(
+    this.subs.add(this.authService.authUser$.pipe(
       switchMap(user => {
         return this.authService.signUp(user) as Observable<IAuthResponse>
       })
@@ -98,7 +82,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.authService.response.next(response);
       if (response.token) {
         this.authService.tmpUser.token = response.token;
-        this.authService.user.next(this.authService.tmpUser);
+        this.authService.authUser$.next(this.authService.tmpUser);
       }
       console.log(response.message);
     }))
@@ -123,20 +107,4 @@ export class HomeComponent implements OnInit, OnDestroy {
   //   document.body.scrollTop = 0; // For Safari
   //   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   // }
-
-  public get codeTrigger$(): Observable<boolean> {
-    return this.authService.isCode;
-  }
-
-  public get signUpTrigger$(): Observable<boolean> {
-    return this.authService.isSignUp;
-  }
-
-  public get signInTrigger$(): Observable<boolean> {
-    return this.authService.isSignIn;
-  }
-
-  public get authMenuTrigger$(): BehaviorSubject<boolean> {
-    return this.panelService.authMenu$;
-  }
 }

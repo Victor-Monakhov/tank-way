@@ -41,15 +41,15 @@ export class AuthMenuComponent implements OnInit, OnDestroy, IDropPanel {
     this.authService.loginWithFacebook();
   }
 
-  public onSignIn(): void{
-    this.closed.emit();
-    this.authService.isSignIn.next(true);
-  }
-
-  public onSignUp(): void{
-    this.closed.emit();
-    this.authService.isSignUp.next(true);
-  }
+  // public onSignIn(): void{
+  //   this.closed.emit();
+  //   this.authService.isSignIn.next(true);
+  // }
+  //
+  // public onSignUp(): void{
+  //   this.closed.emit();
+  //   this.authService.isSignUp.next(true);
+  // }
 
   public onExit(): void {
     this.closed.emit();

@@ -48,11 +48,6 @@
     .golden {
       color: $golden;
     }
-
-    a {
-      color: $golden;
-      font-size: 1.25rem;
-    }
   }
   vmc-code-input {
     display: flex;
@@ -72,5 +67,9 @@
   }
   .timer {
     font-size: 2rem;
+  }
+  a {
+    color: $golden;
+    font-size: 1.25rem;
   }
 }

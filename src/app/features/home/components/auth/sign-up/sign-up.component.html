@@ -20,9 +20,10 @@
       <div class="errors-wrapper">
         <small class="error-msg"
                [ngStyle]="{'visibility':
-                        form.get('nickname').invalid &&
-                        form.get('nickname').touched ? 'visible' : 'hidden'}">
-          nickname is not available
+                        (form.get('nickname').invalid &&
+                        form.get('nickname').touched) ||
+                        responseMsg ? 'visible' : 'hidden'}">
+          {{responseMsg ? responseMsg : 'nickname is not available'}}
         </small>
       </div>
       <div [ngClass]="{'form-item': true,

@@ -9,24 +9,23 @@
     <p>Activate account</p>
     <div class="info">
       <small>We've sent a verification code to:</small>
-      <small class="golden">{{'vitek@gmail.com'}}</small>
+      <small class="golden">{{email}}</small>
       <small>Check it.</small>
-      <a [ngStyle]="{'visibility': !isWaiting ? 'visible' : 'hidden'}"
-         href="#">
-        resend code
-      </a>
     </div>
     <vmc-code-input [capacity]="capacity"
                 (codeEvent)="codeHandler($event)">
     </vmc-code-input>
-<!--    <small class="invalid-input"-->
-<!--           *ngIf="invalidMsg">-->
+<!--    <small *ngIf="invalidMsg" class="invalid-input">-->
 <!--      {{invalidMsg}}-->
 <!--    </small>-->
 <!--    <small>We`ve sent you a code to {{email}}. Please check it.-->
 <!--    </small>-->
-<!--    <p *ngIf="timer" class="timer">{{timer}}</p>-->
-    <p class="timer">{{'02:00'}}</p>
+    <p *ngIf="timer" class="timer">{{timer}}</p>
+    <a [ngStyle]="{'display': !isWaiting ? 'inline' : 'none'}"
+       href="#">
+      resend code
+    </a>
+<!--    <p class="timer">{{'02:00'}}</p>-->
 <!--    <small *ngIf="!timer" class="link" (click)="onSendCode()">Resend code</small>-->
   </div>
 </ng-scrollbar>

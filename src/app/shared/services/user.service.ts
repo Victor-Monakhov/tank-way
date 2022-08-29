@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {IUser} from "../interfaces/auth/user.interface";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {IUser} from '../interfaces/auth/user.interface';
 
 const baseUrl = 'http://localhost:8080/api/test/users';
 
@@ -10,7 +10,7 @@ const baseUrl = 'http://localhost:8080/api/test/users';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {
+  public constructor(private http: HttpClient) {
   }
 
   public getAll(): Observable<IUser[]> {

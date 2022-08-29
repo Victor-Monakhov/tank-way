@@ -37,7 +37,7 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropPanel {
   }
 
   public ngOnInit(): void {
-    this.subscribeToVisible();
+    // this.subscribeToVisible();
     this.subscribeToConnection();
     this.subscribeToWebSocket();
   }
@@ -47,24 +47,24 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropPanel {
     this.webSocket.disconnect();
   }
 
-  public codeHandler(code: string): void {
-    this.invalidMsg = '';
-    if (code.length === this.capacity) {
-      this.authService.code.next({
-        code: code,
-        email: this.email
-      } as IAuthCode);
-    }
-  }
+  // public codeHandler(code: string): void {
+  //   this.invalidMsg = '';
+  //   if (code.length === this.capacity) {
+  //     this.authService.code.next({
+  //       code: code,
+  //       email: this.email
+  //     } as IAuthCode);
+  //   }
+  // }
 
-  public onBack(): void {
-    this.closeModal();
-    this.authService.isSignUp.next(true);
-  }
+  // public onBack(): void {
+  //   this.closeModal();
+  //   this.authService.isSignUp.next(true);
+  // }
 
   public onSendCode(): void {
     if (this.isConnected) {
-      this.authService.user.next(this.authService.tmpUser);
+      this.authService.authUser$.next(this.authService.tmpUser);
       this.webSocket.sendMessage(Paths.wsSendAuthCode, this.timerConfig);
     }
   }
@@ -73,58 +73,58 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropPanel {
     this.authService.response.next({} as IAuthResponse);
   }
 
-  private subscribeToVisible(): void {
-    this.subs.add(this.visible.pipe(
-      switchMap((isVisible) => {
-        if (isVisible) {
-          if (this.isConnected && !this.isWaiting) {
-            this.timerConfig.email = this.email;
-            this.webSocket.sendMessage(Paths.wsSendAuthCode, this.timerConfig);
-          }
-          return this.authService.response;
-        }
-        return of()
-      })
-    ).subscribe((response) => {
-      if ((response as IAuthResponse).token) {
-        this.closeModal();
-        this.successResponse();
-      } else if (Object.keys(response).length) {
-        this.invalidMsg = 'Invalid code';
-      }
-    }));
-  }
+  // private subscribeToVisible(): void {
+  //   this.subs.add(this.visible.pipe(
+  //     switchMap((isVisible) => {
+  //       if (isVisible) {
+  //         if (this.isConnected && !this.isWaiting) {
+  //           this.timerConfig.email = this.email;
+  //           this.webSocket.sendMessage(Paths.wsSendAuthCode, this.timerConfig);
+  //         }
+  //         return this.authService.response;
+  //       }
+  //       return of()
+  //     })
+  //   ).subscribe((response) => {
+  //     if ((response as IAuthResponse).token) {
+  //       this.closeModal();
+  //       this.successResponse();
+  //     } else if (Object.keys(response).length) {
+  //       this.invalidMsg = 'Invalid code';
+  //     }
+  //   }));
+  // }
 
-  private subscribeToWebSocket(): void {
-    this.subs.add(this.webSocket.response.subscribe((timer) => {
-      const minutes = timer['minutes'];
-      const seconds = timer['seconds'];
-      this.timer = `${(minutes < 10) ? `0${minutes}` : minutes} :
-                      ${(seconds < 10) ? `0${seconds}` : seconds}`
-      this.isWaiting = true;
-      if (minutes === 0 && seconds === 0) {
-        this.timer = '';
-        this.isWaiting = false;
-      }
-    }))
-  }
+  // private subscribeToWebSocket(): void {
+  //   this.subs.add(this.webSocket.response.subscribe((timer) => {
+  //     const minutes = timer['minutes'];
+  //     const seconds = timer['seconds'];
+  //     this.timer = `${(minutes < 10) ? `0${minutes}` : minutes} :
+  //                     ${(seconds < 10) ? `0${seconds}` : seconds}`
+  //     this.isWaiting = true;
+  //     if (minutes === 0 && seconds === 0) {
+  //       this.timer = '';
+  //       this.isWaiting = false;
+  //     }
+  //   }))
+  // }
 
-  private subscribeToConnection(): void {
-    this.subs.add(
-      this.webSocket.isConnected.subscribe((isConnected) => {
-        this.isConnected = isConnected;
-        console.log('connection-->', this.isConnected);
-      })
-    );
-  }
+  // private subscribeToConnection(): void {
+  //   this.subs.add(
+  //     this.webSocket.isConnected.subscribe((isConnected) => {
+  //       this.isConnected = isConnected;
+  //       console.log('connection-->', this.isConnected);
+  //     })
+  //   );
+  // }
 
-  private closeModal(): void {
-    this.invalidMsg = '';
-    this.authService.isCode.next(false);
-    this.closed.emit();
-  }
+  // private closeModal(): void {
+  //   this.invalidMsg = '';
+  //   this.authService.isCode.next(false);
+  //   this.closed.emit();
+  // }
 
-  public get email(): string {
-    return this.authService.tmpUser.email ?? '';
-  };
+  // public get email(): string {
+  //   return this.authService.tmpUser.email ?? '';
+  // };
 }

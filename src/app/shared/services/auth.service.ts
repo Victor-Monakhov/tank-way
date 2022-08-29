@@ -1,29 +1,25 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of, Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {Paths} from "../classes/paths.class";
-import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
-import {AbstractControl} from "@angular/forms";
-import {LSKeys} from "../enums/local-storage-keys.enum";
-import {LocalStorageService} from "./local-storage.service";
-import {catchError} from "rxjs/operators";
-import {IAuthCode, IAuthResponse, IUser} from "../interfaces/auth/auth.interface";
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Paths} from '../classes/paths.class';
+import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
+import {AbstractControl} from '@angular/forms';
+import {LSKeys} from '../enums/local-storage-keys.enum';
+import {LocalStorageService} from './local-storage.service';
+import {catchError} from 'rxjs/operators';
+import {IAuthCode, IAuthResponse, IUser} from '../interfaces/auth/auth.interface';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
 
-  public isCode: Subject<boolean> = new Subject<boolean>();
-  public isSignUp: Subject<boolean> = new Subject<boolean>();
-  public isSignIn: Subject<boolean> = new Subject<boolean>();
-  public isAuthMenu: Subject<boolean> = new Subject<boolean>();
-  public user: Subject<IUser> = new Subject<IUser>();
+  public authUser$: Subject<IUser> = new Subject<IUser>();
   public code: Subject<IAuthCode> = new Subject<IAuthCode>();
-  public response: BehaviorSubject<IAuthResponse> = new BehaviorSubject<IAuthResponse>(null);
+  public response: Subject<IAuthResponse> = new Subject<IAuthResponse>();
   public tmpUser: IUser = {} as IUser;
 
-  constructor(private http: HttpClient,
+  public constructor(private http: HttpClient,
               private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService) {
   }
@@ -34,9 +30,9 @@ export class AuthService {
       email: user.email,
       password: '12345678',
       token: user.authToken,
-      avatarUrl: user.photoUrl,
+      avatarUrl: user.photoUrl
     } as IUser;
-    this.user.next(this.tmpUser);
+    this.authUser$.next(this.tmpUser);
   }
 
   public userInitByForm(form: AbstractControl): void {
@@ -45,15 +41,15 @@ export class AuthService {
       email: form.value['email'],
       password: form.value['password'],
       token: '',
-      avatarUrl: '',
+      avatarUrl: ''
     } as IUser
-    this.user.next(this.tmpUser);
+    this.authUser$.next(this.tmpUser);
   }
 
   public signUp(user: IUser): Observable<any> {
     return this.http.post(Paths.signUp, user).pipe(
       catchError((error) => {
-          this.response.next(error['error']);
+        this.response.next(error['error']);
           return of();
         }
       )
