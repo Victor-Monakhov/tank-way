@@ -22,17 +22,17 @@
     </div>
   </div>
   <div class="position-view">
-    <img *ngIf="team === 'red'" class="map" src="../../assets/images/red-map-pos.png" alt="map">
-    <img *ngIf="team === 'blue'" class="map" src="../../assets/images/blue-map-pos.png" alt="map">
+    <img *ngIf="team === 'red'" class="map" src="assets/images/red-map-pos.png" alt="map">
+    <img *ngIf="team === 'blue'" class="map" src="assets/images/blue-map-pos.png" alt="map">
     <div [ngClass]="['pos-view', (team === 'red') ?
                      'red-pos' + form.get('position').value :
                      'blue-pos' + form.get('position').value]">
       <div *ngIf="team === 'red'" class="pos-view-content">
-        <img src="../../assets/images/pos-red.png" alt="">
+        <img src="assets/images/pos-red.png" alt="">
         <b>{{form.get('position').value + 1}}</b>
       </div>
       <div *ngIf="team === 'blue'" class="pos-view-content">
-        <img src="../../assets/images/pos-blue.png" alt="">
+        <img src="assets/images/pos-blue.png" alt="">
         <b>{{form.get('position').value + 1}}</b>
       </div>
     </div>

@@ -14,26 +14,26 @@ export class TankSelectionComponent implements OnInit {
   public selectedTankHead: ITankHead = {} as ITankHead;
   public targetAngle: number = 0;
   public tankBodies: ITankBody[] = [
-    {name: 'T_1', path: '../../assets/images/tanks/T_1.png'} as ITankBody,
-    {name: 'T_2', path: '../../assets/images/tanks/T_2.png'} as ITankBody,
-    {name: 'T_3', path: '../../assets/images/tanks/T_3.png'} as ITankBody,
-    {name: 'T_4', path: '../../assets/images/tanks/T_4.png'} as ITankBody,
-    {name: 'T_3', path: '../../assets/images/tanks/T_3.png'} as ITankBody,
-    {name: 'T_2', path: '../../assets/images/tanks/T_2.png'} as ITankBody,
+    {name: 'T_1', path: 'assets/images/tanks/T_1.png'} as ITankBody,
+    {name: 'T_2', path: 'assets/images/tanks/T_2.png'} as ITankBody,
+    {name: 'T_3', path: 'assets/images/tanks/T_3.png'} as ITankBody,
+    {name: 'T_4', path: 'assets/images/tanks/T_4.png'} as ITankBody,
+    {name: 'T_3', path: 'assets/images/tanks/T_3.png'} as ITankBody,
+    {name: 'T_2', path: 'assets/images/tanks/T_2.png'} as ITankBody,
     {} as ITankBody,
-    {name: 'T_1', path: '../../assets/images/tanks/T_1.png'} as ITankBody,
-    {name: 'T_2', path: '../../assets/images/tanks/T_2.png'} as ITankBody
+    {name: 'T_1', path: 'assets/images/tanks/T_1.png'} as ITankBody,
+    {name: 'T_2', path: 'assets/images/tanks/T_2.png'} as ITankBody
   ];
   public tankHeads: ITankHead[] = [
-    {name: 'gun_1', path: '../../assets/images/tanks/gun_1.png'} as ITankHead,
-    {name: 'gun_2', path: '../../assets/images/tanks/gun_2.png'} as ITankHead,
-    {name: 'gun_3', path: '../../assets/images/tanks/gun_3.png'} as ITankHead,
+    {name: 'gun_1', path: 'assets/images/tanks/gun_1.png'} as ITankHead,
+    {name: 'gun_2', path: 'assets/images/tanks/gun_2.png'} as ITankHead,
+    {name: 'gun_3', path: 'assets/images/tanks/gun_3.png'} as ITankHead,
     {} as ITankHead,
-    {name: 'gun_4', path: '../../assets/images/tanks/gun_4.png'} as ITankHead,
-    {name: 'gun_5', path: '../../assets/images/tanks/gun_5.png'} as ITankHead,
-    {name: 'gun_4', path: '../../assets/images/tanks/gun_4.png'} as ITankHead,
-    {name: 'gun_3', path: '../../assets/images/tanks/gun_3.png'} as ITankHead,
-    {name: 'gun_2', path: '../../assets/images/tanks/gun_2.png'} as ITankHead
+    {name: 'gun_4', path: 'assets/images/tanks/gun_4.png'} as ITankHead,
+    {name: 'gun_5', path: 'assets/images/tanks/gun_5.png'} as ITankHead,
+    {name: 'gun_4', path: 'assets/images/tanks/gun_4.png'} as ITankHead,
+    {name: 'gun_3', path: 'assets/images/tanks/gun_3.png'} as ITankHead,
+    {name: 'gun_2', path: 'assets/images/tanks/gun_2.png'} as ITankHead
   ];
 
   public readonly viewHeight: number = 150;
