@@ -60,8 +60,7 @@
               ]
             },
             "scripts": [
-            ],
-            "baseHref": "/browser-tanks"
+            ]
           },
           "configurations": {
             "production": {
