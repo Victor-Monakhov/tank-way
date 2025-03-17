@@ -61,7 +61,7 @@
             },
             "scripts": [
             ],
-            "baseHref": "/browser-tanks"
+            "baseHref": "https://victor-monakhov.github.io/browser-tanks/"
           },
           "configurations": {
             "production": {
