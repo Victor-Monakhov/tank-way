@@ -1,0 +1,61 @@
+@import "fonts.scss";
+@import "colors.scss";
+@import "mixins.scss";
+p, a {
+  margin: 0;
+  font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+  font-size: 1.3rem;
+}
+
+a {
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+  @extend .border-golden-anim;
+}
+
+label, b, strong {
+  margin: 0;
+  font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+  font-size: 2.1rem;
+}
+
+h1 {
+  @include media-property(H, font-size, 1.5rem, 2rem, 2rem, 2.5rem);
+  @include media-property(H, line-height, 1.5rem, 2rem, 2rem, 2.5rem);
+  margin: 0;
+  font-weight: normal;
+  font-family: RussoOne-Regular, Raleway-Thin, sans-serif;
+  text-shadow: 0 1px 4px $black03;
+}
+
+h2 {
+  @include media-property(H, font-size, 2rem, 2rem, 2rem, 2.5rem);
+  @include media-property(H, line-height, 2rem, 2rem, 2rem, 2.5rem);
+  margin: 0;
+  font-weight: normal;
+  font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+}
+
+h3 {
+  margin: 0;
+  font-weight: bold;
+  font-family: Koulen, RopaSans-Regular, Raleway-Thin, sans-serif;
+  line-height: 2.5rem;
+  font-size: 2.5rem;
+}
+
+small {
+  @include media-property(H, font-size, 1rem, 1.2rem, 1.2rem, 1.25rem);
+  margin: 0;
+  font-weight: normal;
+  font-family: Roboto-Light, Raleway-Thin, sans-serif;
+}
+
+input[type=text], input[type=email], input[type=password] {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+}
+

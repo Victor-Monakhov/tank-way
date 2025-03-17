@@ -1,0 +1,80 @@
+@import 'variables.scss';
+
+/// Simplify media-queries
+//
+/// @param {string} $direction - set horizontal(H) or vertical(V) direction for breakpoints
+/// @param {string} $property - set the property which will be changes on breakpoints
+/// @param {number | string} $value-xs - set property value for xs breakpoint
+/// @param {number | string} $value-sm [$value-xs] - set property value for sm breakpoint
+/// @param {number | string} $value-md [$value-sm] - set property value for md breakpoint
+/// @param {number | string} $value-lg [$value-md] - set property value for lg breakpoint
+/// @param {number | string} $value-xl [$value-lg] - set property value for xl breakpoint
+@mixin media-property($direction,
+                      $property,
+                      $value-xs,
+                      $value-sm: null,
+                      $value-md: null,
+                      $value-lg: null,
+                      $value-xl: null) {
+  @if ($direction == V) {
+    $direction: min-height
+  }
+  @else if($direction == H) {
+    $direction: min-width;
+  }
+  @media screen and (#{$direction}: $xs) {
+    #{$property}: $value-xs;
+  }
+  @if ($value-sm != null) {
+    @media screen and (#{$direction}: $sm) {
+      #{$property}: $value-sm;
+    }
+  }
+  @if ($value-md != null) {
+    @media screen and (#{$direction}: $md) {
+      #{$property}: $value-md;
+    }
+  }
+  @if ($value-lg != null) {
+    @media screen and (#{$direction}: $lg) {
+      #{$property}: $value-lg;
+    }
+  }
+  @if ($value-xl != null) {
+    @media screen and (#{$direction}: $xl) {
+      #{$property}: $value-xl;
+    }
+  }
+}
+
+/// Create background or border-image animation by linear-gradient
+///
+/// @param {string} $name - name for animation
+/// @param {string} $property - property to animate, BG - background, BI - border-image
+/// @param {string} $direction [to right] - linear-gradient direction
+/// @param {string} $color1 [#ffffff] - left color for animation
+/// @param {string} $color2 [#000000] - central color for animation
+/// @param {string} $color3 [#ffffff] - right color for animation
+@mixin gradient-expansion($name, $property, $direction: to right, $color1: #ffffff, $color2: #000000, $color3: #ffffff){
+  $mode: 0;
+  @if ($property == BG) {
+    $property: background;
+  }
+  @else if($property == BI) {
+    $property: border-image;
+    $mode: 1;
+  }
+  @keyframes #{$name} {
+    0% {#{$property}: linear-gradient(#{$direction}, $color1 0, $color1 45%,  $color2 46%, $color2 54%, $color3 55%, $color3 100%) $mode;}
+    12% {#{$property}: linear-gradient(#{$direction}, $color1 0, $color1 39%,  $color2 40%, $color2 60%, $color3 61%, $color3 100%) $mode;}
+    25% {#{$property}: linear-gradient(#{$direction}, $color1 0, $color1 33%,  $color2 34%, $color2 66%, $color3 67%, $color3 100%) $mode;}
+    37% {#{$property}: linear-gradient(#{$direction}, $color1 0, $color1 27%,  $color2 28%, $color2 72%, $color3 73%, $color3 100%) $mode;}
+    50% {#{$property}: linear-gradient(#{$direction}, $color1 0, $color1 22%,  $color2 23%, $color2 77%, $color3 78%, $color3 100%) $mode;}
+    62% {#{$property}: linear-gradient(#{$direction}, $color1 0, $color1 16%,  $color2 17%, $color2 83%, $color3 84%, $color3 100%) $mode;}
+    75% {#{$property}: linear-gradient(#{$direction}, $color1 0, $color1 11%,  $color2 12%, $color2 88%, $color3 89%, $color3 100%) $mode;}
+    87% {#{$property}: linear-gradient(#{$direction}, $color1 0, $color1 5%,  $color2 6%, $color2 94%, $color3 95%, $color3 100%) $mode;}
+    100% {#{$property}: linear-gradient(#{$direction}, $color2 0%, $color2 100%) $mode;}
+  }
+}
+
+
