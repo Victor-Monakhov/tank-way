@@ -7,7 +7,6 @@ import {LocalStorageService} from '../../../../shared/services/local-storage.ser
 import {switchMap} from 'rxjs/operators';
 import {LSKeys} from '../../../../shared/enums/local-storage-keys.enum';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
 import {WebSocket} from '../../../../shared/classes/web-sockets/web-socket.class';
 import {IAuthResponse} from '../../../../shared/interfaces/auth/auth.interface';
 import {NAVIGATE} from '../../../../app.config';
@@ -30,8 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               private router: Router,
               private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService,
-              private panelService: PanelService,
-              private localizationService: LocalizationService) {}
+              private panelService: PanelService,) {}
 
   public ngOnInit(): void {
     this.subscribeToAuthState();

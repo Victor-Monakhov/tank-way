@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {LocalizationService} from '../../../../shared/services/internationalization/localization.service';
 import {PanelService} from '../../../../shared/services/panel-service/panel.service';
 import {BehaviorSubject} from 'rxjs';
 
@@ -22,8 +21,7 @@ export class HeaderComponent implements OnInit {
   ];
   public language = this.getLocal();
 
-  public constructor(private localizationService: LocalizationService,
-                     private panelService: PanelService) {
+  public constructor(private panelService: PanelService) {
   }
 
   public getLocal(): any {
@@ -31,12 +29,6 @@ export class HeaderComponent implements OnInit {
       return this.languages[1].value;
     }
     return this.languages[0].value;
-  }
-
-  public onSelect(lang: string): void {
-    localStorage.setItem('language', lang);
-    this.localizationService.initService();
-    // console.log(lang);
   }
 
   public ngOnInit(): void {
@@ -49,10 +41,6 @@ export class HeaderComponent implements OnInit {
 
   public onAuthMenu(): void {
     this.panelService.authMenu$.next(true);
-  }
-
-  public get name(): string {
-    return this.localizationService.translate('banner.world');
   }
 
   public get headerMenuTrigger$(): BehaviorSubject<boolean> {

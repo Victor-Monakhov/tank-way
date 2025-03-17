@@ -12,7 +12,6 @@ import {DropPanelComponent} from '../../shared/components/vm-lib/drop-panel/drop
 import {FullScreenComponent} from '../../shared/components/slider/full-screen/full-screen.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
-import {TranslateModule} from '@ngx-translate/core';
 import {VmForDirective} from '../../shared/directives/vm-for.directive';
 import {BlockCopyPastDirective} from '../../shared/directives/block-copy-past.directive';
 import {HeaderMenuComponent} from './components/header/header-menu/header-menu.component';
@@ -64,9 +63,6 @@ import {CodeInputComponent} from '../../shared/components/code-input/code-input.
     ReactiveFormsModule,
     SpinnerModule,
     NgScrollbarModule,
-    TranslateModule.forChild({
-      extend: true
-    })
   ],
     exports: [
         DropPanelDirective,
