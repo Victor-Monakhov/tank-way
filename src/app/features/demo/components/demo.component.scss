@@ -3,12 +3,27 @@
 @import 'colors.scss';
 @import 'animations.scss';
 @import 'images.scss';
+@import 'colors.scss';
 
 
 .wrapper{
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+  position: relative;
+  .back-link {
+    color: $golden;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+    background: #1E1E1E;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 10;
+  }
     .demo-panel{
         display: flex;
         flex-direction: column;

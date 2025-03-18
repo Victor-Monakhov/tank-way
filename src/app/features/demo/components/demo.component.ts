@@ -16,6 +16,8 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('demoPanel') public demoPanelRef: ElementRef;
   @ViewChild('canvas') public canvasRef: ElementRef;
 
+  private game!: Game;
+
 
   public constructor(private demoService: DemoService,
                      private lsService: LocalStorageService,
@@ -28,27 +30,41 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  public onClose(): void {
+    this.router.navigate([NAVIGATE.HOME]).then();
+  }
+
   public ngAfterViewInit(): void {
-    this.lsService.setItem(LSKeys.inDemo, 'inDemo');
-    const demoPanel = this.demoPanelRef.nativeElement;
-    const canvas = this.canvasRef.nativeElement;
-    if (demoPanel.clientHeight > demoPanel.clientWidth) {
-      canvas.width = demoPanel.clientHeight - 160;
-      canvas.height = demoPanel.clientWidth - 10;
-      canvas.style.transform = 'rotate(90deg)';
-    } else {
-      canvas.width = demoPanel.clientWidth - 160;
-      canvas.height = demoPanel.clientHeight - 10;
+    if (!localStorage.getItem(LSKeys.inDemo)) {
+      this.lsService.setItem(LSKeys.inDemo, 'inDemo');
+      const demoPanel = this.demoPanelRef.nativeElement;
+      const canvas = this.canvasRef.nativeElement;
+      if (demoPanel.clientHeight > demoPanel.clientWidth) {
+        canvas.width = demoPanel.clientHeight - 160;
+        canvas.height = demoPanel.clientWidth - 10;
+        canvas.style.transform = 'rotate(90deg)';
+      } else {
+        canvas.width = demoPanel.clientWidth - 160;
+        canvas.height = demoPanel.clientHeight - 10;
+      }
+      this.startGame(canvas);
+      onbeforeunload = () => {
+        if (this.game) {
+          this.game.destroy();
+        }
+      };
     }
-    this.startGame(canvas);
   }
 
   public ngOnDestroy(): void {
     localStorage.removeItem(LSKeys.inDemo);
+    if (this.game) {
+      this.game.destroy();
+    }
   }
 
   private startGame(canvas: HTMLElement): void {
-    const game = new Game(canvas, this.demoService.demoSettings);
-    game.run();
+    this.game = new Game(canvas, this.demoService.demoSettings);
+    this.game.run();
   }
 }
