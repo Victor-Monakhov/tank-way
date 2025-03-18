@@ -33,13 +33,13 @@ export class SecretCodeComponent implements OnInit, OnDestroy, IDropPanel {
   public invalidMsg: string = '';
 
   public constructor(public authService: AuthService) {
-    this.webSocket.connect(Paths.wsEndPointTanksAuth, Paths.wsTopicAuthTimer);
+    // this.webSocket.connect(Paths.wsEndPointTanksAuth, Paths.wsTopicAuthTimer);
   }
 
   public ngOnInit(): void {
     // this.subscribeToVisible();
-    this.subscribeToConnection();
-    this.subscribeToWebSocket();
+    // this.subscribeToConnection();
+    // this.subscribeToWebSocket();
   }
 
   public ngOnDestroy(): void {

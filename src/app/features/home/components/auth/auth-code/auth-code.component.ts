@@ -29,7 +29,7 @@ export class AuthCodeComponent implements OnInit, OnDestroy {
 
   public constructor(private panelService: PanelService,
                      private authService: AuthService) {
-    this.webSocket.connect(Paths.wsEndPointTanksAuth, Paths.wsTopicAuthTimer);
+    //this.webSocket.connect(Paths.wsEndPointTanksAuth, Paths.wsTopicAuthTimer);
   }
 
   public ngOnInit(): void {
@@ -40,7 +40,7 @@ export class AuthCodeComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subs.unsubscribe();
-    this.webSocket.disconnect();
+    // this.webSocket.disconnect();
   }
 
   public onBack(): void {
