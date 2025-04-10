@@ -6,8 +6,7 @@ import {SocialAuthService} from 'angularx-social-login';
 import {LocalStorageService} from '../../../../shared/services/local-storage.service';
 import {switchMap} from 'rxjs/operators';
 import {LSKeys} from '../../../../shared/enums/local-storage-keys.enum';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {WebSocket} from '../../../../shared/classes/web-sockets/web-socket.class';
+import {Observable} from 'rxjs';
 import {IAuthResponse} from '../../../../shared/interfaces/auth/auth.interface';
 import {NAVIGATE} from '../../../../app.config';
 import {PanelService} from 'src/app/shared/services/panel-service/panel.service';
@@ -20,10 +19,7 @@ import {PanelService} from 'src/app/shared/services/panel-service/panel.service'
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public galleryMode: string = '';
   public subs: SubSink = new SubSink();
-
-  public webSocket: WebSocket;
 
   public constructor(private authService: AuthService,
               private router: Router,
@@ -32,6 +28,9 @@ export class HomeComponent implements OnInit, OnDestroy {
               private panelService: PanelService,) {}
 
   public ngOnInit(): void {
+    if (localStorage.getItem(LSKeys.inDemo)) {
+      localStorage.removeItem(LSKeys.inDemo);
+    }
     this.subscribeToAuthState();
     this.subscribeToUser();
     this.subscribeToCode();
