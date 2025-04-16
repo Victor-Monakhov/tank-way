@@ -38,7 +38,7 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!localStorage.getItem(LSKeys.inDemo)) {
       this.lsService.setItem(LSKeys.inDemo, 'inDemo');
       const demoPanel = this.demoPanelRef.nativeElement;
-      const canvas = this.canvasRef.nativeElement;
+      const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
       if (demoPanel.clientHeight > demoPanel.clientWidth) {
         canvas.width = demoPanel.clientHeight - 160;
         canvas.height = demoPanel.clientWidth - 10;
@@ -63,7 +63,7 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private startGame(canvas: HTMLElement): void {
+  private startGame(canvas: HTMLCanvasElement): void {
     this.game = new Game(canvas, this.demoService.demoSettings);
     this.game.run();
   }
