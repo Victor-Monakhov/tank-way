@@ -1,4 +1,5 @@
-@import "colors.scss";
+@use "colors" as colors;
+
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -28,7 +29,7 @@
       border-radius: 10px;
 
       i {
-        color: $golden;
+        color: colors.$golden;
         font-size: 1.2rem;
         cursor: pointer;
       }
@@ -48,22 +49,22 @@
     small {
       margin-left: 10px;
       font-size: 1rem;
-      color: $white;
+      color: colors.$white;
     }
 
     .error-msg {
-      color: $red;
+      color: colors.$red;
     }
 
     hr {
-      border-color: $light-grey;
+      border-color: colors.$light-grey;
       width: 100%;
       margin-bottom: 18px;
     }
   }
 
   .invalid-input {
-    @extend .background-red-anim;
+    @extend .background-red-anim !optional;
   }
 
   .demo-btn {
@@ -71,8 +72,8 @@
     height: 40px;
     font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
     font-size: 1.5rem;
-    color: $white;
-    background-color: $golden;
+    color: colors.$white;
+    background-color: colors.$golden;
 
     &:active {
       font-size: 1.4rem;

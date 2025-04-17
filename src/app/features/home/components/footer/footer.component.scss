@@ -1,18 +1,18 @@
-@import 'src/assets/styles/colors';
-@import 'src/assets/styles/mixins';
+@use 'colors';
+@use 'mixins';
 
 .footer-wrapper {
-  @include media-property(H, padding,
+  // box-sizing: border-box;
+  width: 100%;
+  //bottom: 0;
+  //left: 0;
+  background: colors.$black;
+  @include mixins.media-property(H, padding,
     40px 25px,
     50px 50px,
     55px 65px,
     64px 100px
   );
-  // box-sizing: border-box;
-  width: 100%;
-  //bottom: 0;
-  //left: 0;
-  background: $black;
 
   .content {
     display: flex;
@@ -20,21 +20,21 @@
     justify-content: space-between;
 
     p, a {
-      color: $white;
+      color: colors.$white;
       border-bottom: none;
       transition: all 0.3s ease;
     }
 
     a:hover {
-      color: $golden;
+      color: colors.$golden;
     }
 
     .left-side-content {
-      @include media-property(H, width, 100%, 100%, 350px);
       display: grid;
       grid-gap: 1rem;
       grid-template-columns: 0.5fr 1fr 0.5fr;
       padding-bottom: 15px;
+      @include mixins.media-property(H, width, 100%, 100%, 350px);
 
       .column {
         .footer-link {
@@ -46,12 +46,12 @@
     .topic {
       font-size: 22px;
       font-weight: 500;
-      color: $golden;
+      color: colors.$golden;
       margin-bottom: 16px;
     }
 
     .right-side-content {
-       @include media-property(H, margin, 10px 0, 10px 0, 0, 0);
+       @include mixins.media-property(H, margin, 10px 0, 10px 0, 0, 0);
       form {
         display: flex;
         height: 40px;
@@ -68,7 +68,7 @@
           height: 100%;
           padding: 0;
           width: 60px;
-          background-color: $golden;
+          background-color: colors.$golden;
           color: #fff;
           cursor: pointer;
           border: 0;

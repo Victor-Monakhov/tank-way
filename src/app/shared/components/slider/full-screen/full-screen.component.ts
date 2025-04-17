@@ -6,9 +6,10 @@ import {Observable} from 'rxjs';
 import {SubSink} from 'subsink';
 
 @Component({
-  selector: 'app-full-screen-gallery',
-  templateUrl: './full-screen.component.html',
-  styleUrls: ['./full-screen.component.scss']
+    selector: 'app-full-screen-gallery',
+    templateUrl: './full-screen.component.html',
+    styleUrls: ['./full-screen.component.scss'],
+    standalone: false
 })
 export class FullScreenComponent implements OnInit, OnDestroy {
 

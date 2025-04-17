@@ -1,7 +1,8 @@
 import {Directive, HostListener} from '@angular/core';
 
 @Directive({
-  selector: '[blockCopyPast]',
+    selector: '[blockCopyPast]',
+    standalone: false
 })
 export class BlockCopyPastDirective {
 

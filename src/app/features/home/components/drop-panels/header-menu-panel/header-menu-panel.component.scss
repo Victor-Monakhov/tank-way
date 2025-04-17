@@ -1,20 +1,20 @@
-@import "mixins.scss";
-@import "colors.scss";
-@import "variables.scss";
-@import "animations.scss";
+@use "mixins";
+@use "colors";
+@use "variables";
+@use "animations";
 
   vmc-drop-panel {
     overflow: hidden;
   }
 
   .title-page-header-menu {
-    @include media-property(H, display, block, block, none);
-    @include media-property(H, width, 100vw, 50%, 400px);
-    @include media-property(H, border-right, none, 1px solid $golden06);
-    top: calc(50vh + #{$header-height} / 2);
-    height: calc(100vh - #{$header-height} + 1px);
+    top: calc(50vh + #{variables.$header-height} / 2);
+    height: calc(100vh - #{variables.$header-height} + 1px);
     position: fixed;
     overflow: hidden;
+    @include mixins.media-property(H, display, block, block, none);
+    @include mixins.media-property(H, width, 100vw, 50%, 400px);
+    @include mixins.media-property(H, border-right, none, 1px solid colors.$golden06);
 
     &.visible {
       animation: make_visible_move_right_on_start 0.5s ease-out 1 both;

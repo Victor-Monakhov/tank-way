@@ -3,9 +3,10 @@ import {BehaviorSubject, Subject} from 'rxjs';
 import {PanelService} from '../../../../../../shared/services/panel-service/panel.service';
 
 @Component({
-  selector: 'app-sign-up-panel',
-  templateUrl: './sign-up-panel.component.html',
-  styleUrls: ['./sign-up-panel.component.scss']
+    selector: 'app-sign-up-panel',
+    templateUrl: './sign-up-panel.component.html',
+    styleUrls: ['./sign-up-panel.component.scss'],
+    standalone: false
 })
 export class SignUpPanelComponent implements OnInit {
 

@@ -1,7 +1,7 @@
-@import "mixins.scss";
-@import "colors.scss";
-@import "variables.scss";
-@import "classes/anim.scss";
+@use "mixins";
+@use "colors";
+@use "variables";
+@use "classes/anim";
 
 .auth-menu-wrapper {
   display: flex;
@@ -11,9 +11,9 @@
   height: 100%;
   row-gap: 30px;
   padding: 30px 25px;
-  background: $black;
+  background: colors.$black;
   h3 {
-    color: $golden;
+    color: colors.$golden;
   }
   .separator {
     display: flex;
@@ -21,12 +21,12 @@
     column-gap: 15px;
     width: 100%;
     hr{
-      border-color: $light-grey;
+      border-color: colors.$light-grey;
       flex-grow: 1;
       height: 0;
     }
     p {
-      color: $light-grey;
+      color: colors.$light-grey;
     }
   }
   .services {
@@ -42,10 +42,10 @@
       height: 40px;
       border-radius: 50%;
       cursor: pointer;
-      background: $golden;
+      background: colors.$golden;
       i {
         font-size: 2rem;
-        color: $black;
+        color: colors.$black;
 
         &:active {
           font-size: 1.9rem;
@@ -58,7 +58,7 @@
     flex-direction: column;
     row-gap: 10px;
     a {
-      color: $golden;
+      color: colors.$golden;
       text-align: center;
       font-size: 1.2rem;
     }

@@ -17,7 +17,8 @@ import {merge, Observable} from 'rxjs';
 import {SubSink} from 'subsink';
 
 @Directive({
-  selector: '[vmdDropPanel]'
+    selector: '[vmdDropPanel]',
+    standalone: false
 })
 export class DropPanelDirective implements OnChanges {
 

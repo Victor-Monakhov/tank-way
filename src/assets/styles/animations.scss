@@ -1,7 +1,3 @@
-@import "mixins.scss";
-@import "variables.scss";
-
-
 //drop-panel-moving----------------------------------------------------------------------
 @keyframes make_visible_move_right_on_start {
   0% {left: 0; transform: translate(-100%, -50%);}

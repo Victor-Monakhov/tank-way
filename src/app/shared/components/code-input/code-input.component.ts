@@ -12,9 +12,10 @@ import {debounce} from 'rxjs/operators';
 import {SubSink} from 'subsink';
 
 @Component({
-  selector: 'vmc-code-input',
-  templateUrl: './code-input.component.html',
-  styleUrls: ['./code-input.component.scss']
+    selector: 'vmc-code-input',
+    templateUrl: './code-input.component.html',
+    styleUrls: ['./code-input.component.scss'],
+    standalone: false
 })
 export class CodeInputComponent implements OnInit, AfterViewInit, OnDestroy {
 

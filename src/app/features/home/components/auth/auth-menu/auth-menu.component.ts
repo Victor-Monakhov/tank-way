@@ -11,9 +11,10 @@ interface ILoginForm {
 }
 
 @Component({
-  selector: 'app-auth-menu',
-  templateUrl: './auth-menu.component.html',
-  styleUrls: ['./auth-menu.component.scss']
+    selector: 'app-auth-menu',
+    templateUrl: './auth-menu.component.html',
+    styleUrls: ['./auth-menu.component.scss'],
+    standalone: false
 })
 export class AuthMenuComponent implements OnInit, OnDestroy {
 

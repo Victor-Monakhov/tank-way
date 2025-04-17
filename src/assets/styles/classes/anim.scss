@@ -1,15 +1,18 @@
-@import 'animations.scss';
+@use 'animations';
+@use 'colors' as colors;
+@use 'mixins' as mixins;
+
 
 .border-golden-anim {
   border-bottom: 2px solid transparent;
 
   &:hover {
-    @include gradient-expansion(border_golden_anim, BI, to right, transparent, $golden, transparent);
     animation: border_golden_anim 0.3s ease-out 1 both;
+    @include mixins.gradient-expansion(border_golden_anim, BI, to right, transparent, colors.$golden, transparent);
   }
 }
 
 .background-red-anim {
-  @include gradient-expansion(background_red_anim, BG, to right, transparent, $red, transparent);
   animation: background_red_anim 0.3s ease-out 1 both;
+  @include mixins.gradient-expansion(background_red_anim, BG, to right, transparent, colors.$red, transparent);
 }

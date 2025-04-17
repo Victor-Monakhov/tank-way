@@ -1,7 +1,7 @@
-@import "mixins.scss";
-@import "colors.scss";
-@import "variables.scss";
-@import "classes/anim.scss";
+@use "mixins";
+@use "colors";
+@use "variables";
+@use "classes/anim";
 
 .auth-menu-wrapper {
   display: flex;
@@ -11,18 +11,18 @@
   height: 100%;
   row-gap: 20px;
   padding: 25px 25px;
-  background: $black;
+  background: colors.$black;
   .title{
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 10px;
     h3 {
-      color: $golden;
+      color: colors.$golden;
     }
     p {
       font-size: 1.4rem;
-      color: $golden;
+      color: colors.$golden;
     }
   }
 }

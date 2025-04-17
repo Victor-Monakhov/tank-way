@@ -1,6 +1,6 @@
-@import "fonts.scss";
-@import "colors.scss";
-@import "mixins.scss";
+@use "fonts";
+@use "colors" as colors;
+@use "mixins" as mixins;
 p, a {
   margin: 0;
   font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
@@ -11,7 +11,7 @@ a {
   text-decoration: none;
   user-select: none;
   cursor: pointer;
-  @extend .border-golden-anim;
+  @extend .border-golden-anim !optional;
 }
 
 label, b, strong {
@@ -21,20 +21,20 @@ label, b, strong {
 }
 
 h1 {
-  @include media-property(H, font-size, 1.5rem, 2rem, 2rem, 2.5rem);
-  @include media-property(H, line-height, 1.5rem, 2rem, 2rem, 2.5rem);
   margin: 0;
   font-weight: normal;
   font-family: RussoOne-Regular, Raleway-Thin, sans-serif;
-  text-shadow: 0 1px 4px $black03;
+  text-shadow: 0 1px 4px colors.$black03;
+  @include mixins.media-property(H, font-size, 1.5rem, 2rem, 2rem, 2.5rem);
+  @include mixins.media-property(H, line-height, 1.5rem, 2rem, 2rem, 2.5rem);
 }
 
 h2 {
-  @include media-property(H, font-size, 2rem, 2rem, 2rem, 2.5rem);
-  @include media-property(H, line-height, 2rem, 2rem, 2rem, 2.5rem);
   margin: 0;
   font-weight: normal;
   font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+  @include mixins.media-property(H, font-size, 2rem, 2rem, 2rem, 2.5rem);
+  @include mixins.media-property(H, line-height, 2rem, 2rem, 2rem, 2.5rem);
 }
 
 h3 {
@@ -46,10 +46,10 @@ h3 {
 }
 
 small {
-  @include media-property(H, font-size, 1rem, 1.2rem, 1.2rem, 1.25rem);
   margin: 0;
   font-weight: normal;
   font-family: Roboto-Light, Raleway-Thin, sans-serif;
+  @include mixins.media-property(H, font-size, 1rem, 1.2rem, 1.2rem, 1.25rem);
 }
 
 input[type=text], input[type=email], input[type=password] {

@@ -3,9 +3,10 @@ import {BehaviorSubject, Subject} from 'rxjs';
 import {PanelService} from 'src/app/shared/services/panel-service/panel.service';
 
 @Component({
-  selector: 'app-auth-menu-panel',
-  templateUrl: './auth-menu-panel.component.html',
-  styleUrls: ['./auth-menu-panel.component.scss']
+    selector: 'app-auth-menu-panel',
+    templateUrl: './auth-menu-panel.component.html',
+    styleUrls: ['./auth-menu-panel.component.scss'],
+    standalone: false
 })
 export class AuthMenuPanelComponent implements OnInit {
 

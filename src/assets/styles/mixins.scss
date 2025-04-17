@@ -1,4 +1,32 @@
-@import 'variables.scss';
+@use 'variables' as variables;
+
+@mixin vm-media($direction, $properties...) {
+  $breakpoints: (variables.$xs, variables.$sm, variables.$md, variables.$lg, variables.$xl);
+  @if ($direction == vertical) {
+    $direction: min-height;
+  } @else if ($direction == horizontal) {
+    $direction: min-width;
+  }
+  @for $i from 1 through length($breakpoints) {
+    $list: ();
+    @each $property in $properties {
+      $name: nth($property, 1);
+      $values: nth($property, 2);
+      @if length($values) >= $i {
+        $list: append($list, ($name, nth($values, $i)));
+      }
+    }
+    @if length($list) {
+      @media screen and (#{$direction}: nth($breakpoints, $i)) {
+        @each $prop in $list {
+          $name: nth($prop, 1);
+          $value: nth($prop, 2);
+          #{$name}: $value;
+        }
+      }
+    }
+  }
+}
 
 /// Simplify media-queries
 //
@@ -22,26 +50,26 @@
   @else if($direction == H) {
     $direction: min-width;
   }
-  @media screen and (#{$direction}: $xs) {
+  @media screen and (#{$direction}: variables.$xs) {
     #{$property}: $value-xs;
   }
   @if ($value-sm != null) {
-    @media screen and (#{$direction}: $sm) {
+    @media screen and (#{$direction}: variables.$sm) {
       #{$property}: $value-sm;
     }
   }
   @if ($value-md != null) {
-    @media screen and (#{$direction}: $md) {
+    @media screen and (#{$direction}: variables.$md) {
       #{$property}: $value-md;
     }
   }
   @if ($value-lg != null) {
-    @media screen and (#{$direction}: $lg) {
+    @media screen and (#{$direction}: variables.$lg) {
       #{$property}: $value-lg;
     }
   }
   @if ($value-xl != null) {
-    @media screen and (#{$direction}: $xl) {
+    @media screen and (#{$direction}: variables.$xl) {
       #{$property}: $value-xl;
     }
   }

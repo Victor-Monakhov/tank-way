@@ -1,24 +1,24 @@
-@import '../../../../../assets/styles/colors';
-@import '../../../../../assets/styles/mixins';
-@import '../../../../../assets/styles/variables';
-@import '../../../../../assets/styles/images';
-@import 'animations.scss';
-@import 'html-elements/html-elements.scss';
-@import 'classes/anim.scss';
+@use 'colors';
+@use 'mixins';
+@use 'variables';
+@use 'images';
+@use 'animations';
+@use 'html-elements/html-elements';
+@use 'classes/anim';
 
 .title-page-header-wrapper {
-  @include media-property(H, padding, 0 15px, 0 60px, 0 120px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  height: $header-height;
+  height: variables.$header-height;
   margin: 0;
   left: 0;
   right: 0;
   top: 0;
-  z-index: $header-z-index;
-  background-color: $black;
+  z-index: variables.$header-z-index;
+  background-color: colors.$black;
+  @include mixins.media-property(H, padding, 0 15px, 0 60px, 0 120px);
 
   .menu {
     display: flex;
@@ -28,13 +28,13 @@
 
   p {
     cursor: pointer;
-    color: $white;
-    @extend .border-golden-anim;
+    color: colors.$white;
+    @extend .border-golden-anim !optional;
   }
 
   vmc-burger {
-    @include media-property(H, display, block, block, none);
     width: 60px;
+    @include mixins.media-property(H, display, block, block, none);
   }
 
   .left-menu {
@@ -43,35 +43,35 @@
     .gameLogo {
       display: flex;
       width: 50px;
-      height: $img-gameLogo-height;
+      height: images.$img-gameLogo-height;
       border-radius: 5px;
-      background-color: $black;
-      background-image: $img-gameLogo;
+      background-color: colors.$black;
+      background-image: images.$img-gameLogo;
       background-position: center;
     }
 
     p {
-      @include media-property(H, display, none, none, inline);
+      @include mixins.media-property(H, display, none, none, inline);
     }
   }
 
   .right-menu {
-    @include media-property(H, width, 60px, 60px, auto);
     @extend .menu;
+    @include mixins.media-property(H, width, 60px, 60px, auto);
 
     .vertical-slash {
-      @include media-property(H, display, none, none, block);
       width: 2px;
       height: 50px;
       border-radius: 2px;
-      background: $golden;
+      background: colors.$golden;
+      @include mixins.media-property(H, display, none, none, block);
     }
 
     .languages {
-      @include media-property(H, display, none, none, flex);
       align-items: center;
       column-gap: 10px;
       cursor: pointer;
+      @include mixins.media-property(H, display, none, none, flex);
 
       p:hover {
         animation: none;
@@ -80,7 +80,7 @@
       i {
         font-size: 1.4rem;
         width: 15px;
-        color: $golden;
+        color: colors.$golden;
       }
 
       &:active i {
@@ -89,7 +89,7 @@
     }
   }
   .stub {
-    @include media-property(H, width, 60px, 60px, auto);
+    @include mixins.media-property(H, width, 60px, 60px, auto);
   }
 }
 

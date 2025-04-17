@@ -3,9 +3,10 @@ import {PanelService} from '../../../../../../shared/services/panel-service/pane
 import {BehaviorSubject, Subject} from 'rxjs';
 
 @Component({
-  selector: 'app-auth-code-panel',
-  templateUrl: './auth-code-panel.component.html',
-  styleUrls: ['./auth-code-panel.component.scss']
+    selector: 'app-auth-code-panel',
+    templateUrl: './auth-code-panel.component.html',
+    styleUrls: ['./auth-code-panel.component.scss'],
+    standalone: false
 })
 export class AuthCodePanelComponent implements OnInit {
 

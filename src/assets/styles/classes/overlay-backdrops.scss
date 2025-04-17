@@ -1,4 +1,4 @@
-@import "colors.scss";
+@use "colors" as colors;
 
 //.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
 //    &.backdrop-black05 {
@@ -10,5 +10,5 @@
 //}
 
 .overlay-black08 {
-  background: $dark-black08;
+  background: colors.$dark-black08;
 }

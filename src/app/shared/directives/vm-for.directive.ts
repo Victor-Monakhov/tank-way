@@ -1,7 +1,8 @@
 import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
 
 @Directive({
-  selector: '[vmFor]'
+    selector: '[vmFor]',
+    standalone: false
 })
 export class VmForDirective {
   @Input('vmFor')

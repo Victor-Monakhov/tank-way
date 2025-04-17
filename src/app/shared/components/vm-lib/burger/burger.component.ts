@@ -15,9 +15,10 @@ import {WIN_SIZES} from '../../../../app.config';
 import {SubSink} from 'subsink';
 
 @Component({
-  selector: 'vmc-burger',
-  templateUrl: './burger.component.html',
-  styleUrls: ['./burger.component.scss']
+    selector: 'vmc-burger',
+    templateUrl: './burger.component.html',
+    styleUrls: ['./burger.component.scss'],
+    standalone: false
 })
 export class BurgerComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('burger') public burgerRef: ElementRef<HTMLElement> = {} as ElementRef;

@@ -14,10 +14,11 @@ import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-slider',
+    templateUrl: './slider.component.html',
+    styleUrls: ['./slider.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SliderComponent implements OnInit, OnDestroy {
 

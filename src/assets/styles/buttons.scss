@@ -1,7 +1,7 @@
-@import "variables.scss";
-@import "colors.scss";
-@import "images.scss";
-@import "animations.scss";
+@use "variables" as variables;
+@use "colors" as colors;
+@use "images";
+@use "animations";
 ////simple btn
 //.btn {
 //  display: flex;
@@ -121,17 +121,17 @@
   flex-grow: 0;
   margin: 5px;
   border-radius: 50%;
-  border: 5px solid $golden;
+  border: 5px solid colors.$golden;
   cursor: pointer;
-  background-color: $golden;
+  background-color: colors.$golden;
 }
 
 .position-radio:not(:disabled):not(:checked) + label:hover::before {
-  background-color: $golden;
+  background-color: colors.$golden;
 }
 
 .position-radio:checked + label:before {
-  background-color: $white;
+  background-color: colors.$white;
 }
 //---------------------------------------------------------------position-radio
 

@@ -1,28 +1,28 @@
-@import "mixins.scss";
-@import "variables.scss";
-@import "colors.scss";
+@use "mixins";
+@use "variables";
+@use "colors";
 
 .gallery-wrapper {
-  @include media-property(H, padding,
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, 1fr);
+  position: relative;
+  border-top: 65px solid colors.$black;
+  border-bottom: 65px solid colors.$black;
+  overflow: hidden;
+  background: colors.$dark-black05;
+  @include mixins.media-property(H, padding,
     0 5px 0 5px,
     0 40px 0 40px,
     0 80px 0 80px);
-  @include media-property(H, grid-template-columns,
+  @include mixins.media-property(H, grid-template-columns,
     repeat(2, 1fr),
     repeat(3, 1fr),
     repeat(4, 1fr),
     repeat(5, 1fr),
     repeat(6, 1fr));
-  @include media-property(H, grid-column-gap, 10px, 15px);
-  @include media-property(H, grid-row-gap, 10px, 15px);
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(2, 1fr);
-  position: relative;
-  border-top: 65px solid $black;
-  border-bottom: 65px solid $black;
-  overflow: hidden;
-  background: $dark-black05;
+  @include mixins.media-property(H, grid-column-gap, 10px, 15px);
+  @include mixins.media-property(H, grid-row-gap, 10px, 15px);
   .image{
     position: relative;
     height: 0;
@@ -40,7 +40,6 @@
     }
   }
   .demo-btn {
-    @include media-property(H, width, 270px, 380px);
     position: absolute;
     left: 50%;
     top: 50%;
@@ -48,8 +47,9 @@
     height: 60px;
     font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
     font-size: 2rem;
-    color: $white;
-    background-color: $golden;
+    color: colors.$white;
+    background-color: colors.$golden;
+    @include mixins.media-property(H, width, 270px, 380px);
 
     &:active {
       font-size: 1.9rem;

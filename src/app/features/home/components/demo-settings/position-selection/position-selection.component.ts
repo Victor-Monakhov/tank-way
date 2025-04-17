@@ -4,9 +4,10 @@ import {DemoService} from 'src/app/features/demo/services/demo-service/demo.serv
 import {SubSink} from 'subsink';
 
 @Component({
-  selector: 'app-position-selection',
-  templateUrl: './position-selection.component.html',
-  styleUrls: ['./position-selection.component.scss']
+    selector: 'app-position-selection',
+    templateUrl: './position-selection.component.html',
+    styleUrls: ['./position-selection.component.scss'],
+    standalone: false
 })
 export class PositionSelectionComponent implements OnInit, OnDestroy {
 

@@ -1,8 +1,8 @@
-@import '../../../../../assets/styles/mixins';
-@import '../../../../../assets/styles/variables';
-@import '../../../../../assets/styles/colors';
-@import '../../../../../assets/styles/animations';
-@import '../../../../../assets/styles/images';
+@use 'mixins';
+@use 'variables';
+@use 'colors';
+@use 'animations';
+@use 'images';
 
 .full-screen-wrapper {
   display: flex;
@@ -12,31 +12,31 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: $black;
+  background-color: colors.$black;
   overflow: hidden;
 
   i {
-    @include media-property(H, font-size, 1.5rem, 1.5rem, 2rem, 2rem);
-    @include media-property(H, top, 15px, 15px, 20px, 20px);
-    @include media-property(H, right, 20px, 20px, 30px, 30px);
     position: absolute;
     color: #ffffff;
     cursor: pointer;
+    @include mixins.media-property(H, font-size, 1.5rem, 1.5rem, 2rem, 2rem);
+    @include mixins.media-property(H, top, 15px, 15px, 20px, 20px);
+    @include mixins.media-property(H, right, 20px, 20px, 30px, 30px);
   }
 
   .image-wrapper {
-    @include media-property(H, grid-template-columns, 30px 1fr 30px, 40px 1fr 40px, 50px 1fr 50px, 50px 1fr 50px);
-    @include media-property(H, grid-column-gap, 10px, 10px, 20px, 20px);
     display: grid;
     grid-template-rows: 100vh;
     align-items: center;
+    @include mixins.media-property(H, grid-template-columns, 30px 1fr 30px, 40px 1fr 40px, 50px 1fr 50px, 50px 1fr 50px);
+    @include mixins.media-property(H, grid-column-gap, 10px, 10px, 20px, 20px);
     div{
       display: flex;
       justify-content: center;
       i {
-        @include media-property(H, font-size, 1.5rem, 1.5rem, 2rem, 2rem);
         position: static;
         flex-shrink: 0;
+        @include mixins.media-property(H, font-size, 1.5rem, 1.5rem, 2rem, 2rem);
       }
     }
 

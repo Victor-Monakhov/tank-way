@@ -1,20 +1,19 @@
-@import 'src/assets/styles/mixins';
-@import 'src/assets/styles/variables';
-@import 'src/assets/styles/colors';
-@import 'src/assets/styles/animations';
-@import 'src/assets/styles/images';
-@import 'src/assets/styles/variables';
+@use 'mixins';
+@use 'variables';
+@use 'colors';
+@use 'animations';
+@use 'images';
 
 
 .home-wrapper {
-  margin-top: $header-height;
-  height: calc(100% - #{$header-height});
+  margin-top: variables.$header-height;
+  height: calc(100% - #{variables.$header-height});
   overflow: hidden;
 
   .title-wrapper {
-    @include media-property(H, height, 300px, 300px, 500px);
     width: 100%;
     position: relative;
+    @include mixins.media-property(H, height, 300px, 300px, 500px);
 
     .title-img {
       width: 100%;
@@ -24,10 +23,6 @@
     }
 
     .title {
-      @include media-property(H, padding,
-        0 30px 0 30px,
-        0 80px 0 80px,
-        0 150px 0 150px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -35,29 +30,33 @@
       position: absolute;
       top: 50%;
       transform: translate(0, -50%);
+      @include mixins.media-property(H, padding,
+        0 30px 0 30px,
+        0 80px 0 80px,
+        0 150px 0 150px);
 
       h1 {
-        color: $golden;
+        color: colors.$golden;
       }
 
       small {
         margin-left: 20px;
         opacity: 0.7;
-        color: $white;
+        color: colors.$white;
       }
     }
   }
 
   .demo-settings-wrapper {
-    @include media-property(H, padding,
-      15px 5px 15px 5px,
-      30px 40px 30px 40px,
-      45px 80px 45px 80px);
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 15px;
-    background: $black;
+    background: colors.$black;
+    @include mixins.media-property(H, padding,
+      15px 5px 15px 5px,
+      30px 40px 30px 40px,
+      45px 80px 45px 80px);
 
     .settings {
       display: flex;
@@ -67,7 +66,7 @@
       column-gap: 20px;
       row-gap: 15px;
       width: 100%;
-      background-color: $black;
+      background-color: colors.$black;
 
       app-tank-selection, app-position-selection {
         flex-grow: 1;
@@ -75,49 +74,33 @@
     }
 
     .demo-btn {
-      @include media-property(H, width, 270px, 380px);
       height: 60px;
       font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
       font-size: 2rem;
-      color: $white;
-      background-color: $golden;
+      color: colors.$white;
+      background-color: colors.$golden;
+      @include mixins.media-property(H, width, 270px, 380px);
 
       &:active {
         font-size: 1.9rem;
       }
     }
     p {
-      @include media-property(H, margin-top, 0, 25px);
-      @include media-property(H, width, 150px, 300px);
       display: inline-block;
       text-align: center;
       line-height: 1.4rem;
       margin-top: 25px;
-      color: $white;
+      color: colors.$white;
+      @include mixins.media-property(H, margin-top, 0, 25px);
+      @include mixins.media-property(H, width, 150px, 300px);
     }
 
     a {
-      color: $golden;
+      color: colors.$golden;
     }
   }
   hr {
-    @include media-property(H, margin, 0 5px, 0 40px, 0 80px);
-    border-color: $golden06;
-  }
-
-  #btnToTop {
-    display: none; /* Hidden by default */
-    position: fixed; /* Fixed/sticky position */
-    bottom: 20px; /* Place the button at the bottom of the page */
-    right: 30px; /* Place the button 30px from the right */
-    z-index: 99; /* Make sure it does not overlap */
-    border: none; /* Remove borders */
-    outline: none; /* Remove outline */
-    background-color: transparent; /* Set a background color */
-    color: white; /* Text color */
-    cursor: pointer; /* Add a mouse pointer on hover */
-    padding: 10px; /* Some padding */
-    border-radius: 10px; /* Rounded corners */
-    font-size: 20px; /* Increase font size */
+    border-color: colors.$golden06;
+    @include mixins.media-property(H, margin, 0 5px, 0 40px, 0 80px);
   }
 }

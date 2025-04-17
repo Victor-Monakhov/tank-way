@@ -8,9 +8,10 @@ import {Paths} from '../../../../../shared/classes/paths.class';
 import {switchMap} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-auth-code',
-  templateUrl: './auth-code.component.html',
-  styleUrls: ['./auth-code.component.scss']
+    selector: 'app-auth-code',
+    templateUrl: './auth-code.component.html',
+    styleUrls: ['./auth-code.component.scss'],
+    standalone: false
 })
 export class AuthCodeComponent implements OnInit, OnDestroy {
 

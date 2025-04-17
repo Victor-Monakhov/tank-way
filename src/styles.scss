@@ -1,15 +1,14 @@
-@import 'fonts.scss';
-@import 'images.scss';
-@import 'colors.scss';
-@import 'mixins.scss';
-@import 'buttons.scss';
-@import 'animations.scss';
-@import 'variables.scss';
-@import 'classes/overlay-backdrops.scss';
-@import 'html-elements/html-elements.scss';
-@import 'classes/scrollbar.scss';
-@import 'classes/anim.scss';
-@import 'classes/auth-form.scss';
+@use 'fonts';
+@use 'images';
+@use 'colors' as colors;
+@use 'mixins' as mixins;
+@use 'buttons';
+@use 'animations';
+@use 'classes/overlay-backdrops';
+@use 'html-elements/html-elements';
+@use 'classes/scrollbar';
+@use 'classes/anim';
+@use 'classes/auth-form';
 
 * {
   box-sizing: border-box;
@@ -26,14 +25,14 @@ body {
   padding: 0;
   min-width: 320px;
   font-family: Raleway-Thin, sans-serif;
-  background: $black;
+  background: colors.$black;
 }
 
 
 strong {
-  @include media-property(H, font-size, 1.7rem, 1.8rem, 1.9rem, 2rem);
   font-weight: unset;
   color: #ffffff;
+  @include mixins.media-property(H, font-size, 1.7rem, 1.8rem, 1.9rem, 2rem);
 }
 
 .link {
@@ -42,6 +41,6 @@ strong {
 }
 
 .link:hover {
-  color: $blue;
-  border-color: $blue;
+  color: colors.$blue;
+  border-color: colors.$blue;
 }

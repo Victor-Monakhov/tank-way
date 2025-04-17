@@ -1,4 +1,4 @@
-@import 'colors.scss';
+@use 'colors' as colors;
 
 //header--------------------------------------------------------------------------
 $header-height: 90px;
@@ -16,18 +16,18 @@ $b-z-index: 1;
 
 
 $panel-shadow: 2px 2px 6px 2px #000;
-$panel-shadow-blue: 0 2px 4px 0 $blue;
-$panel-shadow-red: 0 2px 4px 0 $red;
+$panel-shadow-blue: 0 2px 4px 0 colors.$blue;
+$panel-shadow-red: 0 2px 4px 0 colors.$red;
 $click-shadow: 0px 0px 1px 2px #000;
 $text-shadow: 2px -2px 6px #000;
-$border-img-gradient: linear-gradient(to bottom right, $green, #8b4513) 2 stretch stretch;
-$border-img-grad-brown-blue: linear-gradient(to bottom right,$brown, $blue) 2 stretch stretch;
-$border-img-grad-white-red: linear-gradient(to bottom right,#ffffff, $red) 2 stretch stretch;
-$border-img-grad-brown-red: linear-gradient(to bottom right,$green, $red) 2 stretch stretch;
-$grad-darkgrey-blue: linear-gradient(to bottom right, $dark_grey 30%, $blue);
-$grad-darkgrey-red: linear-gradient(to bottom right, $dark_grey 30%, $red);
-$btn-grad-blue: linear-gradient(to bottom, $blue, #ffffff, $brown);
-$btn-grad-red: linear-gradient(to bottom, $red, #ffffff, $green);
+$border-img-gradient: linear-gradient(to bottom right, colors.$green, #8b4513) 2 stretch stretch;
+$border-img-grad-brown-blue: linear-gradient(to bottom right, colors.$brown, colors.$blue) 2 stretch stretch;
+$border-img-grad-white-red: linear-gradient(to bottom right,#ffffff, colors.$red) 2 stretch stretch;
+$border-img-grad-brown-red: linear-gradient(to bottom right, colors.$green, colors.$red) 2 stretch stretch;
+$grad-darkgrey-blue: linear-gradient(to bottom right, colors.$dark_grey 30%, colors.$blue);
+$grad-darkgrey-red: linear-gradient(to bottom right, colors.$dark_grey 30%, colors.$red);
+$btn-grad-blue: linear-gradient(to bottom, colors.$blue, #ffffff, colors.$brown);
+$btn-grad-red: linear-gradient(to bottom, colors.$red, #ffffff, colors.$green);
 $xs: 0;
 $sm: 576px;
 $md: 768px;

@@ -5,9 +5,10 @@ import {SubSink} from 'subsink';
 import {WIN_SIZES} from '../../../../../app.config';
 
 @Component({
-  selector: 'app-header-menu',
-  templateUrl: './header-menu.component.html',
-  styleUrls: ['./header-menu.component.scss']
+    selector: 'app-header-menu',
+    templateUrl: './header-menu.component.html',
+    styleUrls: ['./header-menu.component.scss'],
+    standalone: false
 })
 export class HeaderMenuComponent implements OnInit, OnDestroy {
 

@@ -1,5 +1,5 @@
-@import "colors.scss";
-@import "mixins.scss";
+@use "colors" as colors;
+@use "mixins" as mixins;
 
 // .home-wrapper {
   .scrollbar {
@@ -14,7 +14,7 @@
     .thumb {
       border-radius: 10px;
       width: 40% !important;
-      background-color: $golden !important;
+      background-color: colors.$golden !important;
     }
   }
 // }
@@ -24,7 +24,7 @@
     .track {
       border-radius: 0;
       height: 35% !important;
-      background-color: $dark_grey !important;
+      background-color: colors.$dark_grey !important;
       position: absolute !important;
       bottom: 0 !important;
     }
@@ -33,7 +33,7 @@
       height: 100% !important;
       position: absolute !important;
       bottom: 0 !important;
-      background-color: $golden !important;
+      background-color: colors.$golden !important;
     }
   }
 }

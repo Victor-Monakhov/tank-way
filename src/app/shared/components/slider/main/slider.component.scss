@@ -1,8 +1,8 @@
-@import '../../../../../assets/styles/mixins';
-@import '../../../../../assets/styles/variables';
-@import '../../../../../assets/styles/colors';
-@import '../../../../../assets/styles/animations';
-@import '../../../../../assets/styles/images';
+@use 'mixins';
+@use 'variables';
+@use 'colors';
+@use 'animations';
+@use 'images';
 
 //#slider:active{
 //  //height: $header-height + 20px;
@@ -12,19 +12,19 @@
 //}
 
 .wrapper {
-  background-color: $black;
-  @include media-property(H, padding, 10px 10px, 10px 20px, 10px 30px, 10px 40px);
+  background-color: colors.$black;
+  @include mixins.media-property(H, padding, 10px 10px, 10px 20px, 10px 30px, 10px 40px);
 
   a{
     text-decoration: none;
     display: flex;
-    color: $red;
+    color: colors.$red;
   }
   .title {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $red;
+    color: colors.$red;
 
     h3 {
       margin: 0 10px 0 0;
@@ -43,10 +43,6 @@
   }
 
   .slider-content {
-    @include media-property(H, grid-template-rows, repeat(4, 75px), repeat(3, 115px), repeat(2, 150px), repeat(2, 150px));
-    @include media-property(H, grid-row-gap, 10px, 15px, 20px, 20px);
-    @include media-property(H, grid-column-gap, 10px, 15px, 20px, 20px);
-    @include media-property(H, grid-auto-flow, column, column, column, column);
     position: relative;
     transition: 1s;
     height: 0;
@@ -54,14 +50,18 @@
     overflow-y: hidden;
     overflow-x: scroll;
     -ms-overflow-style: none;
+    @include mixins.media-property(H, grid-template-rows, repeat(4, 75px), repeat(3, 115px), repeat(2, 150px), repeat(2, 150px));
+    @include mixins.media-property(H, grid-row-gap, 10px, 15px, 20px, 20px);
+    @include mixins.media-property(H, grid-column-gap, 10px, 15px, 20px, 20px);
+    @include mixins.media-property(H, grid-auto-flow, column, column, column, column);
 
     img {
-      @include media-property(H, width, 100px, 150px, 200px, 200px);
-      @include media-property(H, height, 75px, 115px, 150px, 150px);
       object-fit: cover;
-      border: 1px solid $red;
+      border: 1px solid colors.$red;
       border-radius: 5px;
       cursor: pointer;
+      @include mixins.media-property(H, width, 100px, 150px, 200px, 200px);
+      @include mixins.media-property(H, height, 75px, 115px, 150px, 150px);
     }
   }
 }

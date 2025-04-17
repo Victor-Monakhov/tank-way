@@ -5,9 +5,10 @@ import {ITankBody} from '../../../interfaces/tank-body.interface';
 import {ITankHead} from '../../../interfaces/tank-head.interface';
 
 @Component({
-  selector: 'app-tank-selection',
-  templateUrl: './tank-selection.component.html',
-  styleUrls: ['./tank-selection.component.scss']
+    selector: 'app-tank-selection',
+    templateUrl: './tank-selection.component.html',
+    styleUrls: ['./tank-selection.component.scss'],
+    standalone: false
 })
 export class TankSelectionComponent implements OnInit {
   public selectedTankBody: ITankBody = {} as ITankBody;

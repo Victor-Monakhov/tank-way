@@ -7,9 +7,10 @@ import {WIN_SIZES} from '../../../../app.config';
 import {debounce} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-home-gallery',
-  templateUrl: './home-gallery.component.html',
-  styleUrls: ['./home-gallery.component.scss']
+    selector: 'app-home-gallery',
+    templateUrl: './home-gallery.component.html',
+    styleUrls: ['./home-gallery.component.scss'],
+    standalone: false
 })
 export class HomeGalleryComponent implements OnInit, OnDestroy {
   private subs: SubSink = new SubSink();
