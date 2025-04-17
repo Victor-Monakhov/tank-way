@@ -1,23 +1,43 @@
 @use "colors" as colors;
 @use "mixins" as mixins;
 
-// .home-wrapper {
-  .scrollbar {
-    .view {
-      width: 100%;
-    }
-    .track {
-      background: transparent;
-      border-radius: 0;
-      width: 100% !important;
-    }
-    .thumb {
-      border-radius: 10px;
-      width: 40% !important;
-      background-color: colors.$golden !important;
-    }
+.scrollbar-v, .scrollbar-h {
+  .ng-scroll-content {
+    padding: 0 !important;
   }
-// }
+
+  .track-v, .track-h {
+    background: transparent;
+  }
+
+  .thumb-v, .thumb-h {
+    border-radius: 10px !important;
+    background-color: colors.$golden !important;
+  }
+}
+
+.scrollbar-v {
+
+  .ng-scrollbar-track-wrapper {
+    width: 15px !important;
+  }
+
+  .track-v {
+    width: 100% !important;
+  }
+
+  .thumb-v {
+    width: 40% !important;
+  }
+}
+
+.scrollbar-h {
+
+  .ng-scrollbar-track-wrapper {
+    width: auto !important;
+  }
+}
+
 
 .selection, .profile-cards {
   .scrollbar {
@@ -28,6 +48,7 @@
       position: absolute !important;
       bottom: 0 !important;
     }
+
     .thumb {
       border-radius: 10px;
       height: 100% !important;

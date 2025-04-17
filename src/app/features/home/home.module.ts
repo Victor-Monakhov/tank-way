@@ -14,7 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {VmForDirective} from '../../shared/directives/vm-for.directive';
 import {BlockCopyPastDirective} from '../../shared/directives/block-copy-past.directive';
 import {HeaderMenuComponent} from './components/header/header-menu/header-menu.component';
-// import {NgScrollbarModule} from 'ngx-scrollbar';
+import {NgScrollbarModule} from 'ngx-scrollbar';
 import {TankSelectionComponent} from './components/demo-settings/tank-selection/tank-selection.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {BurgerComponent} from '../../shared/components/vm-lib/burger/burger.component';
@@ -58,7 +58,7 @@ import {CodeInputComponent} from '../../shared/components/code-input/code-input.
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    // NgScrollbarModule,
+    NgScrollbarModule,
   ],
     exports: [
         DropPanelDirective,
