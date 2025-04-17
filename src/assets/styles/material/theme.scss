@@ -1,0 +1,130 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+//@forward 'material/mat-select';
+//@forward 'material/mat-dialog';
+//@forward 'material/mat-input';
+//@forward 'material/mat-button';
+
+@function _patch-error-palette($palette) {
+  @return map.merge(
+      $palette,
+      (
+        error: (
+          0: #000000,
+          10: #420001,
+          20: #6A0004,
+          25: #7F0006,
+          30: #940008,
+          35: #A8180F,
+          40: #BA2B2B,
+          50: #EB3636,
+          60: #FF5248,
+          70: #FF8178,
+          80: #FFAEA8,
+          90: #FFD5D2,
+          95: #FFE9E7,
+          98: #FFF6F5,
+          99: #FFFBFF,
+          100: #FFFFFF,
+        ),
+      )
+  );
+}
+
+$tnm-palette: _patch-error-palette((
+  0: #000000,
+  10: #241700,
+  20: #3e2b00,
+  25: #4b3600,
+  30: #594200,
+  35: #674e00,
+  40: #755a00,
+  50: #927300,
+  60: #af8d00,
+  70: #cca71e,
+  80: #e9c23a,
+  90: #ffdda3,
+  95: #ffeed8,
+  98: #fff8ee,
+  99: #fffbff,
+  100: #ffffff,
+  secondary: (
+    0: #000000,
+    10: #1e1600,
+    20: #332900,
+    25: #3f3400,
+    30: #4b3f00,
+    35: #574a00,
+    40: #635600,
+    50: #7c6e00,
+    60: #968600,
+    70: #b09e17,
+    80: #cbb832,
+    90: #e6d29f,
+    95: #f4e3d6,
+    98: #fcf3ee,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+  neutral: (
+    0: #000000,
+    4: #0e0d09,
+    6: #13120e,
+    10: #1f1e19,
+    12: #24231e,
+    17: #2f2e29,
+    20: #34332e,
+    22: #383731,
+    24: #3c3b35,
+    25: #403e38,
+    30: #4b4943,
+    35: #57554f,
+    40: #63615a,
+    50: #7c7972,
+    60: #96938b,
+    70: #b1ada4,
+    80: #ccc7bd,
+    87: #ddd8ce,
+    90: #e9e3d9,
+    92: #efeade,
+    94: #f3eee3,
+    95: #f6f1e7,
+    96: #f8f4e9,
+    98: #fcf9f0,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+  neutral-variant: (
+    0: #000000,
+    10: #1d1c10,
+    20: #322f23,
+    25: #3e3b2e,
+    30: #4a4739,
+    35: #565345,
+    40: #625e50,
+    50: #7b7667,
+    60: #959081,
+    70: #b0aa9a,
+    80: #cbc4b3,
+    90: #e7dfcc,
+    95: #f4ecda,
+    98: #fdf7e5,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+));
+
+html {
+  color-scheme: dark;
+  @include mat.core();
+  @include mat.theme((
+    color: $tnm-palette,
+    typography: "Roboto",
+    density: 0
+  ));
+
+  @include mat.theme-overrides((
+    "background": #1E1E1E,
+  ));
+}
