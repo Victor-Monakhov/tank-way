@@ -61,10 +61,10 @@ export class AuthMenuComponent implements OnInit, OnDestroy {
   }
 
   public onLoginWithGoogle(): void {
-    this.authService.loginWithGoogle();
+    // this.authService.loginWithGoogle();
   }
 
   public onLoginWithFacebook(): void {
-    this.authService.loginWithFacebook();
+    // this.authService.loginWithFacebook();
   }
 }

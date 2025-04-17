@@ -5,8 +5,8 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {HttpClientModule} from '@angular/common/http';
-import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
-import {GoogleLoginProvider} from 'angularx-social-login';
+// import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
+// import {GoogleLoginProvider} from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -18,29 +18,29 @@ import {GoogleLoginProvider} from 'angularx-social-login';
     BrowserAnimationsModule,
     OverlayModule,
     HttpClientModule,
-    SocialLoginModule,
+    // SocialLoginModule,
   ],
   providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '697267962581-foca2h6t0adjapalls9f9sv2oad9a1he.apps.googleusercontent.com'
-            )
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider(
-              '539128910997140'
-            )
-          }
-        ]
-      } as SocialAuthServiceConfig
-    }
+    // {
+    //   provide: 'SocialAuthServiceConfig',
+    //   useValue: {
+    //     autoLogin: false,
+    //     providers: [
+    //       {
+    //         id: GoogleLoginProvider.PROVIDER_ID,
+    //         provider: new GoogleLoginProvider(
+    //           '697267962581-foca2h6t0adjapalls9f9sv2oad9a1he.apps.googleusercontent.com'
+    //         )
+    //       },
+    //       {
+    //         id: FacebookLoginProvider.PROVIDER_ID,
+    //         provider: new FacebookLoginProvider(
+    //           '539128910997140'
+    //         )
+    //       }
+    //     ]
+    //   } as SocialAuthServiceConfig
+    // }
   ],
   exports: [],
   bootstrap: [AppComponent]

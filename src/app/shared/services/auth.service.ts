@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Paths} from '../classes/paths.class';
-import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
 import {AbstractControl} from '@angular/forms';
 import {LSKeys} from '../enums/local-storage-keys.enum';
 import {LocalStorageService} from './local-storage.service';
@@ -20,20 +19,20 @@ export class AuthService {
   public tmpUser: IUser = {} as IUser;
 
   public constructor(private http: HttpClient,
-              private socialAuthService: SocialAuthService,
+              // private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService) {
   }
 
-  public userInitBySocialUser(user: SocialUser): void {
-    this.tmpUser = {
-      nickname: user.email,
-      email: user.email,
-      password: '12345678',
-      token: user.authToken,
-      avatarUrl: user.photoUrl
-    } as IUser;
-    this.authUser$.next(this.tmpUser);
-  }
+  // public userInitBySocialUser(user: SocialUser): void {
+  //   this.tmpUser = {
+  //     nickname: user.email,
+  //     email: user.email,
+  //     password: '12345678',
+  //     token: user.authToken,
+  //     avatarUrl: user.photoUrl
+  //   } as IUser;
+  //   this.authUser$.next(this.tmpUser);
+  // }
 
   public userInitByForm(form: AbstractControl): void {
     this.tmpUser = {
@@ -86,35 +85,35 @@ export class AuthService {
   //   );
   // }
 
-  public loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(
-      (data) => {
-        if (data['error'] === 'popup_closed_by_user') {
-          window.location.reload();
-        }
-      }
-    );
-    this.lSService.setItem(LSKeys.authProviderID, GoogleLoginProvider.PROVIDER_ID);
-  }
+  // public loginWithGoogle(): void {
+  //   this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).catch(
+  //     (data) => {
+  //       if (data['error'] === 'popup_closed_by_user') {
+  //         window.location.reload();
+  //       }
+  //     }
+  //   );
+  //   this.lSService.setItem(LSKeys.authProviderID, GoogleLoginProvider.PROVIDER_ID);
+  // }
+  //
+  // public loginWithFacebook(): void {
+  //   this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).catch(
+  //     (data) => {
+  //       if (data === 'User cancelled login or did not fully authorize.') {
+  //         window.location.reload();
+  //       }
+  //     }
+  //   );
+  //   this.lSService.setItem(LSKeys.authProviderID, FacebookLoginProvider.PROVIDER_ID);
+  // }
 
-  public loginWithFacebook(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).catch(
-      (data) => {
-        if (data === 'User cancelled login or did not fully authorize.') {
-          window.location.reload();
-        }
-      }
-    );
-    this.lSService.setItem(LSKeys.authProviderID, FacebookLoginProvider.PROVIDER_ID);
-  }
-
-  public signOut(callback: Function): void {
-    this.socialAuthService.signOut(true).then(
-      () => {
-        localStorage.removeItem(LSKeys.authToken);
-        localStorage.removeItem(LSKeys.authProviderID);
-        callback();
-      }
-    );
-  }
+  // public signOut(callback: Function): void {
+  //   this.socialAuthService.signOut(true).then(
+  //     () => {
+  //       localStorage.removeItem(LSKeys.authToken);
+  //       localStorage.removeItem(LSKeys.authProviderID);
+  //       callback();
+  //     }
+  //   );
+  // }
 }

@@ -52,7 +52,7 @@ export class SignInComponent extends Auth implements OnInit, OnDestroy {
 
   public onBack(): void {
     this.closeModal();
-    this.authService.isAuthMenu.next(true);
+    // this.authService.isAuthMenu.next(true);
   }
 
   public successResponse(): void {

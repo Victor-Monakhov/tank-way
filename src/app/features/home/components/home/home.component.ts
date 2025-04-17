@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../../shared/services/auth.service';
 import {SubSink} from 'subsink';
-import {SocialAuthService} from 'angularx-social-login';
 import {LocalStorageService} from '../../../../shared/services/local-storage.service';
 import {switchMap} from 'rxjs/operators';
 import {LSKeys} from '../../../../shared/enums/local-storage-keys.enum';
@@ -23,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public constructor(private authService: AuthService,
               private router: Router,
-              private socialAuthService: SocialAuthService,
+              // private socialAuthService: SocialAuthService,
               private lSService: LocalStorageService,
               private panelService: PanelService,) {}
 
@@ -31,9 +30,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (localStorage.getItem(LSKeys.inDemo)) {
       localStorage.removeItem(LSKeys.inDemo);
     }
-    this.subscribeToAuthState();
-    this.subscribeToUser();
-    this.subscribeToCode();
+    // this.subscribeToAuthState();
+    // this.subscribeToUser();
+    // this.subscribeToCode();
   }
 
   public ngOnDestroy(): void {
@@ -48,42 +47,42 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate([NAVIGATE.DEMO]).then();
   }
 
-  private subscribeToAuthState(): void {
-    this.subs.add(this.socialAuthService.authState.subscribe(
-      (socialUser) => {
-        if (socialUser) {
-          this.authService.userInitBySocialUser(socialUser);
-        }
-      }));
-  }
+  // private subscribeToAuthState(): void {
+  //   this.subs.add(this.socialAuthService.authState.subscribe(
+  //     (socialUser) => {
+  //       if (socialUser) {
+  //         this.authService.userInitBySocialUser(socialUser);
+  //       }
+  //     }));
+  // }
 
-  private subscribeToUser(): void {
-    this.subs.add(this.authService.authUser$.pipe(
-      switchMap(user => {
-        return this.authService.signUp(user) as Observable<IAuthResponse>
-      })
-    ).subscribe((response) => {
-      this.authService.response.next(response);
-      if (response.token) {
-        this.lSService.setItem(LSKeys.authToken, response.token);
-      }
-      console.log(response.message);
-    }));
-  }
+  // private subscribeToUser(): void {
+  //   this.subs.add(this.authService.authUser$.pipe(
+  //     switchMap(user => {
+  //       return this.authService.signUp(user) as Observable<IAuthResponse>
+  //     })
+  //   ).subscribe((response) => {
+  //     this.authService.response.next(response);
+  //     if (response.token) {
+  //       this.lSService.setItem(LSKeys.authToken, response.token);
+  //     }
+  //     console.log(response.message);
+  //   }));
+  // }
 
-  private subscribeToCode(): void {
-    this.subs.add(this.authService.code.pipe(
-      switchMap((code) => {
-        return this.authService.sendCode(code) as Observable<IAuthResponse>
-      })).subscribe((response) => {
-      this.authService.response.next(response);
-      if (response.token) {
-        this.authService.tmpUser.token = response.token;
-        this.authService.authUser$.next(this.authService.tmpUser);
-      }
-      console.log(response.message);
-    }))
-  }
+  // private subscribeToCode(): void {
+  //   this.subs.add(this.authService.code.pipe(
+  //     switchMap((code) => {
+  //       return this.authService.sendCode(code) as Observable<IAuthResponse>
+  //     })).subscribe((response) => {
+  //     this.authService.response.next(response);
+  //     if (response.token) {
+  //       this.authService.tmpUser.token = response.token;
+  //       this.authService.authUser$.next(this.authService.tmpUser);
+  //     }
+  //     console.log(response.message);
+  //   }))
+  // }
 
   // @HostListener('window:scroll', ['$event']) // for window scroll events
   // onScroll() {

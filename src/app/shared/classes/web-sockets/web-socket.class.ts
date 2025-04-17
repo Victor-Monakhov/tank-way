@@ -1,5 +1,4 @@
 import {CompatClient, Stomp} from '@stomp/stompjs';
-import * as SockJS from 'sockjs-client';
 import {Subject} from 'rxjs';
 
 export class WebSocket {
@@ -11,7 +10,7 @@ export class WebSocket {
   }
 
   public connect(endpoint, topic): void {
-    let socket = (): any => new SockJS(endpoint);
+    let socket =  (): any => null;
     this.stompClient = Stomp.over(socket);
     this.stompClient.debug = (): any => {};
     this.stompClient.connect({}, (frame) => {

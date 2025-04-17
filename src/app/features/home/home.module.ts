@@ -11,13 +11,11 @@ import {DropPanelDirective} from '../../shared/directives/vm-lib/drop-panel.dire
 import {DropPanelComponent} from '../../shared/components/vm-lib/drop-panel/drop-panel.component';
 import {FullScreenComponent} from '../../shared/components/slider/full-screen/full-screen.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {SpinnerModule} from '../../shared/components/spinner/spinner.module';
 import {VmForDirective} from '../../shared/directives/vm-for.directive';
 import {BlockCopyPastDirective} from '../../shared/directives/block-copy-past.directive';
 import {HeaderMenuComponent} from './components/header/header-menu/header-menu.component';
-import {NgScrollbarModule} from 'ngx-scrollbar';
+// import {NgScrollbarModule} from 'ngx-scrollbar';
 import {TankSelectionComponent} from './components/demo-settings/tank-selection/tank-selection.component';
-import {ProfileCardsComponent} from './components/profile-cards/profile-cards.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {BurgerComponent} from '../../shared/components/vm-lib/burger/burger.component';
 import {HomeGalleryComponent} from './components/home-gallery/home-gallery.component';
@@ -45,7 +43,6 @@ import {CodeInputComponent} from '../../shared/components/code-input/code-input.
     BlockCopyPastDirective,
     HeaderMenuComponent,
     TankSelectionComponent,
-    ProfileCardsComponent,
     FooterComponent,
     BurgerComponent,
     HomeGalleryComponent,
@@ -61,8 +58,7 @@ import {CodeInputComponent} from '../../shared/components/code-input/code-input.
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SpinnerModule,
-    NgScrollbarModule,
+    // NgScrollbarModule,
   ],
     exports: [
         DropPanelDirective,

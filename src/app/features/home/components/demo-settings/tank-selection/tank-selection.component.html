@@ -1,5 +1,5 @@
 <div class="tank-selection-wrapper">
-  <h2>Customize panzer</h2>
+  <h2>Customize your tank</h2>
   <div class="tank-view"
        [style.width]="viewWidth + 'px'"
        [style.height]="viewHeight + 'px'"
@@ -14,10 +14,10 @@
   <div class="selection-wrapper">
     <small>Head</small>
     <div class="selection">
-      <ng-scrollbar class="scrollbar"
-                    [track]="'horizontal'"
-                    [thumbClass]="'thumb'"
-                    [trackClass]="'track'">
+<!--      <ng-scrollbar class="scrollbar"-->
+<!--                    [track]="'horizontal'"-->
+<!--                    [thumbClass]="'thumb'"-->
+<!--                    [trackClass]="'track'">-->
         <div class="selection-content">
           <div *ngFor="let head of tankHeads; let i = index">
             <img *ngIf="head.path; else requiredImg"
@@ -27,17 +27,17 @@
                  (click)="onHead(i)">
           </div>
         </div>
-      </ng-scrollbar>
+<!--      </ng-scrollbar>-->
     </div>
   </div>
   <div class="selection-wrapper">
     <small>Body</small>
     <div class="selection">
-      <ng-scrollbar class="scrollbar"
-                    [track]="'horizontal'"
-                    [viewClass]="'view'"
-                    [thumbClass]="'thumb'"
-                    [trackClass]="'track'">
+<!--      <ng-scrollbar class="scrollbar"-->
+<!--                    [track]="'horizontal'"-->
+<!--                    [viewClass]="'view'"-->
+<!--                    [thumbClass]="'thumb'"-->
+<!--                    [trackClass]="'track'">-->
         <div class="selection-content">
           <div *ngFor="let body of tankBodies; let i = index">
             <img *ngIf="body.path; else requiredImg"
@@ -47,7 +47,7 @@
                  (click)="onBody(i)">
           </div>
         </div>
-      </ng-scrollbar>
+<!--      </ng-scrollbar>-->
     </div>
   </div>
 </div>
