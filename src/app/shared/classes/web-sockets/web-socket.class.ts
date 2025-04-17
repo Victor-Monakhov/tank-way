@@ -1,8 +1,8 @@
-import {CompatClient, Stomp} from '@stomp/stompjs';
+// import {CompatClient, Stomp} from '@stomp/stompjs';
 import {Subject} from 'rxjs';
 
 export class WebSocket {
-  private stompClient: CompatClient;
+  private stompClient; // CompatClient;
   public response: Subject<any> = new Subject<any>();
   public isConnected: Subject<boolean> = new Subject<boolean>();
 
@@ -11,7 +11,7 @@ export class WebSocket {
 
   public connect(endpoint, topic): void {
     let socket =  (): any => null;
-    this.stompClient = Stomp.over(socket);
+    this.stompClient = {};// Stomp.over(socket);
     this.stompClient.debug = (): any => {};
     this.stompClient.connect({}, (frame) => {
       this.isConnected.next(true);
