@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {Paths} from '../classes/paths.class';
 import {AbstractControl} from '@angular/forms';
 import {LSKeys} from '../enums/local-storage-keys.enum';
