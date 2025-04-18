@@ -1,0 +1,39 @@
+<div class="tnm-text-input">
+  <div class="background static-visible" [style.height]="matInputEl | inputHeight"></div>
+  <div
+    [style.height]="matInputEl | inputHeight"
+    [ngClass]="{'background': true,
+                'visible focused': focused()
+               }"></div>
+  <div
+    [style.height]="matInputEl | inputHeight"
+    [ngClass]="{'background': true,
+                'visible invalid': invalid()
+               }"></div>
+  <mat-form-field class="form-field">
+    <mat-label>{{ label() }}</mat-label>
+    <input
+      matInput
+      [placeholder]="placeholder()"
+      [type]="innerInputType()"
+      [formControl]="formControl"
+      (input)="onInput($event)"
+      (focusin)="onFocusIn()"
+      (focusout)="onFocusOut()"
+      #matInputEl/>
+    @if (inputType() === types.Password) {
+      <mat-icon
+        matSuffix
+        class="icon password-icon"
+        (click)="onPasswordTypeChange()">
+        {{ innerInputType() === types.Password ? 'visibility' : 'visibility_off' }}
+      </mat-icon>
+    }
+    @if (inputType() !== types.Password && pending()) {
+      <tnm-loader matSuffix class="icon loader"></tnm-loader>
+    }
+  </mat-form-field>
+  <div class="errors">
+    <ng-content></ng-content>
+  </div>
+</div>

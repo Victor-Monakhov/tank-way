@@ -1,0 +1,72 @@
+@use 'mixins';
+
+.auth-dialog {
+  width: 450px;
+  min-height: 550px;
+  border-radius: 8px;
+
+  .mat-mdc-dialog-surface {
+    border-radius: 8px;
+    background: var(--mat-sys-background);
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 25px;
+      font-family: var(--mat-sys-body-medium-font), sans-serif;
+
+      & > * {
+        flex-shrink: 0;
+        width: 100%
+      }
+
+      .title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 40px;
+        text-transform: uppercase;
+        color: var(--mat-sys-primary);
+      }
+
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .auth-btn {
+        height: 56px;
+        margin-top: 20px;
+        border-radius: 8px;
+        font-size: 28px;
+
+        &:not(&:disabled) {
+          color: var(--mat-sys-background);
+        }
+      }
+
+      .login-navigation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+        color: var(--mat-sys-primary);
+
+        & > * {
+          position: relative;
+          overflow: visible;
+          cursor: pointer;
+
+          &:hover {
+            background: transparent;
+            box-shadow: none;
+          }
+
+          @include mixins.hover-underline(1px, 2px, var(--mat-sys-primary));
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
-
-//@forward 'material/mat-select';
-//@forward 'material/mat-dialog';
-//@forward 'material/mat-input';
-//@forward 'material/mat-button';
+@forward 'material/mat-select';
+@forward 'material/mat-dialog';
+@forward 'material/mat-input';
+@forward 'material/mat-icon';
+@forward 'material/mat-button';
 
 @function _patch-error-palette($palette) {
   @return map.merge(
@@ -120,7 +120,7 @@ html {
   @include mat.core();
   @include mat.theme((
     color: $tnm-palette,
-    typography: "Roboto",
+    typography: "RussoOne",
     density: 0
   ));
 
@@ -128,3 +128,10 @@ html {
     "background": #1E1E1E,
   ));
 }
+
+
+
+
+
+
+

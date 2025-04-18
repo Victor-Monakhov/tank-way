@@ -57,5 +57,12 @@ input[type=text], input[type=email], input[type=password] {
   font-size: 1.2rem;
   font-weight: normal;
   font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
+  background: var(--mat-sys-on-background);
+  color: var(--mat-sys-background);
 }
+
+//input:-webkit-autofill, input:-webkit-autofill:focus, input:-webkit-autofill:hover {
+//  background: var(--mat-sys-on-background) !important;
+//  color: var(--mat-sys-background) !important;
+//}
 

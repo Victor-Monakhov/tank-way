@@ -1,0 +1,58 @@
+:host {
+  .tnm-text-input {
+    position: relative;
+    width: 100%;
+
+    .form-field {
+      width: calc(100% - 2px);
+      margin: 1px;
+    }
+
+    .background {
+      position: absolute;
+      border-radius: 8px;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+    }
+
+    .static-visible {
+      width: 100%;
+      background: var(--mat-sys-on-background);
+    }
+
+    .visible {
+      width: 100%;
+      transition: width 500ms;
+    }
+
+    .focused {
+      background: var(--mat-sys-primary);
+    }
+
+    .invalid {
+      background: var(--mat-sys-error) !important;
+    }
+
+    .icon {
+      padding: 0 16px;
+    }
+
+    .password-icon {
+      cursor: pointer;
+    }
+
+    .loader {
+      box-sizing: content-box;
+      width: 25px;
+      height: 25px;
+      color: var(--mat-sys-on-background);
+    }
+
+    .errors {
+      margin-left: 10px;
+      min-height: 20px;
+    }
+  }
+}

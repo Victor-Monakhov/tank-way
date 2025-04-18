@@ -1,0 +1,15 @@
+
+.mat-text-btn {
+  &.mat-mdc-button {
+    height: auto;
+    padding: 0;
+  }
+
+  .mat-mdc-button-persistent-ripple {
+    display: none;
+  }
+
+  .mat-mdc-button-ripple {
+    display: none;
+  }
+}

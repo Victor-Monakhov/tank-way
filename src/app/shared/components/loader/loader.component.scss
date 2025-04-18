@@ -1,0 +1,54 @@
+:host {
+  display: block;
+
+  .tank {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .tank-body {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .tank-wheels {
+      position: absolute;
+      display: flex;
+      left: 2%;
+      bottom: 11%;
+      width: 80%;
+      height: 40%;
+      .wheel {
+        width: 100%;
+        height: 100%;
+        .wheel-controller {
+          transform-origin: center;
+          animation: wheel_anim 2s linear infinite;
+        }
+      }
+    }
+
+    .road {
+      position: absolute;
+      width: 30%;
+      height: 2%;
+      bottom: 15%;
+      left: 100%;
+      animation: road_anim 2s linear infinite;
+    }
+  }
+
+
+  @keyframes wheel_anim {
+    100% {
+      transform: rotate(360deg)
+    }
+  }
+
+  @keyframes road_anim {
+    100% {
+      left: -100%;
+    }
+  }
+}

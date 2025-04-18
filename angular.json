@@ -43,6 +43,11 @@
               "src/assets",
               {
                 "glob": "**/*",
+                "input": "src/assets/images",
+                "output": "images"
+              },
+              {
+                "glob": "**/*",
                 "input": "./node_modules/@victor_monakhov/tanks/images/testGame",
                 "output": "images/testGame"
               },

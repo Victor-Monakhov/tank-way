@@ -1,66 +1,20 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-//@use '@angular/material' as mat;
-
-//html {
-//  @include mat.theme((
-//    color: (
-//      theme-type: light,
-//      primary: mat.$azure-palette,
-//      tertiary: mat.$blue-palette,
-//    ),
-//    typography: Roboto,
-//    density: 0,
-//  ));
-//}
+@use "fonts";
+@use "svg-icons";
 @use "material/theme";
-@use 'fonts';
-@use 'images';
-@use 'colors' as colors;
-@use 'mixins' as mixins;
-@use 'buttons';
-@use 'animations';
-@use 'classes/overlay-backdrops';
-@use 'html-elements/html-elements';
-@use 'classes/scrollbar';
-@use 'classes/anim';
-@use 'classes/auth-form';
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 html, body {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden !important;
+  width: 100dvw;
+  height: 100dvh;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  min-width: 320px;
-  font-family: Raleway-Thin, sans-serif;
-  background: colors.$black;
+small {
+  font-family: "Roboto Light", sans-serif;
+  font-size: 13px;
 }
-
-
-strong {
-  font-weight: unset;
-  color: #ffffff;
-  @include mixins.media-property(H, font-size, 1.7rem, 1.8rem, 1.9rem, 2rem);
-}
-
-.link {
-  border-bottom: 1px solid #ffffff;
-  cursor: pointer;
-}
-
-.link:hover {
-  color: colors.$blue;
-  border-color: colors.$blue;
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

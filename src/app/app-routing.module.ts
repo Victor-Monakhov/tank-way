@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: NAVIGATE.HOME,
-    loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule)
   },
 ];
 

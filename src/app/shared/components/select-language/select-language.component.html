@@ -1,0 +1,14 @@
+<mat-select class="language-form" [(ngModel)]="language" (ngModelChange)="onLanguageChange()">
+
+  <mat-select-trigger>
+    <mat-icon class="language-icon" [svgIcon]="language.icon"></mat-icon>
+  </mat-select-trigger>
+
+  @for (lang of languages; track $index) {
+    <mat-option class="language-option" [value]="lang">
+      <mat-icon class="language-option-icon" [svgIcon]="lang.icon"></mat-icon>
+      {{ lang.name }}
+    </mat-option>
+  }
+
+</mat-select>

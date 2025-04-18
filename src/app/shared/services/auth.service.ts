@@ -15,7 +15,7 @@ export class AuthService {
 
   public authUser$: Subject<IUser> = new Subject<IUser>();
   public code: Subject<IAuthCode> = new Subject<IAuthCode>();
-  public response: Subject<IAuthResponse> = new Subject<IAuthResponse>();
+  public response = new BehaviorSubject<IAuthResponse>(null);
   public tmpUser: IUser = {} as IUser;
 
   public constructor(private http: HttpClient,

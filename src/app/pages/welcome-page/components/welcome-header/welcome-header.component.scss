@@ -1,0 +1,67 @@
+@use 'sizes';
+@use '@angular/material' as mat;
+@use 'mixins';
+
+:host {
+  .wrapper {
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 50px;
+    font-size: 22px;
+    text-transform: capitalize;
+    @include mat.toolbar-overrides((
+      "container-background-color": var(--mat-sys-background),
+      "standard-height": sizes.$welcome-header-height,
+    ));
+
+    .left-header-container {
+      display: flex;
+      align-items: center;
+
+      img {
+        flex-shrink: 0;
+        border-radius: 50%;
+        margin-right: 30px;
+        background-image: radial-gradient(
+            circle at center,
+            var(--mat-sys-primary) 30%,
+            var(--mat-sys-background),
+            transparent
+        );
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 30px;
+        padding-top: 3px;
+
+        .nav-link {
+          color: var(--mat-sys-on-background);
+          text-decoration: none;
+          position: relative;
+          @include mixins.hover-underline(2px, 3px, var(--mat-sys-primary));
+        }
+      }
+    }
+
+    .right-header-container {
+      display: flex;
+      align-items: center;
+      height: 60%;
+      gap: 30px;
+
+      & > * {
+        flex-shrink: 0;
+      }
+
+      .sign-in-btn {
+        font-size: 22px;
+      }
+
+      hr {
+        height: 100%;
+        border-color: var(--mat-sys-primary);
+      }
+    }
+  }
+}

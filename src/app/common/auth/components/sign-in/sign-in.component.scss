@@ -1,0 +1,35 @@
+
+:host {
+  .wrapper {
+    .divider {
+      position: relative;
+      margin: 40px 0 30px 0;
+      overflow: visible;
+      opacity: 0.5;
+
+      .divider-label {
+        position: absolute;
+        padding: 0 10px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--mat-sys-background);
+      }
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+
+      & > * {
+        border-radius: 50%;
+
+        .social-icon {
+          width: 70%;
+          height: 70%;
+        }
+      }
+    }
+  }
+}

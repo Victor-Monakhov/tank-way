@@ -1,0 +1,61 @@
+<div class="wrapper">
+
+  <h2 class="title">{{ 'auth.login_title' | translate }}</h2>
+
+  <form class="auth-form" [formGroup]="form">
+    <tnm-input-text
+      formControlName="email"
+      inputType="email"
+      placeholder="tnm@mail.com"
+      [label]="'auth.email' | translate">
+      <tnm-validation [formControl]="emailControl()"></tnm-validation>
+    </tnm-input-text>
+    <tnm-input-text
+      formControlName="password"
+      inputType="password"
+      [label]="'auth.password' | translate">
+      <tnm-validation [formControl]="passwordControl()"></tnm-validation>
+    </tnm-input-text>
+  </form>
+
+  <button
+    mat-flat-button
+    type="button"
+    class="auth-btn"
+    [disabled]="form.invalid"
+    (click)="onLogin()">
+    {{ 'auth.sign_in_btn' | translate }}
+  </button>
+
+  <div class="divider">
+    <hr>
+    <small class="divider-label">{{ 'auth.or_sign_in_with' | translate }}</small>
+  </div>
+
+  <div class="social-login">
+    <button mat-fab type="button" (click)="onGoogleLogin()">
+      <mat-icon class="social-icon" svgIcon="google"></mat-icon>
+    </button>
+    <button mat-fab type="button" (click)="onFacebookLogin()">
+      <mat-icon class="social-icon" svgIcon="facebook"></mat-icon>
+    </button>
+  </div>
+
+  <div class="login-navigation">
+    <button
+      mat-button
+      type="button"
+      class="mat-text-btn"
+      (click)="onNewAccount()">
+      <small>{{ 'auth.create_new_account' | translate }}</small>
+    </button>
+    <button
+      mat-button
+      type="button"
+      class="mat-text-btn"
+      (click)="onForgotPassword()">
+      <small>{{ 'auth.forgot_password' | translate }}</small>
+    </button>
+  </div>
+
+</div>
