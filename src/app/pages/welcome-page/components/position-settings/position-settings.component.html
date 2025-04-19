@@ -1,0 +1,9 @@
+<tnm-demo-settings-panel class="wrapper" title="Select your position">
+  <vms-toggle-btn
+    class="toggle-team"
+    [value1]="eDemoTeams.Red"
+    [value2]="eDemoTeams.Blue"
+    [(ngModel)]="team"
+    (ngModelChange)="onTeamChanged($event)">
+  </vms-toggle-btn>
+</tnm-demo-settings-panel>

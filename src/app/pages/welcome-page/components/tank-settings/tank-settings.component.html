@@ -1,0 +1,58 @@
+<tnm-demo-settings-panel class="wrapper" title="Customize your tank">
+  <div
+    class="tank-view"
+    [style.width]="viewWidth + 'px'"
+    [style.height]="viewHeight + 'px'"
+    (mousemove)="onTarget($event)"
+    (mouseleave)="targetAngle.set(0)">
+    @if (selectedTankBody()) {
+      <img class="view-tank-item" alt="#" width="60" height="60" [ngSrc]="selectedTankBody().path"/>
+    }
+    @if (selectedTankHead()) {
+      <img class="view-tank-item"
+           alt="#"
+           width="60"
+           height="60"
+           [ngSrc]="selectedTankHead().path"
+           [style.transform]="'rotate(' + targetAngle() + 'deg)'"/>
+    }
+  </div>
+
+  <div class="selection-wrapper">
+    <span class="label">Head</span>
+    <div class="selection">
+      <ng-scrollbar class="scrollbar-h" orientation="horizontal" thumbClass="thumb-h" trackClass="track-h">
+        <div class="selection-content">
+          @for (head of tankHeads; track $index) {
+            <button
+              type="button"
+              class="image-btn selection-item"
+              [ngClass]="{'selected' : tankHeadIndex() === $index}"
+              (click)="onHead(head, $index)">
+              <img fill alt="tankHead" [ngSrc]="head.path"/>
+            </button>
+          }
+        </div>
+      </ng-scrollbar>
+    </div>
+  </div>
+
+  <div class="selection-wrapper">
+    <span class="label">Body</span>
+    <div class="selection">
+      <ng-scrollbar class="scrollbar-h" orientation="horizontal" thumbClass="thumb-h" trackClass="track-h">
+        <div class="selection-content">
+          @for (head of tankBodies; track $index) {
+            <button
+              type="button"
+              class="image-btn selection-item"
+              [ngClass]="{'selected' : tankBodyIndex() === $index}"
+              (click)="onBody(head, $index)">
+              <img fill alt="tankHead" [ngSrc]="head.path"/>
+            </button>
+          }
+        </div>
+      </ng-scrollbar>
+    </div>
+  </div>
+</tnm-demo-settings-panel>

@@ -65,7 +65,7 @@ export class TankSelectionComponent implements OnInit {
       this.viewWidth,
       this.viewHeight,
       event.offsetX,
-      event.offsetY
+      event.offsetY,
     );
   }
 

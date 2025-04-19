@@ -1,0 +1,68 @@
+@use '@angular/material' as mat;
+@use 'mixins' as mixins;
+
+:host {
+  .wrapper {
+    .tank-view {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--mat-sys-outline);
+      border-radius: 25px;
+      position: relative;
+      cursor: url('src/assets/images/cursor.png') 20 20, auto;
+      background: radial-gradient(circle at 50%, var(--mat-sys-primary), var(--mat-sys-background) 45%);
+
+      .view-tank-item {
+        position: absolute;
+        user-select: none;
+        transition: transform 200ms;
+      }
+    }
+
+    .selection-wrapper {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+
+      .label {
+        color: var(--mat-sys-on-background);
+      }
+
+      .selection {
+        padding: 5px 10px;
+        border: 1px solid var(--mat-sys-outline);
+        border-radius: 10px;
+        overflow: hidden;
+        @include mixins.vm-media(
+            horizontal,
+              (width, (246px, 346px)),
+              (height, (74px, 84px)),
+        );
+
+        .selection-content {
+          display: flex;
+          margin-bottom: 15px;
+          @include mixins.vm-media(horizontal, (column-gap, (10px, 30px)));
+
+          .selection-item {
+            border: 2px solid transparent;
+            border-radius: 10px;
+            user-select: none;
+            cursor: pointer;
+            background: radial-gradient(circle at 50%, var(--mat-sys-primary), var(--mat-sys-background) 45%);
+            @include mixins.vm-media(
+                horizontal,
+                  (width, (50px, 60px)),
+                  (height, (50px, 60px)),
+            );
+          }
+
+          .selected {
+            border-color: var(--mat-sys-primary);
+          }
+        }
+      }
+    }
+  }
+}

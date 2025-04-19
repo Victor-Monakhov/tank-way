@@ -1,0 +1,9 @@
+@use 'mixins' as mixins;
+
+:host {
+  .wrapper {
+    .toggle-team {
+      width: 290px;
+    }
+  }
+}

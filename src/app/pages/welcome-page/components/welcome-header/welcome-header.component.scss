@@ -1,17 +1,20 @@
-@use 'sizes';
 @use '@angular/material' as mat;
-@use 'mixins';
+@use 'variables' as variables;
+@use 'mixins' as mixins;
 
 :host {
   .wrapper {
     justify-content: space-between;
     width: 100%;
-    padding: 0 50px;
     font-size: 22px;
     text-transform: capitalize;
+    @include mixins.vm-media(
+      horizontal,
+          (padding, (0 15px, 0 30px, 0 50px))
+    );
     @include mat.toolbar-overrides((
       "container-background-color": var(--mat-sys-background),
-      "standard-height": sizes.$welcome-header-height,
+      "standard-height": variables.$welcome-header-height,
     ));
 
     .left-header-container {
@@ -34,6 +37,7 @@
         display: flex;
         gap: 30px;
         padding-top: 3px;
+        list-style: none;
 
         .nav-link {
           color: var(--mat-sys-on-background);

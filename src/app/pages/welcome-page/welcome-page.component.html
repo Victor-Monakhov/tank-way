@@ -1,3 +1,20 @@
 <header>
   <tnm-welcome-header ngSkipHydration (signInClick)="onSignIn()"></tnm-welcome-header>
 </header>
+<div class="wrapper">
+  <ng-scrollbar class="scrollbar-v" thumbClass="thumb-v" trackClass="track-v">
+    <main>
+      <div class="title-wrapper">
+        <img class="title-img" ngSrc="images/title-img.png" alt="title-image" fill priority/>
+        <div class="title-info">
+          <h1 class="title">Join to the most EPIC battle's in the WORLD</h1>
+          <strong class="info">VM-Soft Presents</strong>
+        </div>
+      </div>
+      <tnm-demo-settings></tnm-demo-settings>
+    </main>
+    <footer>
+
+    </footer>
+  </ng-scrollbar>
+</div>

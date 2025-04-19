@@ -68,12 +68,10 @@ enum ETextInputType {
 })
 export class InputTextComponent implements OnInit, ControlValueAccessor, Validator {
 
-  private readonly validationService = inject(ValidationService);
-
   inputType = input<TTextInputType>(ETextInputType.Text);
   placeholder = input<string>('');
-
   label = input<string>('');
+
   focused = signal<boolean>(false);
   invalid = signal<boolean>(false);
   pending = signal<boolean>(false);
@@ -82,6 +80,11 @@ export class InputTextComponent implements OnInit, ControlValueAccessor, Validat
   formControl = new FormControl<string>('', { nonNullable: true });
   parentFormControl!: FormControl;
   types = ETextInputType;
+
+  private readonly validationService = inject(ValidationService);
+
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
 
   ngOnInit(): void {
     this.innerInputType.set(this.inputType());
@@ -133,9 +136,6 @@ export class InputTextComponent implements OnInit, ControlValueAccessor, Validat
     setTimeout(() => this.updateInvalidState(), 0);
     return null;
   }
-
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
 
   private updateInvalidState(): void {
     this.pending.set(!!this.parentFormControl.errors?.['pending']);

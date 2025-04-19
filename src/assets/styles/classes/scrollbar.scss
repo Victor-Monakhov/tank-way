@@ -1,7 +1,7 @@
-@use "colors" as colors;
-@use "mixins" as mixins;
 
 .scrollbar-v, .scrollbar-h {
+  overflow: auto;
+
   .ng-scroll-content {
     padding: 0 !important;
   }
@@ -12,7 +12,7 @@
 
   .thumb-v, .thumb-h {
     border-radius: 10px !important;
-    background-color: colors.$golden !important;
+    background-color: var(--mat-sys-primary) !important;
   }
 }
 
@@ -35,26 +35,5 @@
 
   .ng-scrollbar-track-wrapper {
     width: auto !important;
-  }
-}
-
-
-.selection, .profile-cards {
-  .scrollbar {
-    .track {
-      border-radius: 0;
-      height: 35% !important;
-      background-color: colors.$dark_grey !important;
-      position: absolute !important;
-      bottom: 0 !important;
-    }
-
-    .thumb {
-      border-radius: 10px;
-      height: 100% !important;
-      position: absolute !important;
-      bottom: 0 !important;
-      background-color: colors.$golden !important;
-    }
   }
 }

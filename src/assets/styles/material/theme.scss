@@ -115,6 +115,8 @@ $tnm-palette: _patch-error-palette((
   ),
 ));
 
+//$var: $tnm-palette.;
+
 html {
   color-scheme: dark;
   @include mat.core();

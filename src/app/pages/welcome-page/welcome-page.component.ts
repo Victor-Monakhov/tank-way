@@ -1,7 +1,9 @@
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { TranslateModule } from '@ngx-translate/core';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { Subject, switchMap } from 'rxjs';
 
@@ -11,12 +13,19 @@ import { SignUpComponent } from '../../common/auth/components/sign-up/sign-up.co
 import { EAuthDialogResult } from '../../common/auth/enums/auth.enum';
 import { AuthService } from '../../common/auth/services/auth.service';
 
+import { DemoSettingsComponent } from './components/demo-settings/demo-settings.component';
 import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
 
 @Component({
   standalone: true,
   selector: 'tnm-welcome-page',
-  imports: [WelcomeHeaderComponent, TranslateModule],
+  imports: [
+    WelcomeHeaderComponent,
+    TranslateModule,
+    NgScrollbarModule,
+    NgOptimizedImage,
+    DemoSettingsComponent,
+  ],
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

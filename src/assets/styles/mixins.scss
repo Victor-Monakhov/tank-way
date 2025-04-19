@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 @mixin hover-underline($line-width, $offset, $color, $opacity: 1) {
   bottom: $offset;
   &:before {
@@ -16,5 +18,33 @@
   &:hover:before {
     width: 100%;
     transition: width 300ms;
+  }
+}
+
+@mixin vm-media($direction, $properties...) {
+  $breakpoints: ($xs, $sm, $md, $lg, $xl);
+  @if ($direction == vertical) {
+    $direction: min-height;
+  } @else if ($direction == horizontal) {
+    $direction: min-width;
+  }
+  @for $i from 1 through length($breakpoints) {
+    $list: ();
+    @each $property in $properties {
+      $name: nth($property, 1);
+      $values: nth($property, 2);
+      @if length($values) >= $i {
+        $list: append($list, ($name, nth($values, $i)));
+      }
+    }
+    @if length($list) {
+      @media screen and (#{$direction}: nth($breakpoints, $i)) {
+        @each $prop in $list {
+          $name: nth($prop, 1);
+          $value: nth($prop, 2);
+          #{$name}: $value;
+        }
+      }
+    }
   }
 }
