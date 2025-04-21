@@ -1,4 +1,4 @@
-import { ITankBody, ITankHead } from '../../../../common/auth/interfaces/tank.interface';
+import { ITankBody, ITankHead } from '../../../../common/resources/interfaces/tank.interface';
 
 
 export const tankBodies: ITankBody[] = [

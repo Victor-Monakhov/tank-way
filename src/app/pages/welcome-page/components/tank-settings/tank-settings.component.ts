@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
-import { ITankBody, ITankHead } from '../../../../common/auth/interfaces/tank.interface';
+import { ITankBody, ITankHead, ITankSettings } from '../../../../common/resources/interfaces/tank.interface';
 import { Calculations } from '../../../../shared/classes/calculations/calculations.class';
 import { DemoSettingsPanelComponent } from '../demo-settings-panel/demo-settings-panel.component';
 
@@ -31,12 +31,11 @@ export class TankSettingsComponent {
   readonly tankHeads: ITankHead[] = tankHeads;
   readonly tankBodies: ITankBody[] = tankBodies;
 
-  tankHead = output<ITankHead>();
-  tankBody = output<ITankBody>();
+  tankSettings = output<ITankSettings>();
 
   targetAngle = signal<number>(0);
-  tankHeadIndex = signal<number>(null);
-  tankBodyIndex = signal<number>(null);
+  tankHeadIndex = signal<number>(0);
+  tankBodyIndex = signal<number>(0);
   selectedTankHead = computed<ITankHead>(
     () => Number.isInteger(this.tankHeadIndex()) ? this.tankHeads[this.tankHeadIndex()] : null,
   );
@@ -55,12 +54,18 @@ export class TankSettingsComponent {
 
   public onHead(head: ITankHead, index: number): void {
     this.tankHeadIndex.set(index);
-    this.tankHead.emit(head);
+    this.tankSettings.emit({
+      head,
+      body: this.selectedTankBody(),
+    });
   }
 
   public onBody(body: ITankBody, index: number): void {
     this.tankBodyIndex.set(index);
-    this.tankHead.emit(body);
+    this.tankSettings.emit({
+      body,
+      head: this.selectedTankHead(),
+    });
   }
 
 }

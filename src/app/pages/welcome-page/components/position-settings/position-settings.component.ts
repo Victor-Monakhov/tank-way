@@ -1,10 +1,13 @@
-import {ChangeDetectionStrategy, Component, model} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { NgClass, NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, model, output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatRadioModule } from '@angular/material/radio';
 
-import {EDemoTeams} from '../../../../common/auth/enums/game.enum';
-import {ToggleBtnComponent} from '../../../../shared/components/toggle-btn/toggle-btn.component';
-import {DemoSettingsPanelComponent} from '../demo-settings-panel/demo-settings-panel.component';
+import { ETeamNames } from '../../../../common/resources/enums/game.enum';
+import { IPositionSettings } from '../../../../common/resources/interfaces/game.interface';
+import { ToggleBtnComponent } from '../../../../shared/components/toggle-btn/toggle-btn.component';
+import { DemoSettingsPanelComponent } from '../demo-settings-panel/demo-settings-panel.component';
 
 @Component({
   standalone: true,
@@ -12,8 +15,11 @@ import {DemoSettingsPanelComponent} from '../demo-settings-panel/demo-settings-p
   imports: [
     DemoSettingsPanelComponent,
     MatButtonToggleModule,
+    MatRadioModule,
     ToggleBtnComponent,
     FormsModule,
+    NgClass,
+    NgOptimizedImage,
   ],
   templateUrl: './position-settings.component.html',
   styleUrl: './position-settings.component.scss',
@@ -21,11 +27,19 @@ import {DemoSettingsPanelComponent} from '../demo-settings-panel/demo-settings-p
 })
 export class PositionSettingsComponent {
 
-  readonly eDemoTeams = EDemoTeams;
+  readonly eDemoTeams = ETeamNames;
 
-  team = model<EDemoTeams>(EDemoTeams.Red);
+  positionSettings = output<IPositionSettings>();
 
-  onTeamChanged(team: string): void {
-    console.log(team);
+  team = model<ETeamNames>(ETeamNames.Red);
+  position = model<number>(1);
+
+  readonly positions = [1, 2, 3, 4];
+
+  onChanges(): void {
+    this.positionSettings.emit({
+      team: this.team(),
+      position: this.position(),
+    });
   }
 }

@@ -27,34 +27,29 @@
       width: 100%;
 
       & > * {
-        flex-grow: 1;
+        flex: 40% 1 0;
       }
     }
 
-    .demo-btn {
-      height: 60px;
-      font-family: RopaSans-Regular, Raleway-Thin, sans-serif;
-      font-size: 2rem;
-      //color: colors.$white;
-      //background-color: colors.$golden;
-      //@include mixins.media-property(H, width, 270px, 380px);
+    .mat-submit-btn {
+      @include mixins.vm-media(horizontal, (width, (270px, 380px)));
+    }
 
-      &:active {
-        font-size: 1.9rem;
+    .log-in-row {
+      @include mixins.vm-media(
+          horizontal,
+            (margin-top, (0, 25px)),
+            (font-size, (14px, 16px))
+      );
+
+      .mat-text-btn {
+        margin-top: 2px;
+        @include mixins.hover-underline(1px, 2px, var(--mat-sys-primary));
+        @include mixins.vm-media(
+            horizontal,
+              (font-size, (14px, 16px))
+        );
       }
-    }
-    p {
-      display: inline-block;
-      text-align: center;
-      line-height: 1.4rem;
-      margin-top: 25px;
-      //color: colors.$white;
-      //@include mixins.media-property(H, margin-top, 0, 25px);
-      //@include mixins.media-property(H, width, 150px, 300px);
-    }
-
-    a {
-      //color: colors.$golden;
     }
   }
 }

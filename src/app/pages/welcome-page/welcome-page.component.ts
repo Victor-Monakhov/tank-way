@@ -12,6 +12,7 @@ import { SignInComponent } from '../../common/auth/components/sign-in/sign-in.co
 import { SignUpComponent } from '../../common/auth/components/sign-up/sign-up.component';
 import { EAuthDialogResult } from '../../common/auth/enums/auth.enum';
 import { AuthService } from '../../common/auth/services/auth.service';
+import { FooterComponent } from '../../common/footer/footer.component';
 
 import { DemoSettingsComponent } from './components/demo-settings/demo-settings.component';
 import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
@@ -25,6 +26,7 @@ import { WelcomeHeaderComponent } from './components/welcome-header/welcome-head
     NgScrollbarModule,
     NgOptimizedImage,
     DemoSettingsComponent,
+    FooterComponent,
   ],
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.scss',
@@ -43,7 +45,6 @@ export class WelcomePageComponent implements OnInit {
     this.observeSignIn();
     this.observeSignUp();
     this.observeConfirmEmail();
-    // this.confirmEmail$.next();
   }
 
   onSignIn(): void {

@@ -1,9 +1,10 @@
-@use 'mixins';
+@use 'mixins' as mixins;
 
 .auth-dialog {
   width: 450px;
   min-height: 550px;
   border-radius: 8px;
+  border: 1px solid var(--mat-sys-primary);
 
   .mat-mdc-dialog-surface {
     border-radius: 8px;
@@ -32,17 +33,6 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-      }
-
-      .auth-btn {
-        height: 56px;
-        margin-top: 20px;
-        border-radius: 8px;
-        font-size: 28px;
-
-        &:not(&:disabled) {
-          color: var(--mat-sys-background);
-        }
       }
 
       .login-navigation {

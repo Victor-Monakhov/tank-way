@@ -1,10 +1,10 @@
 @use '@angular/material' as mat;
 @use 'sass:map';
 @forward 'material/mat-select';
-@forward 'material/mat-dialog';
+@forward 'material/mat-button';
 @forward 'material/mat-input';
 @forward 'material/mat-icon';
-@forward 'material/mat-button';
+@forward 'material/mat-dialog';
 
 @function _patch-error-palette($palette) {
   @return map.merge(
@@ -114,8 +114,6 @@ $tnm-palette: _patch-error-palette((
     100: #ffffff,
   ),
 ));
-
-//$var: $tnm-palette.;
 
 html {
   color-scheme: dark;

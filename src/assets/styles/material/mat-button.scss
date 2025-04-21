@@ -13,3 +13,23 @@
     display: none;
   }
 }
+
+.mat-submit-btn {
+  height: 56px !important;
+  border-radius: 8px !important;
+  font-size: 28px !important;
+
+  &:not(&:disabled) {
+    color: var(--mat-sys-background);
+
+    .mdc-button__label {
+      opacity: 0.8;
+    }
+  }
+}
+
+.mat-radio-demo-pos {
+  .mdc-label {
+    font-size: 24px;
+  }
+}
