@@ -5,8 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Observable } from 'rxjs';
 
-import { EAuthDialogResult } from '../enums/auth.enum';
-import { ISignUp, TAuthComponent } from '../interfaces/auth.interface';
+import { environment } from '../../../../environments/environment';
+import { IAuthResult, ISignUp, TAuthComponent } from '../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,23 +15,33 @@ export class AuthService {
 
   private readonly dialog = inject(MatDialog);
   private readonly http = inject(HttpClient);
+  private readonly apiUrl = environment.apiUrl;
 
-  openAuthDialog(authComponent: ComponentType<TAuthComponent>): Observable<EAuthDialogResult> {
+  openAuthDialog(authComponent: ComponentType<TAuthComponent>, data?: Partial<ISignUp>): Observable<IAuthResult> {
     return this.dialog.open(authComponent, {
+      data,
       hasBackdrop: true,
-      panelClass: 'auth-dialog',
+      panelClass: 'mat-vm-dialog',
     }).afterClosed();
   }
 
   userNameExist(userName: string): Observable<boolean> {
-    return this.http.get<boolean>(`http://localhost:5058/api/auth/username?userName=${userName}`);
+    return this.http.get<boolean>(`${this.apiUrl}auth/username?userName=${userName}`);
   }
 
   emailExist(email: string): Observable<boolean> {
-    return this.http.get<boolean>(`http://localhost:5058/api/auth/email?email=${email}`);
+    return this.http.get<boolean>(`${this.apiUrl}auth/email?email=${email}`);
   }
 
-  signUp(signUpModel: ISignUp): Observable<{ message: string }> {
-    return this.http.post<{ message: string }>('http://localhost:5058/api/auth/signup', signUpModel);
+  signUp(signUpModel: ISignUp): Observable<Date> {
+    return this.http.post<Date>(`${this.apiUrl}auth/signup`, signUpModel);
+  }
+
+  sendEmail(email: string): Observable<Date> {
+    return this.http.patch<Date>(`${this.apiUrl}auth/send-email`, { email });
+  }
+
+  emailSentAt(email: string): Observable<Date> {
+    return this.http.get<Date>(`${this.apiUrl}auth/email-sent-at?email=${email}`);
   }
 }

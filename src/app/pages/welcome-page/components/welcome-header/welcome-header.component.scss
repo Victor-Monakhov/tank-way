@@ -10,7 +10,7 @@
     text-transform: capitalize;
     @include mixins.vm-media(
       horizontal,
-          (padding, (0 15px, 0 30px, 0 50px))
+          (padding, (0 15px, 0 40px, 0 80px))
     );
     @include mat.toolbar-overrides((
       "container-background-color": var(--mat-sys-background),
@@ -27,7 +27,7 @@
         margin-right: 30px;
         background-image: radial-gradient(
             circle at center,
-            var(--mat-sys-primary) 30%,
+            var(--mat-sys-on-background) 10%,
             var(--mat-sys-background),
             transparent
         );

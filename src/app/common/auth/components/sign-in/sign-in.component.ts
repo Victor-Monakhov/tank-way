@@ -35,32 +35,32 @@ import { IAuthForm } from '../../interfaces/auth.interface';
 })
 export class SignInComponent extends BaseAuthDirective<IAuthForm> implements OnInit {
 
-  readonly dialogRef = inject(MatDialogRef<SignInComponent>);
-
   override form!: FormGroup<IAuthForm>;
+
+  private readonly dialogRef = inject(MatDialogRef<SignInComponent>);
 
   ngOnInit(): void {
     this.initForm();
   }
 
   onLogin(): void {
-    this.dialogRef.close(EAuthDialogResult.SignIn);
+    this.dialogRef.close({ action: EAuthDialogResult.SignIn });
   }
 
   onGoogleLogin(): void {
-    this.dialogRef.close(EAuthDialogResult.SignInGoogle);
+    this.dialogRef.close({ action: EAuthDialogResult.SignInGoogle });
   }
 
   onFacebookLogin(): void {
-    this.dialogRef.close(EAuthDialogResult.SignInFacebook);
+    this.dialogRef.close({ action: EAuthDialogResult.SignInFacebook });
   }
 
   onNewAccount(): void {
-    this.dialogRef.close(EAuthDialogResult.SignUp);
+    this.dialogRef.close({ action: EAuthDialogResult.SignUp });
   }
 
   onForgotPassword(): void {
-    this.dialogRef.close(EAuthDialogResult.ForgotPassword);
+    this.dialogRef.close({ action: EAuthDialogResult.ForgotPassword });
   }
 
   private initForm(): void {

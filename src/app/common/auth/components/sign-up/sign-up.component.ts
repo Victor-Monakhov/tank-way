@@ -39,15 +39,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements OnInit {
 
-  private readonly dialogRef = inject(MatDialogRef<SignUpComponent>);
-  private readonly authService = inject(AuthService);
-
   userNamePending = signal<boolean>(false);
   userNameExist = signal<boolean>(false);
   emailPending = signal<boolean>(false);
   emailExist = signal<boolean>(false);
   userNameControl!: WritableSignal<FormControl<string>>;
   confirmPasswordControl!: WritableSignal<FormControl<string>>;
+
+  private readonly dialogRef = inject(MatDialogRef<SignUpComponent>);
+  private readonly authService = inject(AuthService);
 
   override form!: FormGroup<ISignUpForm>;
   private register$ = new Subject<void>();
@@ -75,7 +75,7 @@ export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements O
   }
 
   onBackToLogin(): void {
-    this.dialogRef.close(EAuthDialogResult.SignIn);
+    this.dialogRef.close({ action: EAuthDialogResult.SignIn });
   }
 
   private initForm(): void {
@@ -131,9 +131,10 @@ export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements O
   ): void {
     let valueBuff = '';
     control().valueChanges.pipe(
-      debounceTime(500),
+      debounceTime(300),
       filter(value => {
-        const condition = (control().valid || exist()) && valueBuff !== value;
+        const condition =
+          (control().valid || (exist() && Object.keys(control().errors).length === 1)) && valueBuff !== value;
         valueBuff = value;
         return condition;
       }),
@@ -157,7 +158,7 @@ export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements O
 
   private observeRegister(): void {
     this.register$.pipe(
-      debounceTime(500),
+      debounceTime(300),
       switchMap(() => {
         if (this.form.valid) {
           const signUpModel: ISignUp = {
@@ -174,6 +175,12 @@ export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements O
         return EMPTY;
       }),
       takeUntilDestroyed(this.dr),
-    ).subscribe(() => this.dialogRef.close(EAuthDialogResult.SignUp));
+    ).subscribe(result => this.dialogRef.close({
+      action: EAuthDialogResult.SignUp,
+      data: {
+        ...this.form.value,
+        emailSentAt: result,
+      },
+    }));
   }
 }

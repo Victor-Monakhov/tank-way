@@ -1,7 +1,8 @@
 @use "material/theme";
 @use "fonts";
 @use "svg-icons";
-@use "classes/scrollbar";
+@use "common-classes/scrollbar";
+@use "common-classes/auth-dialog";
 @use "html-elements/button";
 
 * {

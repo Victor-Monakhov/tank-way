@@ -1,8 +1,8 @@
 @use 'mixins' as mixins;
 
-.auth-dialog {
+.mat-vm-dialog {
   width: 450px;
-  min-height: 550px;
+  min-height: 300px;
   border-radius: 8px;
   border: 1px solid var(--mat-sys-primary);
 
@@ -27,34 +27,6 @@
         font-size: 40px;
         text-transform: uppercase;
         color: var(--mat-sys-primary);
-      }
-
-      .auth-form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .login-navigation {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin-top: 30px;
-        color: var(--mat-sys-primary);
-
-        & > * {
-          position: relative;
-          overflow: visible;
-          cursor: pointer;
-
-          &:hover {
-            background: transparent;
-            box-shadow: none;
-          }
-
-          @include mixins.hover-underline(1px, 2px, var(--mat-sys-primary));
-        }
       }
     }
   }

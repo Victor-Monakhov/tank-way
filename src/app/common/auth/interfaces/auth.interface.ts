@@ -14,6 +14,7 @@ export interface IAuth {
 
 export interface ISignUp extends IAuth {
   userName: string;
+  emailSentAt?: Date;
 }
 
 export interface IAuthForm extends Record<string, AbstractControl> {
@@ -26,6 +27,6 @@ export interface ISignUpForm extends IAuthForm {
 }
 
 export interface IAuthResult {
-  result: EAuthDialogResult;
-  data?: Partial<IAuth>;
+  action: EAuthDialogResult;
+  data?: Partial<ISignUp>;
 }

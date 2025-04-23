@@ -39,7 +39,7 @@ export class PositionSettingsComponent {
   onChanges(): void {
     this.positionSettings.emit({
       team: this.team(),
-      position: this.position(),
+      position: this.position() - 1,
     });
   }
 }

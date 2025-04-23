@@ -11,6 +11,7 @@ import { ConfirmEmailComponent } from '../../common/auth/components/confirm-emai
 import { SignInComponent } from '../../common/auth/components/sign-in/sign-in.component';
 import { SignUpComponent } from '../../common/auth/components/sign-up/sign-up.component';
 import { EAuthDialogResult } from '../../common/auth/enums/auth.enum';
+import { ISignUp } from '../../common/auth/interfaces/auth.interface';
 import { AuthService } from '../../common/auth/services/auth.service';
 import { FooterComponent } from '../../common/footer/footer.component';
 
@@ -39,12 +40,13 @@ export class WelcomePageComponent implements OnInit {
 
   private signIn$ = new Subject<void>();
   private signUp$ = new Subject<void>();
-  private confirmEmail$ = new Subject<void>();
+  private confirmEmail$ = new Subject<Partial<ISignUp>>();
 
   ngOnInit(): void {
     this.observeSignIn();
     this.observeSignUp();
     this.observeConfirmEmail();
+    this.confirmEmail$.next({ userName: 'Vitya', email: 'vit@mail.com' });
   }
 
   onSignIn(): void {
@@ -56,7 +58,7 @@ export class WelcomePageComponent implements OnInit {
       switchMap(() => this.authService.openAuthDialog(SignInComponent)),
       takeUntilDestroyed(this.dr),
     ).subscribe(result => {
-      if (result === EAuthDialogResult.SignUp) {
+      if (result?.action === EAuthDialogResult.SignUp) {
         this.signUp$.next();
       }
     });
@@ -67,20 +69,18 @@ export class WelcomePageComponent implements OnInit {
       switchMap(() => this.authService.openAuthDialog(SignUpComponent)),
       takeUntilDestroyed(this.dr),
     ).subscribe(result => {
-      if (result === EAuthDialogResult.SignIn) {
+      if (result?.action === EAuthDialogResult.SignIn) {
         this.signIn$.next();
-      } else if (result === EAuthDialogResult.SignUp) {
-        this.confirmEmail$.next();
+      } else if (result?.action === EAuthDialogResult.SignUp) {
+        this.confirmEmail$.next(result.data);
       }
     });
   }
 
   private observeConfirmEmail(): void {
     this.confirmEmail$.pipe(
-      switchMap(() => this.authService.openAuthDialog(ConfirmEmailComponent)),
+      switchMap(data => this.authService.openAuthDialog(ConfirmEmailComponent, data)),
       takeUntilDestroyed(this.dr),
-    ).subscribe(result => {
-
-    });
+    ).subscribe();
   }
 }
