@@ -9,8 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 
-import { ELSKeys } from '../../../../common/resources/enums/local-storage.enum';
-import { GameSettingsService } from '../../../../common/resources/services/game-settings/game-settings.service';
+import { ELSKeys } from '../../common/resources/enums/local-storage.enum';
+import { GameSettingsService } from '../../common/resources/services/game-settings/game-settings.service';
 
 import { Game } from '@victor_monakhov/tanks';
 
@@ -35,7 +35,7 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     if (localStorage.getItem(ELSKeys.InDemo)) {
-      this.router.navigate(['']).then();
+      this.router.navigate(['welcome']).then();
     }
   }
 

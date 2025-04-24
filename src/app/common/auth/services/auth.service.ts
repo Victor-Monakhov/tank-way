@@ -6,7 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { IAuthResult, ISignUp, TAuthComponent } from '../interfaces/auth.interface';
+import { ELSKeys } from '../../resources/enums/local-storage.enum';
+import { IAuthResult, IEmailConfirmation, ISignUp, TAuthComponent } from '../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,18 @@ export class AuthService {
   private readonly dialog = inject(MatDialog);
   private readonly http = inject(HttpClient);
   private readonly apiUrl = environment.apiUrl;
+
+  get authorised(): boolean {
+    return !!localStorage.getItem(ELSKeys.AuthToken);
+  }
+
+  get authToken(): string {
+    return localStorage.getItem(ELSKeys.AuthToken);
+  }
+
+  set authToken(value: string) {
+    localStorage.setItem(ELSKeys.AuthToken, value);
+  }
 
   openAuthDialog(authComponent: ComponentType<TAuthComponent>, data?: Partial<ISignUp>): Observable<IAuthResult> {
     return this.dialog.open(authComponent, {
@@ -43,5 +56,9 @@ export class AuthService {
 
   emailSentAt(email: string): Observable<Date> {
     return this.http.get<Date>(`${this.apiUrl}auth/email-sent-at?email=${email}`);
+  }
+
+  confirmEmail(confirmationData: IEmailConfirmation): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}auth/confirm-email`, confirmationData);
   }
 }

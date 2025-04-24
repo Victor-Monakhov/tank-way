@@ -170,6 +170,7 @@ export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements O
         }
         return EMPTY;
       }),
+      // Todo handle error msg
       catchError(() => {
         console.log('ERROR');
         return EMPTY;

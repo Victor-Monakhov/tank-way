@@ -30,3 +30,8 @@ export interface IAuthResult {
   action: EAuthDialogResult;
   data?: Partial<ISignUp>;
 }
+
+export interface IEmailConfirmation {
+  email: string;
+  token: string;
+}

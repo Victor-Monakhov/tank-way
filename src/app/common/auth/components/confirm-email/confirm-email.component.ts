@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } 
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { debounceTime, Subject, switchMap } from 'rxjs';
+import { catchError, debounceTime, EMPTY, Subject, switchMap } from 'rxjs';
 
 import { ISignUp } from '../../interfaces/auth.interface';
 import { AuthService } from '../../services/auth.service';
@@ -65,8 +65,10 @@ export class ConfirmEmailComponent implements OnInit {
     this.resend$.pipe(
       debounceTime(300),
       switchMap(() => this.authService.sendEmail(this.email())),
+      // Todo handle error msg
+      catchError(error => EMPTY),
     ).subscribe(date => {
-      this.timePassed.set(Math.round((new Date().getTime() - date.getTime()) / 1000));
+      this.timePassed.set(Math.round((new Date().getTime() - (new Date(date ?? 0)?.getTime() ?? 0)) / 1000));
       if (this.timer() > 0) {
         this.startTimer();
       }
