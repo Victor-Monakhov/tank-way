@@ -12,7 +12,7 @@ import { MatError } from '@angular/material/form-field';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import {combineLatest, map} from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 
 import { NoopValueAccessorDirective } from '../../directives/noop-value-accessor/noop-value-accessor.directive';
 

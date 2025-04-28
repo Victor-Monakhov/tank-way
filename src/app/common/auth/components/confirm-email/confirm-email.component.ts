@@ -66,7 +66,7 @@ export class ConfirmEmailComponent implements OnInit {
       debounceTime(300),
       switchMap(() => this.authService.sendEmail(this.email()).pipe(
         // Todo handle error msg
-        catchError(error => EMPTY),
+        catchError(() => EMPTY),
       )),
     ).subscribe(date => {
       this.timePassed.set(Math.round((new Date().getTime() - (new Date(date ?? 0)?.getTime() ?? 0)) / 1000));
