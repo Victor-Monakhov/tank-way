@@ -10,6 +10,7 @@ export type TAuthComponent = SignInComponent | SignUpComponent | ConfirmEmailCom
 export interface IAuth {
   email: string;
   password: string;
+  token?: string;
 }
 
 export interface ISignUp extends IAuth {
@@ -34,4 +35,9 @@ export interface IAuthResult {
 export interface IEmailConfirmation {
   email: string;
   token: string;
+}
+
+export interface IUser {
+  email: string;
+  userName: string;
 }

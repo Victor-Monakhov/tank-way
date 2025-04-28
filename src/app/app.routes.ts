@@ -12,7 +12,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/demo/demo.component').then(m => m.DemoComponent),
   },
   {
-    path: 'profile',
+    path: 'profile/:name',
     loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [authGuard],
   },

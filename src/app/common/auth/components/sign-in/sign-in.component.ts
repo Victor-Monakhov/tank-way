@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -8,11 +9,15 @@ import { MatInputModule } from '@angular/material/input';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
+import { catchError, debounceTime, EMPTY, Subject, switchMap } from 'rxjs';
+
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { ValidationComponent } from '../../../../shared/components/validation/validation.component';
+import { EValidationErrors } from '../../../../shared/components/validation/validation-errors.enum';
 import { BaseAuthDirective } from '../../directives/base-auth/base-auth.directive';
 import { EAuthDialogResult } from '../../enums/auth.enum';
-import { IAuthForm } from '../../interfaces/auth.interface';
+import { IAuth, IAuthForm } from '../../interfaces/auth.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,
@@ -38,13 +43,17 @@ export class SignInComponent extends BaseAuthDirective<IAuthForm> implements OnI
   override form!: FormGroup<IAuthForm>;
 
   private readonly dialogRef = inject(MatDialogRef<SignInComponent>);
+  private readonly authService = inject(AuthService);
+
+  login$ = new Subject<void>();
 
   ngOnInit(): void {
     this.initForm();
+    this.observeLogin();
   }
 
   onLogin(): void {
-    this.dialogRef.close({ action: EAuthDialogResult.SignIn });
+    this.login$.next();
   }
 
   onGoogleLogin(): void {
@@ -76,5 +85,39 @@ export class SignInComponent extends BaseAuthDirective<IAuthForm> implements OnI
     });
     this.emailControl = signal(this.form.get('email') as FormControl);
     this.passwordControl = signal(this.form.get('password') as FormControl);
+  }
+
+  private observeLogin(): void {
+    this.login$.pipe(
+      debounceTime(300),
+      switchMap(() => {
+        if (this.form.valid) {
+          const signInModel: IAuth = {
+            email: <string> this.form.value.email,
+            password: <string> this.form.value.password,
+          };
+          return this.authService.signIn(signInModel).pipe(
+            // Todo handle error msg
+            catchError(error => {
+              if (error.error.message === EValidationErrors.InvalidCredentials) {
+                this.passwordControl().setErrors({ [EValidationErrors.InvalidCredentials]: true });
+              }
+              if (error.error.message === EValidationErrors.ConfirmEmail) {
+                this.dialogRef.close({
+                  action: EAuthDialogResult.ConfirmEmail,
+                  data: this.form.value,
+                });
+              }
+              return EMPTY;
+            }),
+          );
+        }
+        return EMPTY;
+      }),
+      takeUntilDestroyed(this.dr),
+    ).subscribe(result => this.dialogRef.close({
+      action: EAuthDialogResult.SignIn,
+      data: result,
+    }));
   }
 }

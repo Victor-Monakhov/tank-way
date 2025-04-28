@@ -64,9 +64,10 @@ export class ConfirmEmailComponent implements OnInit {
   private observeResend(): void {
     this.resend$.pipe(
       debounceTime(300),
-      switchMap(() => this.authService.sendEmail(this.email())),
-      // Todo handle error msg
-      catchError(error => EMPTY),
+      switchMap(() => this.authService.sendEmail(this.email()).pipe(
+        // Todo handle error msg
+        catchError(error => EMPTY),
+      )),
     ).subscribe(date => {
       this.timePassed.set(Math.round((new Date().getTime() - (new Date(date ?? 0)?.getTime() ?? 0)) / 1000));
       if (this.timer() > 0) {

@@ -166,22 +166,20 @@ export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements O
             email: <string> this.form.value.email,
             password: <string> this.form.value.password,
           };
-          return this.authService.signUp(signUpModel);
+          return this.authService.signUp(signUpModel).pipe(
+            // Todo handle error msg
+            catchError(() => {
+              console.log('ERROR');
+              return EMPTY;
+            }),
+          );
         }
         return EMPTY;
       }),
-      // Todo handle error msg
-      catchError(() => {
-        console.log('ERROR');
-        return EMPTY;
-      }),
       takeUntilDestroyed(this.dr),
-    ).subscribe(result => this.dialogRef.close({
-      action: EAuthDialogResult.SignUp,
-      data: {
-        ...this.form.value,
-        emailSentAt: result,
-      },
+    ).subscribe(() => this.dialogRef.close({
+      action: EAuthDialogResult.ConfirmEmail,
+      data: this.form.value,
     }));
   }
 }

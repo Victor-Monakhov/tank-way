@@ -4,4 +4,5 @@ export enum EAuthDialogResult {
   ForgotPassword,
   SignInGoogle,
   SignInFacebook,
+  ConfirmEmail,
 }

@@ -1,7 +1,7 @@
 <header>
   <tnm-welcome-header ngSkipHydration (signInClick)="onSignIn()"></tnm-welcome-header>
 </header>
-<div class="wrapper">
+<div tnmAuth class="wrapper" (refreshRoute)="onRefreshRoute()" (userLoggedIn)="onUserLoggedIn($event)">
   <ng-scrollbar class="scrollbar-v" thumbClass="thumb-v" trackClass="track-v">
     <main>
       <div class="title-wrapper">

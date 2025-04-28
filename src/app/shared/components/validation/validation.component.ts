@@ -12,7 +12,7 @@ import { MatError } from '@angular/material/form-field';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { map } from 'rxjs';
+import {combineLatest, map} from 'rxjs';
 
 import { NoopValueAccessorDirective } from '../../directives/noop-value-accessor/noop-value-accessor.directive';
 
@@ -42,7 +42,7 @@ export class ValidationComponent implements OnInit {
   ngOnInit(): void {
     const formControl = this.formControl();
     this.errorMsg = toSignal<string>(
-      formControl.valueChanges.pipe(
+      combineLatest([formControl.valueChanges, formControl.statusChanges]).pipe(
         map(() => {
           if (formControl?.hasError(EValidationErrors.Required) && formControl.touched) {
             return 'errors.required_field_error';
@@ -70,6 +70,9 @@ export class ValidationComponent implements OnInit {
           }
           if (formControl?.hasError(EValidationErrors.EmailExist) && formControl.touched) {
             return 'errors.email_exist_error';
+          }
+          if (formControl?.hasError(EValidationErrors.InvalidCredentials) && formControl.touched) {
+            return 'errors.invalid_credentials_error';
           }
           return '';
         }),

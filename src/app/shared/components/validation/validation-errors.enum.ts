@@ -10,4 +10,6 @@ export enum EValidationErrors {
   EmailExist = 'emailExist',
   Pending = 'pending',
   DependentControl = 'dependentControl',
+  ConfirmEmail = 'emailConfirmationRequired',
+  InvalidCredentials = 'invalidCredentials',
 }

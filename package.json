@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "vm-deploy": "ng build --configuration production  --output-path docs --base-href '/browser-tanks/'"
+    "vm-deploy": "ng build --configuration production  --output-path docs --base-href '/tank-way/'"
   },
   "private": true,
   "dependencies": {
