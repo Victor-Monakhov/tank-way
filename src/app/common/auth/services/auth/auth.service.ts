@@ -68,12 +68,20 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}auth/signin-google`, socialAuth);
   }
 
+  signInFacebook(socialAuth: ISocialAuth): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}auth/signin-facebook`, socialAuth);
+  }
+
   signIn(signInModel: IAuth): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.apiUrl}auth/signin`, signInModel);
   }
 
   sendEmail(email: string): Observable<Date> {
     return this.http.patch<Date>(`${this.apiUrl}auth/send-email`, { email });
+  }
+
+  sendPasswordReset(email: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}auth/send-password-reset`, { email });
   }
 
   emailSentAt(email: string): Observable<Date> {

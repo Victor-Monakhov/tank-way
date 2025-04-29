@@ -3,6 +3,10 @@
   <div class="message">
     <p>{{'Hey '}}<strong>{{userName()}}</strong>!</p>
     <br/>
+    @if (withError()) {
+      <p class="error">Looks like you haven’t confirmed your email yet.</p>
+      <br>
+    }
     <p>We just sent a confirmation email to <br/><strong>{{email()}}</strong></p>
     <br/>
     <p>Check your inbox and click the link to finish signing up.</p>

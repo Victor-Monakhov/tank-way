@@ -11,7 +11,12 @@ import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { authInterceptor } from './common/auth/interceptors/auth.interceptor';
 
-import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+  SocialLoginModule,
+} from '@abacritt/angularx-social-login';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, '../assets/i18n/', '.json');
@@ -25,10 +30,10 @@ const provideSocialAuth = {
         id: GoogleLoginProvider.PROVIDER_ID,
         provider: new GoogleLoginProvider(environment.googleOAuthClientId),
       },
-      // {
-      //   id: FacebookLoginProvider.PROVIDER_ID,
-      //   provider: new FacebookLoginProvider('clientId')
-      // }
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider(environment.facebookOAuthAppId),
+      },
     ],
     onError: err => console.error(err),
   } as SocialAuthServiceConfig,

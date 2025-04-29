@@ -34,6 +34,7 @@ export class ConfirmEmailComponent implements OnInit {
   userName = signal<string>(this.data.userName);
   email = signal<string>(this.data.email);
   timer = computed(() => this.timerLimit - this.timePassed());
+  withError = signal<boolean>(this.data.withError);
 
   ngOnInit(): void {
 

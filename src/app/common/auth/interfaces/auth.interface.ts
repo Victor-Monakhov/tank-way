@@ -1,18 +1,26 @@
 import { AbstractControl, FormControl } from '@angular/forms';
 
 import { ConfirmEmailComponent } from '../components/confirm-email/confirm-email.component';
+import { ForgotPasswordComponent } from '../components/forgot-password/forgot-password.component';
 import { SignInComponent } from '../components/sign-in/sign-in.component';
 import { SignUpComponent } from '../components/sign-up/sign-up.component';
 import { UserNameComponent } from '../components/user-name/user-name.component';
 import { EAuthDialogResult } from '../enums/auth.enum';
 
-export type TAuthComponent = SignInComponent | SignUpComponent | ConfirmEmailComponent | UserNameComponent;
+export type TAuthComponent =
+  SignInComponent |
+  SignUpComponent |
+  ConfirmEmailComponent |
+  UserNameComponent |
+  ForgotPasswordComponent;
 
 export interface IAuth {
   email: string;
   password: string;
   token?: string;
   isSignUp?: boolean;
+  isGoogle?: boolean;
+  withError?: boolean;
 }
 
 export interface ISignUp extends IAuth {

@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { catchError, debounceTime, EMPTY, Subject, switchMap } from 'rxjs';
+import { catchError, debounceTime, EMPTY, Observable, Subject, switchMap } from 'rxjs';
 
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { ValidationComponent } from '../../../../shared/components/validation/validation.component';
@@ -29,7 +29,7 @@ import { EAuthDialogResult } from '../../enums/auth.enum';
 export class UserNameComponent extends BaseAuthDirective implements OnInit {
 
   private readonly dialogRef = inject(MatDialogRef<UserNameComponent>);
-  private readonly data = inject<{ token: string }>(MAT_DIALOG_DATA);
+  private readonly data = inject<{ token: string; isGoogle: boolean }>(MAT_DIALOG_DATA);
 
   signUp$ = new Subject<void>();
 
@@ -66,12 +66,23 @@ export class UserNameComponent extends BaseAuthDirective implements OnInit {
   observeGoogleLogin(): void {
     this.signUp$.pipe(
       debounceTime(300),
-      switchMap(() => this.authService.signInGoogle(
-        { idToken: this.data.token, username: this.userNameControl().value },
-        // Todo add error handler
-      ).pipe(catchError(() => EMPTY))),
+      switchMap(() => this.data.isGoogle ? this.handleGoogleLogin() : this.handleFacebookLogin()),
     ).subscribe(response => {
       this.dialogRef.close({ action: EAuthDialogResult.SignIn, data: response });
     });
+  }
+
+  private handleGoogleLogin(): Observable<{ token: string }> {
+    return this.authService.signInGoogle(
+      { idToken: this.data.token, username: this.userNameControl().value },
+      // Todo add error handler
+    ).pipe(catchError(() => EMPTY));
+  }
+
+  private handleFacebookLogin(): Observable<{ token: string }> {
+    return this.authService.signInFacebook(
+      { idToken: this.data.token, username: this.userNameControl().value },
+      // Todo add error handler
+    ).pipe(catchError(() => EMPTY));
   }
 }

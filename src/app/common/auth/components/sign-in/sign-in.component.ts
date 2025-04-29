@@ -18,7 +18,7 @@ import { SignInUpDirective } from '../../directives/sign-in-up/sign-in-up.direct
 import { EAuthDialogResult } from '../../enums/auth.enum';
 import { IAuth, IAuthForm } from '../../interfaces/auth.interface';
 
-import { GoogleSigninButtonDirective, SocialAuthService } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, GoogleSigninButtonDirective, SocialAuthService } from '@abacritt/angularx-social-login';
 
 
 @Component({
@@ -61,7 +61,7 @@ export class SignInComponent extends SignInUpDirective<IAuthForm> implements OnI
   }
 
   onFacebookLogin(): void {
-    this.dialogRef.close({ action: EAuthDialogResult.SignInFacebook });
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then();
   }
 
   onNewAccount(): void {
@@ -105,7 +105,11 @@ export class SignInComponent extends SignInUpDirective<IAuthForm> implements OnI
               if (error.error.message === EValidationErrors.ConfirmEmail) {
                 this.dialogRef.close({
                   action: EAuthDialogResult.ConfirmEmail,
-                  data: this.form.value,
+                  data: {
+                    ...this.form.value,
+                    userName: error.error.userName,
+                    withError: true,
+                  },
                 });
               }
               return EMPTY;
@@ -126,10 +130,11 @@ export class SignInComponent extends SignInUpDirective<IAuthForm> implements OnI
       switchMap(user => combineLatest([of(user), this.authService.emailExist(user.email)])),
       takeUntilDestroyed(this.dr),
     ).subscribe(([user, isSignIn]) => {
+      const isGoogle = !!user.idToken;
       this.dialogRef.close({
-        action: EAuthDialogResult.SignInGoogle,
+        action: isGoogle ? EAuthDialogResult.SignInGoogle : EAuthDialogResult.SignInFacebook,
         data: {
-          token: user.idToken,
+          token: isGoogle ? user.idToken : user.authToken,
           isSignUp: !isSignIn,
         },
       });

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { catchError, combineLatest, EMPTY, map, merge, Observable, of, Subject, switchMap } from 'rxjs';
 
 import { ConfirmEmailComponent } from '../../components/confirm-email/confirm-email.component';
+import { ForgotPasswordComponent } from '../../components/forgot-password/forgot-password.component';
 import { SignInComponent } from '../../components/sign-in/sign-in.component';
 import { SignUpComponent } from '../../components/sign-up/sign-up.component';
 import { UserNameComponent } from '../../components/user-name/user-name.component';
@@ -24,6 +25,7 @@ export class AuthDirective implements OnInit {
   private readonly authService = inject(AuthService);
 
   private signUp$ = new Subject<void>();
+  private forgotPassword$ = new Subject<void>();
   private user$ = new Subject<void>();
   private confirmEmailNotification$ = new Subject<Partial<ISignUp>>();
   private confirmEmail$ = new Subject<IEmailConfirmation>();
@@ -38,6 +40,7 @@ export class AuthDirective implements OnInit {
     this.observeConfirmEmail();
     this.observeUser();
     this.observeRouteParams();
+    this.observeForgotPassword();
     this.checkIfAuth();
   }
 
@@ -47,15 +50,18 @@ export class AuthDirective implements OnInit {
     }
   }
 
-  private handleGoogleLogin(signInDialogResult: Partial<IAuthResult>): Observable<Partial<IAuthResult>> {
+  private handleSocialLogin(signInDialogResult: Partial<IAuthResult>): Observable<Partial<IAuthResult>> {
     const idToken = signInDialogResult?.data?.token;
-    const action = signInDialogResult?.action;
     const isSignUp = signInDialogResult?.data?.isSignUp;
-    if (idToken && isSignUp && action === EAuthDialogResult.SignInGoogle) {
-      return this.authService.openAuthDialog(UserNameComponent, { token: idToken });
+    const isGoogle = signInDialogResult?.action === EAuthDialogResult.SignInGoogle;
+    const request = isGoogle ?
+      this.authService.signInGoogle.bind(this.authService) :
+      this.authService.signInFacebook.bind(this.authService);
+    if (idToken && isSignUp) {
+      return this.authService.openAuthDialog(UserNameComponent, { token: idToken, isGoogle });
     }
-    if (idToken && !isSignUp && action === EAuthDialogResult.SignInGoogle) {
-      return this.authService.signInGoogle({ idToken, username: '' }).pipe(
+    if (idToken && !isSignUp) {
+      return request({ idToken, username: '' }).pipe(
         map(response => ({
           action: EAuthDialogResult.SignIn,
           data: response,
@@ -70,7 +76,7 @@ export class AuthDirective implements OnInit {
   private observeSignIn(): void {
     this.authService.signIn$.pipe(
       switchMap(() => this.authService.openAuthDialog(SignInComponent)),
-      switchMap(result => this.handleGoogleLogin(result)),
+      switchMap(result => this.handleSocialLogin(result)),
       takeUntilDestroyed(this.dr),
     ).subscribe(result => {
       if (result?.data?.token && result?.action === EAuthDialogResult.SignIn) {
@@ -82,6 +88,9 @@ export class AuthDirective implements OnInit {
       }
       if (result?.action === EAuthDialogResult.ConfirmEmail) {
         this.confirmEmailNotification$.next(result.data);
+      }
+      if (result?.action === EAuthDialogResult.ForgotPassword) {
+        this.forgotPassword$.next();
       }
     });
   }
@@ -148,6 +157,16 @@ export class AuthDirective implements OnInit {
       if (email && token) {
         this.confirmEmail$.next({ email, token });
         this.refreshRoute.emit();
+      }
+    });
+  }
+
+  observeForgotPassword(): void {
+    this.forgotPassword$.pipe(
+      switchMap(() => this.authService.openAuthDialog(ForgotPasswordComponent)),
+    ).subscribe(result => {
+      if (result?.action === EAuthDialogResult.ConfirmEmail) {
+        this.confirmEmailNotification$.next(result.data);
       }
     });
   }

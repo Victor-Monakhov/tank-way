@@ -10,6 +10,9 @@
     strong {
       color: var(--mat-sys-primary);
     }
+    .error {
+      color: var(--mat-sys-error);
+    }
     .resend-email {
        .mat-text-btn {
          @include mixins.hover-underline(1px, 2px, var(--mat-sys-primary));
