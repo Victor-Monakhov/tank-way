@@ -6,26 +6,53 @@ import { provideRouter } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { environment } from '../environments/environment';
+
 import { routes } from './app.routes';
 import { authInterceptor } from './common/auth/interceptors/auth.interceptor';
+
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 
-export const appConfig: ApplicationConfig = {
+const provideSocialAuth = {
+  provide: 'SocialAuthServiceConfig',
+  useValue: {
+    autoLogin: false,
+    providers: [
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider(environment.googleOAuthClientId),
+      },
+      // {
+      //   id: FacebookLoginProvider.PROVIDER_ID,
+      //   provider: new FacebookLoginProvider('clientId')
+      // }
+    ],
+    onError: err => console.error(err),
+  } as SocialAuthServiceConfig,
+};
+
+export
+const appConfig: ApplicationConfig = {
   providers: [
+    importProvidersFrom([
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: httpLoaderFactory,
+          deps: [HttpClient],
+        },
+      }),
+      SocialLoginModule,
+    ]),
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(
       withFetch(),
       withInterceptors([authInterceptor]),
     ),
-    importProvidersFrom([TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient],
-      },
-    })]),
+    provideSocialAuth,
   ],
 };

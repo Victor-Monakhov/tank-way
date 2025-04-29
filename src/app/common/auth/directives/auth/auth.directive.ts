@@ -2,14 +2,16 @@ import { DestroyRef, Directive, inject, OnInit, output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
-import { catchError, combineLatest, EMPTY, merge, of, Subject, switchMap } from 'rxjs';
+import { catchError, combineLatest, EMPTY, map, merge, Observable, of, Subject, switchMap } from 'rxjs';
 
 import { ConfirmEmailComponent } from '../../components/confirm-email/confirm-email.component';
 import { SignInComponent } from '../../components/sign-in/sign-in.component';
 import { SignUpComponent } from '../../components/sign-up/sign-up.component';
+import { UserNameComponent } from '../../components/user-name/user-name.component';
 import { EAuthDialogResult } from '../../enums/auth.enum';
-import { IEmailConfirmation, ISignUp, IUser } from '../../interfaces/auth.interface';
-import { AuthService } from '../../services/auth.service';
+import { IAuthResult, IEmailConfirmation, ISignUp, IUser } from '../../interfaces/auth.interface';
+import { AuthService } from '../../services/auth/auth.service';
+
 
 @Directive({
   standalone: true,
@@ -45,19 +47,36 @@ export class AuthDirective implements OnInit {
     }
   }
 
+  private handleGoogleLogin(signInDialogResult: Partial<IAuthResult>): Observable<Partial<IAuthResult>> {
+    const idToken = signInDialogResult?.data?.token;
+    const action = signInDialogResult?.action;
+    const isSignUp = signInDialogResult?.data?.isSignUp;
+    if (idToken && isSignUp && action === EAuthDialogResult.SignInGoogle) {
+      return this.authService.openAuthDialog(UserNameComponent, { token: idToken });
+    }
+    if (idToken && !isSignUp && action === EAuthDialogResult.SignInGoogle) {
+      return this.authService.signInGoogle({ idToken, username: '' }).pipe(
+        map(response => ({
+          action: EAuthDialogResult.SignIn,
+          data: response,
+        } as Partial<IAuthResult>)),
+        // Todo add error handler
+        catchError(() => EMPTY),
+      );
+    }
+    return of(signInDialogResult);
+  }
+
   private observeSignIn(): void {
     this.authService.signIn$.pipe(
       switchMap(() => this.authService.openAuthDialog(SignInComponent)),
-      switchMap(result => {
-        if (result?.data?.token && result?.action === EAuthDialogResult.SignIn) {
-          this.authService.authToken = result.data.token;
-          this.user$.next();
-          return EMPTY;
-        }
-        return of(result);
-      }),
+      switchMap(result => this.handleGoogleLogin(result)),
       takeUntilDestroyed(this.dr),
     ).subscribe(result => {
+      if (result?.data?.token && result?.action === EAuthDialogResult.SignIn) {
+        this.authService.authToken = result.data.token;
+        this.user$.next();
+      }
       if (result?.action === EAuthDialogResult.SignUp) {
         this.signUp$.next();
       }

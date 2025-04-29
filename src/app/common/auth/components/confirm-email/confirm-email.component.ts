@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { catchError, debounceTime, EMPTY, Subject, switchMap } from 'rxjs';
 
 import { ISignUp } from '../../interfaces/auth.interface';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 @Component({

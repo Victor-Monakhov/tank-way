@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <h2 class="title">{{'auth.nickname' | translate}}</h2>
+
+  <tnm-input-text
+    [formControl]="userNameControl()"
+    [label]="'auth.nickname' | translate">
+    <tnm-validation [formControl]="userNameControl()"></tnm-validation>
+  </tnm-input-text>
+
+  <button
+    mat-flat-button
+    type="button"
+    class="mat-submit-btn"
+    [disabled]="userNameControl().invalid"
+    (click)="onContinue()">
+    Continue
+  </button>
+</div>

@@ -12,15 +12,14 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { catchError, debounceTime, EMPTY, filter, Observable, Subject, switchMap } from 'rxjs';
+import { catchError, debounceTime, EMPTY, Subject, switchMap } from 'rxjs';
 
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { ValidationComponent } from '../../../../shared/components/validation/validation.component';
 import { EValidationErrors } from '../../../../shared/components/validation/validation-errors.enum';
-import { BaseAuthDirective } from '../../directives/base-auth/base-auth.directive';
+import { SignInUpDirective } from '../../directives/sign-in-up/sign-in-up.directive';
 import { EAuthDialogResult } from '../../enums/auth.enum';
 import { ISignUp, ISignUpForm } from '../../interfaces/auth.interface';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,
@@ -37,7 +36,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './sign-up.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements OnInit {
+export class SignUpComponent extends SignInUpDirective<ISignUpForm> implements OnInit {
+
+  private readonly dialogRef = inject(MatDialogRef<SignUpComponent>);
+  private register$ = new Subject<void>();
 
   userNamePending = signal<boolean>(false);
   userNameExist = signal<boolean>(false);
@@ -46,11 +48,7 @@ export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements O
   userNameControl!: WritableSignal<FormControl<string>>;
   confirmPasswordControl!: WritableSignal<FormControl<string>>;
 
-  private readonly dialogRef = inject(MatDialogRef<SignUpComponent>);
-  private readonly authService = inject(AuthService);
-
   override form!: FormGroup<ISignUpForm>;
-  private register$ = new Subject<void>();
 
   ngOnInit(): void {
     this.initForm();
@@ -121,39 +119,6 @@ export class SignUpComponent extends BaseAuthDirective<ISignUpForm> implements O
     this.passwordControl().valueChanges.pipe(
       takeUntilDestroyed(this.dr),
     ).subscribe(() => this.confirmPasswordControl().updateValueAndValidity());
-  }
-
-  private observeControlValueExist(
-    control: WritableSignal<FormControl>,
-    pending: WritableSignal<boolean>,
-    exist: WritableSignal<boolean>,
-    request: (value: string) => Observable<boolean>,
-  ): void {
-    let valueBuff = '';
-    control().valueChanges.pipe(
-      debounceTime(300),
-      filter(value => {
-        const condition =
-          (control().valid || (exist() && Object.keys(control().errors).length === 1)) && valueBuff !== value;
-        valueBuff = value;
-        return condition;
-      }),
-      switchMap(value => {
-        pending.set(true);
-        control().updateValueAndValidity();
-        return request(value);
-      }),
-      catchError(() => {
-        pending.set(false);
-        control().updateValueAndValidity();
-        return EMPTY;
-      }),
-      takeUntilDestroyed(this.dr),
-    ).subscribe(result => {
-      pending.set(false);
-      exist.set(result);
-      control().updateValueAndValidity();
-    });
   }
 
   private observeRegister(): void {

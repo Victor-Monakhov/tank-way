@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
 
+
 @Component({
   standalone: true,
   imports: [RouterOutlet],

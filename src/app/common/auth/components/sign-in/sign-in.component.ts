@@ -9,15 +9,17 @@ import { MatInputModule } from '@angular/material/input';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { catchError, debounceTime, EMPTY, Subject, switchMap } from 'rxjs';
+import { catchError, combineLatest, debounceTime, EMPTY, of, Subject, switchMap } from 'rxjs';
 
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { ValidationComponent } from '../../../../shared/components/validation/validation.component';
 import { EValidationErrors } from '../../../../shared/components/validation/validation-errors.enum';
-import { BaseAuthDirective } from '../../directives/base-auth/base-auth.directive';
+import { SignInUpDirective } from '../../directives/sign-in-up/sign-in-up.directive';
 import { EAuthDialogResult } from '../../enums/auth.enum';
 import { IAuth, IAuthForm } from '../../interfaces/auth.interface';
-import { AuthService } from '../../services/auth.service';
+
+import { GoogleSigninButtonDirective, SocialAuthService } from '@abacritt/angularx-social-login';
+
 
 @Component({
   standalone: true,
@@ -33,31 +35,29 @@ import { AuthService } from '../../services/auth.service';
     MatButtonModule,
     MatIconModule,
     ValidationComponent,
+    GoogleSigninButtonDirective,
   ],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignInComponent extends BaseAuthDirective<IAuthForm> implements OnInit {
-
-  override form!: FormGroup<IAuthForm>;
+export class SignInComponent extends SignInUpDirective<IAuthForm> implements OnInit {
 
   private readonly dialogRef = inject(MatDialogRef<SignInComponent>);
-  private readonly authService = inject(AuthService);
+  private readonly socialAuthService = inject(SocialAuthService);
+
+  override form!: FormGroup<IAuthForm>;
 
   login$ = new Subject<void>();
 
   ngOnInit(): void {
     this.initForm();
     this.observeLogin();
+    this.observeGoogleLogin();
   }
 
   onLogin(): void {
     this.login$.next();
-  }
-
-  onGoogleLogin(): void {
-    this.dialogRef.close({ action: EAuthDialogResult.SignInGoogle });
   }
 
   onFacebookLogin(): void {
@@ -119,5 +119,20 @@ export class SignInComponent extends BaseAuthDirective<IAuthForm> implements OnI
       action: EAuthDialogResult.SignIn,
       data: result,
     }));
+  }
+
+  observeGoogleLogin(): void {
+    this.socialAuthService.authState.pipe(
+      switchMap(user => combineLatest([of(user), this.authService.emailExist(user.email)])),
+      takeUntilDestroyed(this.dr),
+    ).subscribe(([user, isSignIn]) => {
+      this.dialogRef.close({
+        action: EAuthDialogResult.SignInGoogle,
+        data: {
+          token: user.idToken,
+          isSignUp: !isSignIn,
+        },
+      });
+    });
   }
 }

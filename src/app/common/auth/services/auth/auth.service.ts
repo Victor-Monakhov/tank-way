@@ -5,9 +5,17 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Observable, Subject } from 'rxjs';
 
-import { environment } from '../../../../environments/environment';
-import { ELSKeys } from '../../resources/enums/local-storage.enum';
-import { IAuth, IAuthResult, IEmailConfirmation, ISignUp, IUser, TAuthComponent } from '../interfaces/auth.interface';
+import { environment } from '../../../../../environments/environment';
+import { ELSKeys } from '../../../resources/enums/local-storage.enum';
+import {
+  IAuth,
+  IAuthResult,
+  IEmailConfirmation,
+  ISignUp,
+  ISocialAuth,
+  IUser,
+  TAuthComponent,
+} from '../../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +62,10 @@ export class AuthService {
 
   signUp(signUpModel: ISignUp): Observable<Date> {
     return this.http.post<Date>(`${this.apiUrl}auth/signup`, signUpModel);
+  }
+
+  signInGoogle(socialAuth: ISocialAuth): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}auth/signin-google`, socialAuth);
   }
 
   signIn(signInModel: IAuth): Observable<{ token: string }> {

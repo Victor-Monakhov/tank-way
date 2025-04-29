@@ -33,7 +33,8 @@
   </div>
 
   <div class="social-login">
-    <button mat-fab type="button" (click)="onGoogleLogin()">
+    <button mat-fab class="google-upper-btn" type="button">
+      <asl-google-signin-button class="google-inner-btn"></asl-google-signin-button>
       <mat-icon class="social-icon" svgIcon="google"></mat-icon>
     </button>
     <button mat-fab type="button" (click)="onFacebookLogin()">

@@ -7,7 +7,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { AuthDirective } from '../../common/auth/directives/auth/auth.directive';
 import { IUser } from '../../common/auth/interfaces/auth.interface';
-import { AuthService } from '../../common/auth/services/auth.service';
+import { AuthService } from '../../common/auth/services/auth/auth.service';
 import { FooterComponent } from '../../common/footer/footer.component';
 
 import { DemoSettingsComponent } from './components/demo-settings/demo-settings.component';
