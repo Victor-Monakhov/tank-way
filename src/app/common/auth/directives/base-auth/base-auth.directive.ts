@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 import { catchError, debounceTime, EMPTY, filter, Observable, switchMap } from 'rxjs';
 
 import { ValidationService } from '../../../../shared/components/validation/validation-service/validation.service';
-import {AuthService} from "../../services/auth/auth.service";
+import { AuthService } from '../../services/auth/auth.service';
 
 @Directive()
 export abstract class BaseAuthDirective {
