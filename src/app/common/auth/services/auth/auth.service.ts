@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Observable, Subject } from 'rxjs';
+import {delay, Observable, Subject} from 'rxjs';
 
 import { environment } from '../../../../../environments/environment';
 import { ELSKeys } from '../../../resources/enums/local-storage.enum';
 import {
-  IAuth,
+  IAuth, IAuthDialogData,
   IAuthResult,
-  IEmailConfirmation,
+  IEmailConfirmation, IPasswordChange,
   ISignUp,
   ISocialAuth,
   IUser,
@@ -44,24 +44,24 @@ export class AuthService {
     localStorage.removeItem(ELSKeys.AuthToken);
   }
 
-  openAuthDialog(authComponent: ComponentType<TAuthComponent>, data?: Partial<ISignUp>): Observable<IAuthResult> {
+  openAuthDialog(authComponent: ComponentType<TAuthComponent>, data?: Partial<IAuthDialogData>): Observable<IAuthResult> {
     return this.dialog.open(authComponent, {
       data,
       hasBackdrop: true,
       panelClass: 'mat-vm-dialog',
-    }).afterClosed();
+    }).afterClosed().pipe(delay(0));
   }
 
   userNameExist(userName: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.apiUrl}auth/username?userName=${userName}`);
+    return this.http.get<boolean>(`${this.apiUrl}auth/username-exist?userName=${userName}`);
   }
 
   emailExist(email: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.apiUrl}auth/email?email=${email}`);
+    return this.http.get<boolean>(`${this.apiUrl}auth/email-exist?email=${email}`);
   }
 
-  signUp(signUpModel: ISignUp): Observable<Date> {
-    return this.http.post<Date>(`${this.apiUrl}auth/signup`, signUpModel);
+  signUp(signUpModel: ISignUp): Observable<IUser> {
+    return this.http.post<IUser>(`${this.apiUrl}auth/signup`, signUpModel);
   }
 
   signInGoogle(socialAuth: ISocialAuth): Observable<{ token: string }> {
@@ -76,20 +76,20 @@ export class AuthService {
     return this.http.post<{ token: string }>(`${this.apiUrl}auth/signin`, signInModel);
   }
 
-  sendEmail(email: string): Observable<Date> {
-    return this.http.patch<Date>(`${this.apiUrl}auth/send-email`, { email });
+  sendEmailConfirmation(email: string): Observable<IUser> {
+    return this.http.patch<IUser>(`${this.apiUrl}auth/send-email-confirmation`, { email });
   }
 
-  sendPasswordReset(email: string): Observable<{ message: string }> {
-    return this.http.post<{ message: string }>(`${this.apiUrl}auth/send-password-reset`, { email });
-  }
-
-  emailSentAt(email: string): Observable<Date> {
-    return this.http.get<Date>(`${this.apiUrl}auth/email-sent-at?email=${email}`);
+  sendEmailPasswordReset(email: string): Observable<IUser> {
+    return this.http.patch<IUser>(`${this.apiUrl}auth/send-email-password-reset`, { email });
   }
 
   confirmEmail(confirmationData: IEmailConfirmation): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(`${this.apiUrl}auth/confirm-email`, confirmationData);
+  }
+
+  changePassword(changes: IPasswordChange): Observable<IUser> {
+    return this.http.post<IUser>(`${this.apiUrl}auth/change-password`, changes);
   }
 
   getUser(): Observable<IUser> {

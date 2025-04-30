@@ -69,7 +69,9 @@ export class SignUpComponent extends SignInUpDirective<ISignUpForm> implements O
   }
 
   onRegister(): void {
-    this.register$.next();
+    if (this.form.valid) {
+      this.register$.next();
+    }
   }
 
   onBackToLogin(): void {
@@ -125,26 +127,23 @@ export class SignUpComponent extends SignInUpDirective<ISignUpForm> implements O
     this.register$.pipe(
       debounceTime(300),
       switchMap(() => {
-        if (this.form.valid) {
-          const signUpModel: ISignUp = {
-            userName: <string> this.form.value.userName,
-            email: <string> this.form.value.email,
-            password: <string> this.form.value.password,
-          };
-          return this.authService.signUp(signUpModel).pipe(
-            // Todo handle error msg
-            catchError(() => {
-              console.log('ERROR');
-              return EMPTY;
-            }),
-          );
-        }
-        return EMPTY;
+        const signUpModel: ISignUp = {
+          userName: <string> this.form.value.userName,
+          email: <string> this.form.value.email,
+          password: <string> this.form.value.password,
+        };
+        return this.authService.signUp(signUpModel).pipe(
+          // Todo handle error msg
+          catchError(() => {
+            console.log('ERROR');
+            return EMPTY;
+          }),
+        );
       }),
       takeUntilDestroyed(this.dr),
-    ).subscribe(() => this.dialogRef.close({
+    ).subscribe(user => this.dialogRef.close({
       action: EAuthDialogResult.ConfirmEmail,
-      data: this.form.value,
+      data: user,
     }));
   }
 }

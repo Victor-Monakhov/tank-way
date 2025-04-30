@@ -6,3 +6,8 @@ export enum EAuthDialogResult {
   SignInFacebook,
   ConfirmEmail,
 }
+
+export enum EEmailMessageTypes {
+  EmailConfirmation = 'emailConfirmation',
+  PasswordReset = 'passwordReset',
+}

@@ -1,5 +1,9 @@
 <div class="wrapper">
-  <h2 class="title">confirmation</h2>
+  @if (emailMsgType() === eEmailMessageTypes.EmailConfirmation) {
+    <h2 class="title">confirmation</h2>
+  } @else {
+    <h2 class="title">reset password</h2>
+  }
   <div class="message">
     <p>{{'Hey '}}<strong>{{userName()}}</strong>!</p>
     <br/>
@@ -7,9 +11,15 @@
       <p class="error">Looks like you haven’t confirmed your email yet.</p>
       <br>
     }
-    <p>We just sent a confirmation email to <br/><strong>{{email()}}</strong></p>
-    <br/>
-    <p>Check your inbox and click the link to finish signing up.</p>
+    @if (emailMsgType() === eEmailMessageTypes.EmailConfirmation) {
+      <p>We just sent a confirmation email to <br/><strong>{{email()}}</strong></p>
+      <br/>
+      <p>Check your inbox and click the link to finish signing up.</p>
+    } @else {
+      <p>We just sent an email to <br/><strong>{{email()}}</strong></p>
+      <br/>
+      <p>Check your inbox and click the link to reset your password.</p>
+    }
     <br/>
     <p>Can’t wait to have you on board!</p>
     <br>

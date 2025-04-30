@@ -53,17 +53,16 @@ export class ForgotPasswordComponent extends BaseAuthDirective implements OnInit
 
   private observeResetPassword(): void {
     this.resetPassword$.pipe(
-      switchMap(() => this.authService.sendPasswordReset(this.emailControl().value).pipe(
+      switchMap(() => this.authService.sendEmailPasswordReset(this.emailControl().value).pipe(
         catchError(error => {
-          if (error.error.message === EValidationErrors.InvalidCredentials) {
-            this.emailControl().setErrors({ [EValidationErrors.InvalidCredentials]: true });
+          if (error.error.message === EValidationErrors.InvalidEmail) {
+            this.emailControl().setErrors({ [EValidationErrors.InvalidEmail]: true });
           }
           if (error.error.message === EValidationErrors.ConfirmEmail) {
             this.dialogRef.close({
               action: EAuthDialogResult.ConfirmEmail,
               data: {
-                email: this.emailControl().value,
-                userName: error.error.userName,
+                ...error.error.user,
                 withError: true,
               },
             });
@@ -72,7 +71,12 @@ export class ForgotPasswordComponent extends BaseAuthDirective implements OnInit
         })),
       ),
       takeUntilDestroyed(this.dr),
-    ).subscribe();
+    ).subscribe(user => {
+      this.dialogRef.close({
+        action: EAuthDialogResult.ForgotPassword,
+        data: user,
+      });
+    });
   }
 
 }

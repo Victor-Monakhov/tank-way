@@ -12,4 +12,5 @@ export enum EValidationErrors {
   DependentControl = 'dependentControl',
   ConfirmEmail = 'emailConfirmationRequired',
   InvalidCredentials = 'invalidCredentials',
+  InvalidEmail = 'invalidEmail',
 }

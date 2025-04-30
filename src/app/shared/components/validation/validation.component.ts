@@ -74,6 +74,9 @@ export class ValidationComponent implements OnInit {
           if (formControl?.hasError(EValidationErrors.InvalidCredentials) && formControl.touched) {
             return 'errors.invalid_credentials_error';
           }
+          if (formControl?.hasError(EValidationErrors.InvalidEmail) && formControl.touched) {
+            return 'errors.invalid_email';
+          }
           return '';
         }),
       ),

@@ -57,7 +57,9 @@ export class SignInComponent extends SignInUpDirective<IAuthForm> implements OnI
   }
 
   onLogin(): void {
-    this.login$.next();
+    if (this.form.valid) {
+      this.login$.next();
+    }
   }
 
   onFacebookLogin(): void {
@@ -91,32 +93,28 @@ export class SignInComponent extends SignInUpDirective<IAuthForm> implements OnI
     this.login$.pipe(
       debounceTime(300),
       switchMap(() => {
-        if (this.form.valid) {
-          const signInModel: IAuth = {
-            email: <string> this.form.value.email,
-            password: <string> this.form.value.password,
-          };
-          return this.authService.signIn(signInModel).pipe(
-            // Todo handle error msg
-            catchError(error => {
-              if (error.error.message === EValidationErrors.InvalidCredentials) {
-                this.passwordControl().setErrors({ [EValidationErrors.InvalidCredentials]: true });
-              }
-              if (error.error.message === EValidationErrors.ConfirmEmail) {
-                this.dialogRef.close({
-                  action: EAuthDialogResult.ConfirmEmail,
-                  data: {
-                    ...this.form.value,
-                    userName: error.error.userName,
-                    withError: true,
-                  },
-                });
-              }
-              return EMPTY;
-            }),
-          );
-        }
-        return EMPTY;
+        const signInModel: IAuth = {
+          email: <string> this.form.value.email,
+          password: <string> this.form.value.password,
+        };
+        return this.authService.signIn(signInModel).pipe(
+          // Todo handle error msg
+          catchError(error => {
+            if (error.error.message === EValidationErrors.InvalidCredentials) {
+              this.passwordControl().setErrors({ [EValidationErrors.InvalidCredentials]: true });
+            }
+            if (error.error.message === EValidationErrors.ConfirmEmail) {
+              this.dialogRef.close({
+                action: EAuthDialogResult.ConfirmEmail,
+                data: {
+                  ...error.error.user,
+                  withError: true,
+                },
+              });
+            }
+            return EMPTY;
+          }),
+        );
       }),
       takeUntilDestroyed(this.dr),
     ).subscribe(result => this.dialogRef.close({

@@ -1,31 +1,28 @@
 import { AbstractControl, FormControl } from '@angular/forms';
 
-import { ConfirmEmailComponent } from '../components/confirm-email/confirm-email.component';
+import { ChangePasswordComponent } from '../components/change-password/change-password.component';
 import { ForgotPasswordComponent } from '../components/forgot-password/forgot-password.component';
+import { SendEmailComponent } from '../components/send-email/send-email.component';
 import { SignInComponent } from '../components/sign-in/sign-in.component';
 import { SignUpComponent } from '../components/sign-up/sign-up.component';
 import { UserNameComponent } from '../components/user-name/user-name.component';
-import { EAuthDialogResult } from '../enums/auth.enum';
+import { EAuthDialogResult, EEmailMessageTypes } from '../enums/auth.enum';
 
 export type TAuthComponent =
   SignInComponent |
   SignUpComponent |
-  ConfirmEmailComponent |
+  SendEmailComponent |
   UserNameComponent |
-  ForgotPasswordComponent;
+  ForgotPasswordComponent |
+  ChangePasswordComponent;
 
 export interface IAuth {
   email: string;
   password: string;
-  token?: string;
-  isSignUp?: boolean;
-  isGoogle?: boolean;
-  withError?: boolean;
 }
 
 export interface ISignUp extends IAuth {
   userName: string;
-  emailSentAt?: Date;
 }
 
 export interface ISocialAuth {
@@ -37,14 +34,30 @@ export interface IAuthForm extends Record<string, AbstractControl> {
   email: FormControl<string>;
   password: FormControl<string>;
 }
+
 export interface ISignUpForm extends IAuthForm {
   userName: FormControl<string>;
   confirmPassword: FormControl<string>;
 }
 
+export interface IChangePasswordForm {
+  password: FormControl<string>;
+  confirmPassword: FormControl<string>;
+}
+
+export interface IAuthDialogData extends ISignUp {
+  isSignUp?: boolean;
+  isGoogle?: boolean;
+  withError?: boolean;
+  token?: string;
+  emailSentAt?: Date;
+  passwordResetSentAt?: Date;
+  emailMsgType?: EEmailMessageTypes;
+}
+
 export interface IAuthResult {
   action: EAuthDialogResult;
-  data?: Partial<ISignUp>;
+  data?: Partial<IAuthDialogData>;
 }
 
 export interface IEmailConfirmation {
@@ -52,7 +65,15 @@ export interface IEmailConfirmation {
   token: string;
 }
 
+export interface IPasswordChange {
+  email: string;
+  password: string;
+  token: string;
+}
+
 export interface IUser {
   email: string;
   userName: string;
+  emailSentAt?: Date;
+  passwordResetSentAt?: Date;
 }
