@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import {delay, Observable, Subject} from 'rxjs';
+import { delay, Observable, Subject } from 'rxjs';
 
 import { environment } from '../../../../../environments/environment';
 import { ELSKeys } from '../../../resources/enums/local-storage.enum';

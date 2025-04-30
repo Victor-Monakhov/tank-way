@@ -9,8 +9,8 @@ import { catchError, EMPTY, Subject, switchMap } from 'rxjs';
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { ValidationComponent } from '../../../../shared/components/validation/validation.component';
 import { BaseAuthDirective } from '../../directives/base-auth/base-auth.directive';
+import { EAuthDialogResult } from '../../enums/auth.enum';
 import { IChangePasswordForm, IPasswordChange } from '../../interfaces/auth.interface';
-import {EAuthDialogResult} from "../../enums/auth.enum";
 
 @Component({
   standalone: true,
