@@ -5,6 +5,7 @@
 @forward 'material/mat-input';
 @forward 'material/mat-icon';
 @forward 'material/mat-dialog';
+@forward 'material/mat-table';
 
 @function _patch-error-palette($palette) {
   @return map.merge(

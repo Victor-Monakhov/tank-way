@@ -1,7 +1,8 @@
 <div class="wrapper">
+  <tnm-user-statistics></tnm-user-statistics>
   <div class="game-settings">
-    <tnm-tank-settings (tankSettings)="onTankSettings($event)"></tnm-tank-settings>
-    <tnm-position-settings (positionSettings)="onPositionSettings($event)"></tnm-position-settings>
+    <tnm-tank-settings></tnm-tank-settings>
+    <tnm-position-settings></tnm-position-settings>
   </div>
   <button mat-flat-button type="button" class="mat-submit-btn" (click)="onDemo()">Play Demo</button>
   <small class="log-in-row">

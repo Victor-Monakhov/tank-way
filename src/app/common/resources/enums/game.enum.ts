@@ -1,4 +1,9 @@
 export enum ETeamNames {
-  Red = 'Red Team',
-  Blue = 'Blue Team',
+  Red = 'red',
+  Blue = 'blue',
 }
+
+export const teamNamesDescription: { [key in ETeamNames]: string } = {
+  [ETeamNames.Red]: 'Red Team',
+  [ETeamNames.Blue]: 'Blue Team',
+};

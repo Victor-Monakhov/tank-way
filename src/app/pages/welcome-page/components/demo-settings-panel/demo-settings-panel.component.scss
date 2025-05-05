@@ -15,6 +15,7 @@
           (min-width, (auto, 370px)),
     );
     .title {
+      text-transform: capitalize;
       font-size: 28px;
       color: var(--mat-sys-primary);
     }

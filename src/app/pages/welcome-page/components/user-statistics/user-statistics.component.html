@@ -1,0 +1,44 @@
+<div class="wrapper">
+
+  <h2 class="title">Your War Room</h2>
+
+  <div class="statistics-header">
+    <tnm-input-text
+      class="user-name"
+      [formControl]="userNameControl()"
+      [label]="'auth.nickname' | translate">
+      <tnm-validation [formControl]="userNameControl()"></tnm-validation>
+    </tnm-input-text>
+    <div class="user-statistics">
+      <div class="user-statistics-item">
+        <strong class="item-name">Battles:</strong>
+        <span>{{player().totalBattles}}</span>
+      </div>
+      <hr/>
+      <div class="user-statistics-item">
+        <strong class="item-name">Wins:</strong>
+        <span>{{player().totalWins}}</span>
+      </div>
+      <hr/>
+      <div class="user-statistics-item">
+        <strong class="item-name">Defeats:</strong>
+        <span>{{player().totalDefeats}}</span>
+      </div>
+      <hr/>
+      <div class="user-statistics-item">
+        <strong class="item-name">Kills:</strong>
+        <span>{{player().totalKills}}</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Battles:</h3>
+
+  <div class="statistics-wrapper">
+    @if (battles().length) {
+      <tnm-battles-table [battles]="battles()"></tnm-battles-table>
+    } @else {
+      <strong class="empty-statistics">No battle stats yet — join a game to get started!</strong>
+    }
+  </div>
+</div>

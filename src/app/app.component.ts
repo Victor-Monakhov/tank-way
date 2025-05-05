@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -14,6 +14,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
 
+  private readonly elRef = inject(ElementRef);
+
   constructor(private translate: TranslateService) {
     const languages: string[] = ['de', 'en', 'uk', 'fr', 'es', 'pl'];
     this.translate.addLangs(languages);
@@ -23,5 +25,8 @@ export class AppComponent {
       const langToUse = languages.includes(browserLang) ? browserLang : 'en';
       this.translate.use(langToUse);
     }
+
+    const hostEl: HTMLElement = this.elRef.nativeElement;
+    hostEl.oncontextmenu = (event: MouseEvent): void => event.preventDefault();
   }
 }

@@ -12,3 +12,12 @@ export interface ITankSettings {
   head: ITankHead;
   body: ITankBody;
 }
+
+export interface ITankStats extends ITankSettings {
+  name: string;
+  team: 'red' | 'blue';
+  level: number;
+  kills: number;
+  deaths: number;
+  date: number;
+}

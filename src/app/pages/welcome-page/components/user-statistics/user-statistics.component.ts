@@ -1,0 +1,87 @@
+import {
+  ChangeDetectionStrategy,
+  Component, computed, DestroyRef,
+  inject, OnInit,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
+import { TranslatePipe } from '@ngx-translate/core';
+
+import { debounceTime } from 'rxjs';
+
+import { IDemoBattle, IDemoPlayer } from '../../../../common/resources/interfaces/game.interface';
+import { StateService } from '../../../../common/resources/services/state/state.service';
+import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
+import { ValidationComponent } from '../../../../shared/components/validation/validation.component';
+import { ValidationService } from '../../../../shared/components/validation/validation-service/validation.service';
+import { BattlesTableComponent } from '../battles-table/battles-table.component';
+
+@Component({
+  standalone: true,
+  selector: 'tnm-user-statistics',
+  imports: [
+    InputTextComponent,
+    ReactiveFormsModule,
+    TranslatePipe,
+    ValidationComponent,
+    BattlesTableComponent,
+  ],
+  templateUrl: './user-statistics.component.html',
+  styleUrl: './user-statistics.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class UserStatisticsComponent implements OnInit {
+
+  private readonly validationService = inject(ValidationService);
+  private readonly stateService = inject(StateService);
+  private readonly dr = inject(DestroyRef);
+
+  private locker = false;
+
+  battles = computed<IDemoBattle[]>(() => this.stateService.demoBattles() ?? []);
+  player = computed<Partial<IDemoPlayer>>(() => {
+    const demoState = this.stateService.demoPlayer();
+    if (demoState) {
+      if (!this.locker) {
+        this.userNameControl().setValue(demoState.name);
+        this.locker = true;
+      }
+      return {
+        name: demoState.name,
+        totalBattles: demoState.totalBattles,
+        totalWins: demoState.totalWins,
+        totalDefeats: demoState.totalDefeats,
+        totalKills: demoState.totalKills,
+      };
+    }
+    return {};
+  });
+
+  userNameControl = signal<FormControl<string>>(
+    new FormControl('Comrade', {
+      validators: [
+        this.validationService.userNameLength,
+        this.validationService.userName,
+      ],
+      nonNullable: true,
+    }),
+  );
+
+  ngOnInit(): void {
+    this.observeUserName();
+  }
+
+  private observeUserName(): void {
+    this.userNameControl().valueChanges.pipe(
+      debounceTime(500),
+      takeUntilDestroyed(this.dr),
+    ).subscribe(value => {
+      if (this.userNameControl().valid) {
+        this.stateService.updatePlayerState({ name: value });
+      }
+    });
+  }
+
+}

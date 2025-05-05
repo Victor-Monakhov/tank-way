@@ -20,10 +20,11 @@
       @include mixins.vm-media(
           horizontal,
             (width, (270px, 300px)),
-            (height, (270px, 300px))
+            (height, (270px, 300px)),
       );
 
       .map {
+        display: inline-block;
         position: relative;
         border-radius: 25px;
         width: 100%;

@@ -3,11 +3,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 
 import { ELSKeys } from '../../../../common/resources/enums/local-storage.enum';
-import { IPositionSettings } from '../../../../common/resources/interfaces/game.interface';
-import { ITankSettings } from '../../../../common/resources/interfaces/tank.interface';
-import { GameSettingsService } from '../../../../common/resources/services/game-settings/game-settings.service';
+import { StateService } from '../../../../common/resources/services/state/state.service';
 import { PositionSettingsComponent } from '../position-settings/position-settings.component';
 import { TankSettingsComponent } from '../tank-settings/tank-settings.component';
+import { UserStatisticsComponent } from '../user-statistics/user-statistics.component';
 
 @Component({
   standalone: true,
@@ -16,6 +15,7 @@ import { TankSettingsComponent } from '../tank-settings/tank-settings.component'
     TankSettingsComponent,
     PositionSettingsComponent,
     MatButtonModule,
+    UserStatisticsComponent,
   ],
   templateUrl: './demo-settings.component.html',
   styleUrl: './demo-settings.component.scss',
@@ -25,7 +25,7 @@ export class DemoSettingsComponent implements OnInit {
 
   signInClick = output<void>();
 
-  private readonly gameSettingsService = inject(GameSettingsService);
+  private readonly stateService = inject(StateService);
   private readonly router = inject(Router);
 
   ngOnInit(): void {
@@ -36,17 +36,6 @@ export class DemoSettingsComponent implements OnInit {
 
   onDemo(): void {
     this.router.navigate(['demo']).then();
-  }
-
-  onTankSettings(settings: ITankSettings): void {
-    this.gameSettingsService.demoSettings.tankBody = settings.body.name;
-    this.gameSettingsService.demoSettings.tankHead = settings.head.name;
-  }
-
-  onPositionSettings(settings: IPositionSettings): void {
-    this.gameSettingsService.demoSettings.position = settings.position;
-    this.gameSettingsService.demoSettings.team =
-      settings.team.toLowerCase().includes('red') ? 'red' : 'blue';
   }
 
 }

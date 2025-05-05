@@ -1,16 +1,18 @@
-import { AfterViewInit,
+import {
   ChangeDetectionStrategy,
-  Component,
+  Component, effect,
   ElementRef,
   inject,
-  OnDestroy, OnInit,
-  viewChild } from '@angular/core';
+  OnDestroy,
+  viewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 
 import { ELSKeys } from '../../common/resources/enums/local-storage.enum';
-import { GameSettingsService } from '../../common/resources/services/game-settings/game-settings.service';
+import { IDemoGameSettings } from '../../common/resources/interfaces/game.interface';
+import { StateService } from '../../common/resources/services/state/state.service';
 
 import { Game } from '@victor_monakhov/tanks';
 
@@ -25,40 +27,41 @@ import { Game } from '@victor_monakhov/tanks';
   styleUrl: './demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DemoComponent implements OnDestroy {
   demoPanelRef = viewChild<ElementRef<HTMLElement>>('demoPanel');
   canvasRef = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
 
-  private readonly gameService = inject(GameSettingsService);
+  private readonly stateService = inject(StateService);
   private readonly router = inject(Router);
   private game!: Game;
 
-  ngOnInit(): void {
-    if (localStorage.getItem(ELSKeys.InDemo)) {
-      this.router.navigate(['welcome']).then();
-    }
-  }
-
-  public ngAfterViewInit(): void {
-    if (!localStorage.getItem(ELSKeys.InDemo)) {
-      localStorage.setItem(ELSKeys.InDemo, JSON.stringify('inDemo'));
-      const demoPanel = this.demoPanelRef().nativeElement;
-      const canvas: HTMLCanvasElement = this.canvasRef().nativeElement;
-      if (demoPanel.clientHeight > demoPanel.clientWidth) {
-        canvas.width = demoPanel.clientHeight - 160;
-        canvas.height = demoPanel.clientWidth - 10;
-        canvas.style.transform = 'rotate(90deg)';
+  constructor() {
+    effect(() => {
+      if (localStorage.getItem(ELSKeys.InDemo)) {
+        this.router.navigate(['welcome']).then();
       } else {
-        canvas.width = demoPanel.clientWidth - 160;
-        canvas.height = demoPanel.clientHeight - 10;
-      }
-      this.startGame(canvas);
-      onbeforeunload = (): void => {
-        if (this.game) {
-          this.game.destroy();
+        const gameSettings = this.stateService.demoGameSettings();
+        if (gameSettings) {
+          localStorage.setItem(ELSKeys.InDemo, JSON.stringify(ELSKeys.InDemo));
+          const demoPanel = this.demoPanelRef().nativeElement;
+          const canvas: HTMLCanvasElement = this.canvasRef().nativeElement;
+          if (demoPanel.clientHeight > demoPanel.clientWidth) {
+            canvas.width = demoPanel.clientHeight - 160;
+            canvas.height = demoPanel.clientWidth - 10;
+            canvas.style.transform = 'rotate(90deg)';
+          } else {
+            canvas.width = demoPanel.clientWidth - 160;
+            canvas.height = demoPanel.clientHeight - 10;
+          }
+          this.startGame(canvas, gameSettings);
+          onbeforeunload = (): void => {
+            if (this.game) {
+              this.game.destroy();
+            }
+          };
         }
-      };
-    }
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -72,8 +75,8 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate(['']).then();
   }
 
-  private startGame(canvas: HTMLCanvasElement): void {
-    this.game = new Game(canvas, this.gameService.demoSettings);
+  private startGame(canvas: HTMLCanvasElement, settings: IDemoGameSettings): void {
+    this.game = new Game(canvas, settings);
     this.game.run();
   }
 }
