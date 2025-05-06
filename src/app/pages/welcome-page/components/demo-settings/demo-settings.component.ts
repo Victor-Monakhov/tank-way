@@ -3,7 +3,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 
 import { ELSKeys } from '../../../../common/resources/enums/local-storage.enum';
-import { StateService } from '../../../../common/resources/services/state/state.service';
 import { PositionSettingsComponent } from '../position-settings/position-settings.component';
 import { TankSettingsComponent } from '../tank-settings/tank-settings.component';
 import { UserStatisticsComponent } from '../user-statistics/user-statistics.component';
@@ -25,7 +24,6 @@ export class DemoSettingsComponent implements OnInit {
 
   signInClick = output<void>();
 
-  private readonly stateService = inject(StateService);
   private readonly router = inject(Router);
 
   ngOnInit(): void {
