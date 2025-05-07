@@ -3,6 +3,9 @@
     <mat-icon>close</mat-icon>
   </button>
   <div class="demo-panel" #demoPanel>
-    <canvas class="demo-canvas" #canvas></canvas>
+    @if (loader()) {
+      <tnm-loader class="loader"></tnm-loader>
+    }
+    <canvas [ngClass]="{'demo-canvas': true, 'canvas-ready': !loader()}" #canvas></canvas>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, output } from '@ang
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 
-import { ELSKeys } from '../../../../common/resources/enums/local-storage.enum';
+import { StateService } from '../../../../common/resources/services/state/state.service';
 import { PositionSettingsComponent } from '../position-settings/position-settings.component';
 import { TankSettingsComponent } from '../tank-settings/tank-settings.component';
 import { UserStatisticsComponent } from '../user-statistics/user-statistics.component';
@@ -25,14 +25,14 @@ export class DemoSettingsComponent implements OnInit {
   signInClick = output<void>();
 
   private readonly router = inject(Router);
+  private readonly stateService = inject(StateService);
 
   ngOnInit(): void {
-    if (localStorage.getItem(ELSKeys.InDemo)) {
-      localStorage.removeItem(ELSKeys.InDemo);
-    }
+    this.stateService.inDemo = false;
   }
 
   onDemo(): void {
+    this.stateService.inDemo = true;
     this.router.navigate(['demo']).then();
   }
 

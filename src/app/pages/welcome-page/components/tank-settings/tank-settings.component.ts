@@ -64,7 +64,7 @@ export class TankSettingsComponent {
 
   public onHead(head: ITankHead, index: number): void {
     this.tankHeadIndex.set(index);
-    this.stateService.updateGameSettingsState({
+    this.stateService.updateDemoGameSettingsState({
       tankHead: head.name,
       tankBody: this.selectedTankBody().name,
     });
@@ -72,7 +72,7 @@ export class TankSettingsComponent {
 
   public onBody(body: ITankBody, index: number): void {
     this.tankBodyIndex.set(index);
-    this.stateService.updateGameSettingsState({
+    this.stateService.updateDemoGameSettingsState({
       tankBody: body.name,
       tankHead: this.selectedTankHead().name,
     });

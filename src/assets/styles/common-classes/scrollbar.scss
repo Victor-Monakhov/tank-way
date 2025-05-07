@@ -37,3 +37,13 @@
     width: auto !important;
   }
 }
+
+.scrollbar-v:has( > div > .battles-table) {
+  .ng-scrollbar-track-wrapper {
+    padding-top: 56px !important;
+  }
+
+  .thumb-v {
+    right: 0;
+  }
+}

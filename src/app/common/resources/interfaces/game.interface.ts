@@ -1,6 +1,6 @@
-import { ETeamNames } from '../enums/game.enum';
+import { IUnitStats } from './tank.interface';
 
-import { ITankStats } from './tank.interface';
+import { ETeamNames, EUnitStatus } from '@victor_monakhov/tanks';
 
 export interface IPositionSettings {
   team: ETeamNames;
@@ -13,8 +13,10 @@ export interface IDemoGameSettings extends IPositionSettings {
 }
 
 export interface IDemoBattle {
-  player: ITankStats;
-  bots: ITankStats[];
+  id: string;
+  battleStatus: EUnitStatus;
+  player: IUnitStats;
+  bots: IUnitStats[];
 }
 
 export interface IDemoPlayer {

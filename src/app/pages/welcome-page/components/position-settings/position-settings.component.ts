@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 
-import { ETeamNames, teamNamesDescription } from '../../../../common/resources/enums/game.enum';
+import { teamNamesDescription } from '../../../../common/resources/enums/game.enum';
 import { StateService } from '../../../../common/resources/services/state/state.service';
 import { ToggleBtnComponent } from '../../../../shared/components/toggle-btn/toggle-btn.component';
 import { DemoSettingsPanelComponent } from '../demo-settings-panel/demo-settings-panel.component';
+
+import { ETeamNames } from '@victor_monakhov/tanks';
 
 @Component({
   standalone: true,
@@ -48,7 +50,7 @@ export class PositionSettingsComponent {
   }
 
   onChanges(): void {
-    this.stateService.updateGameSettingsState({
+    this.stateService.updateDemoGameSettingsState({
       team: Object
         .entries(this.teamNamesDescription)
         .find(([key, value]: [ETeamNames, string]) => this.team() === value)[0] as ETeamNames,

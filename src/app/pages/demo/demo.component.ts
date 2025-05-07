@@ -1,20 +1,26 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  Component, effect,
+  Component,
+  effect,
   ElementRef,
   inject,
   OnDestroy,
+  signal,
   viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 
-import { ELSKeys } from '../../common/resources/enums/local-storage.enum';
-import { IDemoGameSettings } from '../../common/resources/interfaces/game.interface';
-import { StateService } from '../../common/resources/services/state/state.service';
+import { Guid } from 'guid-typescript';
 
-import { Game } from '@victor_monakhov/tanks';
+import { StateService } from '../../common/resources/services/state/state.service';
+import { LoaderComponent } from '../../shared/components/loader/loader.component';
+
+import { DemoService } from './services/demo.service';
+
+import { Game, GameSettings } from '@victor_monakhov/tanks';
 
 @Component({
   standalone: true,
@@ -22,27 +28,32 @@ import { Game } from '@victor_monakhov/tanks';
   imports: [
     MatButtonModule,
     MatIconModule,
+    LoaderComponent,
+    NgClass,
   ],
   templateUrl: './demo.component.html',
   styleUrl: './demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoComponent implements OnDestroy {
-  demoPanelRef = viewChild<ElementRef<HTMLElement>>('demoPanel');
-  canvasRef = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
 
   private readonly stateService = inject(StateService);
+  private readonly demoService = inject(DemoService);
   private readonly router = inject(Router);
   private game!: Game;
 
+  demoPanelRef = viewChild<ElementRef<HTMLElement>>('demoPanel');
+  canvasRef = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
+
+  loader = signal<boolean>(true);
+
   constructor() {
     effect(() => {
-      if (localStorage.getItem(ELSKeys.InDemo)) {
+      if (!this.stateService.inDemo) {
         this.router.navigate(['welcome']).then();
       } else {
         const gameSettings = this.stateService.demoGameSettings();
         if (gameSettings) {
-          localStorage.setItem(ELSKeys.InDemo, JSON.stringify(ELSKeys.InDemo));
           const demoPanel = this.demoPanelRef().nativeElement;
           const canvas: HTMLCanvasElement = this.canvasRef().nativeElement;
           if (demoPanel.clientHeight > demoPanel.clientWidth) {
@@ -53,7 +64,10 @@ export class DemoComponent implements OnDestroy {
             canvas.width = demoPanel.clientWidth - 160;
             canvas.height = demoPanel.clientHeight - 10;
           }
-          this.startGame(canvas, gameSettings);
+          this.startGame(canvas, {
+            ...gameSettings,
+            playerName: this.stateService.demoPlayer().name,
+          });
           onbeforeunload = (): void => {
             if (this.game) {
               this.game.destroy();
@@ -65,7 +79,7 @@ export class DemoComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    localStorage.removeItem(ELSKeys.InDemo);
+    this.stateService.inDemo = false;
     if (this.game) {
       this.game.destroy();
     }
@@ -75,8 +89,17 @@ export class DemoComponent implements OnDestroy {
     this.router.navigate(['']).then();
   }
 
-  private startGame(canvas: HTMLCanvasElement, settings: IDemoGameSettings): void {
+  private startGame(canvas: HTMLCanvasElement, settings: GameSettings): void {
+    const battleId = Guid.create().toString();
     this.game = new Game(canvas, settings);
+    this.game.stateObserver(state => {
+      if (this.loader()) {
+        this.stateService.addDemoBattle(this.demoService.gameStateToDemoButtle(state, battleId));
+      } else {
+        this.stateService.updateDemoBattle(this.demoService.gameStateToDemoButtle(state, battleId));
+      }
+      this.loader.set(false);
+    });
     this.game.run();
   }
 }

@@ -1,3 +1,5 @@
+import { ETeamNames } from '@victor_monakhov/tanks';
+
 export interface ITankBody {
   name: string;
   path: string;
@@ -13,9 +15,9 @@ export interface ITankSettings {
   body: ITankBody;
 }
 
-export interface ITankStats extends ITankSettings {
+export interface IUnitStats extends ITankSettings {
   name: string;
-  team: 'red' | 'blue';
+  team: ETeamNames;
   level: number;
   kills: number;
   deaths: number;

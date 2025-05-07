@@ -1,6 +1,10 @@
 @use 'mixins' as mixins;
 
 :host {
+  .scrollbar-v {
+    max-height: 400px;
+  }
+
   .battles-table {
     width: 100%;
     background: var(--mat-sys-background);
@@ -35,12 +39,12 @@
       @include mixins.vm-media(
           horizontal,
             (padding, (0 3px !important, 0 5px !important)),
-            (min-width, (40px, 50px, 60px, 80px)),
-            (max-width, (40px, 50px, 60px, 80px)),
+            (min-width, (40px, 50px, 60px, 70px)),
+            (max-width, (40px, 50px, 60px, 70px)),
       );
 
       &:has( > .date-value), &:has( > .inner-date-value) {
-        min-width: 150px;
+        min-width: 180px;
       }
 
       .index {

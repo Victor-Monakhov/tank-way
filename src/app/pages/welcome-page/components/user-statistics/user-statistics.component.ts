@@ -79,7 +79,7 @@ export class UserStatisticsComponent implements OnInit {
       takeUntilDestroyed(this.dr),
     ).subscribe(value => {
       if (this.userNameControl().valid) {
-        this.stateService.updatePlayerState({ name: value });
+        this.stateService.updateDemoPlayerState({ name: value });
       }
     });
   }

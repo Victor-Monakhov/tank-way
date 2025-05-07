@@ -4,11 +4,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable, of } from 'rxjs';
 
 import { tankBodies, tankHeads } from '../../constants/tank-settings';
-import { ETeamNames } from '../../enums/game.enum';
 import { ELSKeys } from '../../enums/local-storage.enum';
 import { IDemoBattle, IDemoGameSettings, IDemoPlayer } from '../../interfaces/game.interface';
 import { IDemoState } from '../../interfaces/state.interface';
 import { GzipService } from '../utils/gzip/gzip.service';
+
+import { ETeamNames } from '@victor_monakhov/tanks';
 
 @Injectable({
   providedIn: 'root',
@@ -49,11 +50,13 @@ export class StateService {
 
   private _demoState = linkedSignal<IDemoState>(() => this.initialDemoState());
 
+  inDemo = false;
+
   demoBattles = computed<IDemoBattle[]>(() => this._demoState()?.battles);
   demoPlayer = computed<IDemoPlayer>(() => this._demoState()?.player);
   demoGameSettings = computed<IDemoGameSettings>(() => this._demoState()?.gameSettings);
 
-  updatePlayerState(playerState: Partial<IDemoPlayer>): void {
+  updateDemoPlayerState(playerState: Partial<IDemoPlayer>): void {
     this._demoState.set({
       ...this._demoState(),
       player: {
@@ -64,7 +67,7 @@ export class StateService {
     this.updateState();
   }
 
-  updateGameSettingsState(gameSettingsState: Partial<IDemoGameSettings>): void {
+  updateDemoGameSettingsState(gameSettingsState: Partial<IDemoGameSettings>): void {
     this._demoState.set({
       ...this._demoState(),
       gameSettings: {
@@ -75,7 +78,21 @@ export class StateService {
     this.updateState();
   }
 
-  updateBattlesState(battlesState: Partial<IDemoBattle[]>): void {
+  addDemoBattle(battle: IDemoBattle): void {
+    this.updateDemoBattlesState([battle, ...this.demoBattles()]);
+  }
+
+  updateDemoBattle(battle: IDemoBattle): void {
+    const newBattles = this.demoBattles().map(item => {
+      if (item.id === battle.id) {
+        return battle;
+      }
+      return item;
+    });
+    this.updateDemoBattlesState(newBattles);
+  }
+
+  private updateDemoBattlesState(battlesState: Partial<IDemoBattle[]>): void {
     this._demoState.set({
       ...this._demoState(),
       battles: [...battlesState],

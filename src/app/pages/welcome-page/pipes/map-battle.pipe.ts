@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ITankStats } from '../../../common/resources/interfaces/tank.interface';
+import { IUnitStats } from '../../../common/resources/interfaces/tank.interface';
 import { EBattleStatsColumns } from '../enums/user-statistics.enum';
 
 @Pipe({
@@ -9,7 +9,7 @@ import { EBattleStatsColumns } from '../enums/user-statistics.enum';
 export class MapBattlePipe implements PipeTransform {
 
   transform(
-    unit: ITankStats,
+    unit: IUnitStats,
     column: EBattleStatsColumns,
   ): Partial< { value: string | number; body: string; head: string }> {
     switch (column) {
