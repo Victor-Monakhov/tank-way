@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { StateService } from '../../../../common/resources/services/state/state.service';
 import { PositionSettingsComponent } from '../position-settings/position-settings.component';
 import { TankSettingsComponent } from '../tank-settings/tank-settings.component';
-import { UserStatisticsComponent } from '../user-statistics/user-statistics.component';
+import { WarRoomComponent } from '../war-room/war-room.component';
 
 @Component({
   standalone: true,
@@ -14,7 +14,7 @@ import { UserStatisticsComponent } from '../user-statistics/user-statistics.comp
     TankSettingsComponent,
     PositionSettingsComponent,
     MatButtonModule,
-    UserStatisticsComponent,
+    WarRoomComponent,
   ],
   templateUrl: './demo-settings.component.html',
   styleUrl: './demo-settings.component.scss',

@@ -20,7 +20,7 @@ import { BattlesTableComponent } from '../battles-table/battles-table.component'
 
 @Component({
   standalone: true,
-  selector: 'tnm-user-statistics',
+  selector: 'tnm-war-room',
   imports: [
     InputTextComponent,
     ReactiveFormsModule,
@@ -28,11 +28,11 @@ import { BattlesTableComponent } from '../battles-table/battles-table.component'
     ValidationComponent,
     BattlesTableComponent,
   ],
-  templateUrl: './user-statistics.component.html',
-  styleUrl: './user-statistics.component.scss',
+  templateUrl: './war-room.component.html',
+  styleUrl: './war-room.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserStatisticsComponent implements OnInit {
+export class WarRoomComponent implements OnInit {
 
   private readonly validationService = inject(ValidationService);
   private readonly stateService = inject(StateService);
@@ -42,18 +42,18 @@ export class UserStatisticsComponent implements OnInit {
 
   battles = computed<IDemoBattle[]>(() => this.stateService.demoBattles() ?? []);
   player = computed<Partial<IDemoPlayer>>(() => {
-    const demoState = this.stateService.demoPlayer();
-    if (demoState) {
+    const demoPlayer = this.stateService.demoPlayer();
+    if (demoPlayer) {
       if (!this.locker) {
-        this.userNameControl().setValue(demoState.name);
+        this.userNameControl().setValue(demoPlayer.name);
         this.locker = true;
       }
       return {
-        name: demoState.name,
-        totalBattles: demoState.totalBattles,
-        totalWins: demoState.totalWins,
-        totalDefeats: demoState.totalDefeats,
-        totalKills: demoState.totalKills,
+        name: demoPlayer.name,
+        totalBattles: demoPlayer.totalBattles,
+        totalWins: demoPlayer.totalWins,
+        totalDefeats: demoPlayer.totalDefeats,
+        totalKills: demoPlayer.totalKills,
       };
     }
     return {};

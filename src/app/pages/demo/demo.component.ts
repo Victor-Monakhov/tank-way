@@ -15,12 +15,13 @@ import { Router } from '@angular/router';
 
 import { Guid } from 'guid-typescript';
 
+import { IDemoBattle, IDemoPlayer } from '../../common/resources/interfaces/game.interface';
 import { StateService } from '../../common/resources/services/state/state.service';
 import { LoaderComponent } from '../../shared/components/loader/loader.component';
 
 import { DemoService } from './services/demo.service';
 
-import { Game, GameSettings } from '@victor_monakhov/tanks';
+import { EUnitStatus, Game, GameSettings } from '@victor_monakhov/tanks';
 
 @Component({
   standalone: true,
@@ -48,10 +49,11 @@ export class DemoComponent implements OnDestroy {
   loader = signal<boolean>(true);
 
   constructor() {
-    effect(() => {
-      if (!this.stateService.inDemo) {
-        this.router.navigate(['welcome']).then();
-      } else {
+    if (!this.stateService.inDemo) {
+      this.router.navigate(['welcome']).then();
+    } else {
+      const player = this.stateService.demoPlayer();
+      effect(() => {
         const gameSettings = this.stateService.demoGameSettings();
         if (gameSettings) {
           const demoPanel = this.demoPanelRef().nativeElement;
@@ -66,7 +68,7 @@ export class DemoComponent implements OnDestroy {
           }
           this.startGame(canvas, {
             ...gameSettings,
-            playerName: this.stateService.demoPlayer().name,
+            playerName: player.name,
           });
           onbeforeunload = (): void => {
             if (this.game) {
@@ -74,8 +76,8 @@ export class DemoComponent implements OnDestroy {
             }
           };
         }
-      }
-    });
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -98,8 +100,22 @@ export class DemoComponent implements OnDestroy {
       } else {
         this.stateService.updateDemoBattle(this.demoService.gameStateToDemoButtle(state, battleId));
       }
+      this.updatePlayerStats();
       this.loader.set(false);
     });
     this.game.run();
+  }
+
+  private updatePlayerStats(): void {
+    const battles = this.stateService.demoBattles();
+    const player = this.stateService.demoPlayer();
+    player.totalBattles = battles.length;
+    const partialPlayer = battles.reduce((acc: Partial<IDemoPlayer>, battle: IDemoBattle) => {
+      acc.totalWins = battle.battleStatus === EUnitStatus.Winner ? acc.totalWins + 1 : acc.totalWins;
+      acc.totalDefeats = battle.battleStatus === EUnitStatus.Defeated ? acc.totalDefeats + 1 : acc.totalDefeats;
+      acc.totalKills += battle.player.kills;
+      return acc;
+    }, { totalWins: 0, totalDefeats: 0, totalKills: 0 });
+    this.stateService.updateDemoPlayerState(partialPlayer);
   }
 }

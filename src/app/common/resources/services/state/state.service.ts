@@ -1,13 +1,11 @@
 import { computed, inject, Injectable, Injector, linkedSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { Observable, of } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 
 import { tankBodies, tankHeads } from '../../constants/tank-settings';
-import { ELSKeys } from '../../enums/local-storage.enum';
 import { IDemoBattle, IDemoGameSettings, IDemoPlayer } from '../../interfaces/game.interface';
-import { IDemoState } from '../../interfaces/state.interface';
-import { GzipService } from '../utils/gzip/gzip.service';
+import { IdbService } from '../idb/idb.service';
 
 import { ETeamNames } from '@victor_monakhov/tanks';
 
@@ -16,66 +14,77 @@ import { ETeamNames } from '@victor_monakhov/tanks';
 })
 export class StateService {
 
-  private readonly gzipService = inject(GzipService);
+  private readonly idbService = inject(IdbService);
   private readonly injector = inject(Injector);
 
-  private readonly defaultDemoState: IDemoState = {
-    player: {
-      name: 'Comrade',
-      totalBattles: 0,
-      totalWins: 0,
-      totalDefeats: 0,
-      totalKills: 0,
-    },
-    gameSettings: {
-      position: 0,
-      team: ETeamNames.Red,
-      tankHead: tankHeads[0].name,
-      tankBody: tankBodies[0].name,
-    },
-    battles: [],
+  private readonly defaultDemoPlayerState = {
+    name: 'Comrade',
+    totalBattles: 0,
+    totalWins: 0,
+    totalDefeats: 0,
+    totalKills: 0,
   };
 
-  private initialDemoState = toSignal<IDemoState>(((): Observable<IDemoState> => {
-    const stateCompressedStr = localStorage.getItem(ELSKeys.DemoState) ?? '';
-    if (!stateCompressedStr) {
-      return of(this.defaultDemoState);
-    }
-    return new Observable(subs => {
-      this.gzipService.decompressGzip(stateCompressedStr).then(
-        json => subs.next(JSON.parse(json)),
-        () => subs.next(this.defaultDemoState));
-    });
-  })(), { injector: this.injector });
+  private readonly defaultDemoGameSettingsState = {
+    position: 0,
+    team: ETeamNames.Red,
+    tankHead: tankHeads[0].name,
+    tankBody: tankBodies[0].name,
+  };
 
-  private _demoState = linkedSignal<IDemoState>(() => this.initialDemoState());
+  private readonly defaultDemoBattlesState: IDemoBattle[] = [];
+
+  private initialDemoPlayerState = toSignal<IDemoPlayer>(
+    this.idbService.getDemoPlayerState().pipe(
+      map(state => state ? state : this.defaultDemoPlayerState),
+      catchError(() => of(this.defaultDemoPlayerState)),
+    ),
+    { injector: this.injector },
+  );
+
+  private initialDemoGameSettingsState = toSignal<IDemoGameSettings>(
+    this.idbService.getDemoGameSettingsState().pipe(
+      map(state => state ? state : this.defaultDemoGameSettingsState),
+      catchError(() => of(this.defaultDemoGameSettingsState)),
+    ),
+    { injector: this.injector },
+  );
+
+  private initialDemoBattlesState = toSignal<IDemoBattle[]>(
+    this.idbService.getDemoBattlesState().pipe(
+      map(state => state ? state : this.defaultDemoBattlesState),
+      catchError(() => of(this.defaultDemoBattlesState)),
+    ),
+    { injector: this.injector },
+  );
+
+  private demoPlayerState =
+    linkedSignal<IDemoPlayer>(() => this.initialDemoPlayerState());
+  private demoGameSettingsState =
+    linkedSignal<IDemoGameSettings>(() => this.initialDemoGameSettingsState());
+  private demoBattlesState =
+    linkedSignal<IDemoBattle[]>(() => this.initialDemoBattlesState());
 
   inDemo = false;
 
-  demoBattles = computed<IDemoBattle[]>(() => this._demoState()?.battles);
-  demoPlayer = computed<IDemoPlayer>(() => this._demoState()?.player);
-  demoGameSettings = computed<IDemoGameSettings>(() => this._demoState()?.gameSettings);
+  demoBattles = computed<IDemoBattle[]>(() => this.demoBattlesState());
+  demoPlayer = computed<IDemoPlayer>(() => this.demoPlayerState());
+  demoGameSettings = computed<IDemoGameSettings>(() => this.demoGameSettingsState());
 
   updateDemoPlayerState(playerState: Partial<IDemoPlayer>): void {
-    this._demoState.set({
-      ...this._demoState(),
-      player: {
-        ...this._demoState().player,
-        ...playerState,
-      },
+    this.demoPlayerState.set({
+      ...this.demoPlayerState(),
+      ...playerState,
     });
-    this.updateState();
+    this.idbService.saveDemoPlayerState(this.demoPlayerState());
   }
 
   updateDemoGameSettingsState(gameSettingsState: Partial<IDemoGameSettings>): void {
-    this._demoState.set({
-      ...this._demoState(),
-      gameSettings: {
-        ...this._demoState().gameSettings,
-        ...gameSettingsState,
-      },
+    this.demoGameSettingsState.set({
+      ...this.demoGameSettingsState(),
+      ...gameSettingsState,
     });
-    this.updateState();
+    this.idbService.saveDemoGameSettingsState(this.demoGameSettingsState());
   }
 
   addDemoBattle(battle: IDemoBattle): void {
@@ -93,17 +102,7 @@ export class StateService {
   }
 
   private updateDemoBattlesState(battlesState: Partial<IDemoBattle[]>): void {
-    this._demoState.set({
-      ...this._demoState(),
-      battles: [...battlesState],
-    });
-    this.updateState();
-  }
-
-  private updateState(): void {
-    const jsonState = JSON.stringify(this._demoState());
-    this.gzipService.compressGzip(jsonState).then(compressedDemoState => {
-      localStorage.setItem(ELSKeys.DemoState, compressedDemoState);
-    });
+    this.demoBattlesState.set(battlesState);
+    this.idbService.saveDemoBattlesState(this.demoBattlesState());
   }
 }

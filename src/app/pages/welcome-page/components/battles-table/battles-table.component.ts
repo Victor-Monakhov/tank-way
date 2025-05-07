@@ -15,12 +15,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 
+import { NgScrollbar } from 'ngx-scrollbar';
+
 import { IDemoBattle } from '../../../../common/resources/interfaces/game.interface';
 import { IBreakPointState } from '../../../../shared/services/breakpoint/breakpoint.interface';
 import { BreakpointService } from '../../../../shared/services/breakpoint/breakpoint.service';
 import { EBattleStatsColumns } from '../../enums/user-statistics.enum';
 import { MapBattlePipe } from '../../pipes/map-battle.pipe';
-import {NgScrollbar} from "ngx-scrollbar";
 
 @Component({
   standalone: true,

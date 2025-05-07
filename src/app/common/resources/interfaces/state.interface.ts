@@ -1,8 +1,11 @@
-import { IDemoBattle, IDemoGameSettings, IDemoPlayer } from './game.interface';
+import { DBSchema } from 'idb';
 
-export interface IDemoState {
-  player: IDemoPlayer;
-  gameSettings: IDemoGameSettings;
-  battles: IDemoBattle[];
+import { EStates } from '../enums/game.enum';
+
+
+export interface ITankWayIDB extends DBSchema {
+  [EStates.DemoPlayer]: { key: string; value: string };
+  [EStates.DemoGameSettings]: { key: string; value: string };
+  [EStates.DemoBattles]: { key: string; value: string };
 }
 

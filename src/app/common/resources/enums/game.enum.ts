@@ -5,3 +5,9 @@ export const teamNamesDescription: { [key in ETeamNames]: string } = {
   [ETeamNames.Blue]: 'Blue Team',
   [ETeamNames.Green]: 'Green Team',
 };
+
+export enum EStates {
+  DemoPlayer = 'demoPlayer',
+  DemoGameSettings = 'demoGameSettings',
+  DemoBattles = 'demoBattles',
+}
