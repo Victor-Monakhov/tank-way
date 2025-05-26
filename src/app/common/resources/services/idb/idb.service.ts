@@ -4,7 +4,7 @@ import { IDBPDatabase, openDB } from 'idb';
 import { map, Observable } from 'rxjs';
 
 import { EStates } from '../../enums/game.enum';
-import { IDemoBattle, IDemoGameSettings, IDemoPlayer } from '../../interfaces/game.interface';
+import { IDemoBattle, IDemoGame, IDemoPlayer } from '../../interfaces/game.interface';
 import { ITankWayIDB } from '../../interfaces/state.interface';
 import { GzipService } from '../utils/gzip/gzip.service';
 
@@ -22,9 +22,9 @@ export class IdbService {
     this.saveState(EStates.DemoPlayer, json);
   }
 
-  saveDemoGameSettingsState(value: IDemoGameSettings): void {
+  saveDemoGameState(value: IDemoGame): void {
     const json = JSON.stringify(value);
-    this.saveState(EStates.DemoGameSettings, json);
+    this.saveState(EStates.DemoGame, json);
   }
 
   saveDemoBattlesState(value: IDemoBattle[]): void {
@@ -36,8 +36,8 @@ export class IdbService {
     return this.getState(EStates.DemoPlayer).pipe(map(json => JSON.parse(json)));
   }
 
-  getDemoGameSettingsState(): Observable<IDemoGameSettings> {
-    return this.getState(EStates.DemoGameSettings).pipe(map(json => JSON.parse(json)));
+  getDemoGameState(): Observable<IDemoGame> {
+    return this.getState(EStates.DemoGame).pipe(map(json => JSON.parse(json)));
   }
 
   getDemoBattlesState(): Observable<IDemoBattle[]> {
@@ -65,8 +65,8 @@ export class IdbService {
         if (!db.objectStoreNames.contains(EStates.DemoPlayer)) {
           db.createObjectStore(EStates.DemoPlayer);
         }
-        if (!db.objectStoreNames.contains(EStates.DemoGameSettings)) {
-          db.createObjectStore(EStates.DemoGameSettings);
+        if (!db.objectStoreNames.contains(EStates.DemoGame)) {
+          db.createObjectStore(EStates.DemoGame);
         }
         if (!db.objectStoreNames.contains(EStates.DemoBattles)) {
           db.createObjectStore(EStates.DemoBattles);

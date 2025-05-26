@@ -1,87 +1,62 @@
 import {
   ChangeDetectionStrategy,
-  Component, computed, DestroyRef,
-  inject, OnInit,
-  signal,
+  Component, computed,
+  inject,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
-import { TranslatePipe } from '@ngx-translate/core';
-
-import { debounceTime } from 'rxjs';
-
-import { IDemoBattle, IDemoPlayer } from '../../../../common/resources/interfaces/game.interface';
+import { IDemoBattle, IDemoGame } from '../../../../common/resources/interfaces/game.interface';
+import { IDemoTank } from '../../../../common/resources/interfaces/tank.interface';
 import { StateService } from '../../../../common/resources/services/state/state.service';
-import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
-import { ValidationComponent } from '../../../../shared/components/validation/validation.component';
-import { ValidationService } from '../../../../shared/components/validation/validation-service/validation.service';
+import {
+  GameItemBtnComponent,
+} from '../../../../shared/components/game-buttons/game-item-btn/game-item-btn.component';
 import { BattlesTableComponent } from '../battles-table/battles-table.component';
+import { TankSettingsComponent } from '../tank-settings/tank-settings.component';
+
+import { WarRoomHeaderComponent } from './components/war-room-header/war-room-header.component';
 
 @Component({
   standalone: true,
   selector: 'tnm-war-room',
   imports: [
-    InputTextComponent,
     ReactiveFormsModule,
-    TranslatePipe,
-    ValidationComponent,
     BattlesTableComponent,
+    MatIconModule,
+    MatButtonModule,
+    TankSettingsComponent,
+    GameItemBtnComponent,
+    WarRoomHeaderComponent,
   ],
   templateUrl: './war-room.component.html',
   styleUrl: './war-room.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WarRoomComponent implements OnInit {
+export class WarRoomComponent {
 
-  private readonly validationService = inject(ValidationService);
+  private readonly tanksQuantity = 8;
+
   private readonly stateService = inject(StateService);
-  private readonly dr = inject(DestroyRef);
 
-  private locker = false;
+  private defaultTanks: IDemoTank[] = Array(this.tanksQuantity).fill(this.stateService.defaultDemoTank);
 
   battles = computed<IDemoBattle[]>(() => this.stateService.demoBattles() ?? []);
-  player = computed<Partial<IDemoPlayer>>(() => {
-    const demoPlayer = this.stateService.demoPlayer();
-    if (demoPlayer) {
-      if (!this.locker) {
-        this.userNameControl().setValue(demoPlayer.name);
-        this.locker = true;
-      }
-      return {
-        name: demoPlayer.name,
-        totalBattles: demoPlayer.totalBattles,
-        totalWins: demoPlayer.totalWins,
-        totalDefeats: demoPlayer.totalDefeats,
-        totalKills: demoPlayer.totalKills,
-      };
+  game = computed<Partial<IDemoGame>>(() => {
+    const game = this.stateService.demoGame();
+    if (game) {
+      return { ...game };
     }
     return {};
   });
 
-  userNameControl = signal<FormControl<string>>(
-    new FormControl('Comrade', {
-      validators: [
-        this.validationService.userNameLength,
-        this.validationService.userName,
-      ],
-      nonNullable: true,
-    }),
-  );
-
-  ngOnInit(): void {
-    this.observeUserName();
-  }
-
-  private observeUserName(): void {
-    this.userNameControl().valueChanges.pipe(
-      debounceTime(500),
-      takeUntilDestroyed(this.dr),
-    ).subscribe(value => {
-      if (this.userNameControl().valid) {
-        this.stateService.updateDemoPlayerState({ name: value });
-      }
-    });
-  }
+  tanks = computed(() => this.game()?.tanks?.reduce(
+    (acc: IDemoTank[], item: IDemoTank, index: number) => {
+      acc[index] = item;
+      return acc;
+    },
+    this.defaultTanks,
+  ) ?? []);
 
 }

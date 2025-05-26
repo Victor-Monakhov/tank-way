@@ -5,6 +5,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 
 import { teamNamesDescription } from '../../../../common/resources/enums/game.enum';
+import { IDemoGame } from '../../../../common/resources/interfaces/game.interface';
+import { IDemoTank } from '../../../../common/resources/interfaces/tank.interface';
 import { StateService } from '../../../../common/resources/services/state/state.service';
 import { ToggleBtnComponent } from '../../../../shared/components/toggle-btn/toggle-btn.component';
 import { DemoSettingsPanelComponent } from '../demo-settings-panel/demo-settings-panel.component';
@@ -31,6 +33,9 @@ export class PositionSettingsComponent {
 
   private readonly stateService = inject(StateService);
 
+  private game!: IDemoGame;
+  private tank!: IDemoTank;
+
   readonly eDemoTeams = ETeamNames;
   readonly teamNamesDescription: { [key in ETeamNames]: string } = teamNamesDescription;
 
@@ -41,20 +46,22 @@ export class PositionSettingsComponent {
 
   constructor() {
     effect(() => {
-      const gameSettings = this.stateService.demoGameSettings();
-      if (gameSettings) {
-        this.team.set(this.teamNamesDescription[gameSettings.team]);
-        this.position.set(gameSettings.position + 1);
+      this.game = this.stateService.demoGame();
+      if (this.game) {
+        this.tank = this.game.tanks.find(item => item.chosenAsPlayer);
+        if (this.tank) {
+          this.team.set(this.teamNamesDescription[this.tank.position.team]);
+          this.position.set(this.tank.position.position + 1);
+        }
       }
     });
   }
 
   onChanges(): void {
-    this.stateService.updateDemoGameSettingsState({
-      team: Object
-        .entries(this.teamNamesDescription)
-        .find(([key, value]: [ETeamNames, string]) => this.team() === value)[0] as ETeamNames,
-      position: this.position() - 1,
-    });
+    this.tank.position.team = Object
+      .entries(this.teamNamesDescription)
+      .find(([key, value]: [ETeamNames, string]) => this.team() === value)[0] as ETeamNames;
+    this.tank.position.position = this.position() - 1;
+    this.stateService.updateDemoGameState(this.game);
   }
 }

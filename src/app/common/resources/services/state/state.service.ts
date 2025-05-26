@@ -4,7 +4,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
 
 import { tankBodies, tankHeads } from '../../constants/tank-settings';
-import { IDemoBattle, IDemoGameSettings, IDemoPlayer } from '../../interfaces/game.interface';
+import { IDemoBattle, IDemoGame, IDemoPlayer } from '../../interfaces/game.interface';
+import { IDemoTank } from '../../interfaces/tank.interface';
 import { IdbService } from '../idb/idb.service';
 
 import { ETeamNames } from '@victor_monakhov/tanks';
@@ -17,19 +18,37 @@ export class StateService {
   private readonly idbService = inject(IdbService);
   private readonly injector = inject(Injector);
 
-  private readonly defaultDemoPlayerState = {
+  private readonly defaultDemoTanks: IDemoTank[] = [
+    {
+      name: 'tank',
+      head: tankHeads[0],
+      body: tankBodies[0],
+      chosenAsBot: false,
+      chosenAsPlayer: true,
+      maxHealth: 60,
+      maxArmor: 60,
+      maxSpeed: 30,
+      maxShotPower: 10,
+      position: {
+        team: ETeamNames.Red,
+        position: 0,
+      },
+      bullets: [],
+    },
+  ];
+
+  private readonly defaultDemoPlayerState: IDemoPlayer = {
     name: 'Comrade',
     totalBattles: 0,
     totalWins: 0,
     totalDefeats: 0,
     totalKills: 0,
+    zrists: 0,
+    arenas: 0,
   };
 
-  private readonly defaultDemoGameSettingsState = {
-    position: 0,
-    team: ETeamNames.Red,
-    tankHead: tankHeads[0].name,
-    tankBody: tankBodies[0].name,
+  private readonly defaultDemoGameState: IDemoGame = {
+    tanks: this.defaultDemoTanks,
   };
 
   private readonly defaultDemoBattlesState: IDemoBattle[] = [];
@@ -42,10 +61,10 @@ export class StateService {
     { injector: this.injector },
   );
 
-  private initialDemoGameSettingsState = toSignal<IDemoGameSettings>(
-    this.idbService.getDemoGameSettingsState().pipe(
-      map(state => state ? state : this.defaultDemoGameSettingsState),
-      catchError(() => of(this.defaultDemoGameSettingsState)),
+  private initialDemoGameGameState = toSignal<IDemoGame>(
+    this.idbService.getDemoGameState().pipe(
+      map(state => state ? state : this.defaultDemoGameState),
+      catchError(() => of(this.defaultDemoGameState)),
     ),
     { injector: this.injector },
   );
@@ -60,8 +79,8 @@ export class StateService {
 
   private demoPlayerState =
     linkedSignal<IDemoPlayer>(() => this.initialDemoPlayerState());
-  private demoGameSettingsState =
-    linkedSignal<IDemoGameSettings>(() => this.initialDemoGameSettingsState());
+  private demoGameState =
+    linkedSignal<IDemoGame>(() => this.initialDemoGameGameState());
   private demoBattlesState =
     linkedSignal<IDemoBattle[]>(() => this.initialDemoBattlesState());
 
@@ -69,7 +88,13 @@ export class StateService {
 
   demoBattles = computed<IDemoBattle[]>(() => this.demoBattlesState());
   demoPlayer = computed<IDemoPlayer>(() => this.demoPlayerState());
-  demoGameSettings = computed<IDemoGameSettings>(() => this.demoGameSettingsState());
+  demoGame = computed<IDemoGame>(() => this.demoGameState());
+
+  get defaultDemoTank(): IDemoTank {
+    const tank = JSON.parse(JSON.stringify(this.defaultDemoTanks[0]));
+    tank.chosenAsPlayer = false;
+    return tank;
+  }
 
   updateDemoPlayerState(playerState: Partial<IDemoPlayer>): void {
     this.demoPlayerState.set({
@@ -79,12 +104,12 @@ export class StateService {
     this.idbService.saveDemoPlayerState(this.demoPlayerState());
   }
 
-  updateDemoGameSettingsState(gameSettingsState: Partial<IDemoGameSettings>): void {
-    this.demoGameSettingsState.set({
-      ...this.demoGameSettingsState(),
-      ...gameSettingsState,
+  updateDemoGameState(demoGameState: Partial<IDemoGame>): void {
+    this.demoGameState.set({
+      ...this.demoGameState(),
+      ...demoGameState,
     });
-    this.idbService.saveDemoGameSettingsState(this.demoGameSettingsState());
+    this.idbService.saveDemoGameState(this.demoGameState());
   }
 
   addDemoBattle(battle: IDemoBattle): void {

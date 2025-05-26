@@ -10,7 +10,7 @@
       display: flex;
       @include mixins.vm-media(
           horizontal,
-            (gap, (35px, 50px))
+            (gap, (30px, 40px, 50px))
       );
     }
 

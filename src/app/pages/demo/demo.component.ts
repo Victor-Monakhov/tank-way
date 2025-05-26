@@ -54,27 +54,33 @@ export class DemoComponent implements OnDestroy {
     } else {
       const player = this.stateService.demoPlayer();
       effect(() => {
-        const gameSettings = this.stateService.demoGameSettings();
-        if (gameSettings) {
-          const demoPanel = this.demoPanelRef().nativeElement;
-          const canvas: HTMLCanvasElement = this.canvasRef().nativeElement;
-          if (demoPanel.clientHeight > demoPanel.clientWidth) {
-            canvas.width = demoPanel.clientHeight - 160;
-            canvas.height = demoPanel.clientWidth - 10;
-            canvas.style.transform = 'rotate(90deg)';
-          } else {
-            canvas.width = demoPanel.clientWidth - 160;
-            canvas.height = demoPanel.clientHeight - 10;
-          }
-          this.startGame(canvas, {
-            ...gameSettings,
-            playerName: player.name,
-          });
-          onbeforeunload = (): void => {
-            if (this.game) {
-              this.game.destroy();
+        const game = this.stateService.demoGame();
+        if (game) {
+          const tank = game.tanks.find(item => item.chosenAsPlayer);
+          if (tank) {
+            const demoPanel = this.demoPanelRef().nativeElement;
+            const canvas: HTMLCanvasElement = this.canvasRef().nativeElement;
+            if (demoPanel.clientHeight > demoPanel.clientWidth) {
+              canvas.width = demoPanel.clientHeight - 160;
+              canvas.height = demoPanel.clientWidth - 10;
+              canvas.style.transform = 'rotate(90deg)';
+            } else {
+              canvas.width = demoPanel.clientWidth - 160;
+              canvas.height = demoPanel.clientHeight - 10;
             }
-          };
+            this.startGame(canvas, {
+              tankHead: tank.head.name,
+              tankBody: tank.body.name,
+              position: tank.position.position,
+              team: tank.position.team,
+              playerName: player.name,
+            });
+            onbeforeunload = (): void => {
+              if (this.game) {
+                this.game.destroy();
+              }
+            };
+          }
         }
       });
     }
@@ -107,15 +113,16 @@ export class DemoComponent implements OnDestroy {
   }
 
   private updatePlayerStats(): void {
-    const battles = this.stateService.demoBattles();
-    const player = this.stateService.demoPlayer();
+    const battles: IDemoBattle[] = this.stateService.demoBattles();
+    const player: IDemoPlayer = this.stateService.demoPlayer();
     player.totalBattles = battles.length;
     const partialPlayer = battles.reduce((acc: Partial<IDemoPlayer>, battle: IDemoBattle) => {
       acc.totalWins = battle.battleStatus === EUnitStatus.Winner ? acc.totalWins + 1 : acc.totalWins;
       acc.totalDefeats = battle.battleStatus === EUnitStatus.Defeated ? acc.totalDefeats + 1 : acc.totalDefeats;
       acc.totalKills += battle.player.kills;
+      // Todo add arenas, zrists
       return acc;
-    }, { totalWins: 0, totalDefeats: 0, totalKills: 0 });
+    }, { totalWins: 0, totalDefeats: 0, totalKills: 0, zrists: 0, arenas: 0 });
     this.stateService.updateDemoPlayerState(partialPlayer);
   }
 }

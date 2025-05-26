@@ -1,15 +1,9 @@
-import { IUnitStats } from './tank.interface';
+import { IDemoTank, IUnitStats } from './tank.interface';
 
-import { ETeamNames, EUnitStatus } from '@victor_monakhov/tanks';
+import { EUnitStatus } from '@victor_monakhov/tanks';
 
-export interface IPositionSettings {
-  team: ETeamNames;
-  position: number;
-}
-
-export interface IDemoGameSettings extends IPositionSettings {
-  tankHead: string;
-  tankBody: string;
+export interface IDemoGame {
+  tanks: IDemoTank[];
 }
 
 export interface IDemoBattle {
@@ -25,4 +19,6 @@ export interface IDemoPlayer {
   totalWins: number;
   totalDefeats: number;
   totalKills: number;
+  zrists: number;
+  arenas: number;
 }

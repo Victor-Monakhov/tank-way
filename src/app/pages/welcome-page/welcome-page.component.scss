@@ -5,6 +5,10 @@
   .wrapper {
     height: calc(100% - #{variables.$welcome-header-height});
 
+    .scrollbar-v {
+      overflow-x: hidden;
+    }
+
     .title-wrapper {
       width: 100%;
       position: relative;

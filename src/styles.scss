@@ -14,6 +14,7 @@
 html, body {
   width: 100dvw;
   height: 100dvh;
+  min-width: 375px;
   font-family: var(--mat-sys-body-medium-font), sans-serif;
   background: var(--mat-sys-background);
   overflow: hidden;

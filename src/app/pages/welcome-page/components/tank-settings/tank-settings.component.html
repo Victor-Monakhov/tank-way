@@ -1,10 +1,10 @@
-<tnm-demo-settings-panel class="wrapper" title="Customize your tank">
+<!--<tnm-demo-settings-panel class="wrapper" title="Customize your tank">-->
+<div
+  class="wrapper">
   <div
     class="tank-view"
-    [style.width]="viewWidth + 'px'"
-    [style.height]="viewHeight + 'px'"
-    (mousemove)="onTarget($event)"
-    (mouseleave)="targetAngle.set(0)">
+    (mousemove)="onTarget($event, wrapper)"
+    (mouseleave)="onMouseLeave(wrapper)" #wrapper>
     @if (selectedTankBody()) {
       <img class="view-tank-item" alt="#" width="60" height="60" [ngSrc]="selectedTankBody().path"/>
     }
@@ -18,41 +18,85 @@
     }
   </div>
 
-  <div class="selection-wrapper">
-    <span class="label">Head</span>
-    <div class="selection">
-      <ng-scrollbar class="scrollbar-h" orientation="horizontal" thumbClass="thumb-h" trackClass="track-h">
-        <div class="selection-content">
-          @for (head of tankHeads; track $index) {
-            <button
-              type="button"
-              class="image-btn selection-item"
-              [ngClass]="{'selected' : tankHeadIndex() === $index}"
-              (click)="onHead(head, $index)">
-              <img fill alt="tankHead" [ngSrc]="head.path"/>
-            </button>
-          }
-        </div>
-      </ng-scrollbar>
+  <div class="shops">
+    <div class="shop-btn">
+      <div class="shop-btn-icon">
+        <img
+          ngSrc="assets/images/tanks/gun_1.png" alt="#" width="60" height="60"/>
+      </div>
     </div>
+    <div class="shop-btn">
+      <div class="shop-btn-icon">
+        <img ngSrc="assets/images/tanks/T_1.png" alt="#" width="50" height="50"/>
+      </div>
+    </div>
+    <div class="shop-btn">
+      <div class="shop-btn-icon">
+        <img
+          ngSrc="assets/icons/tank/simple-bullet.svg" alt="#" width="40" height="40"/>
+      </div>
+    </div>
+<!--    <button class="shop-btn" mat-fab type="button">-->
+<!--      <img-->
+<!--        class="shop-btn-icon"-->
+<!--        ngSrc="assets/images/tanks/gun_1.png" alt="#" width="60" height="60">-->
+<!--    </button>-->
+
+<!--    <button class="shop-btn" mat-fab type="button">-->
+<!--      <img-->
+<!--        class="shop-btn-icon"-->
+<!--        ngSrc="assets/images/tanks/T_1.png" alt="#" width="60" height="60">-->
+<!--    </button>-->
   </div>
 
-  <div class="selection-wrapper">
-    <span class="label">Body</span>
-    <div class="selection">
-      <ng-scrollbar class="scrollbar-h" orientation="horizontal" thumbClass="thumb-h" trackClass="track-h">
-        <div class="selection-content">
-          @for (head of tankBodies; track $index) {
-            <button
-              type="button"
-              class="image-btn selection-item"
-              [ngClass]="{'selected' : tankBodyIndex() === $index}"
-              (click)="onBody(head, $index)">
-              <img fill alt="tankHead" [ngSrc]="head.path"/>
-            </button>
-          }
-        </div>
-      </ng-scrollbar>
-    </div>
-  </div>
-</tnm-demo-settings-panel>
+<!--  <tnm-game-shop-btn-->
+<!--    class="shop-btn"-->
+<!--    iconSrc1="assets/images/tanks/gun_1.png">-->
+<!--  </tnm-game-shop-btn>-->
+
+<!--  <div-->
+<!--    class="selection-wrapper"-->
+<!--    (mousemove)="$event.stopImmediatePropagation()"-->
+<!--    (mouseleave)="$event.stopImmediatePropagation()">-->
+<!--&lt;!&ndash;    <span class="label">Head</span>&ndash;&gt;-->
+<!--    <div class="selection">-->
+<!--      <ng-scrollbar class="scrollbar-h" orientation="horizontal" thumbClass="thumb-h" trackClass="track-h">-->
+<!--        <div class="selection-content">-->
+<!--          @for (head of tankHeads; track $index) {-->
+<!--            <button-->
+<!--              type="button"-->
+<!--              class="image-btn selection-item"-->
+<!--              [ngClass]="{'selected' : tankHeadIndex() === $index}"-->
+<!--              (click)="onHead(head, $index)">-->
+<!--              <img fill alt="tankHead" [ngSrc]="head.path"/>-->
+<!--            </button>-->
+<!--          }-->
+<!--        </div>-->
+<!--      </ng-scrollbar>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div-->
+<!--    class="selection-wrapper"-->
+<!--    (mousemove)="$event.stopImmediatePropagation()"-->
+<!--    (mouseleave)="$event.stopImmediatePropagation()">-->
+<!--&lt;!&ndash;    <span class="label">Body</span>&ndash;&gt;-->
+<!--    <div class="selection">-->
+<!--      <ng-scrollbar class="scrollbar-h" orientation="horizontal" thumbClass="thumb-h" trackClass="track-h">-->
+<!--        <div class="selection-content">-->
+<!--          @for (head of tankBodies; track $index) {-->
+<!--            <button-->
+<!--              type="button"-->
+<!--              class="image-btn selection-item"-->
+<!--              [ngClass]="{'selected' : tankBodyIndex() === $index}"-->
+<!--              (click)="onBody(head, $index)">-->
+<!--              <img fill alt="tankHead" [ngSrc]="head.path"/>-->
+<!--            </button>-->
+<!--          }-->
+<!--        </div>-->
+<!--      </ng-scrollbar>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--</tnm-demo-settings-panel>-->

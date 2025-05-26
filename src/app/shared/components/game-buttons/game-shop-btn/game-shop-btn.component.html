@@ -1,0 +1,27 @@
+<div [ngClass]="{ 'wrapper': true, 'focused': focused() }">
+<!--  <div class="back-decoration">-->
+<!--    <div class="back-decoration-item"></div>-->
+<!--  </div>-->
+  <div type="button" class="game-item-btn">
+    <div [ngClass]="{ 'game-item': true, 'blocked-item': blocked() }">
+      <img fill class="available-icon" alt="#" [ngSrc]="iconSrc1()" [style.transform]="rotateValue()"/>
+      @if (iconSrc2()) {
+        <img fill class="available-icon" alt="#" [ngSrc]="iconSrc2()" [style.transform]="rotateValue()"/>
+      }
+      @if (iconSrc3()) {
+        <img fill class="available-icon" alt="#" [ngSrc]="iconSrc3()"/>
+      }
+    </div>
+  </div>
+  @if (blocked()) {
+    <div class="tag">
+      <mat-icon class="blocked-icon">lock</mat-icon>
+    </div>
+  }
+  @if (name()) {
+    <div class="tag">
+      <span class="name">{{name()}}</span>
+    </div>
+  }
+  <button mat-button class="surface mat-text-btn" type="button" (click)="onClick.emit($event)"></button>
+</div>

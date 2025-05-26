@@ -8,6 +8,6 @@ export const teamNamesDescription: { [key in ETeamNames]: string } = {
 
 export enum EStates {
   DemoPlayer = 'demoPlayer',
-  DemoGameSettings = 'demoGameSettings',
+  DemoGame = 'demoGame',
   DemoBattles = 'demoBattles',
 }

@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <tnm-input-text
+    class="user-name"
+    [formControl]="userNameControl()"
+    [label]="'auth.nickname' | translate">
+    <tnm-validation [formControl]="userNameControl()"></tnm-validation>
+  </tnm-input-text>
+  <div class="user-achievements">
+    <div class="achievement-item">
+      <strong class="item-name">Battles:</strong>
+      <div class="item-value">
+        <span>{{ player().totalBattles }}</span>
+        <img ngSrc="assets/icons/battles.svg" alt="#" width="25" height="25"/>
+      </div>
+    </div>
+    <hr/>
+    <div class="achievement-item">
+      <strong class="item-name">Wins:</strong>
+      <div class="item-value">
+        <span>{{ player().totalWins }}</span>
+        <img ngSrc="assets/icons/win-flag.svg" alt="#" width="24" height="24"/>
+      </div>
+    </div>
+    <hr/>
+    <div class="achievement-item">
+      <strong class="item-name">Zrists:</strong>
+      <div class="item-value">
+        <span>{{ player().zrists }}</span>
+        <img ngSrc="assets/icons/zrist.svg" alt="#" width="23" height="23"/>
+      </div>
+    </div>
+    <hr/>
+    <div class="achievement-item">
+      <strong class="item-name">Arenas:</strong>
+      <div class="item-value">
+        <span>{{ player().arenas }}</span>
+        <img ngSrc="assets/icons/arena.svg" alt="#" width="24" height="24"/>
+      </div>
+    </div>
+  </div>
+</div>

@@ -64,5 +64,12 @@ export class SvgMaterialModule {
         '../../../../assets/icons/facebook.svg',
       ),
     );
+
+    this.matIconRegistry.addSvgIcon(
+      'gold',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../../../../assets/icons/arena.svg',
+      ),
+    );
   }
 }

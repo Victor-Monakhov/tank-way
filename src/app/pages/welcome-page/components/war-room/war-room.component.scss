@@ -23,50 +23,40 @@
       margin-left: 20px;
     }
 
-    .statistics-header {
+    .tanks-wrapper {
       display: flex;
-      align-items: center;
-      margin-bottom: 30px;
+      gap: 20px;
+      padding: 40px 0;
+      position: relative;
       @include mixins.vm-media(horizontal, (flex-direction, (column, column, column, row)));
 
-      .user-name {
-        flex-shrink: 0;
-        @include mixins.vm-media(horizontal, (width, (280px, 320px, 350px, 280px)));
+      .sub-title {
+        position: absolute;
+        left: 0;
+        top: 0;
       }
 
-      .user-statistics {
+      .tanks-container {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: space-around;
-        width: 100%;
-        padding: 0 20px;
-        border-bottom: 1px solid var(--mat-sys-outline);
-        @include mixins.vm-media(
-            horizontal,
-              (flex-direction, (column, column, column, row)),
-              (margin-bottom, (0, 0, 0, 15px)),
-              (padding-bottom, (20px, 20px, 20px, 0)),
-              (height, (auto, auto, auto, 56px)),
-              (gap, (5px, 5px, 5px, 15px)),
-        );
+        flex-basis: 50%;
+        height: 100%;
+        gap: 20px;
 
-        .user-statistics-item {
+        .tanks-list {
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 20px;
-          @include mixins.vm-media(horizontal, (min-width, (200px, 200px, 200px, auto)));
+          justify-content: center;
+          row-gap: 20px;
+          flex-wrap: wrap;
+          @include mixins.vm-media(horizontal, (column-gap, (3px, 10px, 20px, 20px, 30px)));
 
-          .item-name {
-            color: var(--mat-sys-primary);
-            font-weight: 400;
+          .tank-btn {
+            @include mixins.vm-media(horizontal,
+                (width, (80px, 90px, 100px)),
+                (height, (80px, 90px, 100px)),
+            );
           }
-        }
-
-        hr {
-          height: 100%;
-          border-color: var(--mat-sys-outline);
-          @include mixins.vm-media(horizontal, (display, (none, none, none, block)));
         }
       }
     }

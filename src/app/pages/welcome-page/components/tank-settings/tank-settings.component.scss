@@ -2,16 +2,34 @@
 @use 'mixins' as mixins;
 
 :host {
+  flex-basis: 50%;
+
   .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    min-width: 300px;
+    padding: 15px;
+    //width: 100%;
+    border: 1px solid var(--mat-sys-outline);
+    border-radius: 25px;
+    overflow: hidden;
+    //@include mixins.vm-media(horizontal, (margin-left, (0, 0, 0, 0, 40px)));
+
     .tank-view {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid var(--mat-sys-outline);
-      border-radius: 25px;
+      //width: 100%;
       position: relative;
       cursor: url('src/assets/images/cursor.png') 20 20, auto;
-      background: radial-gradient(circle at 50%, var(--mat-sys-primary), var(--mat-sys-background) 45%);
+     // pointer-events: none;
+      background: radial-gradient(circle at 50%, var(--mat-sys-primary), var(--mat-sys-background) 70%);
+      @include mixins.vm-media(horizontal,
+          (width, (200px, 250px, 250px, 250px, 300px)),
+          (height, (200px, 250px, 250px, 250px, 300px)),
+      );
 
       .view-tank-item {
         position: absolute;
@@ -19,10 +37,34 @@
       }
     }
 
+    .shops {
+      display: flex;
+      gap: 20px;
+      .shop-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 20%;
+        border: 1px solid var(--mat-sys-primary-container);
+
+        .shop-btn-icon {
+          border-radius: 20%;
+          margin: 5px;
+          background: var(--mat-sys-surface-container);
+          box-shadow: 0 0 10px -3px var(--mat-sys-primary);
+        }
+      }
+    }
+
     .selection-wrapper {
       display: flex;
       flex-direction: column;
       row-gap: 10px;
+      min-width: calc(100% - 1px);
+      //flex-basis: 100%;
+      width: 100%;
 
       .label {
         color: var(--mat-sys-on-background);
@@ -30,13 +72,15 @@
 
       .selection {
         padding: 5px 10px;
-        border: 1px solid var(--mat-sys-outline);
-        border-radius: 10px;
+        //border: 1px solid var(--mat-sys-outline);
+        //border-radius: 10px;
+        //width: calc(100% - 1px);
+        //min-width: 300px;
         overflow: hidden;
         @include mixins.vm-media(
             horizontal,
-              (width, (246px, 346px)),
-              (height, (74px, 84px)),
+              //(min-width, (300px, 300px, 350px, 350px, 400px)),
+              (height, (75px, 85px)),
         );
 
         .selection-content {
