@@ -71,6 +71,9 @@ export class InputTextComponent implements OnInit, ControlValueAccessor, Validat
   inputType = input<TTextInputType>(ETextInputType.Text);
   placeholder = input<string>('');
   label = input<string>('');
+  borderColor = input<string>('var(--mat-sys-on-background)');
+  disableErrors = input<boolean>(false);
+  centered = input<boolean>(false);
 
   focused = signal<boolean>(false);
   invalid = signal<boolean>(false);

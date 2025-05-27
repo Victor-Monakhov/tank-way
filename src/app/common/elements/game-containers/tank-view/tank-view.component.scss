@@ -1,0 +1,64 @@
+@use 'mixins' as mixins;
+:host {
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 50%;
+    border: 1px solid var(--mat-sys-primary-container);
+    background: radial-gradient(circle at 50%, var(--mat-sys-primary), var(--mat-sys-background) 72%);
+    @include mixins.vm-media(horizontal,
+        (width, (200px, 250px, 250px, 250px, 300px)),
+        (height, (200px, 250px, 250px, 250px, 300px)),
+    );
+    .tank-view-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+      background: var(--mat-sys-surface-container);
+
+
+      .tank-view {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        cursor: url('src/assets/images/cursor.png') 20 20, auto;
+
+
+        .view-tank-item {
+          position: absolute;
+          user-select: none;
+        }
+      }
+    }
+
+    .tank-name-tag {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120%;
+      bottom: -10px;
+      left: -10%;
+      border-radius: 100px;
+      border: 1px solid var(--mat-sys-primary-container);
+      background: linear-gradient(
+          to top, var(--mat-sys-primary) -100%, var(--mat-sys-background) 10%, var(--mat-sys-primary) 300%
+      );
+      @include mixins.vm-media(horizontal, (height, (70px, 80px)));
+
+      & > * {
+        display: inline-block;
+        width: calc(100% - 80px);
+      }
+    }
+  }
+}

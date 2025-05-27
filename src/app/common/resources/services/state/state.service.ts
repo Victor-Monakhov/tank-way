@@ -33,7 +33,8 @@ export class StateService {
         team: ETeamNames.Red,
         position: 0,
       },
-      bullets: [],
+      bullets: Array(4).fill(100),
+      inventions: Array(9).fill(null),
     },
   ];
 

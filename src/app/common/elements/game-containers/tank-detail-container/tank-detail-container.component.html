@@ -1,0 +1,10 @@
+<div class="detail-container">
+  <div class="detail-container-content">
+    <div [ngClass]="{ 'img-wrapper': true, 'min-img': isMany() }">
+      <img fill draggable="false" class="img" alt="#" [ngSrc]="iconSrc()"/>
+    </div>
+    @if (isMany()) {
+      <span>{{ quantity() }}</span>
+    }
+  </div>
+</div>

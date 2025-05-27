@@ -19,7 +19,11 @@
 
     .static-visible {
       width: 100%;
-      background: var(--mat-sys-on-background);
+    }
+
+    .input {
+      display: flex;
+      justify-content: center;
     }
 
     .visible {

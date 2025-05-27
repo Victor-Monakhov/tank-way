@@ -1,3 +1,5 @@
+import { EInventionEffect } from '../enums/game.enum';
+
 import { ETeamNames } from '@victor_monakhov/tanks';
 
 export interface ITankPosition {
@@ -21,12 +23,21 @@ export interface ITankConstruction {
 }
 
 export interface IBullet {
+  id: number;
   name: string;
   path: string;
   quantity: number;
   damage: number;
   accuracy: number;
   // Todo add bullet effect
+}
+
+export interface IInvention {
+  id: number;
+  name: string;
+  path: string;
+  description: string;
+  effect: EInventionEffect;
 }
 
 export interface IDemoTank extends ITankConstruction {
@@ -39,6 +50,7 @@ export interface IDemoTank extends ITankConstruction {
   maxShotPower: number;
   position: ITankPosition;
   bullets: IBullet[];
+  inventions: IInvention[];
 }
 
 export interface IUnitStats extends ITankConstruction {

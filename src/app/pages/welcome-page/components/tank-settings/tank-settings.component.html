@@ -1,53 +1,40 @@
 <!--<tnm-demo-settings-panel class="wrapper" title="Customize your tank">-->
-<div
-  class="wrapper">
-  <div
-    class="tank-view"
-    (mousemove)="onTarget($event, wrapper)"
-    (mouseleave)="onMouseLeave(wrapper)" #wrapper>
-    @if (selectedTankBody()) {
-      <img class="view-tank-item" alt="#" width="60" height="60" [ngSrc]="selectedTankBody().path"/>
-    }
-    @if (selectedTankHead()) {
-      <img class="view-tank-item"
-           alt="#"
-           width="60"
-           height="60"
-           [ngSrc]="selectedTankHead().path"
-           [style.transform]="'rotate(' + targetAngle() + 'deg)'"/>
+<div class="wrapper">
+  <tnm-tank-view
+    [selectedTankBody]="selectedTankBody()"
+    [selectedTankHead]="selectedTankHead()">
+  </tnm-tank-view>
+
+  <div class="tank-details">
+    <div class="tank-details-container">
+      <tnm-tank-detail-container iconSrc="assets/images/tanks/gun_1.png"></tnm-tank-detail-container>
+      <tnm-tank-detail-container iconSrc="assets/images/tanks/T_1.png"></tnm-tank-detail-container>
+      <tnm-tank-detail-container
+        iconSrc="assets/icons/tank/red-bullet.svg"
+        [quantity]="25500"
+        [isMany]="true">
+      </tnm-tank-detail-container>
+      <tnm-tank-detail-container
+        iconSrc="assets/icons/tank/blue-bullet.svg"
+        [quantity]="12500"
+        [isMany]="true">
+      </tnm-tank-detail-container>
+      <tnm-tank-detail-container
+        iconSrc="assets/icons/tank/green-bullet.svg"
+        [quantity]="3500"
+        [isMany]="true">
+      </tnm-tank-detail-container>
+      <tnm-tank-detail-container
+        iconSrc="assets/icons/tank/gold-bullet.svg"
+        [quantity]="1500"
+        [isMany]="true">
+      </tnm-tank-detail-container>
+    </div>
+    @if (tank()) {
+      <tnm-tank-inventions class="inventions" [inventions]="tank().inventions"></tnm-tank-inventions>
     }
   </div>
-
-  <div class="shops">
-    <div class="shop-btn">
-      <div class="shop-btn-icon">
-        <img
-          ngSrc="assets/images/tanks/gun_1.png" alt="#" width="60" height="60"/>
-      </div>
-    </div>
-    <div class="shop-btn">
-      <div class="shop-btn-icon">
-        <img ngSrc="assets/images/tanks/T_1.png" alt="#" width="50" height="50"/>
-      </div>
-    </div>
-    <div class="shop-btn">
-      <div class="shop-btn-icon">
-        <img
-          ngSrc="assets/icons/tank/simple-bullet.svg" alt="#" width="40" height="40"/>
-      </div>
-    </div>
-<!--    <button class="shop-btn" mat-fab type="button">-->
-<!--      <img-->
-<!--        class="shop-btn-icon"-->
-<!--        ngSrc="assets/images/tanks/gun_1.png" alt="#" width="60" height="60">-->
-<!--    </button>-->
-
-<!--    <button class="shop-btn" mat-fab type="button">-->
-<!--      <img-->
-<!--        class="shop-btn-icon"-->
-<!--        ngSrc="assets/images/tanks/T_1.png" alt="#" width="60" height="60">-->
-<!--    </button>-->
-  </div>
+</div>
 
 <!--  <tnm-game-shop-btn-->
 <!--    class="shop-btn"-->

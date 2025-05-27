@@ -8,53 +8,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    min-width: 300px;
-    padding: 15px;
-    //width: 100%;
-    border: 1px solid var(--mat-sys-outline);
-    border-radius: 25px;
+    gap: 30px;
     overflow: hidden;
-    //@include mixins.vm-media(horizontal, (margin-left, (0, 0, 0, 0, 40px)));
 
-    .tank-view {
+
+
+
+    .tank-details {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      //width: 100%;
-      position: relative;
-      cursor: url('src/assets/images/cursor.png') 20 20, auto;
-     // pointer-events: none;
-      background: radial-gradient(circle at 50%, var(--mat-sys-primary), var(--mat-sys-background) 70%);
-      @include mixins.vm-media(horizontal,
-          (width, (200px, 250px, 250px, 250px, 300px)),
-          (height, (200px, 250px, 250px, 250px, 300px)),
-      );
+      flex-shrink: 0;
+      gap: 10px;
 
-      .view-tank-item {
-        position: absolute;
-        user-select: none;
-      }
-    }
-
-    .shops {
-      display: flex;
-      gap: 20px;
-      .shop-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 70px;
-        height: 70px;
-        border-radius: 20%;
-        border: 1px solid var(--mat-sys-primary-container);
-
-        .shop-btn-icon {
-          border-radius: 20%;
-          margin: 5px;
-          background: var(--mat-sys-surface-container);
-          box-shadow: 0 0 10px -3px var(--mat-sys-primary);
-        }
+      .tank-details-container {
+        display: grid;
+        grid-gap: 3px;
+        @include mixins.vm-media(
+          horizontal,
+            (grid-template-columns, (60px 60px, 70px 70px)),
+              (grid-template-rows, (70px 60px 60px, 80px 70px 70px)),
+        );
       }
     }
 

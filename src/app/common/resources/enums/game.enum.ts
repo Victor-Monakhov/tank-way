@@ -11,3 +11,9 @@ export enum EStates {
   DemoGame = 'demoGame',
   DemoBattles = 'demoBattles',
 }
+
+export enum EInventionEffect {
+  Booster,
+  DestroyerMode,
+  FattyTank,
+}

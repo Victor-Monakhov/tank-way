@@ -7,12 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+import {
+  GameItemBtnComponent,
+} from '../../../../common/elements/game-buttons/game-item-btn/game-item-btn.component';
 import { IDemoBattle, IDemoGame } from '../../../../common/resources/interfaces/game.interface';
 import { IDemoTank } from '../../../../common/resources/interfaces/tank.interface';
 import { StateService } from '../../../../common/resources/services/state/state.service';
-import {
-  GameItemBtnComponent,
-} from '../../../../shared/components/game-buttons/game-item-btn/game-item-btn.component';
 import { BattlesTableComponent } from '../battles-table/battles-table.component';
 import { TankSettingsComponent } from '../tank-settings/tank-settings.component';
 
