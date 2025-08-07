@@ -1,0 +1,59 @@
+@use 'mixins' as mixins;
+@use 'variables' as variables;
+
+:host {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--mat-sys-primary);
+    border-radius: 20px;
+    padding: 15px;
+
+    .title {
+      display: block;
+      text-align: center;
+      width: 100%;
+      font-size: 28px;
+      color: var(--mat-sys-primary);
+      margin-bottom: 20px;
+    }
+
+    .sub-title {
+      font-size: 20px;
+      color: var(--mat-sys-primary);
+      margin-left: 20px;
+    }
+
+    .tanks-wrapper {
+      display: flex;
+      align-items: center;
+      row-gap: 20px;
+      column-gap: 40px;
+      padding: 40px 0;
+      position: relative;
+      @include mixins.vm-media(horizontal, (flex-direction, (column, column, column, row)));
+
+      .tanks-list-wrapper {
+        .sub-title {
+          margin-bottom: 10px;
+        }
+
+        .shops-inventory {
+          margin: 20px 0;
+        }
+      }
+
+    }
+
+    .statistics-wrapper {
+      text-align: center;
+
+      .empty-statistics {
+        display: inline-block;
+        margin: 30px 0;
+        font-size: 18px;
+        color: var(--mat-sys-outline);
+      }
+    }
+  }
+}

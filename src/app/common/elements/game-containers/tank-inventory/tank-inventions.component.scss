@@ -1,0 +1,70 @@
+@use 'mixins' as mixins;
+@use 'variables' as variables;
+
+:host {
+  .tank-inventions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    border: 1px solid var(--mat-sys-primary-container);
+
+    @include mixins.vm-media(
+        horizontal,
+          (border-radius, (13px, 15px)),
+          (width, (200px, 250px)),
+          (height, (variables.$inventory-height-sm, variables.$inventory-height-md)),
+    );
+
+    .inventions-container {
+      padding: 5px;
+      width: calc(100% - 10px);
+      height: calc(100% - 10px);
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: "Roboto Light", sans-serif;
+      color: var(--mat-sys-on-primary-container);
+      background: var(--mat-sys-surface-container);
+      box-shadow: 0 0 10px -3px var(--mat-sys-primary);
+      @include mixins.vm-media(
+        horizontal,
+          (border-radius, (10px, 12px)),
+      );
+
+      .inventions {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 3px;
+        width: 100%;
+        height: 100%;
+
+        .invention-item {
+          position: relative;
+          border-radius: 8px;
+          border: 1px solid var(--mat-sys-primary-container);
+          cursor: grab;
+
+          &:has(.icon-stub) {
+            padding: 12px;
+          }
+
+          .icon-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+          }
+
+          .icon-stub {
+            filter: brightness(30%);
+          }
+        }
+
+        .img {
+          position: absolute;
+        }
+      }
+    }
+  }
+}

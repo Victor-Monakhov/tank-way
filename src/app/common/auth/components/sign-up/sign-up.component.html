@@ -1,0 +1,55 @@
+<div class="wrapper auth-dialog">
+
+  <h2 class="title">{{ 'auth.registration_title' | translate }}</h2>
+
+  <form class="auth-form" [formGroup]="form">
+    <tnm-input-text
+      formControlName="userName"
+      [label]="'auth.nickname' | translate">
+      <tnm-validation [formControl]="userNameControl()"></tnm-validation>
+    </tnm-input-text>
+    <tnm-input-text
+      formControlName="email"
+      inputType="email"
+      placeholder="tnm@mail.com"
+      [label]="'auth.email' | translate">
+      <tnm-validation [formControl]="emailControl()"></tnm-validation>
+    </tnm-input-text>
+    <tnm-input-text
+      formControlName="password"
+      inputType="password"
+      placeholder="aaaaaaA1"
+      [label]="'auth.password' | translate">
+      <tnm-validation [formControl]="passwordControl()"></tnm-validation>
+    </tnm-input-text>
+    <tnm-input-text
+      formControlName="confirmPassword"
+      inputType="password"
+      [label]="'auth.confirm_password' | translate">
+      <tnm-validation [formControl]="confirmPasswordControl()"></tnm-validation>
+    </tnm-input-text>
+  </form>
+
+  <button
+    mat-flat-button
+    type="button"
+    class="mat-submit-btn"
+    [disabled]="form.invalid"
+    (click)="onRegister()">
+    {{ 'auth.sign_up_btn' | translate }}
+  </button>
+
+  <hr class="divider">
+
+  <div class="login-navigation">
+    <button
+      mat-button
+      type="button"
+      class="mat-text-btn"
+      (click)="onBackToLogin()">
+      <small>{{ 'auth.back_to_login' | translate }}</small>
+    </button>
+  </div>
+
+</div>
+

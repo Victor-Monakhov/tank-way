@@ -1,0 +1,56 @@
+@use 'mixins' as mixins;
+
+:host {
+  .wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    @include mixins.vm-media(horizontal, (flex-direction, (column, column, column, row)));
+
+    .user-name {
+      flex-shrink: 0;
+      @include mixins.vm-media(horizontal, (width, (280px, 320px, 350px, 280px)));
+    }
+
+    .user-achievements {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--mat-sys-outline);
+      @include mixins.vm-media(
+          horizontal,
+            (flex-direction, (column, column, column, row)),
+            (margin-bottom, (0, 0, 0, 15px)),
+            (padding-bottom, (20px, 20px, 20px, 0)),
+            (height, (auto, auto, auto, 56px)),
+            (gap, (5px, 5px, 5px, 5px, 15px)),
+      );
+      .achievement-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        @include mixins.vm-media(horizontal, (min-width, (200px, 200px, 200px, auto)));
+
+        .item-name {
+          color: var(--mat-sys-primary);
+          font-weight: 400;
+        }
+
+        .item-value {
+          display: flex;
+          align-items: center;
+          gap: 5px
+        }
+      }
+
+      hr {
+        height: 100%;
+        border-color: var(--mat-sys-outline);
+        @include mixins.vm-media(horizontal, (display, (none, none, none, block)));
+      }
+    }
+  }
+}

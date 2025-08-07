@@ -1,0 +1,133 @@
+@use 'mixins' as mixins;
+
+:host {
+  .wrapper {
+    .toggle-team {
+      width: 290px;
+    }
+
+    .positions-wrapper {
+      display: flex;
+      @include mixins.vm-media(
+          horizontal,
+            (gap, (30px, 40px, 50px))
+      );
+    }
+
+    .position-view-wrapper {
+      border-radius: 25px;
+      position: relative;
+      @include mixins.vm-media(
+          horizontal,
+            (width, (270px, 300px)),
+            (height, (270px, 300px)),
+      );
+
+      .map {
+        display: inline-block;
+        position: relative;
+        border-radius: 25px;
+        width: 100%;
+        height: 100%;
+      }
+
+      .position-view {
+        position: absolute;
+        @include mixins.vm-media(
+            horizontal,
+              (width, (72px, 80px)),
+              (height, (81px, 90px)),
+        );
+
+        .pos-view-content {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          width: 100%;
+          height: 100%;
+
+          .flag-img {
+            position: absolute;
+            object-fit: fill;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
+
+          .flag-info {
+            font-size: 18px;
+            color: var(--mat-sys-on-background);
+            user-select: none;
+            z-index: 1;
+            @include mixins.vm-media(horizontal, (margin-top, (19px, 22px)));
+          }
+        }
+      }
+
+      .red-pos1 {
+        @include mixins.vm-media(
+            horizontal,
+              (top, (72px, 80px)),
+              (left, (18px, 20px)),
+        );
+      }
+
+      .red-pos2 {
+        @include mixins.vm-media(
+            horizontal,
+              (top, (104px, 115px)),
+              (left, (18px, 20px)),
+        );
+      }
+
+      .red-pos3 {
+        @include mixins.vm-media(
+            horizontal,
+              (top, (171px, 190px)),
+              (left, (84px, 93px)),
+        );
+      }
+
+      .red-pos4 {
+        @include mixins.vm-media(
+            horizontal,
+              (top, (171px, 190px)),
+              (left, (117px, 130px)),
+        );
+      }
+
+      .blue-pos1 {
+        @include mixins.vm-media(
+            horizontal,
+              (top, (68px, 75px)),
+              (left, (180px, 200px)),
+        );
+      }
+
+      .blue-pos2 {
+        @include mixins.vm-media(
+            horizontal,
+              (top, (101px, 112px)),
+              (left, (180px, 200px)),
+        );
+      }
+
+      .blue-pos3 {
+        @include mixins.vm-media(
+            horizontal,
+              (top, (171px, 190px)),
+              (left, (113px, 125px)),
+        );
+      }
+
+      .blue-pos4 {
+        @include mixins.vm-media(
+            horizontal,
+              (top, (171px, 190px)),
+              (left, (79px, 88px)),
+        );
+      }
+    }
+  }
+}

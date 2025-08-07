@@ -1,0 +1,72 @@
+@use 'mixins'as mixins;
+@use 'variables' as variables;
+
+:host {
+  .wrapper {
+    height: calc(100% - #{variables.$welcome-header-height});
+
+    .scrollbar-v {
+      overflow-x: hidden;
+    }
+
+    .title-wrapper {
+      width: 100%;
+      position: relative;
+      @include mixins.vm-media(horizontal, (height, (300px, 300px, 500px)));
+
+      .title-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.5);
+      }
+
+      .title-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        transform: translate(0, -50%);
+        @include mixins.vm-media(
+            horizontal,
+              (padding, (
+                0 30px 0 30px,
+                0 80px 0 80px,
+                0 150px 0 150px
+              ))
+        );
+
+        .title {
+          text-transform: uppercase;
+          text-align: center;
+          color: var(--mat-sys-primary);
+          opacity: 0.3;
+          margin-bottom: 20px;
+          @include mixins.vm-media(horizontal, (font-size, (60px, 60px, 90px, 120px, 140px)));
+        }
+
+        .sub-title {
+          color: var(--mat-sys-primary);
+          opacity: 0.7;
+          @include mixins.vm-media(horizontal, (font-size, (28px, 28px, 32px, 38px, 46px)));
+        }
+
+        .info {
+          margin-left: auto;
+          opacity: 0.6;
+          font-size: 18px;
+          color: var(--mat-sys-on-background);
+        }
+      }
+    }
+
+    .divider {
+      border-color: var(--mat-sys-primary);
+      opacity: 0.5;
+      @include mixins.vm-media(horizontal, (margin, (0 5px, 0 40px, 0 80px)));
+    }
+  }
+}

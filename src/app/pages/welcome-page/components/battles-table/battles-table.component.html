@@ -1,0 +1,142 @@
+<ng-scrollbar class="scrollbar-v" thumbClass="thumb-v" trackClass="track-v">
+  <table mat-table
+         multiTemplateDataRows
+         class="battles-table mat-elevation-z8"
+         [dataSource]="battles()">
+
+    @for (column of columnsToDisplay; track $index) {
+      <ng-container [matColumnDef]="column">
+        <th
+          mat-header-cell
+          [ngClass]="{
+              'column': true,
+              'column-head': true,
+              'hidden-column':
+              (column === eBattleStatsColumns.Date || column === eBattleStatsColumns.Id) && !isLargeScreen()
+            }"
+          *matHeaderCellDef>
+          <span class="value">{{ column }}</span>
+        </th>
+        <td
+          mat-cell
+          [ngClass]="{
+              'column': true,
+              'name-column': column === eBattleStatsColumns.Name,
+              'hidden-column':
+              (column === eBattleStatsColumns.Date || column === eBattleStatsColumns.Id) && !isLargeScreen()
+            }"
+          *matCellDef="let element; let i = dataIndex">
+          @switch (column) {
+            @case (eBattleStatsColumns.Id) {
+              <span class="index">{{ i + 1 }}</span>
+            }
+            @case (eBattleStatsColumns.Tank) {
+              @let src = (element.player | mapBattle : column);
+              <div class="tank-icon">
+                <img fill [ngSrc]="src.body" alt="body"/>
+                <img fill [ngSrc]="src.head" alt="head"/>
+              </div>
+            }
+            @case (eBattleStatsColumns.Date) {
+              <span class="value date-value">
+                {{ (element.player | mapBattle : column).value | date : 'yyyy-MM-dd/hh:mm a' }}
+              </span>
+            }
+            @default {
+              <span class="value">{{ (element.player | mapBattle : column).value }}</span>
+            }
+          }
+        </td>
+      </ng-container>
+    }
+
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell class="column column-head" aria-label="row actions" *matHeaderCellDef></th>
+      <td mat-cell class="column btn-column" *matCellDef="let element; let i = dataIndex">
+
+        <button
+          mat-mini-fab
+          type="button"
+          aria-label="expand row"
+          [ngClass]="{
+          'table-btn': true,
+          'table-toggle-btn': true,
+          'table-toggle-btn-expanded': expandedElement()?.id === element.id
+        }"
+          (click)="toggle(element, i); $event.stopPropagation()">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+        <div #expandedEl class="battle-details-wrapper">
+
+          <table
+            mat-table
+            class="battles-table inner-table mat-elevation-z8"
+            [dataSource]="element.bots">
+
+            @for (column of columnsToDisplay; track $index) {
+              <ng-container [matColumnDef]="column">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td
+                  mat-cell
+                  [ngClass]="{
+                      'column': true,
+                      'inner-column': true,
+                      'name-column': column === eBattleStatsColumns.Name,
+                      'hidden-column':
+                        (column === eBattleStatsColumns.Date || column === eBattleStatsColumns.Id) && !isLargeScreen()
+                    }"
+                  *matCellDef="let subElement">
+                  @switch (column) {
+                    @case (eBattleStatsColumns.Id) {
+                      <div class="stub"></div>
+                    }
+                    @case (eBattleStatsColumns.Tank) {
+                      @let src = (subElement | mapBattle : column);
+                      <div class="tank-icon">
+                        <img fill [ngSrc]="src.body" alt="body"/>
+                        <img fill [ngSrc]="src.head" alt="head"/>
+                      </div>
+                    }
+                    @case (eBattleStatsColumns.Date) {
+                      <span class="value inner-date-value">
+                        {{ (element.player | mapBattle : column).value | date : 'yyyy-MM-dd/hh:mm a' }}
+                      </span>
+                    }
+                    @default {
+                      <span class="value">{{ (subElement | mapBattle : column).value }}</span>
+                    }
+                  }
+                </td>
+              </ng-container>
+            }
+
+            <ng-container matColumnDef="expand">
+              <th mat-header-cell class="column column-head" aria-label="row actions" *matHeaderCellDef></th>
+              <td mat-cell class="column btn-column inner-column" *matCellDef="let element">
+                <div class="stub"></div>
+              </td>
+            </ng-container>
+
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplayWithExpand;"></tr>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+          </table>
+
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand; sticky: true"></tr>
+    <tr
+      mat-row
+      class="table-element-row"
+      *matRowDef="let element; columns: columnsToDisplayWithExpand;">
+    </tr>
+    <tr mat-row class="detail-row" *matRowDef="let row; columns: ['expandedDetail']"></tr>
+  </table>
+</ng-scrollbar>

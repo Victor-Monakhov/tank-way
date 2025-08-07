@@ -1,0 +1,71 @@
+@use '@angular/material' as mat;
+@use 'variables' as variables;
+@use 'mixins' as mixins;
+
+:host {
+  .wrapper {
+    justify-content: space-between;
+    width: 100%;
+    font-size: 22px;
+    text-transform: capitalize;
+    @include mixins.vm-media(
+      horizontal,
+          (padding, (0 15px, 0 40px, 0 80px))
+    );
+    @include mat.toolbar-overrides((
+      "container-background-color": var(--mat-sys-background),
+      "standard-height": variables.$welcome-header-height,
+    ));
+
+    .left-header-container {
+      display: flex;
+      align-items: center;
+
+      img {
+        flex-shrink: 0;
+        border-radius: 50%;
+        margin-right: 30px;
+        background-image: radial-gradient(
+            circle at center,
+            var(--mat-sys-on-background) 10%,
+            var(--mat-sys-background),
+            transparent
+        );
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 30px;
+        padding-top: 3px;
+        list-style: none;
+
+        .nav-link {
+          color: var(--mat-sys-on-background);
+          text-decoration: none;
+          position: relative;
+          @include mixins.hover-underline(2px, 3px, var(--mat-sys-primary));
+        }
+      }
+    }
+
+    .right-header-container {
+      display: flex;
+      align-items: center;
+      height: 60%;
+      gap: 30px;
+
+      & > * {
+        flex-shrink: 0;
+      }
+
+      .sign-in-btn {
+        font-size: 22px;
+      }
+
+      hr {
+        height: 100%;
+        border-color: var(--mat-sys-primary);
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+@use 'mixins' as mixins;
+
+:host {
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: var(--mat-sys-background);
+    @include mixins.vm-media(
+      horizontal,
+          (padding, (
+            20px 5px 20px 5px,
+            30px 40px 30px 40px,
+            45px 80px 45px 80px
+          ))
+    );
+
+    & > * {
+      width: 100%;
+    }
+
+    .game-settings {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+
+      & > * {
+        flex: 40% 1 0;
+      }
+    }
+
+    .mat-submit-btn {
+      @include mixins.vm-media(horizontal, (width, (270px, 380px)));
+    }
+
+    .log-in-row {
+      text-align: center;
+      @include mixins.vm-media(
+          horizontal,
+            (margin-top, (0, 25px)),
+            (font-size, (14px, 16px))
+      );
+
+      .mat-text-btn {
+        margin-top: 2px;
+        @include mixins.hover-underline(1px, 2px, var(--mat-sys-primary));
+        @include mixins.vm-media(
+            horizontal,
+              (font-size, (14px, 16px))
+        );
+      }
+    }
+  }
+}

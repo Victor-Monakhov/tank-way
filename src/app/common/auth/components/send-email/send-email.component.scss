@@ -1,0 +1,29 @@
+@use 'mixins' as mixins;
+
+:host {
+  .wrapper {
+    .message {
+      text-align: center;
+      font-family: "Roboto Light", sans-serif;
+      color: var(--mat-sys-on-background);
+    }
+    strong {
+      color: var(--mat-sys-primary);
+    }
+    .error {
+      color: var(--mat-sys-error);
+    }
+    .resend-email {
+       .mat-text-btn {
+         @include mixins.hover-underline(1px, 2px, var(--mat-sys-primary));
+       }
+      .timer {
+        padding-left: 20px;
+      }
+    }
+    .mat-submit-btn {
+      margin-top: 40px;
+      width: 270px;
+    }
+  }
+}

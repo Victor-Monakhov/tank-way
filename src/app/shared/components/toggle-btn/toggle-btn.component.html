@@ -1,0 +1,13 @@
+  <div matRipple class="wrapper">
+    <input type="button" class="toggler-container" [(ngModel)]="value" (click)="onToggle()"/>
+
+    <button
+      type="button"
+      [ngClass]="['toggler', (value() === value1()) ? 'left' : 'right']"
+      (click)="$event.stopPropagation()">
+    </button>
+
+    <span [ngClass]="{'selected-value': value() === value1(), 'value': true}">{{value1()}}</span>
+
+    <span [ngClass]="{'selected-value': value() === value2(), 'value': true}">{{value2()}}</span>
+  </div>

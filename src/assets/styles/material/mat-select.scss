@@ -1,0 +1,37 @@
+@use '@angular/material' as mat;
+
+.language-form {
+  mat-select-trigger {
+    display: flex;
+  }
+
+  .mat-mdc-select-arrow {
+    width: 24px;
+    height: 24px;
+    scale: 1.5;
+  }
+}
+
+.language-option {
+  @include mat.option-overrides((
+    "label-text-size": 20px,
+  ));
+
+  language-option-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &.mat-mdc-option {
+    padding: 0 5px;
+    text-transform: uppercase;
+
+    .mat-icon {
+      margin-right: 5px;
+    }
+  }
+
+  .mat-pseudo-checkbox {
+    display: none !important;
+  }
+}

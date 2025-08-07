@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <tnm-war-room></tnm-war-room>
+  <div class="game-settings">
+    <tnm-position-settings></tnm-position-settings>
+  </div>
+  <button mat-flat-button type="button" class="mat-submit-btn" (click)="onDemo()">Play Demo</button>
+  <small class="log-in-row">
+    or
+    <button mat-button type="button" class="mat-text-btn" (click)="signInClick.emit()">Log In</button>
+    and unlock more features
+  </small>
+</div>

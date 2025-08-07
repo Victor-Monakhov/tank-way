@@ -1,0 +1,36 @@
+<div class="wrapper">
+  @if (emailMsgType() === eEmailMessageTypes.EmailConfirmation) {
+    <h2 class="title">confirmation</h2>
+  } @else {
+    <h2 class="title">reset password</h2>
+  }
+  <div class="message">
+    <p>{{'Hey '}}<strong>{{userName()}}</strong>!</p>
+    <br/>
+    @if (withError()) {
+      <p class="error">Looks like you haven’t confirmed your email yet.</p>
+      <br>
+    }
+    @if (emailMsgType() === eEmailMessageTypes.EmailConfirmation) {
+      <p>We just sent a confirmation email to <br/><strong>{{email()}}</strong></p>
+      <br/>
+      <p>Check your inbox and click the link to finish signing up.</p>
+    } @else {
+      <p>We just sent an email to <br/><strong>{{email()}}</strong></p>
+      <br/>
+      <p>Check your inbox and click the link to reset your password.</p>
+    }
+    <br/>
+    <p>Can’t wait to have you on board!</p>
+    <br>
+    <small class="resend-email">
+      Didn’t get the email?
+      @if (timer() <= 0) {
+        <button mat-button type="button" class="mat-text-btn" (click)="onResend()"><small>Send it again</small></button>
+      } @else {
+        <strong class="timer">{{timer()}}</strong>
+      }
+    </small>
+  </div>
+  <button mat-flat-button type="button" class="mat-submit-btn" (click)="onOk()">Ok</button>
+</div>

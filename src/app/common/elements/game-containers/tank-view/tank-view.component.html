@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="tank-view-container">
+    <div
+      class="tank-view"
+      (mousemove)="onTarget($event, wrapper)"
+      (mouseleave)="onMouseLeave(wrapper)" #wrapper>
+      @if (selectedTankBody()) {
+        <img class="view-tank-item" alt="#" width="60" height="60" [ngSrc]="selectedTankBody().path"/>
+      }
+      @if (selectedTankHead()) {
+        <img class="view-tank-item"
+             alt="#"
+             width="60"
+             height="60"
+             [ngSrc]="selectedTankHead().path"
+             [style.transform]="'rotate(' + targetAngle() + 'deg)'"/>
+      }
+    </div>
+  </div>
+  <div class="tank-name-tag">
+    @if (tankNameControl()) {
+      <tnm-input-text
+        borderColor="var(--mat-sys-primary-container)"
+        [formControl]="tankNameControl()"
+        [disableErrors]="true"
+        [centered]="true">
+      </tnm-input-text>
+    }
+  </div>
+</div>

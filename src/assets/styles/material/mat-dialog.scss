@@ -1,0 +1,33 @@
+@use 'mixins' as mixins;
+
+.mat-vm-dialog {
+  width: 450px;
+  min-height: 300px;
+  border-radius: 8px;
+  border: 1px solid var(--mat-sys-primary);
+
+  .mat-mdc-dialog-surface {
+    border-radius: 8px;
+    background: var(--mat-sys-background);
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 25px;
+
+      & > * {
+        flex-shrink: 0;
+        width: 100%
+      }
+
+      .title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 40px;
+        text-transform: uppercase;
+        color: var(--mat-sys-primary);
+      }
+    }
+  }
+}

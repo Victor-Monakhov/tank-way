@@ -1,0 +1,37 @@
+<div class="tanks-container">
+  <div class="tanks-list">
+    @for (tank of tanks(); track $index) {
+      @if (game()?.tanks?.length) {
+        @if ($index < game().tanks.length) {
+          <tnm-game-item-btn
+            class="tank-btn rotate"
+            [iconSrc1]="tank.body.path"
+            [iconSrc2]="tank.head.path"
+            [name]="tank.name"
+            [focused]="tank.chosenAsPlayer"
+            [rotate]="270"
+            (onClick)="onSelectTank($index)">
+          </tnm-game-item-btn>
+        } @else if ($index === game().tanks.length) {
+          <tnm-game-item-btn
+            class="tank-btn rotate"
+            [iconSrc1]="tank.body.path"
+            [iconSrc2]="tank.head.path"
+            [priced]="true"
+            [price]="1000"
+            [rotate]="270"
+            (onClick)="onBuyTank(tank)">
+          </tnm-game-item-btn>
+        } @else {
+          <tnm-game-item-btn
+            class="tank-btn rotate"
+            [iconSrc1]="tank.body.path"
+            [iconSrc2]="tank.head.path"
+            [blocked]="true"
+            [rotate]="270">
+          </tnm-game-item-btn>
+        }
+      }
+    }
+  </div>
+</div>

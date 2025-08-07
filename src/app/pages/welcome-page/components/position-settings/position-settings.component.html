@@ -1,0 +1,45 @@
+<tnm-demo-settings-panel class="wrapper" title="Select your position">
+
+  <vms-toggle-btn
+    class="toggle-team"
+    [value1]="teamNamesDescription[eDemoTeams.Red]"
+    [value2]="teamNamesDescription[eDemoTeams.Blue]"
+    [(ngModel)]="team"
+    (ngModelChange)="onChanges()">
+  </vms-toggle-btn>
+
+  <mat-radio-group
+    class="positions-wrapper"
+    [(ngModel)]="position"
+    (ngModelChange)="onChanges()">
+    @for (pos of positions; track $index) {
+      <mat-radio-button class="mat-radio-demo-pos" [value]="pos">{{ pos }}</mat-radio-button>
+    }
+  </mat-radio-group>
+
+  <div class="position-view-wrapper">
+    @if (team() === teamNamesDescription[eDemoTeams.Red]) {
+      <img fill class="map" ngSrc="images/red-map-pos.png" alt="red-map">
+    }
+    @if (team() === teamNamesDescription[eDemoTeams.Blue]) {
+      <img fill class="map" ngSrc="images/blue-map-pos.png" alt="blue-map">
+    }
+    <div [ngClass]="['position-view', (team() === teamNamesDescription[eDemoTeams.Red]) ?
+                    'red-pos' + position() :
+                    'blue-pos' + position()]">
+      @if (team() === teamNamesDescription[eDemoTeams.Red]) {
+        <div  class="pos-view-content">
+          <img fill class="flag-img" ngSrc="images/pos-red.png" alt="red-flag">
+          <b class="flag-info">{{position()}}</b>
+        </div>
+      }
+      @if (team() === teamNamesDescription[eDemoTeams.Blue]) {
+        <div class="pos-view-content">
+          <img fill class="flag-img" ngSrc="assets/images/pos-blue.png" alt="blue-flag">
+          <b class="flag-info">{{position()}}</b>
+        </div>
+      }
+    </div>
+  </div>
+
+</tnm-demo-settings-panel>

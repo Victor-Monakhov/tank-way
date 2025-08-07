@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <button mat-mini-fab type="button" class="back-link" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="demo-panel" #demoPanel>
+    @if (loader()) {
+      <tnm-loader class="loader"></tnm-loader>
+    }
+    <canvas [ngClass]="{'demo-canvas': true, 'canvas-ready': !loader()}" #canvas></canvas>
+  </div>
+</div>

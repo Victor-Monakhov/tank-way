@@ -1,0 +1,14 @@
+@use 'mixins' as mixins;
+
+:host {
+  .shop-wrapper {
+    display: flex;
+    gap: 10px;
+    .shop-item {
+      @include mixins.vm-media(horizontal,
+          (width, (60px, 70px, 80px)),
+          (height, (60px, 70px, 80px)),
+      );
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<div class="tank-inventions">
+  <div class="inventions-container">
+    <div class="inventions">
+      @for (inventoryCell of inventory(); track $index) {
+        <div
+          class="invention-item"
+          [draggable]="inventoryCell?.length"
+          (dragover)="$event.preventDefault()"
+          (drop)="onDrop($index, $event)"
+          (dragstart)="onDragStart($index)"
+          (dragenter)="onDragEnter($event)"
+          (dragleave)="onDragLeave($event)"
+          (dblclick)="onDoubleClick($index)">
+          @if (inventoryCell && !inventoryCell.length) {
+            <div [ngClass]="{ 'icon-wrapper': true, 'icon-stub': !inventoryCell.length }">
+              <img fill class="img" ngSrc="assets/icons/tank/invention-stub.svg" alt="#">
+            </div>
+          } @else if (inventoryCell) {
+            <div class="icon-wrapper">
+              <img fill class="img" alt="#" [ngSrc]="inventoryCell[0].path">
+            </div>
+            <span class="item-quantity">{{inventoryCell.length}}</span>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
