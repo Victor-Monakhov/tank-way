@@ -18,10 +18,13 @@
     </div>
   </div>
   <div class="tank-name-tag">
-    <tnm-input-text
-      borderColor="var(--mat-sys-primary-container)"
-      [disableErrors]="true"
-      [centered]="true">
-    </tnm-input-text>
+    @if (tankNameControl()) {
+      <tnm-input-text
+        borderColor="var(--mat-sys-primary-container)"
+        [formControl]="tankNameControl()"
+        [disableErrors]="true"
+        [centered]="true">
+      </tnm-input-text>
+    }
   </div>
 </div>

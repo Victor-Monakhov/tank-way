@@ -3,46 +3,36 @@
   <h2 class="title">Your War Room</h2>
 
   <section class="war-room-header">
-    <tnm-war-room-header></tnm-war-room-header>
+    <tnm-war-room-header [player]="player()" (savePlayerName)="onSavePlayerName($event)"></tnm-war-room-header>
   </section>
 
   <section class="tanks-wrapper">
-    <h3 class="sub-title">Tanks:</h3>
-    <div class="tanks-container">
-      <div class="tanks-list">
-        @for (tank of tanks(); track $index) {
-          @if (game()?.tanks?.length) {
-            @if ($index < game().tanks.length) {
-              <tnm-game-item-btn
-                class="tank-btn rotate"
-                [iconSrc1]="tank.body.path"
-                [iconSrc2]="tank.head.path"
-                [name]="tank.name"
-                [focused]="tank.chosenAsPlayer"
-                [rotate]="270">
-              </tnm-game-item-btn>
-            } @else if ($index === game().tanks.length) {
-              <tnm-game-item-btn
-                class="tank-btn rotate"
-                [iconSrc1]="tank.body.path"
-                [iconSrc2]="tank.head.path"
-                [priced]="true"
-                [rotate]="270">
-              </tnm-game-item-btn>
-            } @else {
-              <tnm-game-item-btn
-                class="tank-btn rotate"
-                [iconSrc1]="tank.body.path"
-                [iconSrc2]="tank.head.path"
-                [blocked]="true"
-                [rotate]="270">
-              </tnm-game-item-btn>
-            }
-          }
-        }
-      </div>
+    <div class="tanks-list-wrapper">
+      <h3 class="sub-title">Tanks:</h3>
+      <tnm-tank-list
+        [game]="game()"
+        [tanks]="tanks()"
+        (buyTank)="onBuyTank($event)"
+        (selectTank)="onSelectTank($event)"></tnm-tank-list>
+      <mat-tab-group
+        class="shops-inventory"
+        [selectedIndex]="selectedTab()"
+        (selectedIndexChange)="selectedTab.set($event)">
+        <mat-tab class="shops-tab" label="Inventory">
+          <tnm-player-inventory [inventory]="inventory()" (saveInventory)="onSaveInventory($event)">
+          </tnm-player-inventory>
+        </mat-tab>
+        <mat-tab label="Bullets"> In Progress </mat-tab>
+        <mat-tab label="Heads">
+          <tnm-shop [shopItems]="tankHeadsShop" (buyItem)="onBuyItem($event)"></tnm-shop>
+        </mat-tab>
+        <mat-tab label="Bodies">
+          <tnm-shop [shopItems]="tankBodiesShop" (buyItem)="onBuyItem($event)"></tnm-shop>
+        </mat-tab>
+        <mat-tab label="Inventions"> In Progress </mat-tab>
+      </mat-tab-group>
     </div>
-    <tnm-tank-settings></tnm-tank-settings>
+    <tnm-tank-settings [tank]="chosenTank()" (saveTank)="onSaveTank($event)"></tnm-tank-settings>
   </section>
 
   <h3 class="sub-title">Battles:</h3>

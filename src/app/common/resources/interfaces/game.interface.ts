@@ -1,4 +1,4 @@
-import { IDemoTank, IUnitStats } from './tank.interface';
+import { IDemoTank, ITankItem, IUnitStats } from './tank.interface';
 
 import { EUnitStatus } from '@victor_monakhov/tanks';
 
@@ -15,6 +15,7 @@ export interface IDemoBattle {
 
 export interface IDemoPlayer {
   name: string;
+  inventory: ITankItem[][];
   totalBattles: number;
   totalWins: number;
   totalDefeats: number;

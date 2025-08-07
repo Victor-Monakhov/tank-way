@@ -1,4 +1,5 @@
 @use 'mixins' as mixins;
+@use 'variables' as variables;
 
 :host {
   .wrapper {
@@ -25,40 +26,23 @@
 
     .tanks-wrapper {
       display: flex;
-      gap: 20px;
+      align-items: center;
+      row-gap: 20px;
+      column-gap: 40px;
       padding: 40px 0;
       position: relative;
       @include mixins.vm-media(horizontal, (flex-direction, (column, column, column, row)));
 
-      .sub-title {
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
+      .tanks-list-wrapper {
+        .sub-title {
+          margin-bottom: 10px;
+        }
 
-      .tanks-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-basis: 50%;
-        height: 100%;
-        gap: 20px;
-
-        .tanks-list {
-          display: flex;
-          justify-content: center;
-          row-gap: 20px;
-          flex-wrap: wrap;
-          @include mixins.vm-media(horizontal, (column-gap, (3px, 10px, 20px, 20px, 30px)));
-
-          .tank-btn {
-            @include mixins.vm-media(horizontal,
-                (width, (80px, 90px, 100px)),
-                (height, (80px, 90px, 100px)),
-            );
-          }
+        .shops-inventory {
+          margin: 20px 0;
         }
       }
+
     }
 
     .statistics-wrapper {

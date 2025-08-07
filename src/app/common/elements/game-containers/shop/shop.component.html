@@ -1,0 +1,11 @@
+<div class="shop-wrapper">
+  @for (shopItem of shopItems(); track shopItem.item.name) {
+    <tnm-game-item-btn
+      class="shop-item"
+      [iconSrc1]="shopItem.item.path"
+      [priced]="true"
+      [price]="shopItem.price"
+      (onClick)="onBuyItem(shopItem)">
+    </tnm-game-item-btn>
+  }
+</div>

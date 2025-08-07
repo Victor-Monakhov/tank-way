@@ -1,4 +1,4 @@
-<div [ngClass]="{ 'wrapper': true, 'focused': focused() }">
+<div [ngClass]="{ 'game-item-btn-wrapper': true, 'focused': focused() }">
   <div type="button" class="game-item-btn">
     <div [ngClass]="{
       'game-item': true,
@@ -21,12 +21,12 @@
   }
   @if (name()) {
     <div class="tag">
-      <span class="name">{{name()}}</span>
+      <span class="name">{{ name() }}</span>
     </div>
   }
   @if (priced()) {
     <div class="tag">
-      <span class="price">1000</span>
+      <span class="price">{{ price() }}</span>
       <mat-icon class="priced-icon" svgIcon="gold"></mat-icon>
     </div>
   }

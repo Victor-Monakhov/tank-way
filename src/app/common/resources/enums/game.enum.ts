@@ -12,6 +12,13 @@ export enum EStates {
   DemoBattles = 'demoBattles',
 }
 
+export enum ETankItemType {
+  TankBody = 'tankBody',
+  TankHead = 'tankHead',
+  Bullet = 'bullet',
+  Invention = 'invention',
+}
+
 export enum EInventionEffect {
   Booster,
   DestroyerMode,

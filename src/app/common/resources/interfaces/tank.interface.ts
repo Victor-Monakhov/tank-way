@@ -1,41 +1,39 @@
-import { EInventionEffect } from '../enums/game.enum';
+import { EInventionEffect, ETankItemType } from '../enums/game.enum';
 
 import { ETeamNames } from '@victor_monakhov/tanks';
+
+export type TTankItem = ITankHead | ITankBody | IBullet | IInvention;
 
 export interface ITankPosition {
   team: ETeamNames;
   position: number;
 }
 
-export interface ITankBody {
+export interface ITankItem {
+  itemType: ETankItemType;
   name: string;
   path: string;
 }
 
-export interface ITankHead {
-  name: string;
-  path: string;
-}
+export interface ITankBody extends ITankItem {}
+
+export interface ITankHead extends ITankItem {}
 
 export interface ITankConstruction {
   head: ITankHead;
   body: ITankBody;
 }
 
-export interface IBullet {
+export interface IBullet extends ITankItem {
   id: number;
-  name: string;
-  path: string;
   quantity: number;
   damage: number;
   accuracy: number;
   // Todo add bullet effect
 }
 
-export interface IInvention {
+export interface IInvention extends ITankItem {
   id: number;
-  name: string;
-  path: string;
   description: string;
   effect: EInventionEffect;
 }

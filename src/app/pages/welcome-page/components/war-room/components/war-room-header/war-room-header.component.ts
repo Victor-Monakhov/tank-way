@@ -1,5 +1,15 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  effect,
+  inject,
+  input,
+  OnInit,
+  output,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -8,7 +18,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { debounceTime } from 'rxjs';
 
 import { IDemoPlayer } from '../../../../../../common/resources/interfaces/game.interface';
-import { StateService } from '../../../../../../common/resources/services/state/state.service';
 import { InputTextComponent } from '../../../../../../shared/components/input-text/input-text.component';
 import { ValidationComponent } from '../../../../../../shared/components/validation/validation.component';
 import {
@@ -31,22 +40,12 @@ import {
 export class WarRoomHeaderComponent implements OnInit {
 
   private readonly validationService = inject(ValidationService);
-  private readonly stateService = inject(StateService);
   private readonly dr = inject(DestroyRef);
 
   private locker = false;
 
-  player = computed<Partial<IDemoPlayer>>(() => {
-    const demoPlayer = this.stateService.demoPlayer();
-    if (demoPlayer) {
-      if (!this.locker) {
-        this.userNameControl().setValue(demoPlayer.name);
-        this.locker = true;
-      }
-      return { ...demoPlayer };
-    }
-    return {};
-  });
+  player = input.required<Partial<IDemoPlayer>>();
+  savePlayerName = output<string>();
 
   userNameControl = signal<FormControl<string>>(
     new FormControl('Comrade', {
@@ -58,6 +57,15 @@ export class WarRoomHeaderComponent implements OnInit {
     }),
   );
 
+  constructor() {
+    effect(() => {
+      if (this.player().hasOwnProperty('name') && !this.locker) {
+        this.userNameControl().setValue(this.player().name);
+        this.locker = true;
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.observeUserName();
   }
@@ -68,7 +76,7 @@ export class WarRoomHeaderComponent implements OnInit {
       takeUntilDestroyed(this.dr),
     ).subscribe(value => {
       if (this.userNameControl().valid) {
-        this.stateService.updateDemoPlayerState({ name: value });
+        this.savePlayerName.emit(value);
       }
     });
   }

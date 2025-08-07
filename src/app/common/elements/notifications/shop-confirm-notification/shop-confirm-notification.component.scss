@@ -1,0 +1,47 @@
+@use 'mixins' as mixins;
+
+:host {
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+
+    .mat-submit-btn {
+      flex: 1 0 40%;
+    }
+
+    .cancel-btn {
+      background: var(--mat-sys-surface-container);
+      color: var(--mat-sys-on-surface-variant);
+    }
+  }
+
+  .message {
+    font-family: "Roboto Light", sans-serif;
+    text-align: center;
+  }
+
+  .shop-item-wrapper {
+    display: flex;
+    margin: 20px 0;
+    @include mixins.vm-media(horizontal,
+        (width, (80px, 90px, 100px)),
+        (height, (80px, 90px, 100px)),
+    );
+    .shop-item {
+      @include mixins.vm-media(horizontal,
+          (width, (80px, 90px, 100px)),
+          (height, (80px, 90px, 100px)),
+      );
+    }
+  }
+
+  .success {
+    color: var(--mat-sys-on-background);
+  }
+
+  .error {
+    color: var(--mat-sys-error);
+  }
+}

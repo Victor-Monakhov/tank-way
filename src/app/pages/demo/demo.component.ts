@@ -122,7 +122,7 @@ export class DemoComponent implements OnDestroy {
       acc.totalKills += battle.player.kills;
       // Todo add arenas, zrists
       return acc;
-    }, { totalWins: 0, totalDefeats: 0, totalKills: 0, zrists: 0, arenas: 0 });
+    }, { totalWins: 0, totalDefeats: 0, totalKills: 0, zrists: player.zrists, arenas: player.arenas });
     this.stateService.updateDemoPlayerState(partialPlayer);
   }
 }

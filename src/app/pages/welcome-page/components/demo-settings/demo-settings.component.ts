@@ -4,14 +4,12 @@ import { Router } from '@angular/router';
 
 import { StateService } from '../../../../common/resources/services/state/state.service';
 import { PositionSettingsComponent } from '../position-settings/position-settings.component';
-import { TankSettingsComponent } from '../tank-settings/tank-settings.component';
 import { WarRoomComponent } from '../war-room/war-room.component';
 
 @Component({
   standalone: true,
   selector: 'tnm-demo-settings',
   imports: [
-    TankSettingsComponent,
     PositionSettingsComponent,
     MatButtonModule,
     WarRoomComponent,

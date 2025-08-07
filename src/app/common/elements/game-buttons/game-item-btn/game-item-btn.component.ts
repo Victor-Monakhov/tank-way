@@ -26,6 +26,7 @@ export class GameItemBtnComponent {
   rounded = input<boolean>(false);
   name = input<string>('');
   rotate = input<number>(0);
+  price = input<number>(0);
 
   onClick = output<MouseEvent>();
 
