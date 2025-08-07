@@ -1,12 +1,12 @@
-@use '@angular/material' as mat;
+@use 'index' as mat;
 @use 'sass:map';
-@forward 'material/mat-select';
-@forward 'material/mat-button';
-@forward 'material/mat-input';
-@forward 'material/mat-icon';
-@forward 'material/mat-dialog';
-@forward 'material/mat-table';
-@forward 'material/mat-tabs';
+@forward '../../../../src/assets/styles/material/mat-select';
+@forward '../../../../src/assets/styles/material/mat-button';
+@forward '../../../../src/assets/styles/material/mat-input';
+@forward '../../../../src/assets/styles/material/mat-icon';
+@forward '../../../../src/assets/styles/material/mat-dialog';
+@forward '../../../../src/assets/styles/material/mat-table';
+@forward '../../../../src/assets/styles/material/mat-tabs';
 
 @function _patch-error-palette($palette) {
   @return map.merge(

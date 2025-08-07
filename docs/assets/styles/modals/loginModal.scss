@@ -1,7 +1,7 @@
 @import "src/assets/styles/colors";
-@import "src/assets/styles/variables";
+@import "../../../../src/assets/styles/variables";
 @import "src/assets/styles/animations";
-@import "src/assets/styles/mixins";
+@import "../../../../src/assets/styles/mixins";
 @import "images.scss";
 .wrapper{
   @include media-property(H, width, 90%, 400px, 400px, 400px);
