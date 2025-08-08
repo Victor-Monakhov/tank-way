@@ -12,6 +12,7 @@ import { FooterComponent } from '../../common/footer/footer.component';
 
 import { DemoSettingsComponent } from './components/demo-settings/demo-settings.component';
 import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
+import { WarRoomService } from './services/war-room/war-room.service';
 
 @Component({
   standalone: true,
@@ -27,6 +28,7 @@ import { WelcomeHeaderComponent } from './components/welcome-header/welcome-head
   ],
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.scss',
+  providers: [WarRoomService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomePageComponent {

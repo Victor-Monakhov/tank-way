@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -18,8 +19,10 @@ import {
   SocialLoginModule,
 } from '@abacritt/angularx-social-login';
 
-const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
-  new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+const httpLoaderFactory: (http: HttpClient, doc: Document) => TranslateHttpLoader = (http: HttpClient, doc: Document) => {
+  const baseHref = doc.getElementsByTagName('base')[0].href;
+  return new TranslateHttpLoader(http, `${baseHref}assets/i18n/`, '.json');
+};
 
 const provideSocialAuth = {
   provide: 'SocialAuthServiceConfig',
@@ -47,7 +50,7 @@ const appConfig: ApplicationConfig = {
         loader: {
           provide: TranslateLoader,
           useFactory: httpLoaderFactory,
-          deps: [HttpClient],
+          deps: [HttpClient, DOCUMENT],
         },
       }),
       SocialLoginModule,

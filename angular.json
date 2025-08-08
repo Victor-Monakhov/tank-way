@@ -30,7 +30,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/tanks"
+              "base": "dist/tank-way"
             },
             "index": "src/index.html",
             "polyfills": [
@@ -161,6 +161,13 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/tank-way/",
+            "dir": "dist/tank-way/browser"
           }
         }
       }

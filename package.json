@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "vm-deploy": "ng build --configuration production  --output-path docs --base-href '/tank-way/'"
+    "vm-deploy": "ng build --configuration production --output-path dist/tank-way/browser --base-href '/tank-way/' && cp dist/tank-way/browser/index.html dist/tank-way/browser/404.html && npx gh-pages -d dist/tank-way/browser"
   },
   "private": true,
   "dependencies": {
@@ -55,6 +55,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
+    "angular-cli-ghpages": "^2.0.3",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-rxjs": "^5.0.3",
