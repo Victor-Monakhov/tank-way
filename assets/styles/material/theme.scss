@@ -8,8 +8,6 @@
 @forward 'material/mat-table';
 @forward 'material/mat-tabs';
 
-@include mat.core();
-
 @function _patch-error-palette($palette) {
   @return map.merge(
       $palette,
@@ -131,6 +129,22 @@ html {
   @include mat.theme-overrides((
     "background": #1E1E1E,
   ));
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+    @include mat.core();
+    @include mat.theme((
+      color: $tnm-palette,
+      typography: "RussoOne",
+      density: 0
+    ));
+
+    @include mat.theme-overrides((
+      "background": #1E1E1E,
+    ));
+  }
 }
 
 
