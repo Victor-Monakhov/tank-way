@@ -8,6 +8,8 @@
 @forward 'material/mat-table';
 @forward 'material/mat-tabs';
 
+@include mat.core();
+
 @function _patch-error-palette($palette) {
   @return map.merge(
       $palette,
