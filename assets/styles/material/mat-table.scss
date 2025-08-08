@@ -1,0 +1,9 @@
+.mat-column-expandedDetail {
+  padding: 0 !important;
+}
+
+.inner-table {
+  & > thead {
+    display: none;
+  }
+}
