@@ -5,8 +5,8 @@
         @if ($index < game().tanks.length) {
           <tnm-game-item-btn
             class="tank-btn rotate"
-            [iconSrc1]="tank.body.path"
-            [iconSrc2]="tank.head.path"
+            [iconSrc1]="tank.hull.path"
+            [iconSrc2]="tank.turret.path"
             [name]="tank.name"
             [focused]="tank.chosenAsPlayer"
             [rotate]="270"
@@ -15,8 +15,8 @@
         } @else if ($index === game().tanks.length) {
           <tnm-game-item-btn
             class="tank-btn rotate"
-            [iconSrc1]="tank.body.path"
-            [iconSrc2]="tank.head.path"
+            [iconSrc1]="tank.hull.path"
+            [iconSrc2]="tank.turret.path"
             [priced]="true"
             [price]="1000"
             [rotate]="270"
@@ -25,8 +25,8 @@
         } @else {
           <tnm-game-item-btn
             class="tank-btn rotate"
-            [iconSrc1]="tank.body.path"
-            [iconSrc2]="tank.head.path"
+            [iconSrc1]="tank.hull.path"
+            [iconSrc2]="tank.turret.path"
             [blocked]="true"
             [rotate]="270">
           </tnm-game-item-btn>

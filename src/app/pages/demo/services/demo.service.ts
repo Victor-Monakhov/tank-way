@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { tankBodies, tankHeads } from '../../../common/resources/constants/tank-settings';
+import { tankHulls, tankTurrets } from '../../../common/resources/constants/tank-settings';
 import { IDemoBattle } from '../../../common/resources/interfaces/game.interface';
 import { IUnitStats } from '../../../common/resources/interfaces/tank.interface';
 
@@ -19,8 +19,8 @@ export class DemoService {
       kills: unit.kills,
       deaths: unit.deaths,
       date: unit.date,
-      head: tankHeads.find(item => item.name === unit.tankHead),
-      body: tankBodies.find(item => item.name === unit.tankBody),
+      turret: tankTurrets.find(item => item.name === unit.tankHead),
+      hull: tankHulls.find(item => item.name === unit.tankBody),
     }));
     return units.reduce((acc: IDemoBattle, unit: IUnitStats, index: number) => {
       if (!index) {

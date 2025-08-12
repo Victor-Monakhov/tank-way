@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, input, OnInit, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, input, OnInit, output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -53,27 +53,31 @@ export class TankSettingsComponent implements OnInit {
   }
 
   onTankItemChange(gameItem?: ITankItem): void {
-    const data = gameItem ? gameItem : this.inventoryService.inventoryDraggingData;
-    const tank = this.tank();
-    switch (data?.itemType) {
-      case ETankItemType.TankHead: {
-        this.inventoryService.tankItemChanged$.next(tank.head);
-        tank.head = data;
-        break;
+    if (this.inventoryService.isDragging) {
+      const data = gameItem ? gameItem : this.inventoryService.inventoryDraggingData;
+      const tank = this.tank();
+      switch (data?.itemType) {
+        case ETankItemType.TankTurret: {
+          this.inventoryService.tankItemChanged$.next(tank.turret);
+          tank.turret = data;
+          break;
+        }
+        case ETankItemType.TankHull: {
+          this.inventoryService.tankItemChanged$.next(tank.hull);
+          tank.hull = data;
+          break;
+        }
       }
-      case ETankItemType.TankBody: {
-        this.inventoryService.tankItemChanged$.next(tank.body);
-        tank.body = data;
-        break;
-      }
+      this.saveTank.emit(tank);
     }
-    this.saveTank.emit(tank);
+    this.inventoryService.isDragging = false;
   }
 
   private observeInventoryItem(): void {
     this.inventoryService.inventoryItemClicked$.pipe(
       takeUntilDestroyed(this.dr),
     ).subscribe(item => {
+      this.inventoryService.isDragging = true;
       this.onTankItemChange(item);
     });
   }

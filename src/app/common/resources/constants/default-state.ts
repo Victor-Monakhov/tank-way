@@ -1,15 +1,15 @@
 import { IDemoBattle, IDemoGame, IDemoPlayer } from '../interfaces/game.interface';
 import { IDemoTank, ITankItem } from '../interfaces/tank.interface';
 
-import { tankBodies, tankHeads } from './tank-settings';
+import { tankBullets, tankHulls, tankTurrets } from './tank-settings';
 
 import { ETeamNames } from '@victor_monakhov/tanks';
 
 export const defaultDemoTanks: IDemoTank[] = [
   {
     name: 'tank',
-    head: tankHeads[0],
-    body: tankBodies[0],
+    turret: tankTurrets[0],
+    hull: tankHulls[0],
     chosenAsBot: false,
     chosenAsPlayer: true,
     maxHealth: 60,
@@ -20,22 +20,24 @@ export const defaultDemoTanks: IDemoTank[] = [
       team: ETeamNames.Red,
       position: 0,
     },
-    bullets: Array(4).fill(100),
+    bullets: Array(4).fill(null).map((item, index) => (
+      !index ? { ...tankBullets[0], quantity: 800 } : null),
+    ),
     inventions: Array(9).fill(null),
   },
 ];
 
 export const inventoryAllIn: ITankItem[][] = [
-  [tankBodies[1]],
-  [tankBodies[2], tankBodies[2]],
-  [tankHeads[1]],
-  [tankHeads[2], tankHeads[2]],
+  [tankHulls[1]],
+  [tankHulls[2], tankHulls[2]],
+  [tankTurrets[1]],
+  [tankTurrets[2], tankTurrets[2]],
   ...Array(11).fill(null).map(() => []),
 ];
 
 export const defaultDemoPlayerState: IDemoPlayer = {
   name: 'Comrade',
-  inventory: Array(15).fill(null).map(() => []),
+  inventory: Array(15).fill(null),
   // inventory: inventoryAllIn,
   totalBattles: 0,
   totalWins: 0,

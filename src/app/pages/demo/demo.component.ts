@@ -69,8 +69,8 @@ export class DemoComponent implements OnDestroy {
               canvas.height = demoPanel.clientHeight - 10;
             }
             this.startGame(canvas, {
-              tankHead: tank.head.name,
-              tankBody: tank.body.name,
+              tankHead: tank.turret.name,
+              tankBody: tank.hull.name,
               position: tank.position.position,
               team: tank.position.team,
               playerName: player.name,

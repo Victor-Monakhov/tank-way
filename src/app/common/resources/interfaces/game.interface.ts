@@ -15,7 +15,7 @@ export interface IDemoBattle {
 
 export interface IDemoPlayer {
   name: string;
-  inventory: ITankItem[][];
+  inventory: ITankItem[];
   totalBattles: number;
   totalWins: number;
   totalDefeats: number;

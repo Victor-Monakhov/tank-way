@@ -33,6 +33,10 @@
       position: relative;
       @include mixins.vm-media(horizontal, (flex-direction, (column, column, column, row)));
 
+      & > * {
+        flex: 1 1 0;
+      }
+
       .tanks-list-wrapper {
         .sub-title {
           margin-bottom: 10px;

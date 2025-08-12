@@ -9,6 +9,7 @@ import { ITankItem } from '../../../../common/resources/interfaces/tank.interfac
 })
 export class InventoryService {
 
+  isDragging = false;
   inventoryDraggingData: ITankItem = null;
   tankItemChanged$ = new Subject<ITankItem>();
   inventoryItemClicked$ = new Subject<ITankItem>();

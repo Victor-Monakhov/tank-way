@@ -16,7 +16,7 @@ import { ShopComponent } from '../../../../common/elements/game-containers/shop/
 import {
   ShopConfirmNotificationComponent,
 } from '../../../../common/elements/notifications/shop-confirm-notification/shop-confirm-notification.component';
-import { tankBodiesShop, tankHeadsShop } from '../../../../common/resources/constants/shops';
+import { tankBulletsShop, tankHullsShop, tankTurretsShop } from '../../../../common/resources/constants/shops';
 import { ENotificationTypes } from '../../../../common/resources/enums/notification.enum';
 import { IDemoBattle, IDemoGame, IDemoPlayer } from '../../../../common/resources/interfaces/game.interface';
 import { IShopItem } from '../../../../common/resources/interfaces/shop.interface';
@@ -60,8 +60,9 @@ export class WarRoomComponent {
     () => JSON.parse(JSON.stringify(this.stateService.defaultDemoTank)),
   );
 
-  tankHeadsShop = tankHeadsShop;
-  tankBodiesShop = tankBodiesShop;
+  tankTurretsShop = tankTurretsShop;
+  tankHullsShop = tankHullsShop;
+  tankBulletsShop = tankBulletsShop;
 
   player = computed<Partial<IDemoPlayer>>(() => {
     const demoPlayer = this.stateService.demoPlayer();
@@ -70,7 +71,7 @@ export class WarRoomComponent {
     }
     return {};
   });
-  inventory = computed<ITankItem[][]>(() => [...(this.player()?.inventory) ?? []]);
+  inventory = computed<ITankItem[]>(() => [...(this.player()?.inventory) ?? []]);
   battles = computed<IDemoBattle[]>(() => this.stateService.demoBattles() ?? []);
   game = computed<Partial<IDemoGame>>(() => {
     const game = this.stateService.demoGame();
@@ -102,7 +103,7 @@ export class WarRoomComponent {
     this.stateService.updateDemoPlayerState({ name });
   }
 
-  onSaveInventory(inventory: ITankItem[][]): void {
+  onSaveInventory(inventory: ITankItem[]): void {
     this.stateService.updateDemoPlayerState({ inventory });
   }
 
@@ -171,15 +172,17 @@ export class WarRoomComponent {
 
   private putItemInInventory(player: Partial<IDemoPlayer>, shopItem: IShopItem): void {
     player.arenas -= shopItem.price;
-    const existingItem = player.inventory.find(
-      item => item.length && item[0].path === shopItem.item.path,
+    const existingItemIndex = player.inventory.findIndex(
+      item => item?.quantity && item.path === shopItem.item.path,
     );
-    if (existingItem) {
-      existingItem.push(shopItem.item);
+    if (existingItemIndex >= 0) {
+      player.inventory[existingItemIndex] = shopItem.item;
+      player.inventory[existingItemIndex].quantity++;
     } else {
-      const freeItem = player.inventory.find(item => !item.length);
-      if (freeItem) {
-        freeItem.push(shopItem.item);
+      const freeItemIndex = player.inventory.findIndex(item => !item?.quantity);
+      if (freeItemIndex >= 0) {
+        player.inventory[freeItemIndex] = shopItem.item;
+        player.inventory[freeItemIndex].quantity++;
       }
     }
   }

@@ -60,6 +60,22 @@
           width: 100%;
           height: 100%;
         }
+
+        .small-icon {
+          width: 85% !important;
+          height: 85% !important;
+          left: 50% !important;
+          top: -10% !important;
+          translate: -50% !important;
+        }
+
+        .large-icon {
+          width: 120% !important;
+          height: 120% !important;
+          left: 50% !important;
+          top: -20% !important;
+          translate: -50% !important;
+        }
       }
     }
 

@@ -17,7 +17,7 @@ import { WarRoomService } from '../../../../pages/welcome-page/services/war-room
 import { Calculations } from '../../../../shared/classes/calculations/calculations.class';
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { ValidationService } from '../../../../shared/components/validation/validation-service/validation.service';
-import { ITankHead } from '../../../resources/interfaces/tank.interface';
+import { ITankTurret } from '../../../resources/interfaces/tank.interface';
 
 @Component({
   selector: 'tnm-tank-view',
@@ -36,8 +36,8 @@ export class TankViewComponent {
   private readonly warRoomService = inject(WarRoomService);
   private readonly dr = inject(DestroyRef);
 
-  selectedTankHead = input.required<ITankHead>();
-  selectedTankBody = input.required<ITankHead>();
+  selectedTankHead = input.required<ITankTurret>();
+  selectedTankBody = input.required<ITankTurret>();
   tankName = input.required<string>();
   tankNameChange = output<string>();
 

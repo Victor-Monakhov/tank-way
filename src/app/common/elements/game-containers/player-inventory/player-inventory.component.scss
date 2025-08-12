@@ -81,6 +81,14 @@
         .img {
           position: absolute;
         }
+
+        .small-icon {
+          width: 70% !important;
+          height: 70% !important;
+          left: 50% !important;
+          top: 50% !important;
+          translate: -50% -50% !important;
+        }
       }
     }
   }

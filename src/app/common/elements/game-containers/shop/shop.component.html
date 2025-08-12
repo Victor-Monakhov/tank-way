@@ -5,6 +5,9 @@
       [iconSrc1]="shopItem.item.path"
       [priced]="true"
       [price]="shopItem.price"
+      [rotate]="rotatePictures()"
+      [smallIcon]="smallIcons()"
+      [largeIcon]="largeIcons()"
       (onClick)="onBuyItem(shopItem)">
     </tnm-game-item-btn>
   }

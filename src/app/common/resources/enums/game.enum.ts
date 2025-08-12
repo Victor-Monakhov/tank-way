@@ -13,8 +13,8 @@ export enum EStates {
 }
 
 export enum ETankItemType {
-  TankBody = 'tankBody',
-  TankHead = 'tankHead',
+  TankHull = 'tankHull',
+  TankTurret = 'tankTurret',
   Bullet = 'bullet',
   Invention = 'invention',
 }
@@ -23,4 +23,35 @@ export enum EInventionEffect {
   Booster,
   DestroyerMode,
   FattyTank,
+}
+
+export enum EBulletEffect {
+  Explosion,
+  Regular,
+  Freeze,
+  Stan,
+  Poison,
+}
+
+export enum ETankBulletNames {
+  Gray = 'gray-bullet',
+  Red = 'red-bullet',
+  Blue = 'blue-bullet',
+  Green = 'green-bullet',
+  Golden = 'golden-bullet',
+}
+
+export enum ETankTurretNames {
+  UkraineStyle = 'gun_2',
+  USAStyle = 'gun_4',
+  RegularRed = 'gun_1',
+  RegularBlue = 'gun_3',
+  ForestStyle = 'gun_5',
+}
+
+export enum ETankHullNames {
+  UkraineStyle = 'T_2',
+  USAStyle = 'T_4',
+  RegularRed = 'T_1',
+  RegularBlue = 'T_3',
 }

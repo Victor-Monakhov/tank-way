@@ -5,7 +5,12 @@
       'blocked-item': blocked(),
       'priced-item': priced(),
       'rounded': rounded() }">
-      <img fill class="available-icon" alt="#" [ngSrc]="iconSrc1()" [style.transform]="rotateValue()"/>
+      <img
+        fill
+        alt="#"
+        [ngClass]="{ 'available-icon': true, 'small-icon': smallIcon(), 'large-icon': largeIcon() }"
+        [ngSrc]="iconSrc1()"
+        [style.transform]="rotateValue()"/>
       @if (iconSrc2()) {
         <img fill class="available-icon" alt="#" [ngSrc]="iconSrc2()" [style.transform]="rotateValue()"/>
       }

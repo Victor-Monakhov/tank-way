@@ -16,6 +16,9 @@ import { GameItemBtnComponent } from '../../game-buttons/game-item-btn/game-item
 export class ShopComponent {
 
   shopItems = input.required<IShopItem[]>();
+  rotatePictures = input<number>(0);
+  smallIcons = input<boolean>(false);
+  largeIcons = input<boolean>(false);
   buyItem = output<IShopItem>();
 
 

@@ -41,6 +41,10 @@
           position: absolute;
         }
 
+        .stub {
+          filter: brightness(30%);
+        }
+
         &.min-img {
           width: calc(100% - 20px);
           height: calc(100% - 20px);

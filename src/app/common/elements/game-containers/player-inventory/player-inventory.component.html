@@ -4,22 +4,32 @@
       @for (inventoryCell of inventory(); track $index) {
         <div
           class="invention-item"
-          [draggable]="inventoryCell?.length"
+          [draggable]="inventoryCell?.quantity"
           (dragover)="$event.preventDefault()"
           (drop)="onDrop($index, $event)"
           (dragstart)="onDragStart($index)"
+          (dragend)="onDragEnd()"
           (dragenter)="onDragEnter($event)"
           (dragleave)="onDragLeave($event)"
           (dblclick)="onDoubleClick($index)">
-          @if (inventoryCell && !inventoryCell.length) {
-            <div [ngClass]="{ 'icon-wrapper': true, 'icon-stub': !inventoryCell.length }">
+          @if (!inventoryCell?.quantity) {
+            <div [ngClass]="{ 'icon-wrapper': true, 'icon-stub': !inventoryCell?.quantity }">
               <img fill class="img" ngSrc="assets/icons/tank/invention-stub.svg" alt="#">
             </div>
           } @else if (inventoryCell) {
             <div class="icon-wrapper">
-              <img fill class="img" alt="#" [ngSrc]="inventoryCell[0].path">
+              <img
+                fill
+                alt="#"
+                [ngClass]="{
+                       'img': true,
+                       'small-icon': inventoryCell.itemType === tankItemType.Bullet,
+                       'large-icon': false
+                       }"
+                [ngSrc]="inventoryCell.path"
+                [style.transform]="inventoryCell | rotateBullet">
             </div>
-            <span class="item-quantity">{{inventoryCell.length}}</span>
+            <span class="item-quantity">{{ inventoryCell.quantity }}</span>
           }
         </div>
       }

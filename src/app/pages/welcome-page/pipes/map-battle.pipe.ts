@@ -15,8 +15,8 @@ export class MapBattlePipe implements PipeTransform {
     switch (column) {
       case EBattleStatsColumns.Tank:
         return {
-          body: unit.body.path,
-          head: unit.head.path,
+          body: unit.hull.path,
+          head: unit.turret.path,
         };
       case EBattleStatsColumns.Name:
         return { value: unit.name };

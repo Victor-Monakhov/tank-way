@@ -24,6 +24,8 @@ export class GameItemBtnComponent {
   priced = input<boolean>(false);
   focused = input<boolean>(false);
   rounded = input<boolean>(false);
+  smallIcon = input<boolean>(false);
+  largeIcon = input<boolean>(false);
   name = input<string>('');
   rotate = input<number>(0);
   price = input<number>(0);
