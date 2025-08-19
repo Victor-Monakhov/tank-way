@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class InputHeightPipe implements PipeTransform {
 
-  transform(el: HTMLInputElement): string {
-    return el ? `calc(${el.parentElement!.clientHeight}px + 2px)` : '100%';
+  transform(height: number): string {
+    return !Number.isNaN(+height) ? `calc(${height}px + 2px)` : '100%';
   }
 
 }

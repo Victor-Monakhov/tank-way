@@ -1,0 +1,63 @@
+<div class="wrapper">
+  <h2 class="title">{{ 'TRADE' }}</h2>
+
+  <div class="arenas-wrapper">
+    <div class="arenas-wrapper-item">
+      <span>Your Arenas:</span>
+      <span>Price:</span>
+    </div>
+    <div class="arenas-wrapper-item">
+      <div class="arenas">
+        <span>{{data.playerArenas}}</span>
+        <img ngSrc="assets/icons/arena.svg" alt="#" width="24" height="24">
+      </div>
+      <div class="arenas">
+        <span [ngClass]="{'invalid': !isDeal()}">{{price()}}</span>
+        <img ngSrc="assets/icons/arena.svg" alt="#" width="24" height="24">
+      </div>
+    </div>
+  </div>
+
+  <strong class="message "> Let's make a deal! </strong>
+
+  <div class="shop-item-wrapper">
+    <tnm-game-item-btn
+      class="shop-item"
+      [iconSrc1]="data.shopItem.item.path"
+      [rotate]="isBullet ? 60 : 0"
+      [smallIcon]="isBullet"
+      [priced]="true"
+      [price]="data.shopItem.price">
+    </tnm-game-item-btn>
+  </div>
+
+  <div class="quantity">
+    <span>Quantity: </span>
+    <tnm-input-text
+      borderColor="var(--mat-sys-primary-container)"
+      placeholder="Enter quantity"
+      inputType="number"
+      [formControl]="quantityControl"
+      [disableErrors]="true"
+      [centered]="true">
+    </tnm-input-text>
+  </div>
+
+  <div class="nav-buttons">
+    <button
+      mat-flat-button
+      type="button"
+      class="mat-submit-btn cancel-btn"
+      (click)="onCancel()">
+      CANCEL
+    </button>
+    <button
+      mat-flat-button
+      type="button"
+      class="mat-submit-btn"
+      [disabled]="quantityControl.invalid || !isDeal()"
+      (click)="onConfirm()">
+      OKAY
+    </button>
+  </div>
+</div>

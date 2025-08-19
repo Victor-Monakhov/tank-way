@@ -85,4 +85,14 @@ export class ValidationService {
     });
   }
 
+  multipleOf(control: AbstractControl, multiple?: number): void {
+    control.addValidators(() => {
+      const value: number = +control.value;
+      if (!Number.isInteger(value) || value % multiple) {
+        return { [EValidationErrors.MultipleOf]: true };
+      }
+      return null;
+    });
+  }
+
 }

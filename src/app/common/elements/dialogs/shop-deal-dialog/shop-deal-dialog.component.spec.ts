@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShopConfirmNotificationComponent } from './shop-confirm-notification.component';
+import { ShopDealDialogComponent } from './shop-deal-dialog.component';
 
 describe('ShopConfirmNotificationComponent', () => {
-  let component: ShopConfirmNotificationComponent;
-  let fixture: ComponentFixture<ShopConfirmNotificationComponent>;
+  let component: ShopDealDialogComponent;
+  let fixture: ComponentFixture<ShopDealDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShopConfirmNotificationComponent]
+      imports: [ShopDealDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ShopConfirmNotificationComponent);
+    fixture = TestBed.createComponent(ShopDealDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

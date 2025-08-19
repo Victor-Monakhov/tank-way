@@ -1,0 +1,21 @@
+<button mat-button type="button" class="mat-text-btn quantity-wrapper"
+     (click)="$event.stopImmediatePropagation()">
+
+  <button class="nav-btn" mat-mini-fab type="button" (click)="onCancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <tnm-input-text
+    class="quantity-control"
+    borderColor="var(--mat-sys-primary-container)"
+    inputType="number"
+    [placeholder]="quantity()"
+    [formControl]="quantityControl"
+    [disableErrors]="true"
+    [centered]="true">
+  </tnm-input-text>
+
+  <button class="nav-btn" mat-mini-fab type="button" (click)="onSubmit()">
+    <mat-icon>check</mat-icon>
+  </button>
+</button>

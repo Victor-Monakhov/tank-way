@@ -13,4 +13,5 @@ export enum EValidationErrors {
   ConfirmEmail = 'emailConfirmationRequired',
   InvalidCredentials = 'invalidCredentials',
   InvalidEmail = 'invalidEmail',
+  MultipleOf = 'multipleOf',
 }

@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 
 import { catchError, map, of } from 'rxjs';
 
+import { copy } from '../../../../shared/constants/utils';
 import {
   defaultDemoBattlesState,
   defaultDemoGameState,
@@ -60,7 +61,7 @@ export class StateService {
   demoGame = computed<IDemoGame>(() => this.demoGameState());
 
   get defaultDemoTank(): IDemoTank {
-    const tank = JSON.parse(JSON.stringify(defaultDemoTanks[0]));
+    const tank = copy(defaultDemoTanks[0]);
     tank.chosenAsPlayer = false;
     return tank;
   }

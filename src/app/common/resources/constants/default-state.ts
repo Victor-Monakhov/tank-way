@@ -1,3 +1,4 @@
+import { copy } from '../../../shared/constants/utils';
 import { IDemoBattle, IDemoGame, IDemoPlayer } from '../interfaces/game.interface';
 import { IDemoTank, ITankItem } from '../interfaces/tank.interface';
 
@@ -8,8 +9,8 @@ import { ETeamNames } from '@victor_monakhov/tanks';
 export const defaultDemoTanks: IDemoTank[] = [
   {
     name: 'tank',
-    turret: tankTurrets[0],
-    hull: tankHulls[0],
+    turret: { ...copy(tankTurrets[0]), quantity: 1 },
+    hull: { ...copy(tankHulls[0]), quantity: 1 },
     chosenAsBot: false,
     chosenAsPlayer: true,
     maxHealth: 60,
@@ -21,7 +22,7 @@ export const defaultDemoTanks: IDemoTank[] = [
       position: 0,
     },
     bullets: Array(4).fill(null).map((item, index) => (
-      !index ? { ...tankBullets[0], quantity: 800 } : null),
+      !index ? { ...copy(tankBullets[0]), quantity: 800 } : null),
     ),
     inventions: Array(9).fill(null),
   },

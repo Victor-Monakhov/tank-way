@@ -33,6 +33,14 @@ export interface ITankConstruction {
   hull: ITankHull;
 }
 
+export interface ITankTransactionItem {
+  isTransaction: boolean;
+  oldItem: ITankItem;
+  newItem: ITankItem;
+  remainedItem: ITankItem;
+  cellIndex: number;
+}
+
 export interface IBullet extends ITankItem {
   quantity: number;
   damage: number;

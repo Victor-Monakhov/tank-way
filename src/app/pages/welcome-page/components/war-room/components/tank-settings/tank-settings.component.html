@@ -12,36 +12,37 @@
       <tnm-tank-detail-container
         [iconSrc]="tank()?.turret?.path ?? '#'"
         (dragover)="$event.preventDefault()"
-        (drop)="onTankItemChange()">
+        (drop)="onTurretChange()">
       </tnm-tank-detail-container>
       <tnm-tank-detail-container
         [iconSrc]="tank()?.hull?.path ?? '#'"
         (dragover)="$event.preventDefault()"
-        (drop)="onTankItemChange()">
+        (drop)="onHullChange()">
       </tnm-tank-detail-container>
       @for (bullet of tank()?.bullets; track $index) {
-        <tnm-tank-detail-container
-          [iconSrc]="bullet?.path"
-          [quantity]="bullet?.quantity"
-          [isMany]="true">
-        </tnm-tank-detail-container>
+        <div class="tank-detail-wrapper">
+          <tnm-tank-detail-container
+            [iconSrc]="bullet?.path"
+            [quantity]="bullet?.quantity"
+            [isMany]="true"
+            (dragover)="$event.preventDefault()"
+            (drop)="onBulletChange($index)">
+          </tnm-tank-detail-container>
+          <button
+            mat-button
+            type="button"
+            class="menu-trigger"
+            [matMenuTriggerFor]="menu"
+            (menuClosed)="onMenuClosed()">
+            Menu
+          </button>
+          <mat-menu #menu="matMenu">
+            <tnm-quantity-menu
+              (quantityChange)="onItemQuantityChange($event)">
+            </tnm-quantity-menu>
+          </mat-menu>
+        </div>
       }
-<!--      <tnm-tank-detail-container-->
-<!--      assets/icons/tank/red-bullet.svg-->
-<!--        iconSrc="assets/icons/tank/blue-bullet.svg"-->
-<!--        [quantity]="12500"-->
-<!--        [isMany]="true">-->
-<!--      </tnm-tank-detail-container>-->
-<!--      <tnm-tank-detail-container-->
-<!--        iconSrc="assets/icons/tank/green-bullet.svg"-->
-<!--        [quantity]="3500"-->
-<!--        [isMany]="true">-->
-<!--      </tnm-tank-detail-container>-->
-<!--      <tnm-tank-detail-container-->
-<!--        iconSrc="assets/icons/tank/gold-bullet.svg"-->
-<!--        [quantity]="1500"-->
-<!--        [isMany]="true">-->
-<!--      </tnm-tank-detail-container>-->
     </div>
     @if (tank()) {
       <tnm-tank-inventions class="inventions" [inventions]="tank().inventions"></tnm-tank-inventions>

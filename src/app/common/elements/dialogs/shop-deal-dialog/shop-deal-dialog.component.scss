@@ -1,0 +1,70 @@
+@use 'mixins' as mixins;
+
+:host {
+  .arenas-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--mat-sys-on-surface-variant);
+  }
+  .arenas-wrapper-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .arenas {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100px;
+      color: var(--mat-sys-primary);
+
+      .invalid {
+        color: var(--mat-sys-error);
+      }
+    }
+  }
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+
+    .mat-submit-btn {
+      flex: 1 0 40%;
+    }
+
+    .cancel-btn {
+      background: var(--mat-sys-surface-container);
+      color: var(--mat-sys-on-surface-variant);
+    }
+  }
+
+  .quantity {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .message {
+    font-family: "Roboto Light", sans-serif;
+    text-align: center;
+    color: var(--mat-sys-on-surface-variant);
+    font-size: 20px;
+  }
+
+  .shop-item-wrapper {
+    display: flex;
+    margin: 20px;
+    justify-content: center;
+    .shop-item {
+      @include mixins.vm-media(horizontal,
+          (width, (80px, 90px, 100px)),
+          (height, (80px, 90px, 100px)),
+      );
+    }
+  }
+}

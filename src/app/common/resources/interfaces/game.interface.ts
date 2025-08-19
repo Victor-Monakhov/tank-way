@@ -23,3 +23,8 @@ export interface IDemoPlayer {
   zrists: number;
   arenas: number;
 }
+
+export interface IQuantityResult {
+  status: boolean;
+  quantity: number;
+}

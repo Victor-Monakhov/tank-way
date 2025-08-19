@@ -1,4 +1,3 @@
-import { ENotificationTypes } from '../enums/notification.enum';
 
 import { TTankItem } from './tank.interface';
 
@@ -9,8 +8,14 @@ export interface IShopItem {
   item: TShopItem;
 }
 
-export interface IShopNotificationConfig {
-  message: string;
+export interface IShopDealConfig {
   shopItem: IShopItem;
-  type: ENotificationTypes;
+  playerArenas: number;
+}
+
+export interface IShopDealResult {
+  quantity: number;
+  price: number;
+  shopItem: IShopItem;
+  result: boolean;
 }

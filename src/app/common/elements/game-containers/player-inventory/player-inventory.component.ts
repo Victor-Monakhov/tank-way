@@ -34,8 +34,6 @@ export class PlayerInventoryComponent implements OnInit {
   private readonly inventoryService = inject(InventoryService);
   private readonly dr = inject(DestroyRef);
 
-  private readonly rotateIcon = 60;
-
   inventory = input.required<ITankItem[]>();
   saveInventory = output<ITankItem[]>();
 
@@ -52,9 +50,9 @@ export class PlayerInventoryComponent implements OnInit {
       const temp = inventory[this.dragIndex];
       inventory[this.dragIndex] = inventory[dropIndex];
       inventory[dropIndex] = temp;
-      this.onDragLeave(event);
       this.saveInventory.emit(inventory);
     }
+    this.onDragLeave(event);
     this.dragIndex = null;
   }
 
@@ -87,30 +85,32 @@ export class PlayerInventoryComponent implements OnInit {
   }
 
   private observeTankItemChanged(): void {
-    this.inventoryService.tankItemChanged$.pipe(
+    this.inventoryService.tankTransactionComplete$.pipe(
       takeUntilDestroyed(this.dr),
-    ).subscribe(gameItem => {
+    ).subscribe(tankTransformationItem => {
       const inventory = this.inventory();
-      const droppedGameItem = this.inventoryService.inventoryDraggingData;
+      const oldTankItem = tankTransformationItem.oldItem;
+      const remainedTankItem = tankTransformationItem.remainedItem;
       let gameItemPushed = false;
       inventory.forEach((item, index) => {
-        if (item?.quantity && item.path === gameItem.path) {
-          item.quantity++;
+        if (item?.quantity && item.name === oldTankItem?.name) {
+          item.quantity += oldTankItem.quantity;
           gameItemPushed = true;
         }
-        if (item?.quantity && item.path === droppedGameItem.path) {
-          item.quantity--;
+        if (item?.quantity && item.name === remainedTankItem.name) {
+          item.quantity = remainedTankItem.quantity;
           if (!item.quantity) {
             inventory[index] = null;
           }
-          this.inventoryService.inventoryDraggingData = null;
         }
       });
       if (!gameItemPushed) {
         const freeCellIndex = inventory.findIndex(item => !item?.quantity);
         if (freeCellIndex >= 0) {
-          inventory[freeCellIndex] = gameItem;
-          inventory[freeCellIndex].quantity++;
+          inventory[freeCellIndex] = oldTankItem;
+          if (!inventory[freeCellIndex]?.quantity) {
+            inventory[freeCellIndex] = null;
+          }
         }
       }
       this.saveInventory.emit(inventory);

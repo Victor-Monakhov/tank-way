@@ -1,0 +1,21 @@
+:host {
+  .quantity-wrapper {
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid var(--mat-sys-primary);
+    cursor: default;
+    height: 100%;
+    .quantity-control {
+      width: 100px;
+    }
+
+    .quantity-label {
+      color: var(--mat-sys-on-surface);
+    }
+
+    .nav-btn {
+
+      border-radius: 50%;
+    }
+  }
+}

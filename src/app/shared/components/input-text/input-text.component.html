@@ -1,19 +1,21 @@
 <div class="tnm-text-input">
   <div
     class="background static-visible"
-    [style.height]="matInputEl | inputHeight"
+    [style.height]="matInputHeight | inputHeight"
     [style.background]="borderColor()">
   </div>
   <div
-    [style.height]="matInputEl | inputHeight"
+    [style.height]="matInputHeight | inputHeight"
     [ngClass]="{'background': true,
                 'visible focused': focused()
-               }"></div>
+               }">
+  </div>
   <div
-    [style.height]="matInputEl | inputHeight"
+    [style.height]="matInputHeight | inputHeight"
     [ngClass]="{'background': true,
                 'visible invalid': invalid()
-               }"></div>
+               }">
+  </div>
   <mat-form-field class="form-field">
     @if (label()) {
       <mat-label>{{ label() }}</mat-label>

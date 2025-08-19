@@ -1,6 +1,13 @@
 import { EBulletEffect, ETankBulletNames, ETankHullNames, ETankItemType, ETankTurretNames } from '../enums/game.enum';
-import { IBullet, ITankHull, ITankTurret } from '../interfaces/tank.interface';
+import { IBullet, ITankHull, ITankTransactionItem, ITankTurret } from '../interfaces/tank.interface';
 
+export const tankDefaultTransactionItem: ITankTransactionItem = {
+  isTransaction: false,
+  oldItem: null,
+  newItem: null,
+  remainedItem: null,
+  cellIndex: 0,
+};
 
 export const tankHulls: ITankHull[] = [
   { name: ETankHullNames.RegularRed, itemType: ETankItemType.TankHull, path: 'assets/images/tanks/T_1.png', quantity: 0 },

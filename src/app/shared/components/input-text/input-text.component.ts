@@ -1,12 +1,12 @@
 import { NgClass } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
-  Component,
+  ChangeDetectionStrategy, ChangeDetectorRef,
+  Component, ElementRef,
   forwardRef,
   inject,
   input,
   OnInit,
-  signal,
+  signal, viewChild,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -28,12 +28,13 @@ import { ValidationService } from '../validation/validation-service/validation.s
 
 import { InputHeightPipe } from './input-height-pipe/input-height.pipe';
 
-type TTextInputType = 'text' | 'password' | 'email';
+type TTextInputType = 'text' | 'password' | 'email' | 'number';
 
 enum ETextInputType {
   Text = 'text',
   Password = 'password',
   Email = 'email',
+  Number = 'number',
 }
 
 @Component({
@@ -68,6 +69,16 @@ enum ETextInputType {
 })
 export class InputTextComponent implements OnInit, ControlValueAccessor, Validator {
 
+  private readonly validationService = inject(ValidationService);
+
+  private readonly matInputEl =
+    viewChild<ElementRef<HTMLInputElement>>('matInputEl');
+
+  readonly cdr = inject(ChangeDetectorRef);
+
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
+
   inputType = input<TTextInputType>(ETextInputType.Text);
   placeholder = input<string>('');
   label = input<string>('');
@@ -84,10 +95,9 @@ export class InputTextComponent implements OnInit, ControlValueAccessor, Validat
   parentFormControl!: FormControl;
   types = ETextInputType;
 
-  private readonly validationService = inject(ValidationService);
-
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
+  get matInputHeight(): number {
+    return this.matInputEl().nativeElement.parentElement.clientHeight;
+  }
 
   ngOnInit(): void {
     this.innerInputType.set(this.inputType());

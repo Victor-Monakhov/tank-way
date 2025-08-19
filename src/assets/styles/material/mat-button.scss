@@ -1,5 +1,11 @@
 @use 'mixins' as mixins;
-
+.quantity-wrapper {
+  .mdc-button__label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
 .mat-text-btn {
   cursor: pointer;
 

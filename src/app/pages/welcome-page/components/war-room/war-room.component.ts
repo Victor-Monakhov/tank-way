@@ -1,27 +1,29 @@
-import {
-  ChangeDetectionStrategy,
-  Component, computed,
-  inject, signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 
+import { Observable } from 'rxjs';
+
+import {
+  ShopDealDialogComponent,
+} from '../../../../common/elements/dialogs/shop-deal-dialog/shop-deal-dialog.component';
 import {
   PlayerInventoryComponent,
 } from '../../../../common/elements/game-containers/player-inventory/player-inventory.component';
 import { ShopComponent } from '../../../../common/elements/game-containers/shop/shop.component';
-import {
-  ShopConfirmNotificationComponent,
-} from '../../../../common/elements/notifications/shop-confirm-notification/shop-confirm-notification.component';
 import { tankBulletsShop, tankHullsShop, tankTurretsShop } from '../../../../common/resources/constants/shops';
-import { ENotificationTypes } from '../../../../common/resources/enums/notification.enum';
 import { IDemoBattle, IDemoGame, IDemoPlayer } from '../../../../common/resources/interfaces/game.interface';
-import { IShopItem } from '../../../../common/resources/interfaces/shop.interface';
+import {
+  IShopDealConfig,
+  IShopDealResult,
+  IShopItem,
+} from '../../../../common/resources/interfaces/shop.interface';
 import { IDemoTank, ITankItem } from '../../../../common/resources/interfaces/tank.interface';
 import { StateService } from '../../../../common/resources/services/state/state.service';
+import { copy } from '../../../../shared/constants/utils';
 import { WarRoomService } from '../../services/war-room/war-room.service';
 import { BattlesTableComponent } from '../battles-table/battles-table.component';
 
@@ -57,7 +59,7 @@ export class WarRoomComponent {
   private readonly dialog = inject(MatDialog);
 
   private defaultTanks: IDemoTank[] = Array(this.tanksQuantity).fill(null).map(
-    () => JSON.parse(JSON.stringify(this.stateService.defaultDemoTank)),
+    () => copy(this.stateService.defaultDemoTank),
   );
 
   tankTurretsShop = tankTurretsShop;
@@ -139,52 +141,48 @@ export class WarRoomComponent {
 
   onBuyItem(shopItem: IShopItem): void {
     const player = this.player();
-    const failMessage = 'Unfortunately you do not have enough money to buy this item.';
-    const successMessage = 'Do you want to buy this item?';
     if (player.arenas >= shopItem.price) {
-      this.dialog.open(ShopConfirmNotificationComponent, {
-        data: {
-          message: successMessage,
-          shopItem,
-          type: ENotificationTypes.Success,
-        },
-        hasBackdrop: true,
-        panelClass: 'mat-vm-dialog',
-      }).afterClosed().subscribe(result => {
-        if (result) {
-          this.putItemInInventory(player, shopItem);
+      this.showShopDealDialog({
+        shopItem,
+        playerArenas: player.arenas,
+      }).subscribe((result: IShopDealResult) => {
+        if (result.result) {
+          this.putItemInInventory(player, result);
           this.stateService.updateDemoPlayerState(player);
           this.selectedTab.set(0);
         }
       });
     } else {
-      this.dialog.open(ShopConfirmNotificationComponent, {
-        data: {
-          message: failMessage,
-          shopItem,
-          type: ENotificationTypes.Error,
-        },
-        hasBackdrop: true,
-        panelClass: 'mat-vm-dialog',
+      this.showShopDealDialog({
+        shopItem,
+        playerArenas: player.arenas,
       });
     }
   }
 
-  private putItemInInventory(player: Partial<IDemoPlayer>, shopItem: IShopItem): void {
-    player.arenas -= shopItem.price;
+  private putItemInInventory(player: Partial<IDemoPlayer>, dealResult: IShopDealResult): void {
+    player.arenas -= dealResult.price;
     const existingItemIndex = player.inventory.findIndex(
-      item => item?.quantity && item.path === shopItem.item.path,
+      item => item?.quantity && item.path === dealResult.shopItem.item.path,
     );
     if (existingItemIndex >= 0) {
-      player.inventory[existingItemIndex] = shopItem.item;
-      player.inventory[existingItemIndex].quantity++;
+      // player.inventory[existingItemIndex] = dealResult.shopItem.item;
+      player.inventory[existingItemIndex].quantity += dealResult.quantity;
     } else {
       const freeItemIndex = player.inventory.findIndex(item => !item?.quantity);
       if (freeItemIndex >= 0) {
-        player.inventory[freeItemIndex] = shopItem.item;
-        player.inventory[freeItemIndex].quantity++;
+        player.inventory[freeItemIndex] = dealResult.shopItem.item;
+        player.inventory[freeItemIndex].quantity += dealResult.quantity;
       }
     }
+  }
+
+  private showShopDealDialog(dataConfig: Partial<IShopDealConfig>): Observable<IShopDealResult> {
+    return this.dialog.open(ShopDealDialogComponent, {
+      data: dataConfig,
+      hasBackdrop: true,
+      panelClass: 'mat-vm-dialog',
+    }).afterClosed();
   }
 
 }
