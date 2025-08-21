@@ -55,3 +55,23 @@ export enum ETankHullNames {
   RegularRed = 'T_1',
   RegularBlue = 'T_3',
 }
+
+export enum ETankTransactionHosts {
+  NoHost,
+  Inventory,
+  Tank,
+}
+
+export enum ETankTransactionTargets {
+  NoTarget,
+  Inventory,
+  Tank,
+}
+
+export enum ETankTransactionTypes {
+  NoTransaction,
+  InventoryTank,
+  InventoryInventory,
+  TankInventory,
+  TankTank,
+}

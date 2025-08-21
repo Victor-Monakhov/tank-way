@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     user-select: none;
+    cursor: grab;
     border: 1px solid var(--mat-sys-primary-container);
     @include mixins.vm-media(
       horizontal,
@@ -25,6 +26,7 @@
       color: var(--mat-sys-on-primary-container);
       background: var(--mat-sys-surface-container);
       box-shadow: 0 0 10px -3px var(--mat-sys-primary);
+      pointer-events: none;
       @include mixins.vm-media(
           horizontal,
             (border-radius, (10px, 12px)),

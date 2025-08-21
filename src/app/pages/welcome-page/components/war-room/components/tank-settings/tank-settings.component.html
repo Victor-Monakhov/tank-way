@@ -9,25 +9,26 @@
 
   <div class="tank-details">
     <div class="tank-details-container">
-      <tnm-tank-detail-container
-        [iconSrc]="tank()?.turret?.path ?? '#'"
+      <tnm-tank-item-slot
+        [tankItem]="tank()?.turret"
         (dragover)="$event.preventDefault()"
         (drop)="onTurretChange()">
-      </tnm-tank-detail-container>
-      <tnm-tank-detail-container
-        [iconSrc]="tank()?.hull?.path ?? '#'"
+      </tnm-tank-item-slot>
+      <tnm-tank-item-slot
+        [tankItem]="tank()?.hull"
         (dragover)="$event.preventDefault()"
         (drop)="onHullChange()">
-      </tnm-tank-detail-container>
-      @for (bullet of tank()?.bullets; track $index) {
+      </tnm-tank-item-slot>
+      @for (bullet of bullets(); track $index) {
         <div class="tank-detail-wrapper">
-          <tnm-tank-detail-container
-            [iconSrc]="bullet?.path"
-            [quantity]="bullet?.quantity"
-            [isMany]="true"
+          <tnm-tank-item-slot
+            [tankItem]="bullet"
+            [multipleItems]="true"
             (dragover)="$event.preventDefault()"
+            (dragStart)="onBulletSlotDragStart($index, $event)"
+            (dragEnd)="onBulletSlotDragEnd()"
             (drop)="onBulletChange($index)">
-          </tnm-tank-detail-container>
+          </tnm-tank-item-slot>
           <button
             mat-button
             type="button"

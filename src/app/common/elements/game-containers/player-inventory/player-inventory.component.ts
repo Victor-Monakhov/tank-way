@@ -11,8 +11,10 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { InventoryService } from '../../../../pages/welcome-page/services/inventory/inventory.service';
-import { ETankItemType } from '../../../resources/enums/game.enum';
+import {
+  TankItemTransactionService,
+} from '../../../../pages/welcome-page/services/tank-item-transaction/tank-item-transaction.service';
+import { ETankItemType, ETankTransactionHosts } from '../../../resources/enums/game.enum';
 import { ITankItem } from '../../../resources/interfaces/tank.interface';
 import { RotateBulletPipe } from '../../../resources/pipes/rotate-bullet/rotate-bullet.pipe';
 
@@ -31,7 +33,7 @@ import { RotateBulletPipe } from '../../../resources/pipes/rotate-bullet/rotate-
 export class PlayerInventoryComponent implements OnInit {
 
   private readonly renderer = inject(Renderer2);
-  private readonly inventoryService = inject(InventoryService);
+  private readonly tankItemTransactionService = inject(TankItemTransactionService);
   private readonly dr = inject(DestroyRef);
 
   inventory = input.required<ITankItem[]>();
@@ -41,13 +43,13 @@ export class PlayerInventoryComponent implements OnInit {
   dragIndex: number | null = null;
 
   ngOnInit(): void {
-    this.observeTankItemChanged();
+    this.observeInventoryTankTransaction();
   }
 
   onDrop(dropIndex: number, event: DragEvent): void {
     if (Number.isInteger(this.dragIndex)) {
-      const inventory = this.inventory();
-      const temp = inventory[this.dragIndex];
+      const inventory: ITankItem[] = this.inventory();
+      const temp: ITankItem = inventory[this.dragIndex];
       inventory[this.dragIndex] = inventory[dropIndex];
       inventory[dropIndex] = temp;
       this.saveInventory.emit(inventory);
@@ -58,18 +60,21 @@ export class PlayerInventoryComponent implements OnInit {
 
   onDragStart(dragIndex: number): void {
     this.dragIndex = dragIndex;
-    this.inventoryService.isDragging = true;
-    this.inventoryService.inventoryDraggingData = this.inventory()[dragIndex];
+    const newItem: ITankItem = this.inventory()[dragIndex];
+    this.tankItemTransactionService.createTransaction(newItem, ETankTransactionHosts.Inventory);
   }
 
   onDragEnd(): void {
     this.dragIndex = null;
+    if (!this.tankItemTransactionService.transactionInProgress) {
+      this.tankItemTransactionService.destroyTransaction();
+    }
   }
 
   onDoubleClick(index: number): void {
     const item = this.inventory()[index];
-    this.inventoryService.inventoryDraggingData = item;
-    this.inventoryService.inventoryItemClicked$.next(item);
+    this.tankItemTransactionService.createTransaction(item, ETankTransactionHosts.Inventory);
+    this.tankItemTransactionService.inventoryItemClicked$.next();
   }
 
   onDragEnter(event: DragEvent): void {
@@ -84,36 +89,15 @@ export class PlayerInventoryComponent implements OnInit {
     this.renderer.setStyle(el, 'border-width', '1px');
   }
 
-  private observeTankItemChanged(): void {
-    this.inventoryService.tankTransactionComplete$.pipe(
+  private observeInventoryTankTransaction(): void {
+    this.tankItemTransactionService.inventoryTankTransactionComplete$.pipe(
       takeUntilDestroyed(this.dr),
-    ).subscribe(tankTransformationItem => {
-      const inventory = this.inventory();
-      const oldTankItem = tankTransformationItem.oldItem;
-      const remainedTankItem = tankTransformationItem.remainedItem;
-      let gameItemPushed = false;
-      inventory.forEach((item, index) => {
-        if (item?.quantity && item.name === oldTankItem?.name) {
-          item.quantity += oldTankItem.quantity;
-          gameItemPushed = true;
-        }
-        if (item?.quantity && item.name === remainedTankItem.name) {
-          item.quantity = remainedTankItem.quantity;
-          if (!item.quantity) {
-            inventory[index] = null;
-          }
-        }
-      });
-      if (!gameItemPushed) {
-        const freeCellIndex = inventory.findIndex(item => !item?.quantity);
-        if (freeCellIndex >= 0) {
-          inventory[freeCellIndex] = oldTankItem;
-          if (!inventory[freeCellIndex]?.quantity) {
-            inventory[freeCellIndex] = null;
-          }
-        }
-      }
-      this.saveInventory.emit(inventory);
+    ).subscribe(tankTransactionItem => {
+      const updatedInventory: ITankItem[] = this.tankItemTransactionService.handleInventoryTankTransactionCompletion(
+        this.inventory(),
+        tankTransactionItem,
+      );
+      this.saveInventory.emit(updatedInventory);
     });
   }
 }

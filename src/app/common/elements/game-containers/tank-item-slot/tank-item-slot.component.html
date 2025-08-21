@@ -1,0 +1,22 @@
+<div
+  class="detail-container"
+  draggable="true"
+  (dragenter)="onDragEnter(container)"
+  (dragleave)="onDragLeave(container)"
+  (dragstart)="onDragStart()"
+  (dragend)="onDragEnd()"
+  (drop)="onDrop(container)"
+  #container>
+  <div class="detail-container-content">
+    <div [ngClass]="{ 'img-wrapper': true, 'min-img': multipleItems() }">
+      @if (iconSrc()) {
+        <img fill draggable="false" class="img" alt="#" [ngSrc]="iconSrc()"/>
+      } @else {
+        <img fill draggable="false" class="img stub" alt="#" ngSrc="assets/icons/tank/stub-bullet.svg"/>
+      }
+    </div>
+    @if (multipleItems() && quantity()) {
+      <span>{{ quantity() }}</span>
+    }
+  </div>
+</div>

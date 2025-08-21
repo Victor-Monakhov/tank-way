@@ -39,7 +39,7 @@ export const inventoryAllIn: ITankItem[][] = [
 export const defaultDemoPlayerState: IDemoPlayer = {
   name: 'Comrade',
   inventory: Array(15).fill(null),
-  // inventory: inventoryAllIn,
+  // tank-item-transaction: inventoryAllIn,
   totalBattles: 0,
   totalWins: 0,
   totalDefeats: 0,

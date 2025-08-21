@@ -166,7 +166,7 @@ export class WarRoomComponent {
       item => item?.quantity && item.path === dealResult.shopItem.item.path,
     );
     if (existingItemIndex >= 0) {
-      // player.inventory[existingItemIndex] = dealResult.shopItem.item;
+      // player.tank-item-transaction[existingItemIndex] = dealResult.shopItem.item;
       player.inventory[existingItemIndex].quantity += dealResult.quantity;
     } else {
       const freeItemIndex = player.inventory.findIndex(item => !item?.quantity);

@@ -3,7 +3,7 @@ import {
   EInventionEffect,
   ETankBulletNames,
   ETankHullNames,
-  ETankItemType,
+  ETankItemType, ETankTransactionHosts, ETankTransactionTargets, ETankTransactionTypes,
   ETankTurretNames,
 } from '../enums/game.enum';
 
@@ -34,11 +34,12 @@ export interface ITankConstruction {
 }
 
 export interface ITankTransactionItem {
-  isTransaction: boolean;
+  host: ETankTransactionHosts;
+  target: ETankTransactionTargets;
+  type: ETankTransactionTypes;
   oldItem: ITankItem;
   newItem: ITankItem;
   remainedItem: ITankItem;
-  cellIndex: number;
 }
 
 export interface IBullet extends ITankItem {
