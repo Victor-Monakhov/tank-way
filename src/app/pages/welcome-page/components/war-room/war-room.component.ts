@@ -73,7 +73,7 @@ export class WarRoomComponent {
     }
     return {};
   });
-  inventory = computed<ITankItem[]>(() => [...(this.player()?.inventory) ?? []]);
+  inventory = computed<ITankItem[]>(() => copy((this.player()?.inventory ?? [])));
   battles = computed<IDemoBattle[]>(() => this.stateService.demoBattles() ?? []);
   game = computed<Partial<IDemoGame>>(() => {
     const game = this.stateService.demoGame();
@@ -94,7 +94,7 @@ export class WarRoomComponent {
   chosenTank = computed<IDemoTank>(() => {
     const tank = this.game()?.tanks?.find(item => item.chosenAsPlayer) ?? null;
     if (tank) {
-      return tank;
+      return copy(tank);
     }
     return null;
   });
@@ -111,9 +111,11 @@ export class WarRoomComponent {
 
   onSaveTank(changedTank: IDemoTank): void {
     const game = this.game();
-    const tank = game.tanks.find(item => item.chosenAsPlayer);
-    tank.name = changedTank.name;
-    this.stateService.updateDemoGameState(game);
+    const index = game.tanks.findIndex(item => item.chosenAsPlayer);
+    if (index >= 0) {
+      game.tanks[index] = changedTank;
+      this.stateService.updateDemoGameState(game);
+    }
   }
 
   onSelectTank(index: number): void {

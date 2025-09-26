@@ -15,6 +15,8 @@ import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
+import { delay, merge } from 'rxjs';
+
 import {
   QuantityMenuComponent,
 } from '../../../../../../common/elements/game-containers/quantity-menu/quantity-menu.component';
@@ -25,7 +27,11 @@ import {
   TankItemSlotComponent,
 } from '../../../../../../common/elements/game-containers/tank-item-slot/tank-item-slot.component';
 import { TankViewComponent } from '../../../../../../common/elements/game-containers/tank-view/tank-view.component';
-import { ETankItemType, ETankTransactionTargets } from '../../../../../../common/resources/enums/game.enum';
+import {
+  ETankItemType,
+  ETankTransactionHosts,
+  ETankTransactionTargets,
+} from '../../../../../../common/resources/enums/game.enum';
 import { IQuantityResult } from '../../../../../../common/resources/interfaces/game.interface';
 import {
   IBullet,
@@ -33,7 +39,7 @@ import {
   ITankItem,
   ITankTransactionItem,
 } from '../../../../../../common/resources/interfaces/tank.interface';
-import { copy } from '../../../../../../shared/constants/utils';
+import { copy, swap } from '../../../../../../shared/constants/utils';
 import { TankItemTransactionService } from '../../../../services/tank-item-transaction/tank-item-transaction.service';
 
 @Component({
@@ -66,27 +72,27 @@ export class TankSettingsComponent implements OnInit {
   matTriggers = viewChildren(MatMenuTrigger);
   quantityMenus = viewChildren(QuantityMenuComponent);
 
-  bullets = computed<IBullet[]>(() => copy(this.tank()?.bullets ?? []));
+  tankClone = computed<IDemoTank>(() => copy(this.tank()));
 
   ngOnInit(): void {
     this.observeInventoryItem();
+    this.observeTankInventoryTransactionReady();
+    this.observeTransactionResult();
   }
 
   onTankNameChange(name: string): void {
-    const tank = this.tank();
+    const tank = this.tankClone();
     tank.name = name;
     this.saveTank.emit(tank);
   }
 
   onTurretChange(): void {
     if (this.tankItemTransactionService.transactionTankItemType === ETankItemType.TankTurret) {
-      const tank = this.tank();
-      this.tankItemTransactionService.startTransaction(tank.turret, ETankTransactionTargets.Tank);
+      this.tankItemTransactionService.startTransaction(this.tankClone().turret, ETankTransactionTargets.Tank);
       const tankTransactionItem: Readonly<ITankTransactionItem> =
-        this.tankItemTransactionService.finishTransaction(1, true);
+        this.tankItemTransactionService.fillTransaction(1, true);
       if (tankTransactionItem) {
-        tank.turret = tankTransactionItem.newItem;
-        this.saveTank.emit(tank);
+        this.tankClone().turret = tankTransactionItem.newItem;
       }
     } else {
       this.tankItemTransactionService.destroyTransaction();
@@ -95,30 +101,48 @@ export class TankSettingsComponent implements OnInit {
 
   onHullChange(): void {
     if (this.tankItemTransactionService.transactionTankItemType === ETankItemType.TankHull) {
-      const tank = this.tank();
-      this.tankItemTransactionService.startTransaction(tank.hull, ETankTransactionTargets.Tank);
+      this.tankItemTransactionService.startTransaction(this.tankClone().hull, ETankTransactionTargets.Tank);
       const tankTransactionItem: Readonly<ITankTransactionItem> =
-        this.tankItemTransactionService.finishTransaction(1, true);
+        this.tankItemTransactionService.fillTransaction(1, true);
       if (tankTransactionItem) {
-        tank.hull = tankTransactionItem.newItem;
-        this.saveTank.emit(tank);
+        this.tankClone().hull = tankTransactionItem.newItem;
       }
     } else {
       this.tankItemTransactionService.destroyTransaction();
     }
   }
 
-  onBulletChange(index: number): void {
+  onBulletChange(index: number | null): void {
     if (this.tankItemTransactionService.transactionTankItemType === ETankItemType.Bullet) {
-      const oldBullet = this.tank().bullets[index];
+      const newBullet: ITankItem = this.tankItemTransactionService.transactionNewItem;
+      const possibleIndex: number = this.tankClone().bullets.findIndex(
+        bullet => bullet?.name === newBullet.name,
+      );
+      if (index === null) {
+        index = this.tankClone().bullets.findIndex(bullet => !bullet);
+        index = index >= 0 ? index : 0;
+      }
+      const actualIndex: number = possibleIndex >= 0 ? possibleIndex : index;
+      const oldBullet: IBullet = this.tankClone().bullets[actualIndex];
       const tankTransactionItem: Readonly<ITankTransactionItem> =
         this.tankItemTransactionService.startTransaction(oldBullet, ETankTransactionTargets.Tank);
-      console.log(tankTransactionItem);
       if (tankTransactionItem) {
-        this.bulletActiveIndex = index;
-        this.bullets()[index] = copy(tankTransactionItem.remainedItem) as IBullet;
-        this.matTriggers()[index].openMenu();
-        this.quantityMenus()[index].updateValidators(tankTransactionItem.newItem.quantity);
+        switch (tankTransactionItem.host) {
+          case ETankTransactionHosts.Inventory: {
+            this.bulletActiveIndex = actualIndex;
+            this.tankClone().bullets[actualIndex] = copy(tankTransactionItem.remainedItem) as IBullet;
+            this.matTriggers()[actualIndex].openMenu();
+            this.quantityMenus()[actualIndex].updateValidators(tankTransactionItem.newItem.quantity);
+            break;
+          }
+          case ETankTransactionHosts.Tank: {
+            this.tankClone().bullets = swap(this.tankClone().bullets, this.bulletActiveIndex, index);
+            this.tankItemTransactionService.destroyTransaction();
+            this.bulletActiveIndex = null;
+            this.saveTank.emit(this.tankClone());
+            break;
+          }
+        }
       }
     } else {
       this.bulletActiveIndex = null;
@@ -129,13 +153,11 @@ export class TankSettingsComponent implements OnInit {
   onItemQuantityChange(quantityResult: IQuantityResult): void {
     if (!this.itemQuantityChanged && quantityResult.status) {
       this.itemQuantityChanged = true;
-      const tank: IDemoTank = this.tank();
+      const tank: IDemoTank = this.tankClone();
       const tankTransactionItem: Readonly<ITankTransactionItem> =
-        this.tankItemTransactionService.finishTransaction(quantityResult.quantity);
+        this.tankItemTransactionService.fillTransaction(quantityResult.quantity);
       if (tankTransactionItem) {
         tank.bullets[this.bulletActiveIndex] = tankTransactionItem.newItem as IBullet;
-        this.bullets()[this.bulletActiveIndex] = copy(this.tank().bullets[this.bulletActiveIndex]) as IBullet;
-        this.saveTank.emit(tank);
       }
     }
     this.matTriggers()[this.bulletActiveIndex].closeMenu();
@@ -143,7 +165,7 @@ export class TankSettingsComponent implements OnInit {
 
   onMenuClosed(): void {
     if (!this.itemQuantityChanged) {
-      this.bullets()[this.bulletActiveIndex] = this.tank().bullets[this.bulletActiveIndex] as IBullet;
+      this.saveTank.emit(this.tank());
     }
     this.itemQuantityChanged = false;
     this.bulletActiveIndex = null;
@@ -152,14 +174,20 @@ export class TankSettingsComponent implements OnInit {
 
   onBulletSlotDragStart(index: number, item: ITankItem): void {
     this.bulletActiveIndex = index;
-    //todo
-    // this.tankItemTransactionService.inventoryDraggingData = item;
+    this.tankItemTransactionService.createTransaction(item, ETankTransactionHosts.Tank);
   }
 
   onBulletSlotDragEnd(): void {
     this.bulletActiveIndex = null;
-    //todo
-    // this.tankItemTransactionService.inventoryDraggingData = null;
+    if (!this.tankItemTransactionService.transactionInProgress) {
+      this.tankItemTransactionService.destroyTransaction();
+    }
+  }
+
+  onBulletDoubleClick(index: number): void {
+    const item = this.tankClone().bullets[index];
+    this.tankItemTransactionService.createTransaction(item, ETankTransactionHosts.Tank);
+    this.tankItemTransactionService.tankItemClicked$.next();
   }
 
   private observeInventoryItem(): void {
@@ -175,7 +203,37 @@ export class TankSettingsComponent implements OnInit {
           this.onHullChange();
           break;
         }
+        case ETankItemType.Bullet: {
+          this.onBulletChange(null);
+          break;
+        }
       }
+    });
+  }
+
+  private observeTankInventoryTransactionReady(): void {
+    this.tankItemTransactionService.tankInventoryTransactionReady$.pipe(
+      takeUntilDestroyed(this.dr),
+    ).subscribe(tankTransactionItem => {
+      if (tankTransactionItem.newItem.itemType === ETankItemType.Bullet) {
+        const updatedTankItems: ITankItem[] = this.tankItemTransactionService.handleTransactionCompletion(
+          this.tankClone().bullets,
+          tankTransactionItem,
+        );
+        this.tankClone().bullets = updatedTankItems as IBullet[];
+      }
+    });
+  }
+
+  private observeTransactionResult(): void {
+    merge(
+      this.tankItemTransactionService.tankInventoryTransactionCompleted$,
+      this.tankItemTransactionService.inventoryTankTransactionCompleted$,
+    ).pipe(
+      delay(0),
+      takeUntilDestroyed(this.dr),
+    ).subscribe(result => {
+      result ? this.saveTank.emit(this.tankClone()) : this.saveTank.emit(this.tank());
     });
   }
 }

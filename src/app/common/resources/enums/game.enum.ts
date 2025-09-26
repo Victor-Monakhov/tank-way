@@ -71,7 +71,5 @@ export enum ETankTransactionTargets {
 export enum ETankTransactionTypes {
   NoTransaction,
   InventoryTank,
-  InventoryInventory,
   TankInventory,
-  TankTank,
 }

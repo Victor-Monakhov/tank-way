@@ -1,25 +1,25 @@
 
 <div class="wrapper">
   <tnm-tank-view
-    [tankName]="tank()?.name"
-    [selectedTankBody]="tank()?.hull"
-    [selectedTankHead]="tank()?.turret"
+    [tankName]="tankClone()?.name"
+    [selectedTankBody]="tankClone()?.hull"
+    [selectedTankHead]="tankClone()?.turret"
     (tankNameChange)="onTankNameChange($event)">
   </tnm-tank-view>
 
   <div class="tank-details">
     <div class="tank-details-container">
       <tnm-tank-item-slot
-        [tankItem]="tank()?.turret"
+        [tankItem]="tankClone()?.turret"
         (dragover)="$event.preventDefault()"
         (drop)="onTurretChange()">
       </tnm-tank-item-slot>
       <tnm-tank-item-slot
-        [tankItem]="tank()?.hull"
+        [tankItem]="tankClone()?.hull"
         (dragover)="$event.preventDefault()"
         (drop)="onHullChange()">
       </tnm-tank-item-slot>
-      @for (bullet of bullets(); track $index) {
+      @for (bullet of tankClone()?.bullets; track $index) {
         <div class="tank-detail-wrapper">
           <tnm-tank-item-slot
             [tankItem]="bullet"
@@ -27,7 +27,8 @@
             (dragover)="$event.preventDefault()"
             (dragStart)="onBulletSlotDragStart($index, $event)"
             (dragEnd)="onBulletSlotDragEnd()"
-            (drop)="onBulletChange($index)">
+            (drop)="onBulletChange($index)"
+            (dblclick)="onBulletDoubleClick($index)">
           </tnm-tank-item-slot>
           <button
             mat-button
@@ -46,7 +47,7 @@
       }
     </div>
     @if (tank()) {
-      <tnm-tank-inventions class="inventions" [inventions]="tank().inventions"></tnm-tank-inventions>
+      <tnm-tank-inventions class="inventions" [inventions]="tankClone().inventions"></tnm-tank-inventions>
     }
   </div>
 </div>

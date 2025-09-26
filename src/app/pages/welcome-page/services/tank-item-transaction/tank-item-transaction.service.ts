@@ -9,7 +9,10 @@ import {
   ETankTransactionTargets,
   ETankTransactionTypes,
 } from '../../../../common/resources/enums/game.enum';
-import { ITankItem, ITankTransactionItem } from '../../../../common/resources/interfaces/tank.interface';
+import {
+  ITankItem,
+  ITankTransactionItem,
+} from '../../../../common/resources/interfaces/tank.interface';
 import { copy } from '../../../../shared/constants/utils';
 
 @Injectable({
@@ -20,21 +23,21 @@ export class TankItemTransactionService {
   private transactionItem: ITankTransactionItem = copy(tankDefaultTransactionItem);
 
   private inventoryTankTransaction$ = new Subject<Readonly<ITankTransactionItem>>();
-  private inventoryInventoryTransaction$ = new Subject<Readonly<ITankTransactionItem>>();
-  private tankTankTransaction$ = new Subject<Readonly<ITankTransactionItem>>();
   private tankInventoryTransaction$ = new Subject<Readonly<ITankTransactionItem>>();
+  private inventoryTankTransactionResult$ = new Subject<boolean>();
+  private tankInventoryTransactionResult$ = new Subject<boolean>();
 
-  inventoryTankTransactionComplete$ =
+  inventoryTankTransactionReady$ =
     this.inventoryTankTransaction$ as Observable<Readonly<ITankTransactionItem>>;
-  inventoryInventoryTransactionComplete$ =
-    this.inventoryInventoryTransaction$ as Observable<Readonly<ITankTransactionItem>>;
-  tankTankTransactionComplete$ =
-    this.tankTankTransaction$ as Observable<Readonly<ITankTransactionItem>>;
-  tankInventoryTransactionComplete$ =
+  tankInventoryTransactionReady$ =
     this.tankInventoryTransaction$ as Observable<Readonly<ITankTransactionItem>>;
+  inventoryTankTransactionCompleted$ =
+    this.inventoryTankTransactionResult$ as Observable<boolean>;
+  tankInventoryTransactionCompleted$ =
+    this.tankInventoryTransactionResult$ as Observable<boolean>;
 
   inventoryItemClicked$ = new Subject<void>();
-  tankItemClicked$ = new Subject<ITankItem>();
+  tankItemClicked$ = new Subject<void>();
 
   get transactionInProgress(): boolean {
     return this.transactionItem.type !== ETankTransactionTypes.NoTransaction;
@@ -42,6 +45,14 @@ export class TankItemTransactionService {
 
   get transactionTankItemType(): ETankItemType | null {
     return this.transactionItem?.newItem?.itemType ?? null;
+  }
+
+  get transactionNewItem(): ITankItem | null {
+    return this.transactionItem?.newItem ?? null;
+  }
+
+  get transactionHost(): ETankTransactionHosts | null {
+    return this.transactionItem?.host ?? null;
   }
 
   createTransaction(newItem: ITankItem, host: ETankTransactionHosts): void {
@@ -64,7 +75,7 @@ export class TankItemTransactionService {
     return Object.freeze(copy(this.transactionItem));
   }
 
-  finishTransaction(quantity: number, replace = false): Readonly<ITankTransactionItem> | null {
+  fillTransaction(quantity: number, replace = false): Readonly<ITankTransactionItem> | null {
     const condition1 = this.transactionItem.type === ETankTransactionTypes.NoTransaction;
     const condition2 = this.transactionItem.newItem.quantity < quantity;
     if (condition1 || condition2) {
@@ -87,12 +98,6 @@ export class TankItemTransactionService {
       case ETankTransactionTypes.InventoryTank:
         this.inventoryTankTransaction$.next(transactionClone);
         break;
-      case ETankTransactionTypes.InventoryInventory:
-        this.inventoryInventoryTransaction$.next(transactionClone);
-        break;
-      case ETankTransactionTypes.TankTank:
-        this.tankTankTransaction$.next(transactionClone);
-        break;
       case ETankTransactionTypes.TankInventory:
         this.tankInventoryTransaction$.next(transactionClone);
         break;
@@ -104,53 +109,62 @@ export class TankItemTransactionService {
     this.transactionItem = copy(tankDefaultTransactionItem);
   }
 
-  handleInventoryTankTransactionCompletion(
-    inventory: ITankItem[],
+  handleTransactionCompletion(
+    hostItems: ITankItem[],
     transactionItem: Readonly<ITankTransactionItem>,
   ): ITankItem[] {
-    const inventoryClone: ITankItem[] = copy(inventory);
-    if (transactionItem.type === ETankTransactionTypes.InventoryTank) {
-      const oldTankItem: ITankItem = transactionItem.oldItem;
-      const remainedTankItem: ITankItem = transactionItem.remainedItem;
-      let oldTankItemAdded = false;
-      let remainedTankItemAdded = false;
-      inventoryClone.forEach((item, index) => {
-        if (item?.quantity && item.name === oldTankItem?.name && !oldTankItemAdded) {
-          item.quantity += oldTankItem.quantity;
-          oldTankItemAdded = true;
-        }
-        if (item?.quantity && item.name === remainedTankItem.name && !remainedTankItemAdded) {
-          item.quantity = remainedTankItem.quantity;
-          remainedTankItemAdded = true;
-          if (!item.quantity) {
-            inventoryClone[index] = null;
-          }
-        }
-      });
-      if (!oldTankItemAdded) {
-        const freeCellIndex = inventoryClone.findIndex(item => !item?.quantity);
-        if (freeCellIndex >= 0) {
-          inventoryClone[freeCellIndex] = oldTankItem;
-          if (!inventoryClone[freeCellIndex]?.quantity) {
-            inventoryClone[freeCellIndex] = null;
-          }
+    const hostItemsClone: ITankItem[] = copy(hostItems);
+    const oldTankItem: ITankItem = transactionItem.oldItem;
+    const remainedTankItem: ITankItem = transactionItem.remainedItem;
+    let oldTankItemAdded = false;
+    let remainedTankItemAdded = false;
+    hostItemsClone.forEach((item, index) => {
+      if (item?.quantity && item.name === oldTankItem?.name && !oldTankItemAdded) {
+        item.quantity += oldTankItem.quantity;
+        oldTankItemAdded = true;
+      }
+      if (item?.quantity && item.name === remainedTankItem.name && !remainedTankItemAdded) {
+        item.quantity = remainedTankItem.quantity;
+        remainedTankItemAdded = true;
+        if (!item.quantity) {
+          hostItemsClone[index] = null;
         }
       }
+    });
+    if (!oldTankItemAdded) {
+      const freeCellIndex = hostItemsClone.findIndex(item => !item?.quantity);
+      if (freeCellIndex >= 0) {
+        hostItemsClone[freeCellIndex] = oldTankItem;
+        if (!hostItemsClone[freeCellIndex]?.quantity) {
+          hostItemsClone[freeCellIndex] = null;
+        }
+      } else {
+        this.sendTransactionResult(transactionItem.type, false);
+        return hostItems;
+      }
     }
-    return inventoryClone;
+    this.sendTransactionResult(transactionItem.type, true);
+    return hostItemsClone;
   }
 
-  private getTransactionType(host: ETankTransactionHosts, target: ETankTransactionTargets): ETankTransactionTypes {
+  getTransactionType(host: ETankTransactionHosts, target: ETankTransactionTargets): ETankTransactionTypes {
     if (host === ETankTransactionHosts.Inventory && target === ETankTransactionTargets.Tank) {
       return ETankTransactionTypes.InventoryTank;
-    } else if (host === ETankTransactionHosts.Inventory && target === ETankTransactionTargets.Inventory) {
-      return ETankTransactionTypes.InventoryInventory;
-    } else if (host === ETankTransactionHosts.Tank && target === ETankTransactionTargets.Tank) {
-      return ETankTransactionTypes.TankTank;
     } else if (host === ETankTransactionHosts.Tank && target === ETankTransactionTargets.Inventory) {
       return ETankTransactionTypes.TankInventory;
     } else {
       return ETankTransactionTypes.NoTransaction;
+    }
+  }
+
+  private sendTransactionResult(transactionType: ETankTransactionTypes, result: boolean): void {
+    switch (transactionType) {
+      case ETankTransactionTypes.InventoryTank:
+        this.inventoryTankTransactionResult$.next(result);
+        break;
+      case ETankTransactionTypes.TankInventory:
+        this.tankInventoryTransactionResult$.next(result);
+        break;
     }
   }
 }

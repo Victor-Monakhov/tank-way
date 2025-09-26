@@ -14,9 +14,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 
 import { WarRoomService } from '../../../../pages/welcome-page/services/war-room/war-room.service';
-import { Calculations } from '../../../../shared/classes/calculations/calculations.class';
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { ValidationService } from '../../../../shared/components/validation/validation-service/validation.service';
+import { angleBetweenCenterAndPoint } from '../../../../shared/constants/utils';
 import { ITankTurret } from '../../../resources/interfaces/tank.interface';
 
 @Component({
@@ -70,7 +70,7 @@ export class TankViewComponent {
   onTarget(event: MouseEvent, el: HTMLDivElement): void {
     const viewWidth = el.clientWidth;
     const viewHeight = el.clientHeight;
-    this.targetAngle.set(Calculations.getAngleBetweenCenterAndPoint(
+    this.targetAngle.set(angleBetweenCenterAndPoint(
       viewWidth,
       viewHeight,
       event.offsetX,
