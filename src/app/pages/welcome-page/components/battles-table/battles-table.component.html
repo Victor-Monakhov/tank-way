@@ -1,8 +1,9 @@
 <ng-scrollbar class="scrollbar-v" thumbClass="thumb-v" trackClass="track-v">
-  <table mat-table
-         multiTemplateDataRows
-         class="battles-table mat-elevation-z8"
-         [dataSource]="battles()">
+  <table
+    mat-table
+    multiTemplateDataRows
+    class="battles-table mat-elevation-z8"
+    [dataSource]="battles()">
 
     @for (column of columnsToDisplay; track $index) {
       <ng-container [matColumnDef]="column">
