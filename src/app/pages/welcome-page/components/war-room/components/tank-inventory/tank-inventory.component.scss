@@ -1,0 +1,31 @@
+@use 'mixins' as mixins;
+
+:host {
+  .tank-details {
+    display: flex;
+    flex-shrink: 0;
+    gap: 10px;
+
+    .tank-details-container {
+      display: grid;
+      grid-gap: 3px;
+      @include mixins.vm-media(
+          horizontal,
+            (grid-template-columns, (60px 60px, 70px 70px)),
+            (grid-template-rows, (70px 60px 60px, 80px 70px 70px)),
+      );
+      .tank-detail-wrapper {
+        position: relative;
+        .menu-trigger {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          border-radius: 15px;
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}

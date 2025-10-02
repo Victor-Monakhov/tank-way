@@ -1,34 +1,26 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { Observable } from 'rxjs';
-
-import {
-  ShopDealDialogComponent,
-} from '../../../../common/elements/dialogs/shop-deal-dialog/shop-deal-dialog.component';
 import {
   PlayerInventoryComponent,
 } from '../../../../common/elements/game-containers/player-inventory/player-inventory.component';
-import { ShopComponent } from '../../../../common/elements/game-containers/shop/shop.component';
-import { tankBulletsShop, tankHullsShop, tankTurretsShop } from '../../../../common/resources/constants/shops';
-import { IDemoBattle, IDemoGame, IDemoPlayer } from '../../../../common/resources/interfaces/game.interface';
 import {
-  IShopDealConfig,
-  IShopDealResult,
-  IShopItem,
-} from '../../../../common/resources/interfaces/shop.interface';
+  TankModernizationComponent,
+} from '../../../../common/elements/game-containers/tank-modernization/tank-modernization.component';
+import { TankViewComponent } from '../../../../common/elements/game-containers/tank-view/tank-view.component';
+import { IDemoBattle, IDemoGame, IDemoPlayer } from '../../../../common/resources/interfaces/game.interface';
 import { IDemoTank, ITankItem } from '../../../../common/resources/interfaces/tank.interface';
 import { StateService } from '../../../../common/resources/services/state/state.service';
 import { copy } from '../../../../shared/constants/utils';
 import { WarRoomService } from '../../services/war-room/war-room.service';
 import { BattlesTableComponent } from '../battles-table/battles-table.component';
 
+import { TankInventoryComponent } from './components/tank-inventory/tank-inventory.component';
 import { TankListComponent } from './components/tank-list/tank-list.component';
-import { TankSettingsComponent } from './components/tank-settings/tank-settings.component';
+import { TankShopsComponent } from './components/tank-shops/tank-shops.component';
 import { WarRoomHeaderComponent } from './components/war-room-header/war-room-header.component';
 
 @Component({
@@ -39,12 +31,14 @@ import { WarRoomHeaderComponent } from './components/war-room-header/war-room-he
     BattlesTableComponent,
     MatIconModule,
     MatButtonModule,
-    TankSettingsComponent,
     WarRoomHeaderComponent,
     TankListComponent,
     MatTabsModule,
     PlayerInventoryComponent,
-    ShopComponent,
+    TankViewComponent,
+    TankInventoryComponent,
+    TankShopsComponent,
+    TankModernizationComponent,
   ],
   templateUrl: './war-room.component.html',
   styleUrl: './war-room.component.scss',
@@ -56,15 +50,10 @@ export class WarRoomComponent {
 
   private readonly stateService = inject(StateService);
   private readonly warRoomService = inject(WarRoomService);
-  private readonly dialog = inject(MatDialog);
 
   private defaultTanks: IDemoTank[] = Array(this.tanksQuantity).fill(null).map(
     () => copy(this.stateService.defaultDemoTank),
   );
-
-  tankTurretsShop = tankTurretsShop;
-  tankHullsShop = tankHullsShop;
-  tankBulletsShop = tankBulletsShop;
 
   player = computed<Partial<IDemoPlayer>>(() => {
     const demoPlayer = this.stateService.demoPlayer();
@@ -99,14 +88,22 @@ export class WarRoomComponent {
     return null;
   });
 
-  selectedTab = signal<number>(0);
-
   onSavePlayerName(name: string): void {
     this.stateService.updateDemoPlayerState({ name });
   }
 
+  onSavePlayer(player: Partial<IDemoPlayer>): void {
+    this.stateService.updateDemoPlayerState(player);
+  }
+
   onSaveInventory(inventory: ITankItem[]): void {
     this.stateService.updateDemoPlayerState({ inventory });
+  }
+
+  onTankNameChange(name: string): void {
+    const tank = this.chosenTank();
+    tank.name = name;
+    this.onSaveTank(tank);
   }
 
   onSaveTank(changedTank: IDemoTank): void {
@@ -139,52 +136,6 @@ export class WarRoomComponent {
       game.tanks.push(tank);
       this.stateService.updateDemoGameState(this.game());
     }
-  }
-
-  onBuyItem(shopItem: IShopItem): void {
-    const player = this.player();
-    if (player.arenas >= shopItem.price) {
-      this.showShopDealDialog({
-        shopItem,
-        playerArenas: player.arenas,
-      }).subscribe((result: IShopDealResult) => {
-        if (result.result) {
-          this.putItemInInventory(player, result);
-          this.stateService.updateDemoPlayerState(player);
-          this.selectedTab.set(0);
-        }
-      });
-    } else {
-      this.showShopDealDialog({
-        shopItem,
-        playerArenas: player.arenas,
-      });
-    }
-  }
-
-  private putItemInInventory(player: Partial<IDemoPlayer>, dealResult: IShopDealResult): void {
-    player.arenas -= dealResult.price;
-    const existingItemIndex = player.inventory.findIndex(
-      item => item?.quantity && item.path === dealResult.shopItem.item.path,
-    );
-    if (existingItemIndex >= 0) {
-      // player.tank-item-transaction[existingItemIndex] = dealResult.shopItem.item;
-      player.inventory[existingItemIndex].quantity += dealResult.quantity;
-    } else {
-      const freeItemIndex = player.inventory.findIndex(item => !item?.quantity);
-      if (freeItemIndex >= 0) {
-        player.inventory[freeItemIndex] = dealResult.shopItem.item;
-        player.inventory[freeItemIndex].quantity += dealResult.quantity;
-      }
-    }
-  }
-
-  private showShopDealDialog(dataConfig: Partial<IShopDealConfig>): Observable<IShopDealResult> {
-    return this.dialog.open(ShopDealDialogComponent, {
-      data: dataConfig,
-      hasBackdrop: true,
-      panelClass: 'mat-vm-dialog',
-    }).afterClosed();
   }
 
 }

@@ -1,7 +1,7 @@
 import {
   EBulletEffect,
   EInventionEffect,
-  ETankBulletNames,
+  ETankBulletNames, ETankCharacteristics,
   ETankHullNames,
   ETankItemType, ETankTransactionHosts, ETankTransactionTargets, ETankTransactionTypes,
   ETankTurretNames,
@@ -52,6 +52,13 @@ export interface IBullet extends ITankItem {
 export interface IInvention extends ITankItem {
   description: string;
   effect: EInventionEffect;
+}
+
+export interface ITankCharacteristic {
+  type: ETankCharacteristics;
+  value: number;
+  growth: number;
+  price: number;
 }
 
 export interface IDemoTank extends ITankConstruction {

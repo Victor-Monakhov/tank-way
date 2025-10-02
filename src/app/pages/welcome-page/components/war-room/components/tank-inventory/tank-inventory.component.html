@@ -1,0 +1,43 @@
+<div class="tank-details">
+  <div class="tank-details-container">
+    <tnm-tank-item-slot
+      [tankItem]="tankClone()?.turret"
+      (dragover)="$event.preventDefault()"
+      (drop)="onTurretChange()">
+    </tnm-tank-item-slot>
+    <tnm-tank-item-slot
+      [tankItem]="tankClone()?.hull"
+      (dragover)="$event.preventDefault()"
+      (drop)="onHullChange()">
+    </tnm-tank-item-slot>
+    @for (bullet of tankClone()?.bullets; track $index) {
+      <div class="tank-detail-wrapper">
+        <tnm-tank-item-slot
+          [tankItem]="bullet"
+          [multipleItems]="true"
+          (dragover)="$event.preventDefault()"
+          (dragStart)="onBulletSlotDragStart($index, $event)"
+          (dragEnd)="onBulletSlotDragEnd()"
+          (drop)="onBulletChange($index)"
+          (dblclick)="onBulletDoubleClick($index)">
+        </tnm-tank-item-slot>
+        <button
+          mat-button
+          type="button"
+          class="menu-trigger"
+          [matMenuTriggerFor]="menu"
+          (menuClosed)="onMenuClosed()">
+          Menu
+        </button>
+        <mat-menu #menu="matMenu">
+          <tnm-quantity-menu
+            (quantityChange)="onItemQuantityChange($event)">
+          </tnm-quantity-menu>
+        </mat-menu>
+      </div>
+    }
+  </div>
+  @if (tank()) {
+    <tnm-tank-inventions class="inventions" [inventions]="tankClone().inventions"></tnm-tank-inventions>
+  }
+</div>

@@ -24,7 +24,7 @@ export const defaultDemoTanks: IDemoTank[] = [
     bullets: Array(4).fill(null).map((item, index) => (
       !index ? { ...copy(tankBullets[0]), quantity: 800 } : null),
     ),
-    inventions: Array(9).fill(null),
+    inventions: Array(6).fill(null),
   },
 ];
 

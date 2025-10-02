@@ -1,6 +1,6 @@
 import {
   EBulletEffect,
-  ETankBulletNames,
+  ETankBulletNames, ETankCharacteristics,
   ETankHullNames,
   ETankItemType,
   ETankTransactionHosts,
@@ -8,7 +8,13 @@ import {
   ETankTransactionTypes,
   ETankTurretNames,
 } from '../enums/game.enum';
-import { IBullet, ITankHull, ITankTransactionItem, ITankTurret } from '../interfaces/tank.interface';
+import {
+  IBullet, IDemoTank,
+  ITankCharacteristic,
+  ITankHull,
+  ITankTransactionItem,
+  ITankTurret,
+} from '../interfaces/tank.interface';
 
 export const tankDefaultTransactionItem: ITankTransactionItem = {
   host: ETankTransactionHosts.NoHost,
@@ -81,3 +87,32 @@ export const tankBullets: IBullet[] = [
     effect: EBulletEffect.Explosion,
   },
 ];
+
+export function getTankCharacteristics(tank: IDemoTank): ITankCharacteristic[] {
+  return [
+    {
+      type: ETankCharacteristics.MaxHealth,
+      value: tank.maxHealth,
+      growth: 3,
+      price: 1,
+    },
+    {
+      type: ETankCharacteristics.MaxArmor,
+      value: tank.maxArmor,
+      growth: 3,
+      price: 1,
+    },
+    {
+      type: ETankCharacteristics.MaxSpeed,
+      value: tank.maxSpeed,
+      growth: 1,
+      price: 1,
+    },
+    {
+      type: ETankCharacteristics.MaxShotPower,
+      value: tank.maxShotPower,
+      growth: 1,
+      price: 1,
+    },
+  ];
+}

@@ -38,7 +38,7 @@ export class ShopDealDialogComponent implements OnInit {
   ]);
 
   price = signal<number>(this.data.shopItem.price);
-  isDeal = computed<boolean>(() => this.data.playerArenas >= this.price());
+  isDeal = computed<boolean>(() => this.data.playerCoins >= this.price());
 
   get isBullet(): boolean {
     return this.data.shopItem.item.itemType === ETankItemType.Bullet;

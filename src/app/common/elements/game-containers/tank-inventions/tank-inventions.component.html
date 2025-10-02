@@ -1,14 +1,14 @@
-<div class="tank-inventions">
-  <div class="inventions-container">
-    <div class="inventions">
+<div class="inventory-wrapper">
+  <div class="inventory-container">
+    <div class="inventory-items">
       @for (invention of inventions(); track $index) {
         <div
-          class="invention-item"
+          class="inventory-item"
           (dragenter)="onDragEnter($event)"
           (dragleave)="onDragLeave($event)">
           @if (!invention) {
             <div [ngClass]="{ 'icon-wrapper': true, 'icon-stub': !invention }">
-              <img fill class="img" ngSrc="assets/icons/tank/invention-stub.svg" alt="#">
+              <img fill class="inventory-item-img" ngSrc="assets/icons/tank/invention-stub.svg" alt="#">
             </div>
           }
         </div>

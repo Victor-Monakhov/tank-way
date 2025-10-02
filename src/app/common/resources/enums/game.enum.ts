@@ -56,6 +56,13 @@ export enum ETankHullNames {
   RegularBlue = 'T_3',
 }
 
+export enum ETankCharacteristics {
+  MaxHealth = 'max health',
+  MaxArmor = 'max armor',
+  MaxSpeed = 'max speed',
+  MaxShotPower = 'max power',
+}
+
 export enum ETankTransactionHosts {
   NoHost,
   Inventory,

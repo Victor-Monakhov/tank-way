@@ -1,9 +1,9 @@
-<div class="tank-inventions">
-  <div class="inventions-container">
-    <div class="inventions">
+<div class="inventory-wrapper">
+  <div class="inventory-container">
+    <div class="inventory-items">
       @for (inventoryCell of inventoryClone(); track $index) {
         <div
-          class="invention-item"
+          class="inventory-item"
           [draggable]="inventoryCell?.quantity"
           (dragover)="$event.preventDefault()"
           (drop)="onInventoryItemDrop($index, $event)"
@@ -14,7 +14,7 @@
           (dblclick)="onInventoryItemDoubleClick($index)">
           @if (!inventoryCell?.quantity) {
             <div [ngClass]="{ 'icon-wrapper': true, 'icon-stub': !inventoryCell?.quantity }">
-              <img fill class="img" ngSrc="assets/icons/tank/invention-stub.svg" alt="#">
+              <img fill class="inventory-item-img" ngSrc="assets/icons/tank/inventory-stub.svg" alt="#">
             </div>
           } @else if (inventoryCell) {
             <div class="icon-wrapper">
@@ -22,7 +22,7 @@
                 fill
                 alt="#"
                 [ngClass]="{
-                       'img': true,
+                       'inventory-item-img': true,
                        'small-icon': inventoryCell.itemType === tankItemType.Bullet,
                        'large-icon': false
                        }"

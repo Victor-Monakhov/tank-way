@@ -1,0 +1,19 @@
+<div class="inventory-wrapper">
+  <div class="inventory-container">
+    <div class="tank-characteristics">
+      @for (item of characteristics(); track $index) {
+        <div class="tank-characteristic-item">
+          <span class="item-label">{{item.type}}:</span>
+          <div class="item-action-wrapper">
+            <span class="item-value">{{item.value}}</span>
+            <small class="item-progress"> +{{item.growth}} </small>
+            <button mat-button type="button" class="tank-characteristic-item-action-btn" [disabled]="false">
+              <span class="item-action-price">{{item.price}}</span>
+              <img class="item-zrist-img" ngSrc="assets/icons/zrist.svg" alt="arenas" width="24" height="24"/>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -18,8 +18,8 @@
 
       .tank-btn {
         @include mixins.vm-media(horizontal,
-            (width, (80px, 90px, 100px)),
-            (height, (80px, 90px, 100px)),
+            (width, (80px, 90px, 90px, 90px, 100px)),
+            (height, (80px, 90px, 90px, 90px, 100px)),
         );
       }
     }

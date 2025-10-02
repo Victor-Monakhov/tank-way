@@ -18,35 +18,40 @@
       margin-bottom: 20px;
     }
 
-    .sub-title {
-      font-size: 20px;
-      color: var(--mat-sys-primary);
-      margin-left: 20px;
-    }
+    .war-room-content {
+      display: grid;
+      grid-row-gap: 40px;
+      @include mixins.vm-media(
+          horizontal,
+            (grid-template-columns, (1fr, 1fr, 1fr, repeat(2, 1fr))),
+            (grid-template-rows, (repeat(6, 1fr), repeat(6, 1fr), repeat(6, 1fr), repeat(3, 1fr))),
+            (grid-row-gap, (20px, 20px, 20px, 40px)),
+      );
 
-    .tanks-wrapper {
-      display: flex;
-      align-items: center;
-      row-gap: 20px;
-      column-gap: 40px;
-      padding: 40px 0;
-      position: relative;
-      @include mixins.vm-media(horizontal, (flex-direction, (column, column, column, row)));
+      .war-room-content-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        @include mixins.vm-media(horizontal, (height, (230px, 275px)));
 
-      & > * {
-        flex: 1 1 0;
-      }
-
-      .tanks-list-wrapper {
         .sub-title {
-          margin-bottom: 10px;
+          font-size: 20px;
+          color: var(--mat-sys-primary);
+          margin-bottom: 20px;
+          @include mixins.vm-media(horizontal, (display, (none, none, none, block)));
         }
 
-        .shops-inventory {
-          margin: 20px 0;
+        &.simple-title {
+          .sub-title {
+            margin-bottom: 3px;
+          }
+        }
+
+        &.without-sub-title {
+          @include mixins.vm-media(horizontal, (padding-top, (0, 0, 0, 45px)));
         }
       }
-
     }
 
     .statistics-wrapper {

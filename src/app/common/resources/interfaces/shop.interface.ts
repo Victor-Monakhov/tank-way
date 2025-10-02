@@ -10,12 +10,12 @@ export interface IShopItem {
 
 export interface IShopDealConfig {
   shopItem: IShopItem;
-  playerArenas: number;
+  playerCoins: number;
 }
 
 export interface IShopDealResult {
   quantity: number;
-  price: number;
+  dealPrice: number;
   shopItem: IShopItem;
   result: boolean;
 }

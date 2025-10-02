@@ -26,7 +26,6 @@ export const bulletPrices: { [key in ETankBulletNames]: number } = {
   [ETankBulletNames.Red]: 35,
 };
 
-
 export const tankTurretsShop: IShopItem[] = [
   ...tankTurrets.map(turret => ({
     item: turret,

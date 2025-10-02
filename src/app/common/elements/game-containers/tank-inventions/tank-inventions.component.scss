@@ -1,0 +1,20 @@
+@use 'mixins' as mixins;
+@use 'variables' as variables;
+
+:host {
+  .inventory-wrapper {
+    @include mixins.vm-media(
+        horizontal,
+          (border-radius, (13px, 15px)),
+          (width, (140px, 171px)),
+          (height, (variables.$inventory-height-sm, variables.$inventory-height-md)),
+    );
+
+    .inventory-container {
+      .inventory-items {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+      }
+    }
+  }
+}

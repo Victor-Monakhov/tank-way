@@ -1,0 +1,39 @@
+@use 'mixins' as mixins;
+@use 'variables' as variables;
+
+:host {
+  .inventory-wrapper {
+    @include mixins.vm-media(
+        horizontal,
+          (border-radius, (13px, 15px)),
+          (width, (273px, 324px)),
+          (height, (variables.$inventory-height-sm, variables.$inventory-height-md)),
+    );
+
+    .inventory-container {
+      .tank-characteristics {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .tank-characteristic-item {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          font-size: 16px;
+          font-family: var(--mat-sys-body-medium-font), sans-serif;
+
+          .item-action-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .item-progress {
+                font-size: 14px;
+                color: var(--mat-sys-outline);
+            }
+          }
+        }
+      }
+    }
+  }
+}

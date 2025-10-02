@@ -9,11 +9,8 @@ import {
   viewChildren,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
-
-import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { delay, merge } from 'rxjs';
 
@@ -22,11 +19,10 @@ import {
 } from '../../../../../../common/elements/game-containers/quantity-menu/quantity-menu.component';
 import {
   TankInventionsComponent,
-} from '../../../../../../common/elements/game-containers/tank-inventory/tank-inventions.component';
+} from '../../../../../../common/elements/game-containers/tank-inventions/tank-inventions.component';
 import {
   TankItemSlotComponent,
 } from '../../../../../../common/elements/game-containers/tank-item-slot/tank-item-slot.component';
-import { TankViewComponent } from '../../../../../../common/elements/game-containers/tank-view/tank-view.component';
 import {
   ETankItemType,
   ETankTransactionHosts,
@@ -44,22 +40,19 @@ import { TankItemTransactionService } from '../../../../services/tank-item-trans
 
 @Component({
   standalone: true,
-  selector: 'tnm-tank-settings',
+  selector: 'tnm-tank-inventory',
   imports: [
-    NgScrollbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
     TankItemSlotComponent,
-    TankInventionsComponent,
-    TankViewComponent,
+    MatButton,
+    MatMenuModule,
     QuantityMenuComponent,
+    TankInventionsComponent,
   ],
-  templateUrl: './tank-settings.component.html',
-  styleUrl: './tank-settings.component.scss',
+  templateUrl: './tank-inventory.component.html',
+  styleUrl: './tank-inventory.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TankSettingsComponent implements OnInit {
+export class TankInventoryComponent implements OnInit {
 
   private readonly tankItemTransactionService = inject(TankItemTransactionService);
   private readonly dr = inject(DestroyRef);
@@ -78,12 +71,6 @@ export class TankSettingsComponent implements OnInit {
     this.observeInventoryItem();
     this.observeTankInventoryTransactionReady();
     this.observeTransactionResult();
-  }
-
-  onTankNameChange(name: string): void {
-    const tank = this.tankClone();
-    tank.name = name;
-    this.saveTank.emit(tank);
   }
 
   onTurretChange(): void {

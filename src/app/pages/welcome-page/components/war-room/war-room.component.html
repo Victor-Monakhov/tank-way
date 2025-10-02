@@ -6,40 +6,46 @@
     <tnm-war-room-header [player]="player()" (savePlayerName)="onSavePlayerName($event)"></tnm-war-room-header>
   </section>
 
-  <section class="tanks-wrapper">
-    <div class="tanks-list-wrapper">
-      <h3 class="sub-title">Tanks:</h3>
-      <tnm-tank-list
-        [game]="game()"
-        [tanks]="tanks()"
-        (buyTank)="onBuyTank($event)"
-        (selectTank)="onSelectTank($event)"></tnm-tank-list>
-      <mat-tab-group
-        class="shops-inventory"
-        [selectedIndex]="selectedTab()"
-        (selectedIndexChange)="selectedTab.set($event)">
-        <mat-tab class="shops-tab" label="Inventory">
-          <tnm-player-inventory [inventory]="inventory()" (saveInventory)="onSaveInventory($event)">
-          </tnm-player-inventory>
-        </mat-tab>
-        <mat-tab label="Turrets">
-          <tnm-shop [shopItems]="tankTurretsShop" [largeIcons]="true" (buyItem)="onBuyItem($event)"></tnm-shop>
-        </mat-tab>
-        <mat-tab label="Hulls">
-          <tnm-shop [shopItems]="tankHullsShop" (buyItem)="onBuyItem($event)"></tnm-shop>
-        </mat-tab>
-        <mat-tab label="Bullets">
-          <tnm-shop
-            [shopItems]="tankBulletsShop"
-            [smallIcons]="true"
-            [rotatePictures]="60"
-            (buyItem)="onBuyItem($event)">
-          </tnm-shop>
-        </mat-tab>
-        <mat-tab label="Inventions"> In Progress </mat-tab>
-      </mat-tab-group>
-    </div>
-    <tnm-tank-settings [tank]="chosenTank()" (saveTank)="onSaveTank($event)"></tnm-tank-settings>
+  <section class="war-room-content">
+    @if (chosenTank() && player()) {
+      <div class="war-room-content-item">
+        <h3 class="sub-title">Tanks:</h3>
+        <tnm-tank-list
+          [game]="game()"
+          [tanks]="tanks()"
+          (buyTank)="onBuyTank($event)"
+          (selectTank)="onSelectTank($event)">
+        </tnm-tank-list>
+      </div>
+
+      <div class="war-room-content-item without-sub-title">
+        <tnm-tank-view
+          [tankName]="chosenTank()?.name"
+          [selectedTankBody]="chosenTank()?.hull"
+          [selectedTankHead]="chosenTank()?.turret"
+          (tankNameChange)="onTankNameChange($event)">
+        </tnm-tank-view>
+      </div>
+
+      <div class="war-room-content-item">
+        <h3 class="sub-title">Inventory:</h3>
+        <tnm-player-inventory [inventory]="inventory()" (saveInventory)="onSaveInventory($event)">
+        </tnm-player-inventory>
+      </div>
+
+      <div class="war-room-content-item without-sub-title">
+        <tnm-tank-inventory [tank]="chosenTank()" (saveTank)="onSaveTank($event)"></tnm-tank-inventory>
+      </div>
+
+      <div class="war-room-content-item simple-title">
+        <h3 class="sub-title">Market:</h3>
+        <tnm-tank-shops [player]="player()" (savePlayer)="onSavePlayer($event)"></tnm-tank-shops>
+      </div>
+
+      <div class="war-room-content-item without-sub-title">
+        <tnm-tank-modernization [tank]="chosenTank()"></tnm-tank-modernization>
+      </div>
+    }
   </section>
 
   <h3 class="sub-title">Battles:</h3>

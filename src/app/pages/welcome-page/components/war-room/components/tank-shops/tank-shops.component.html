@@ -1,0 +1,20 @@
+<mat-tab-group
+  class="shops-inventory"
+  [selectedIndex]="selectedTab()"
+  (selectedIndexChange)="selectedTab.set($event)">
+  <mat-tab label="Turrets">
+    <tnm-shop [shopItems]="tankTurretsShop" [largeIcons]="true" (buyItem)="onBuyItem($event)"></tnm-shop>
+  </mat-tab>
+  <mat-tab label="Hulls">
+    <tnm-shop [shopItems]="tankHullsShop" (buyItem)="onBuyItem($event)"></tnm-shop>
+  </mat-tab>
+  <mat-tab label="Bullets">
+    <tnm-shop
+      [shopItems]="tankBulletsShop"
+      [smallIcons]="true"
+      [rotatePictures]="60"
+      (buyItem)="onBuyItem($event)">
+    </tnm-shop>
+  </mat-tab>
+  <mat-tab label="Inventions"> In Progress </mat-tab>
+</mat-tab-group>
