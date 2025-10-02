@@ -2,9 +2,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 
-import { ETankCharacteristics } from '../../../resources/enums/game.enum';
+import { getTankCharacteristics } from '../../../resources/constants/tank-settings';
 import { IDemoTank, ITankCharacteristic } from '../../../resources/interfaces/tank.interface';
-import { getTankCharacteristics } from "../../../resources/constants/tank-settings";
 
 @Component({
   standalone: true,

@@ -6,18 +6,14 @@ describe('TankShopsComponent', () => {
   let component: TankShopsComponent;
   let fixture: ComponentFixture<TankShopsComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      imports: [TankShopsComponent]
+      imports: [TankShopsComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TankShopsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

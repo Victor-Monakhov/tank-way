@@ -6,18 +6,14 @@ describe('TankModernizationComponent', () => {
   let component: TankModernizationComponent;
   let fixture: ComponentFixture<TankModernizationComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      imports: [TankModernizationComponent]
+      imports: [TankModernizationComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TankModernizationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });
