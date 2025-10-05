@@ -1,2 +1,0 @@
-import{Lb as o,Mb as i,fc as r,pb as n}from"./chunk-YYMASR54.js";import"./chunk-RISTMBTU.js";var m=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=n({type:e,selectors:[["tnm-profile"]],decls:2,vars:0,template:function(t,c){t&1&&(o(0,"p"),r(1,"USER PROFILE"),i())},encapsulation:2,changeDetection:0})}}return e})();export{m as ProfileComponent};
-//# sourceMappingURL=chunk-7R4VJSVZ.js.map

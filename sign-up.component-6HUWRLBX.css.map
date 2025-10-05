@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/common/auth/components/sign-up/sign-up.component.scss"],
-  "sourcesContent": ["\n:host {\n  .wrapper {\n    .mat-submit-btn {\n      margin-top: 20px;\n    }\n    .divider {\n      margin-top: 30px;\n      opacity: 0.5;\n    }\n  }\n}\n"],
-  "mappings": "AAGI,MAAA,CAAA,QAAA,CAAA,eACE,WAAA,KAEF,MAAA,CAHA,QAGA,CAAA,QACE,WAAA,KACA,QAAA",
-  "names": []
-}
