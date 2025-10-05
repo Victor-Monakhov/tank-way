@@ -14,7 +14,13 @@
       .tank-characteristics {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        justify-content: center;
+        height: 100%;
+        @include mixins.vm-media(
+            horizontal,
+              (gap, (6px, 10px)),
+        );
+
         .tank-characteristic-item {
           display: flex;
           justify-content: space-around;

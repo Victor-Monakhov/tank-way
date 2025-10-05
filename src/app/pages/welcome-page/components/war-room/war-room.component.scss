@@ -18,6 +18,13 @@
       margin-bottom: 20px;
     }
 
+    .sub-title {
+      font-size: 20px;
+      color: var(--mat-sys-primary);
+      margin-bottom: 20px;
+      @include mixins.vm-media(horizontal, (display, (none, none, none, block)));
+    }
+
     .war-room-content {
       display: grid;
       grid-row-gap: 40px;
@@ -35,13 +42,6 @@
         justify-content: center;
         @include mixins.vm-media(horizontal, (height, (230px, 275px)));
 
-        .sub-title {
-          font-size: 20px;
-          color: var(--mat-sys-primary);
-          margin-bottom: 20px;
-          @include mixins.vm-media(horizontal, (display, (none, none, none, block)));
-        }
-
         &.simple-title {
           .sub-title {
             margin-bottom: 3px;
@@ -54,11 +54,20 @@
       }
     }
 
-    .statistics-wrapper {
+    .battles-history {
+      display: flex;
+      flex-direction: column;
       text-align: center;
+      margin-top: 40px;
+      width: 100%;
 
-      .empty-statistics {
+      & > * {
+        width: 100%;
+      }
+
+      .empty-history {
         display: inline-block;
+        text-align: center;
         margin: 30px 0;
         font-size: 18px;
         color: var(--mat-sys-outline);

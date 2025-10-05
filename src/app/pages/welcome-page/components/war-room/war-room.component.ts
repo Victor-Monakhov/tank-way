@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+
+import { map } from 'rxjs';
 
 import {
   PlayerInventoryComponent,
@@ -15,6 +18,7 @@ import { IDemoBattle, IDemoGame, IDemoPlayer } from '../../../../common/resource
 import { IDemoTank, ITankItem } from '../../../../common/resources/interfaces/tank.interface';
 import { StateService } from '../../../../common/resources/services/state/state.service';
 import { copy } from '../../../../shared/constants/utils';
+import { BreakpointService } from '../../../../shared/services/breakpoint/breakpoint.service';
 import { WarRoomService } from '../../services/war-room/war-room.service';
 import { BattlesTableComponent } from '../battles-table/battles-table.component';
 
@@ -50,6 +54,11 @@ export class WarRoomComponent {
 
   private readonly stateService = inject(StateService);
   private readonly warRoomService = inject(WarRoomService);
+  private readonly breakpointService = inject(BreakpointService);
+
+  isSmallScreen = toSignal(this.breakpointService.adjustedBreakPointObserver$.pipe(
+    map(state => state.mobile || state.tablet),
+  ));
 
   private defaultTanks: IDemoTank[] = Array(this.tanksQuantity).fill(null).map(
     () => copy(this.stateService.defaultDemoTank),

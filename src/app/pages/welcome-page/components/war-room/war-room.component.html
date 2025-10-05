@@ -27,34 +27,49 @@
         </tnm-tank-view>
       </div>
 
+      @if (isSmallScreen()) {
+        <div class="war-room-content-item without-sub-title">
+          <tnm-tank-inventory [tank]="chosenTank()" (saveTank)="onSaveTank($event)"></tnm-tank-inventory>
+        </div>
+      }
+
       <div class="war-room-content-item">
         <h3 class="sub-title">Inventory:</h3>
         <tnm-player-inventory [inventory]="inventory()" (saveInventory)="onSaveInventory($event)">
         </tnm-player-inventory>
       </div>
 
-      <div class="war-room-content-item without-sub-title">
-        <tnm-tank-inventory [tank]="chosenTank()" (saveTank)="onSaveTank($event)"></tnm-tank-inventory>
-      </div>
+      @if (!isSmallScreen()) {
+        <div class="war-room-content-item without-sub-title">
+          <tnm-tank-inventory [tank]="chosenTank()" (saveTank)="onSaveTank($event)"></tnm-tank-inventory>
+        </div>
+      }
+
+      @if (isSmallScreen()) {
+        <div class="war-room-content-item without-sub-title">
+          <tnm-tank-modernization [tank]="chosenTank()"></tnm-tank-modernization>
+        </div>
+      }
 
       <div class="war-room-content-item simple-title">
         <h3 class="sub-title">Market:</h3>
         <tnm-tank-shops [player]="player()" (savePlayer)="onSavePlayer($event)"></tnm-tank-shops>
       </div>
 
-      <div class="war-room-content-item without-sub-title">
-        <tnm-tank-modernization [tank]="chosenTank()"></tnm-tank-modernization>
-      </div>
+      @if (!isSmallScreen()) {
+        <div class="war-room-content-item without-sub-title">
+          <tnm-tank-modernization [tank]="chosenTank()"></tnm-tank-modernization>
+        </div>
+      }
     }
   </section>
 
-  <h3 class="sub-title">Battles:</h3>
-
-  <section class="statistics-wrapper">
+  <section class="battles-history">
+    <h3 class="sub-title">Battles:</h3>
     @if (battles().length) {
       <tnm-battles-table [battles]="battles()"></tnm-battles-table>
     } @else {
-      <strong class="empty-statistics">No battle stats yet — join a game to get started!</strong>
+      <strong class="empty-history">No battle stats yet — join a game to get started!</strong>
     }
   </section>
 </div>
