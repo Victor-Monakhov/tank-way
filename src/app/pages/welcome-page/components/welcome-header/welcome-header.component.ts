@@ -37,6 +37,6 @@ export class WelcomeHeaderComponent {
   // Todo temporary for demo versions
   onRefreshPage(): void {
     this.stateService.refreshStates();
-    location.reload();
+    setTimeout(() => location.reload(), 300);
   }
 }
