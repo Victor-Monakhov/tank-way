@@ -80,6 +80,7 @@ export class TankShopsComponent {
     return this.dialog.open(ShopDealDialogComponent, {
       data: dataConfig,
       hasBackdrop: true,
+      disableClose: true,
       panelClass: 'mat-vm-dialog',
     }).afterClosed();
   }

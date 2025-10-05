@@ -96,7 +96,7 @@ export class StateService {
     this.updateDemoBattlesState(newBattles);
   }
 
-  public refreshStates(): void {
+  refreshStates(): void {
     this.updateDemoPlayerState(copy(defaultDemoPlayerState));
     this.updateDemoGameState(copy(defaultDemoGameState));
     this.updateDemoBattlesState(copy(defaultDemoBattlesState));

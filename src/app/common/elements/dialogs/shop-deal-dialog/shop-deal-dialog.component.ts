@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { InputTextComponent } from '../../../../shared/components/input-text/input-text.component';
 import { ValidationService } from '../../../../shared/components/validation/validation-service/validation.service';
 import { ETankItemType } from '../../../resources/enums/game.enum';
-import { IShopDealConfig } from '../../../resources/interfaces/shop.interface';
+import { IShopDealConfig, IShopDealResult } from '../../../resources/interfaces/shop.interface';
 import { GameItemBtnComponent } from '../../game-buttons/game-item-btn/game-item-btn.component';
 
 @Component({
@@ -51,21 +51,21 @@ export class ShopDealDialogComponent implements OnInit {
 
   onCancel(): void {
     this.dialogRef.close({
-      price: 0,
+      dealPrice: 0,
       quantity: 0,
       shopItem: this.data.shopItem,
       result: false,
-    });
+    } as IShopDealResult);
   }
 
   onConfirm(): void {
     if (this.quantityControl.valid && this.isDeal()) {
       this.dialogRef.close({
-        price: this.price(),
+        dealPrice: this.price(),
         quantity: +this.quantityControl.value,
         shopItem: this.data.shopItem,
         result: true,
-      });
+      } as IShopDealResult);
     }
   }
 
