@@ -7,6 +7,7 @@
 @forward 'material/mat-dialog';
 @forward 'material/mat-table';
 @forward 'material/mat-tabs';
+@forward "material/mat-menu";
 
 @function _patch-error-palette($palette) {
   @return map.merge(

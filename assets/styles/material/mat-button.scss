@@ -1,4 +1,25 @@
 @use 'mixins' as mixins;
+.quantity-wrapper, .tank-characteristic-item-action-btn {
+  .mdc-button__label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.tank-characteristic-item-action-btn {
+  border: 1px solid var(--mat-sys-primary-container) !important;
+
+  .item-action-price {
+    font-size: 16px !important;
+  }
+}
+
+.tank-characteristic-item-action-btn:disabled {
+  .item-zrist-img {
+    filter: brightness(50%);
+  }
+}
 
 .mat-text-btn {
   cursor: pointer;
