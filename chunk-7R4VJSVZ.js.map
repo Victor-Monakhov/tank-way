@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/profile/profile.component.ts", "src/app/pages/profile/profile.component.html"],
+  "sourcesContent": ["import { ChangeDetectionStrategy, Component } from '@angular/core';\n\n@Component({\n  standalone: true,\n  selector: 'tnm-profile',\n  imports: [],\n  templateUrl: './profile.component.html',\n  styleUrl: './profile.component.scss',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class ProfileComponent {\n\n}\n", "<p>USER PROFILE</p>\n"],
+  "mappings": "6FAUA,IAAaA,GAAgB,IAAA,CAAvB,MAAOA,CAAgB,iDAAhBA,EAAgB,CAAA,+BAAhBA,EAAgBC,UAAA,CAAA,CAAA,aAAA,CAAA,EAAAC,MAAA,EAAAC,KAAA,EAAAC,SAAA,SAAAC,EAAAC,EAAA,CAAAD,EAAA,ICV7BE,EAAA,EAAA,GAAA,EAAGC,EAAA,EAAA,cAAA,EAAYC,EAAA,gDDUFT,CAAgB,GAAA",
+  "names": ["ProfileComponent", "selectors", "decls", "vars", "template", "rf", "ctx", "\u0275\u0275elementStart", "\u0275\u0275text", "\u0275\u0275elementEnd"]
+}

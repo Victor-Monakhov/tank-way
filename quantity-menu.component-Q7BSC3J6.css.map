@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/common/elements/game-containers/quantity-menu/quantity-menu.component.scss"],
+  "sourcesContent": [":host {\n  .quantity-wrapper {\n    padding: 10px;\n    border-radius: 15px;\n    border: 1px solid var(--mat-sys-primary);\n    cursor: default;\n    height: 100%;\n    .quantity-control {\n      width: 100px;\n    }\n\n    .quantity-label {\n      color: var(--mat-sys-on-surface);\n    }\n\n    .nav-btn {\n\n      border-radius: 50%;\n    }\n  }\n}\n"],
+  "mappings": "AACE,MAAA,CAAA,iBAAA,QACE,KADF,cAEE,KACA,OAAA,IAAA,MAAA,IAAA,mBACA,OAAA,QACA,OAAA,KACA,MAAA,CANF,iBAME,CAAA,iBACE,MAAA,MAGF,MAAA,CAVF,iBAUE,CAAA,eACE,MAAA,IAAA,sBAGF,MAAA,CAdF,iBAcE,CAAA,QAdF,cAgBI",
+  "names": []
+}

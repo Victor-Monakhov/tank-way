@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/common/auth/components/sign-in/sign-in.component.scss"],
+  "sourcesContent": ["\n:host {\n  .wrapper {\n    .mat-submit-btn {\n      margin-top: 20px;\n    }\n\n    .divider {\n      position: relative;\n      margin: 40px 0 30px 0;\n      overflow: visible;\n      opacity: 0.5;\n\n      .divider-label {\n        position: absolute;\n        padding: 0 10px;\n        left: 50%;\n        top: 50%;\n        transform: translate(-50%, -50%);\n        background: var(--mat-sys-background);\n      }\n    }\n\n    .social-login {\n      display: flex;\n      justify-content: center;\n      gap: 25px;\n\n      & > * {\n        position: relative;\n        border-radius: 50%;\n\n        .social-icon {\n          width: 70%;\n          height: 70%;\n        }\n      }\n    }\n  }\n}\n"],
+  "mappings": "AAGI,MAAA,CAAA,QAAA,CAAA,eACE,WAAA,KAGF,MAAA,CAJA,QAIA,CAAA,QACE,SAAA,SALF,OAME,KAAA,EAAA,KACA,SAAA,QACA,QAAA,GAEA,MAAA,CAVF,QAUE,CANF,QAME,CAAA,cACE,SAAA,SAXJ,QAYI,EAAA,KACA,KAAA,IACA,IAAA,IACA,UAAA,UAAA,IAAA,CAAA,MACA,WAAA,IAAA,sBAIJ,MAAA,CApBA,QAoBA,CAAA,aACE,QAAA,KACA,gBAAA,OACA,IAAA,KAEA,MAAA,CAzBF,QAyBE,CALF,YAKE,CAAA,EACE,SAAA,SA1BJ,cA2BI,IAEA,MAAA,CA7BJ,QA6BI,CATJ,YASI,CAAA,EAAA,CAAA,YACE,MAAA,IACA,OAAA",
+  "names": []
+}

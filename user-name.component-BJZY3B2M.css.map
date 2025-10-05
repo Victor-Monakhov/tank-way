@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/common/auth/components/user-name/user-name.component.scss"],
+  "sourcesContent": [":host {\n  .mat-submit-btn {\n    margin-top: 40px;\n    width: 270px;\n  }\n}\n"],
+  "mappings": "AACE,MAAA,CAAA,eACE,WAAA,KACA,MAAA",
+  "names": []
+}
