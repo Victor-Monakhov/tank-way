@@ -96,6 +96,12 @@ export class StateService {
     this.updateDemoBattlesState(newBattles);
   }
 
+  public refreshStates(): void {
+    this.updateDemoPlayerState(copy(defaultDemoPlayerState));
+    this.updateDemoGameState(copy(defaultDemoGameState));
+    this.updateDemoBattlesState(copy(defaultDemoBattlesState));
+  }
+
   private updateDemoBattlesState(battlesState: Partial<IDemoBattle[]>): void {
     this.demoBattlesState.set(battlesState);
     this.idbService.saveDemoBattlesState(this.demoBattlesState());

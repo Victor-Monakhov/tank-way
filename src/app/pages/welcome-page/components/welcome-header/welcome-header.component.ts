@@ -1,10 +1,11 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
+import { StateService } from '../../../../common/resources/services/state/state.service';
 import { SelectLanguageComponent } from '../../../../shared/components/select-language/select-language.component';
 
 @Component({
@@ -24,9 +25,16 @@ import { SelectLanguageComponent } from '../../../../shared/components/select-la
 })
 export class WelcomeHeaderComponent {
 
+  // Todo temporary for demo versions
+  private readonly stateService = inject(StateService);
+
   signInClick = output<void>();
 
   onSignInBtnClick(): void {
     this.signInClick.emit();
+  }
+
+  onRefreshPage(): void {
+    this.stateService.refreshStates();
   }
 }
