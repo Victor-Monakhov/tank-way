@@ -34,7 +34,9 @@ export class WelcomeHeaderComponent {
     this.signInClick.emit();
   }
 
+  // Todo temporary for demo versions
   onRefreshPage(): void {
     this.stateService.refreshStates();
+    location.reload();
   }
 }
