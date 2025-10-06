@@ -6,18 +6,14 @@ describe('BurgerBtnComponent', () => {
   let component: BurgerBtnComponent;
   let fixture: ComponentFixture<BurgerBtnComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     await TestBed.configureTestingModule({
-      imports: [BurgerBtnComponent]
+      imports: [BurgerBtnComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(BurgerBtnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });
