@@ -3,11 +3,13 @@
 :host {
   .shop-wrapper {
     display: flex;
+    @include mixins.vm-media(horizontal,
+        (gap, (8px, 10px)),
+    );
     .shop-item {
       @include mixins.vm-media(horizontal,
           (width, (60px, 70px, 80px)),
           (height, (60px, 70px, 80px)),
-          (gap, (8px, 10px)),
       );
     }
   }
