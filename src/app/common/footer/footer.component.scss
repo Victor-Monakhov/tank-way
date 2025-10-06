@@ -6,22 +6,22 @@
     display: flex;
     justify-content: space-between;
     background: var(--mat-sys-background);
+    gap: 20px;
     @include mixins.vm-media(
         horizontal,
-          (padding, (
-            40px 25px,
-            50px 50px,
-            55px 65px,
-            64px 100px
-            ))
+          (padding, (40px, 50px, 55px 65px, 64px 100px)),
+          (flex-direction, (column, row, row))
     );
     .left-content, .right-content {
       display: flex;
       flex-direction: column;
-      align-items: center;
       flex: 50% 1 0;
+      @include mixins.vm-media(horizontal, (align-items, (cstart, center)));
+
       .title {
+        width: 100%;
         font-size: 18px;
+        text-align: center;
         color: var(--mat-sys-primary);
         margin-bottom: 15px;
       }

@@ -1,0 +1,257 @@
+:host {
+  .vm-burger {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+
+    .vm-burger-line-top, .vm-burger-line-center, .vm-burger-line-bottom  {
+      display: flex;
+      position: absolute;
+      width: 100%;
+      height: 20%;
+      transition: all 300ms ease-in-out;
+    }
+
+    .vm-burger-left-part, .vm-burger-right-part {
+      width: 50%;
+      height: 100%;
+      background: black;
+      transition: all 300ms ease-in-out;
+    }
+
+    .vm-burger-line-top {
+      transform: translateY(-200%);
+    }
+
+    .vm-burger-line-bottom {
+      transform: translateY(200%);
+    }
+
+    .vm-burger-left-part {
+      border-bottom-left-radius: 100px;
+      border-top-left-radius: 100px;
+    }
+
+    .vm-burger-right-part {
+      border-bottom-right-radius: 100px;
+      border-top-right-radius: 100px;
+    }
+  }
+
+}
+
+:host-context(.static-all-open) {
+  .vm-burger {
+    .vm-burger-line-center {
+      .vm-burger-left-part, .vm-burger-right-part {
+        background: transparent !important;
+      }
+    }
+
+    .vm-burger-line-top {
+      transform: translateY(0);
+      .vm-burger-left-part {
+        transform-origin: right;
+        transform: rotate(45deg);
+      }
+      .vm-burger-right-part {
+        transform-origin: left;
+        transform: rotate(-45deg) ;
+      }
+    }
+
+    .vm-burger-line-bottom {
+      transform: translateY(0);
+      .vm-burger-left-part {
+        transform-origin: right;
+        transform: rotate(-45deg);
+      }
+      .vm-burger-right-part {
+        transform-origin: left;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+:host-context(.dynamic-all-open) {
+  .vm-burger {
+    .vm-burger-line-center {
+      .vm-burger-left-part {
+        transform: translate(-200%);
+        background: transparent !important;
+      }
+      .vm-burger-right-part {
+        transform: translate(200%);
+        background: transparent !important;
+      }
+    }
+
+    .vm-burger-line-top {
+      transform: translateY(0);
+      .vm-burger-left-part {
+        transform-origin: right;
+        transform: rotate(45deg);
+      }
+      .vm-burger-right-part {
+        transform-origin: left;
+        transform: rotate(-45deg) ;
+      }
+    }
+
+    .vm-burger-line-bottom {
+      transform: translateY(0);
+      .vm-burger-left-part {
+        transform-origin: right;
+        transform: rotate(-45deg);
+      }
+      .vm-burger-right-part {
+        transform-origin: left;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+:host-context(.static-left-open) {
+  .vm-burger {
+    .vm-burger-line-center {
+      .vm-burger-left-part, .vm-burger-right-part {
+        background: transparent !important;
+      }
+    }
+
+    .vm-burger-line-top {
+      transform: rotate(45deg);
+    }
+
+    .vm-burger-line-bottom {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+:host-context(.dynamic-left-open) {
+  .vm-burger {
+    .vm-burger-line-center {
+      transform: translate(-100%);
+      .vm-burger-left-part, .vm-burger-right-part {
+        background: transparent !important;
+      }
+    }
+
+    .vm-burger-line-top {
+      transform: rotate(45deg);
+    }
+
+    .vm-burger-line-bottom {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+:host-context(.advanced-left-open) {
+  .vm-burger {
+    .vm-burger-line-center {
+      transform: rotate(45deg);
+    }
+
+    .vm-burger-line-top {
+      transform: translateY(0);
+      .vm-burger-left-part {
+        background: transparent !important;
+      }
+      .vm-burger-right-part {
+        transform-origin: left;
+        transform: rotate(-45deg) ;
+      }
+    }
+
+    .vm-burger-line-bottom {
+      transform: translateY(0);
+      .vm-burger-left-part {
+        transform-origin: right;
+        transform: rotate(-45deg);
+      }
+      .vm-burger-right-part {
+        background: transparent !important;
+      }
+    }
+  }
+}
+
+:host-context(.static-right-open) {
+  .vm-burger {
+    .vm-burger-line-center {
+      .vm-burger-left-part, .vm-burger-right-part {
+        background: transparent !important;
+      }
+    }
+
+    .vm-burger-line-top {
+      transform: rotate(315deg);
+    }
+
+    .vm-burger-line-bottom {
+      transform: rotate(-315deg);
+    }
+  }
+}
+
+:host-context(.dynamic-right-open) {
+  .vm-burger {
+    .vm-burger-line-center {
+      transform: translate(100%);
+      .vm-burger-left-part, .vm-burger-right-part {
+        background: transparent !important;
+      }
+    }
+
+    .vm-burger-line-top {
+      transform: rotate(315deg);
+    }
+
+    .vm-burger-line-bottom {
+      transform: rotate(-315deg);
+    }
+  }
+}
+
+:host-context(.advanced-right-open) {
+  .vm-burger {
+    .vm-burger-line-center {
+      transform: rotate(-45deg);
+    }
+
+    .vm-burger-line-top {
+      transform: translateY(0);
+      .vm-burger-left-part {
+        transform-origin: right;
+        transform: rotate(45deg);
+      }
+      .vm-burger-right-part {
+        background: transparent !important;
+      }
+    }
+
+    .vm-burger-line-bottom {
+      transform: translateY(0);
+      .vm-burger-left-part {
+        background: transparent !important;
+      }
+      .vm-burger-right-part {
+        transform-origin: left;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}

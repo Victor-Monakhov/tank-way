@@ -1,38 +1,51 @@
 <mat-toolbar class="wrapper">
 
-  <div class="left-header-container">
+  @if (!isSmallScreen()) {
+    <div class="left-header-container">
+      <img
+        priority
+        class="logo"
+        draggable="false"
+        ngSrc="assets/images/tnm-logo.png" alt="TNMLogo"
+        width="90"
+        height="90"/>
+      <nav>
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#">{{ 'header.demo' | translate }}</a></li>
+          <li><a class="nav-link" href="#">Guid</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="right-header-container">
+      <button
+        mat-button
+        type="button"
+        class="sign-in-btn"
+        style="color: red"
+        (click)="onRefreshPage()">
+        Re-State!
+      </button>
+      <button
+        mat-button
+        type="button"
+        class="sign-in-btn"
+        (click)="onSignInBtnClick()">
+        {{ 'header.sign_in' | translate }}
+      </button>
+      <hr>
+      <tnm-select-language></tnm-select-language>
+    </div>
+  } @else {
+    <tnm-burger-btn class="burger-btn"></tnm-burger-btn>
     <img
       priority
+      class="logo"
       draggable="false"
-      ngSrc="images/tnm-logo.png" alt="TNMLogo"
+      ngSrc="assets/images/tnm-logo.png" alt="TNMLogo"
       width="90"
       height="90"/>
-    <nav>
-      <ul class="nav-list">
-        <li><a class="nav-link" href="#">{{ 'header.demo' | translate }}</a></li>
-        <li><a class="nav-link" href="#">Guid</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <div class="right-header-container">
-    <button
-      mat-button
-      type="button"
-      class="sign-in-btn"
-      style="color: red"
-      (click)="onRefreshPage()">
-      Re-State!
-    </button>
-    <button
-      mat-button
-      type="button"
-      class="sign-in-btn"
-      (click)="onSignInBtnClick()">
-      {{ 'header.sign_in' | translate }}
-    </button>
-    <hr>
     <tnm-select-language></tnm-select-language>
-  </div>
+  }
 
 </mat-toolbar>
