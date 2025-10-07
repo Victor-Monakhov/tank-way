@@ -3,6 +3,8 @@
 :host {
   .shop-wrapper {
     display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     @include mixins.vm-media(horizontal,
         (gap, (8px, 10px)),
     );

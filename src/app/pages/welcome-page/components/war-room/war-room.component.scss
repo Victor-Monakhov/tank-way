@@ -22,7 +22,6 @@
       font-size: 20px;
       color: var(--mat-sys-primary);
       margin-bottom: 20px;
-      @include mixins.vm-media(horizontal, (display, (none, none, none, block)));
     }
 
     .war-room-content {
@@ -41,6 +40,10 @@
         align-items: center;
         justify-content: center;
         @include mixins.vm-media(horizontal, (height, (230px, 275px)));
+
+        .sub-title {
+          @include mixins.vm-media(horizontal, (display, (none, none, none, block)));
+        }
 
         &.simple-title {
           .sub-title {
