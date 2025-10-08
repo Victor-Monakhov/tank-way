@@ -12,16 +12,6 @@
   padding: 0;
 }
 
-html, body {
-  width: 100vw;
-  height: 100vh;
-  min-width: 320px;
-  font-family: var(--mat-sys-body-medium-font), sans-serif;
-  background: var(--mat-sys-background);
-  color: var(--mat-sys-on-background);
-  overflow: hidden;
-}
-
 small {
   font-family: "Roboto Light", sans-serif;
   font-size: 13px;

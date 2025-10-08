@@ -115,22 +115,32 @@ html {
   @include mat.theme((
     color: $tnm-palette,
     typography: "RussoOne",
-    density: 0,
+    density: -1,
   ));
-}
 
-.light-theme {
-  color-scheme: light;
-  @include mat.theme-overrides((
-    "background": #DCDCDC,
-  ));
-}
+  body {
+    width: 100dvw;
+    height: 100dvh;
+    min-width: 320px;
+    font-family: var(--mat-sys-body-medium-font), sans-serif;
+    background: var(--mat-sys-background);
+    color: var(--mat-sys-on-background);
+    overflow: hidden;
 
-.dark-theme {
-  color-scheme: dark;
-  @include mat.theme-overrides((
-    "background": #1E1E1E,
-  ));
+    &.light-theme {
+      color-scheme: light;
+      @include mat.theme-overrides((
+        "background": #DCDCDC,
+      ));
+    }
+
+    &.dark-theme {
+      color-scheme: dark;
+      @include mat.theme-overrides((
+        "background": #1E1E1E,
+      ));
+    }
+  }
 }
 
 
