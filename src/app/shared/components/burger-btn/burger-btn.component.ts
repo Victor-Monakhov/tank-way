@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, effect,
   ElementRef,
   HostBinding,
   inject,
-  input,
+  input, model,
   OnInit,
   output, signal,
 } from '@angular/core';
@@ -22,12 +22,21 @@ import { TBurgerMode } from './burger-btn';
 export class BurgerBtnComponent implements OnInit {
 
   private readonly elementRef = inject(ElementRef);
+
   mode = input<TBurgerMode>('dynamic-all');
+  state = model<boolean>(false);
   click = output<MouseEvent>();
 
   color = signal<string>('#000000');
 
-  @HostBinding('class') private state = `${this.mode()}-close`;
+  @HostBinding('class') private modeClass = `${this.mode()}-close`;
+
+  constructor() {
+    const mode = this.mode();
+    effect(() => {
+      this.updateState(mode);
+    });
+  }
 
   ngOnInit(): void {
     const color = window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('color');
@@ -36,9 +45,13 @@ export class BurgerBtnComponent implements OnInit {
 
   public onBurger(event: MouseEvent): void {
     event.stopPropagation();
-    const close = `${this.mode()}-close`;
-    const open = `${this.mode()}-open`;
-    this.state = (this.state === close) ? open : close;
+    this.state.update(state => !state);
     this.click.emit(event);
+  }
+
+  private updateState(mode: TBurgerMode): void {
+    const close = `${mode}-close`;
+    const open = `${mode}-open`;
+    this.modeClass = (this.state()) ? open : close;
   }
 }

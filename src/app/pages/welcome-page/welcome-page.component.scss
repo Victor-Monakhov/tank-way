@@ -2,8 +2,21 @@
 @use 'variables' as variables;
 
 :host {
+
   .wrapper {
     height: calc(100% - #{variables.$welcome-header-height});
+
+
+    .side-menu-container {
+      height: 100%;
+
+      .side-menu {
+        padding: 20px;
+        width: 300px;
+        background: var(--mat-sys-background);
+        border-radius: 0;
+      }
+    }
 
     .scrollbar-v {
       overflow-x: hidden;

@@ -1,22 +1,30 @@
 <header>
-  <tnm-welcome-header ngSkipHydration (signInClick)="onSignIn()"></tnm-welcome-header>
+  <tnm-welcome-header ngSkipHydration [(burgerState)]="sideMenu" (signInClick)="onSignIn()"></tnm-welcome-header>
 </header>
+
 <div tnmAuth class="wrapper" (refreshRoute)="onRefreshRoute()" (userLoggedIn)="onUserLoggedIn($event)">
-  <ng-scrollbar class="scrollbar-v" thumbClass="thumb-v" trackClass="track-v">
-    <main>
-      <div class="title-wrapper">
-        <img class="title-img" ngSrc="images/title-img.png" alt="title-image" fill priority/>
-        <div class="title-info">
-          <h1 class="title">Tank Way</h1>
-          <h2 class="sub-title">Join to the most EPIC battle's in the WORLD</h2>
-          <strong class="info">VM-Soft Presents</strong>
-        </div>
-      </div>
-      <tnm-demo-settings (signInClick)="onSignIn()"></tnm-demo-settings>
-      <hr class="divider">
-    </main>
-    <footer>
-      <tnm-footer></tnm-footer>
-    </footer>
-  </ng-scrollbar>
+  <mat-drawer-container class="side-menu-container" [hasBackdrop]="true">
+    <mat-drawer class="side-menu" mode="over" [(opened)]="sideMenu">
+      <tnm-side-menu></tnm-side-menu>
+    </mat-drawer>
+    <mat-drawer-content>
+      <ng-scrollbar class="scrollbar-v" thumbClass="thumb-v" trackClass="track-v">
+        <main>
+          <div class="title-wrapper">
+            <img class="title-img" ngSrc="assets/images/title-img.png" alt="title-image" fill priority/>
+            <div class="title-info">
+              <h1 class="title">Tank Way</h1>
+              <h2 class="sub-title">Join to the most EPIC battle's in the WORLD</h2>
+              <strong class="info">VM-Soft Presents</strong>
+            </div>
+          </div>
+          <tnm-demo-settings (signInClick)="onSignIn()"></tnm-demo-settings>
+          <hr class="divider">
+        </main>
+        <footer>
+          <tnm-footer></tnm-footer>
+        </footer>
+      </ng-scrollbar>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

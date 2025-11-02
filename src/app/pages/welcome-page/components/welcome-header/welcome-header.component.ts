@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, model, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -39,7 +39,10 @@ export class WelcomeHeaderComponent {
     map(state => state.mobile || state.tablet),
   ));
 
+  burgerState = model<boolean>();
+
   signInClick = output<void>();
+  burgerClick = output<boolean>();
 
   onSignInBtnClick(): void {
     this.signInClick.emit();

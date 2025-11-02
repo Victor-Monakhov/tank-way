@@ -1,5 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, model } from '@angular/core';
+import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,6 +12,7 @@ import { AuthService } from '../../common/auth/services/auth/auth.service';
 import { FooterComponent } from '../../common/footer/footer.component';
 
 import { DemoSettingsComponent } from './components/demo-settings/demo-settings.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { WelcomeHeaderComponent } from './components/welcome-header/welcome-header.component';
 import { WarRoomService } from './services/war-room/war-room.service';
 
@@ -25,6 +27,10 @@ import { WarRoomService } from './services/war-room/war-room.service';
     DemoSettingsComponent,
     FooterComponent,
     AuthDirective,
+    MatDrawer,
+    MatDrawerContent,
+    MatDrawerContainer,
+    SideMenuComponent,
   ],
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.scss',
@@ -35,6 +41,8 @@ export class WelcomePageComponent {
 
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
+
+  sideMenu = model<boolean>(false);
 
   onSignIn(): void {
     this.authService.signIn$.next();
