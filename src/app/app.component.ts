@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, Renderer2 } from '@angular/core';
+
+import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, Renderer2, DOCUMENT } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
